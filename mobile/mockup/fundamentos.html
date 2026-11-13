@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fundamentos do design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+*{box-sizing:border-box}
+html{background:#EAEFF3}
+body{margin:0;background:#EAEFF3;color:var(--n-900);font-family:var(--font-doc);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding:40px 16px 80px}
+h1{font-size:2rem;line-height:1.15;margin:0 0 8px;color:var(--brand-700)}
+h2{font-size:1.4rem;margin:64px 0 4px;color:var(--brand-700)}
+h3{font-size:1.05rem;margin:24px 0 8px}
+p{margin:0 0 8px}
+.lead{max-width:64ch;color:var(--n-600)}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85em;background:#DFE6EC;padding:1px 5px;border-radius:4px}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+nav.toc a{color:var(--brand-700);background:#fff;border-radius:99px;padding:6px 14px;text-decoration:none;font-weight:700;font-size:.92rem}
+nav.toc a:focus-visible{outline:3px solid var(--brand-400);outline-offset:2px}
+
+/* logo */
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:16px}
+.tile{border-radius:16px;min-height:190px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:20px;font-size:.9rem}
+.tile img{height:96px;width:auto;display:block}
+.tile.l{background:#fff;color:var(--n-700)} .tile.d{background:var(--brand-800);color:var(--brand-100)} .tile.b{background:var(--brand-500);color:#fff}
+.icons{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-end;margin-top:16px}
+.icons figure{margin:0;text-align:center;font-size:.9rem;color:var(--n-600)}
+.icons .ic{overflow:hidden;display:block;margin:0 auto 8px;background:var(--brand-700)}
+.icons .ic img{width:100%;height:100%;display:block}
+.sizes{display:flex;gap:28px;align-items:flex-end;flex-wrap:wrap;background:#fff;border-radius:16px;padding:20px;margin-top:16px}
+.sizes figure{margin:0;text-align:center;font-size:.85rem;color:var(--n-600)}
+.sizes img{display:block;margin:0 auto 6px}
+.clear{position:relative;display:inline-block;padding:30px;outline:2px dashed var(--brand-300);outline-offset:-1px;background:#fff;border-radius:6px}
+.clear img{height:120px;display:block}
+.donts{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-top:16px}
+.dont{background:#fff;border-radius:12px;padding:14px;text-align:center;font-size:.88rem;color:var(--n-700)}
+.dont .st{height:80px;display:flex;align-items:center;justify-content:center;margin-bottom:8px;border-radius:8px;overflow:hidden}
+.dont img{height:60px;display:block}
+.dont b{color:var(--danger)}
+
+/* cores */
+.ramp{display:grid;grid-template-columns:repeat(auto-fit,minmax(86px,1fr));gap:6px;margin-top:10px}
+.sw{border-radius:10px;padding:10px 8px;min-height:92px;display:flex;flex-direction:column;justify-content:space-between;font-size:.8rem;line-height:1.3;border:1px solid rgba(0,0,0,.06)}
+.sw b{font-size:.86rem}
+.modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px;margin-top:16px}
+.mode{background:var(--bg);border-radius:16px;padding:16px;color:var(--text)}
+.mode h3{margin:0 0 10px;color:var(--text)}
+.roles{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.roles .sw{min-height:70px}
+.risk{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.risk div{border-radius:12px;padding:10px 14px;font-weight:700;display:flex;gap:10px;align-items:center}
+.risk i{width:14px;height:14px;border-radius:50%;display:inline-block}
+.note{background:#FBEBC2;color:#5E4100;border-radius:8px;padding:8px 12px;display:inline-block;margin-top:10px;font-size:.92rem}
+
+/* tipografia */
+table{border-collapse:collapse;width:100%;background:#fff;font-size:.92rem;margin-top:12px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--n-200);vertical-align:baseline}
+th{background:var(--brand-100);color:var(--brand-700)}
+td.ios{font-family:var(--font-ios)} td.and{font-family:var(--font-android)}
+td small{display:block;color:var(--n-600);font-family:var(--font-doc);font-size:.78rem}
+.tw{overflow-x:auto}
+.tw table{min-width:720px}
+
+/* espaçamento */
+.scale{display:flex;gap:18px;align-items:flex-end;flex-wrap:wrap;background:#fff;border-radius:16px;padding:20px;margin-top:12px}
+.scale div{text-align:center;font-size:.8rem;color:var(--n-600)}
+.scale span{display:block;background:var(--brand-400);margin:0 auto 6px;border-radius:3px}
+.radii{display:flex;gap:18px;flex-wrap:wrap;background:#fff;border-radius:16px;padding:20px;margin-top:12px}
+.radii div{width:92px;height:70px;background:var(--brand-100);border:2px solid var(--brand-400);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--brand-700);font-weight:700}
+.touch{display:flex;gap:28px;flex-wrap:wrap;background:#fff;border-radius:16px;padding:20px;margin-top:12px;align-items:flex-end}
+.touch figure{margin:0;text-align:center;font-size:.85rem;color:var(--n-600)}
+.touch .t{background:var(--brand-100);outline:2px dashed var(--brand-400);display:flex;align-items:center;justify-content:center;margin:0 auto 6px;border-radius:8px}
+.touch .t i{display:block;background:var(--brand-500);border-radius:50%}
+
+/* referências */
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-top:16px}
+.ref{background:#fff;border-radius:14px;padding:16px 18px}
+.ref h3{margin:0 0 4px;color:var(--brand-700)}
+.ref ul{margin:6px 0 0;padding-left:18px}
+.ref li{margin-bottom:4px}
+.ref .nao{color:var(--n-600)}
+a{color:var(--brand-600)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Fundamentos do design</h1>
+  <p class="lead">Logo, cores, tipografia e medidas do app mobile. É a base geral: serve para qualquer tela e fica igual no iOS e no Android. O que muda por plataforma (abas, barras, botões) está em <a href="componentes.html">componentes</a>. As regras de trabalho estão em <code>mobile/REGRAS.md</code>.</p>
+  <nav class="toc" aria-label="Seções">
+    <a href="#logo">Logo</a><a href="#cores">Cores</a><a href="#tipografia">Tipografia</a><a href="#medidas">Medidas</a><a href="#referencias">Referências</a>
+  </nav>
+</header>
+
+<h2 id="logo">Logo</h2>
+<p class="lead">A marca é um inseto em pixel art. O arquivo original tinha ruído e pixels soltos, então refizemos em vetor a partir da grade de pixels. A cor muda conforme o fundo, e o desenho não.</p>
+
+<div class="tiles">
+  <div class="tile l"><img src="../assets/brand/logo-mark.svg" alt="Logo em azul marinho"><span>Fundo claro: azul marinho</span></div>
+  <div class="tile d"><img src="../assets/brand/logo-mark-light.svg" alt="Logo em azul claro"><span>Fundo escuro: azul claro</span></div>
+  <div class="tile b"><img src="../assets/brand/logo-mark-white.svg" alt="Logo em branco"><span>Fundo da marca: branco</span></div>
+</div>
+
+<h3>Ícone do app</h3>
+<div class="icons">
+  <figure><span class="ic" style="width:120px;height:120px;border-radius:27px"><img src="../assets/brand/app-icon.svg" alt="Ícone do app no iOS"></span>iOS, cantos do sistema</figure>
+  <figure><span class="ic" style="width:120px;height:120px;border-radius:50%"><img src="../assets/brand/app-icon.svg" alt="Ícone do app no Android, redondo"></span>Android, máscara redonda</figure>
+  <figure><span class="ic" style="width:120px;height:120px;border-radius:34px"><img src="../assets/brand/app-icon.svg" alt="Ícone do app no Android, quadrado arredondado"></span>Android, máscara quadrada</figure>
+  <figure><span class="ic" style="width:60px;height:60px;border-radius:13px"><img src="../assets/brand/app-icon.svg" alt="Ícone do app em tamanho de tela inicial"></span>Na tela inicial</figure>
+</div>
+
+<h3>Tamanhos e área de proteção</h3>
+<div class="sizes">
+  <figure><img src="../assets/brand/logo-mark.svg" alt="" height="16"><span>16 (abaixo do mínimo)</span></figure>
+  <figure><img src="../assets/brand/logo-mark.svg" alt="" height="24"><span>24 (mínimo, barra de topo)</span></figure>
+  <figure><img src="../assets/brand/logo-mark.svg" alt="" height="40"><span>40</span></figure>
+  <figure><img src="../assets/brand/logo-mark.svg" alt="" height="64"><span>64 (cabeçalho)</span></figure>
+  <figure><img src="../assets/brand/logo-mark.svg" alt="" height="112"><span>112 (identificação)</span></figure>
+  <figure><span class="clear"><img src="../assets/brand/logo-mark.svg" alt="Logo com área de proteção"></span><span style="display:block;margin-top:6px">Respiro: 1/4 da altura em volta</span></figure>
+</div>
+
+<h3>Evite</h3>
+<div class="donts">
+  <div class="dont"><div class="st" style="background:#fff"><img src="../assets/brand/logo-mark.svg" alt="" style="transform:scaleX(1.5)"></div><b>Não</b> esticar ou achatar</div>
+  <div class="dont"><div class="st" style="background:#fff"><img src="../assets/brand/logo-mark.svg" alt="" style="transform:rotate(30deg)"></div><b>Não</b> girar</div>
+  <div class="dont"><div class="st" style="background:#fff"><img src="../assets/brand/logo-mark-light.svg" alt=""></div><b>Não</b> usar a versão clara sobre fundo claro</div>
+  <div class="dont"><div class="st" style="background:#fff"><img src="../assets/brand/logo-mark.svg" alt="" style="filter:hue-rotate(150deg) saturate(3)"></div><b>Não</b> trocar a cor fora da paleta</div>
+  <div class="dont"><div class="st" style="background:repeating-linear-gradient(45deg,#F2C14E,#F2C14E 8px,#C73A2E 8px,#C73A2E 16px)"><img src="../assets/brand/logo-mark.svg" alt=""></div><b>Não</b> pôr sobre fundo cheio de padrão</div>
+</div>
+
+<h2 id="cores">Cores</h2>
+<p class="lead">Um azul de ação, neutros frios e três cores de estado. A rampa de marca parte da cor original da logo (<code>#B0DCFC</code>) e chega ao azul marinho. Cada cor mostra a taxa de contraste: 4,5 ou mais para texto comum, 3 ou mais para texto grande e elementos de interface.</p>
+
+<h3>Marca</h3>
+<div class="ramp" id="r-brand"></div>
+<h3>Neutros</h3>
+<div class="ramp" id="r-neutral"></div>
+
+<h3>Papéis: claro e escuro</h3>
+<p class="lead">O app nunca usa a cor "crua". Usa o papel (fundo, superfície, texto, ação), e cada papel tem valor no claro e no escuro.</p>
+<div class="modes">
+  <div class="mode" data-theme="light"><h3>Claro</h3><div class="roles" data-roles></div></div>
+  <div class="mode" data-theme="dark"><h3>Escuro</h3><div class="roles" data-roles></div></div>
+</div>
+
+<h3>Risco e estado</h3>
+<p class="lead">O risco usa verde, âmbar e vermelho, e <b>sempre vem com rótulo em texto</b>: uma pessoa que não distingue as cores precisa ler o mesmo que as outras.</p>
+<div class="risk">
+  <div style="background:var(--success-soft);color:var(--on-success-soft)"><i style="background:var(--success)"></i>Risco baixo</div>
+  <div style="background:var(--warning-soft);color:var(--on-warning-soft)"><i style="background:var(--warning)"></i>Risco médio</div>
+  <div style="background:var(--danger-soft);color:var(--on-danger-soft)"><i style="background:var(--danger)"></i>Risco alto</div>
+</div>
+<div class="risk" data-theme="dark" style="background:var(--bg);padding:12px;border-radius:14px">
+  <div style="background:var(--success-soft);color:var(--on-success-soft)"><i style="background:var(--success)"></i>Risco baixo</div>
+  <div style="background:var(--warning-soft);color:var(--on-warning-soft)"><i style="background:var(--warning)"></i>Risco médio</div>
+  <div style="background:var(--danger-soft);color:var(--on-danger-soft)"><i style="background:var(--danger)"></i>Risco alto</div>
+</div>
+<span class="note">No Android 12 ou mais novo, as barras e botões do sistema podem seguir a cor dinâmica do aparelho (proposta). As cores de risco nunca mudam, porque carregam significado.</span>
+
+<h2 id="tipografia">Tipografia</h2>
+<p class="lead">O app usa a fonte do sistema: SF Pro no iOS e Roboto no Android. É isso que faz o texto parecer nativo e respeitar o tamanho de texto que a pessoa escolheu no aparelho. A identidade vem da cor, da logo e do tom, não de uma fonte própria.</p>
+<div class="tw"><table>
+  <thead><tr><th>Papel</th><th>iOS (SF Pro)</th><th>Android (Material 3)</th></tr></thead>
+  <tbody>
+    <tr><td>Título da tela</td><td class="ios" style="font-size:34px;font-weight:700;line-height:1.2">Relatos<small>Large Title, 34, negrito</small></td><td class="and" style="font-size:28px;line-height:1.25">Relatos<small>Headline Medium, 28</small></td></tr>
+    <tr><td>Título de seção</td><td class="ios" style="font-size:22px;line-height:1.25">Risco por região<small>Title 2, 22</small></td><td class="and" style="font-size:22px;line-height:1.3">Risco por região<small>Title Large, 22</small></td></tr>
+    <tr><td>Título do cartão</td><td class="ios" style="font-size:17px;font-weight:600">Celular, Bela Vista<small>Headline, 17, seminegrito</small></td><td class="and" style="font-size:16px;font-weight:500">Celular, Bela Vista<small>Title Medium, 16, médio</small></td></tr>
+    <tr><td>Texto</td><td class="ios" style="font-size:17px;line-height:1.35">Levaram meu celular no ponto de ônibus<small>Body, 17</small></td><td class="and" style="font-size:16px;line-height:1.5">Levaram meu celular no ponto de ônibus<small>Body Large, 16</small></td></tr>
+    <tr><td>Texto secundário</td><td class="ios" style="font-size:15px;color:var(--n-600)">Ontem, 21h35, noite<small>Subheadline, 15</small></td><td class="and" style="font-size:14px;color:var(--n-600)">Ontem, 21h35, noite<small>Body Medium, 14</small></td></tr>
+    <tr><td>Legenda</td><td class="ios" style="font-size:13px;color:var(--n-600)">Local aproximado<small>Footnote, 13</small></td><td class="and" style="font-size:12px;font-weight:500;color:var(--n-600)">Local aproximado<small>Label Medium, 12</small></td></tr>
+  </tbody>
+</table></div>
+<p class="lead" style="margin-top:12px">Regras: títulos em frase (só a primeira letra maiúscula), nada em caixa alta e nenhum texto abaixo de 12. O texto cresce com a configuração do aparelho (até 200%), e a tela precisa continuar usável nesse tamanho.</p>
+
+<h2 id="medidas">Medidas</h2>
+<h3>Espaçamento (grade de 4)</h3>
+<div class="scale" id="sp"></div>
+<h3>Raios</h3>
+<div class="radii" id="rd"></div>
+<h3>Alvo de toque</h3>
+<div class="touch">
+  <figure><div class="t" style="width:44px;height:44px"><i style="width:20px;height:20px"></i></div>iOS: 44 pt</figure>
+  <figure><div class="t" style="width:48px;height:48px"><i style="width:24px;height:24px"></i></div>Android: 48 dp</figure>
+  <figure><div class="t" style="width:24px;height:24px;outline-color:var(--danger);background:var(--danger-soft)"><i style="width:12px;height:12px;background:var(--danger)"></i></div>24: pequeno demais para tocar</figure>
+</div>
+<p class="lead" style="margin-top:12px">O ícone pode ser menor que o alvo, mas a área que responde ao toque não. Entre dois alvos, pelo menos 8 de distância.</p>
+
+<h2 id="referencias">Referências</h2>
+<p class="lead">Fonte: <a href="https://github.com/VoltAgent/awesome-design-md">awesome-design-md</a>. Os arquivos são de sites, então usamos como referência de tom, cor e tipografia, e não como componente nativo. Lemos de fato os resumos de Apple e Uber. Do Airbnb só havia a descrição geral, e Wise, Revolut e Spotify ainda não foram lidos.</p>
+<div class="cols">
+  <div class="ref"><h3>Apple</h3>
+    <p>Interface quase invisível, uma única cor de ação (azul), texto de corpo em 17 e títulos com espaçamento de letras levemente apertado.</p>
+    <ul><li>Levamos: uma só cor interativa, estado pressionado com leve redução de escala, sombra só em quem flutua, vidro só em barras.</li>
+    <li class="nao">Não levamos: o ritmo de "telas de produto" de largura total, que é de site.</li></ul></div>
+  <div class="ref"><h3>Uber</h3>
+    <p>Uma ação principal por tela, títulos em frase, cartões planos (sem sombra) com raio de 16 e ilustração editorial.</p>
+    <ul><li>Levamos: um botão principal por tela, cartões planos, títulos em frase, clareza em mapa com folha.</li>
+    <li class="nao">Não levamos: preto como cor de marca e botão em pílula em tudo, porque no iOS e no Android o formato vem do sistema.</li></ul></div>
+  <div class="ref"><h3>Airbnb</h3>
+    <p>Só a descrição geral: acento coral, muita fotografia, cantos arredondados.</p>
+    <ul><li>Levamos: a ideia de filtros em chips e cartões com respiro.</li>
+    <li class="nao">Sem fotos no nosso caso (dados anônimos), então a cor e a hierarquia carregam a tela.</li></ul></div>
+</div>
+
+<h3>Documentação nativa</h3>
+<div class="ref" style="margin-top:8px">
+  <ul>
+    <li><a href="https://docs.expo.dev/versions/latest/sdk/glass-effect/">expo-glass-effect</a>: vidro do iOS 26. A documentação diz que só funciona no iOS 26 ou mais novo e cai para uma <code>View</code> comum nos outros casos. Checar a disponibilidade antes de usar.</li>
+    <li><a href="https://docs.expo.dev/versions/latest/sdk/ui/jetpack-compose/">@expo/ui, Jetpack Compose</a>: componentes Material 3 no Android (botão, chip, campo, barra de navegação, entre outros).</li>
+    <li>Guias da comunidade divergem sobre o uso no Expo Go. <b>Testar no Expo Go de verdade</b> antes de adotar, como diz o <code>REGRAS.md</code>.</li>
+  </ul>
+</div>
+
+</div>
+
+<script>
+(function(){
+  function rgb(c){var m=c.match(/[\d.]+/g).map(Number);return m.slice(0,3)}
+  function lum(c){var a=c.map(function(v){v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*a[0]+.7152*a[1]+.0722*a[2]}
+  function ratio(a,b){var x=lum(a),y=lum(b);var hi=Math.max(x,y),lo=Math.min(x,y);return (hi+.05)/(lo+.05)}
+  function hex(c){return '#'+c.map(function(v){return ('0'+Math.round(v).toString(16)).slice(-2)}).join('').toUpperCase()}
+  function fmt(n){return n.toFixed(1).replace('.',',')}
+  function swatch(host,name,varName){
+    var d=document.createElement('div');d.className='sw';d.style.background='var('+varName+')';
+    host.appendChild(d);
+    var bg=rgb(getComputedStyle(d).backgroundColor);
+    var white=[255,255,255],ink=[11,21,32];
+    var cw=ratio(bg,white),ci=ratio(bg,ink);
+    var fg=cw>=ci?white:ink;
+    d.style.color=hex(fg);
+    d.innerHTML='<b>'+name+'</b><span>'+hex(bg)+'</span><span>'+fmt(Math.max(cw,ci))+':1 '+(cw>=ci?'com branco':'com preto')+'</span>';
+  }
+  var brand=['50','100','200','300','400','500','600','700','800','900'];
+  var hb=document.getElementById('r-brand');brand.forEach(function(k){swatch(hb,k,'--brand-'+k)});
+  var neu=['0','50','100','200','300','400','600','700','800','900','950'];
+  var hn=document.getElementById('r-neutral');neu.forEach(function(k){swatch(hn,k,'--n-'+k)});
+  var roles=[['Fundo','--bg'],['Superfície','--surface'],['Superfície 2','--surface-2'],['Linha','--line'],['Texto','--text'],['Texto secundário','--text-muted'],['Ação','--primary'],['Ação suave','--primary-soft']];
+  document.querySelectorAll('[data-roles]').forEach(function(host){roles.forEach(function(r){swatch(host,r[0],r[1])})});
+  var sp=[[4,'1'],[8,'2'],[12,'3'],[16,'4'],[20,'5'],[24,'6'],[32,'8'],[40,'10']];
+  var s=document.getElementById('sp');sp.forEach(function(p){var d=document.createElement('div');d.innerHTML='<span style="width:'+p[0]+'px;height:'+p[0]+'px"></span>'+p[0];s.appendChild(d)});
+  var rd=[['xs',6],['sm',10],['md',14],['lg',20],['xl',28],['pill',999]];
+  var r=document.getElementById('rd');rd.forEach(function(p){var d=document.createElement('div');d.style.borderRadius=p[1]+'px';d.textContent=p[0]+(p[1]<999?' '+p[1]:'');r.appendChild(d)});
+})();
+</script>
+</body>
+</html>

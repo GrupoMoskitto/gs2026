@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup do app mobile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sign:#0E3B6B; --sign-soft:#DCE8F5;
+  --ink:#16212C; --muted:#586878; --line:#D3DBE3;
+  --bg:#EAEFF3; --paper:#FFFFFF; --app:#F6F8FA;
+  --baixo:#2E8B6A; --baixo-bg:#D3EBE1; --baixo-ink:#14573F;
+  --medio:#D99A00; --medio-bg:#FBEBC2; --medio-ink:#5E4100;
+  --alto:#C73A2E;  --alto-bg:#F8DAD6;  --alto-ink:#7F1D14;
+  --metro:#00835C; --me:#1B6DE0;
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding:40px 16px 72px}
+h1{font-size:2rem;line-height:1.15;margin:0 0 8px;color:var(--sign)}
+h2{font-size:1.35rem;margin:56px 0 4px;color:var(--sign)}
+h3{font-size:1.05rem;margin:0 0 2px}
+p{margin:0 0 8px}
+code{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:.85em;background:#DFE6EC;padding:1px 5px;border-radius:4px}
+.lead{max-width:62ch;color:var(--muted)}
+.proposta{display:inline-block;margin-top:10px;padding:6px 12px;background:var(--medio-bg);color:var(--medio-ink);border-radius:6px;font-size:.92rem}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;font-size:.92rem;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block}
+
+/* grade de telas */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:40px 28px;margin-top:24px;align-items:start}
+figure{margin:0}
+figcaption{max-width:300px;margin-top:14px}
+figcaption p{color:var(--muted);font-size:.92rem}
+figcaption .meta{font-size:.82rem;color:var(--muted)}
+
+/* celular */
+.phone{width:300px;height:620px;border-radius:40px;background:#0B1826;padding:9px;box-shadow:0 14px 30px -12px rgba(11,24,38,.45)}
+.screen{position:relative;height:100%;background:var(--app);border-radius:32px;overflow:hidden;display:flex;flex-direction:column}
+.status{height:28px;flex:none;display:flex;justify-content:space-between;align-items:flex-end;padding:0 20px 2px;font-size:12px;font-weight:700;color:var(--ink)}
+.screen.dark-top .status{color:#fff;background:var(--sign)}
+.body{flex:1;overflow:hidden;display:flex;flex-direction:column}
+.bar{flex:none;padding:10px 16px 12px;background:var(--paper);border-bottom:1px solid var(--line)}
+.bar b{font-size:20px;display:block;line-height:1.2}
+.bar small{color:var(--muted);font-size:13px}
+.tabs{flex:none;display:flex;background:var(--paper);border-top:1px solid var(--line);padding:6px 0 10px}
+.tab{flex:1;text-align:center;font-size:12px;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:2px}
+.tab svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tab.on{color:var(--sign);font-weight:700}
+
+/* elementos do app */
+.btn{display:block;width:100%;text-align:center;padding:13px 16px;border-radius:10px;background:var(--sign);color:#fff;font-weight:700;font-size:16px}
+.btn.alt{background:var(--paper);color:var(--sign);border:2px solid var(--sign);padding:11px 16px}
+.btn.off{background:#B9C4CF;color:#fff}
+.chip{display:inline-block;padding:4px 10px;border-radius:99px;font-size:13px;font-weight:700;line-height:1.3}
+.chip.alto{background:var(--alto-bg);color:var(--alto-ink)}
+.chip.medio{background:var(--medio-bg);color:var(--medio-ink)}
+.chip.baixo{background:var(--baixo-bg);color:var(--baixo-ink)}
+.chip.ok{background:var(--baixo-bg);color:var(--baixo-ink)}
+.chip.pend{background:#E4E9EE;color:#3B4856}
+.filtro{display:inline-block;padding:6px 12px;border-radius:99px;border:1.5px solid var(--line);background:var(--paper);font-size:13px;margin-right:6px;white-space:nowrap}
+.filtro.on{background:var(--sign);border-color:var(--sign);color:#fff;font-weight:700}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:14px;font-weight:700;margin-bottom:4px}
+.input{border:1.5px solid #9AA9B8;background:var(--paper);border-radius:8px;padding:10px 12px;font-size:16px;min-height:44px}
+.input.err{border-color:var(--alto);}
+.errmsg{color:var(--alto-ink);font-size:13px;margin-top:4px;font-weight:700}
+.hint{color:var(--muted);font-size:13px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:10px}
+.card .t{display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:700;font-size:15px}
+.card .d{font-size:14px;margin:4px 0 2px}
+.card .w{font-size:13px;color:var(--muted)}
+.fab{position:absolute;right:14px;bottom:76px;background:var(--sign);color:#fff;font-weight:700;border-radius:99px;padding:12px 18px;font-size:15px;box-shadow:0 6px 14px -4px rgba(14,59,107,.6)}
+.fab b{font-size:18px;margin-right:6px}
+
+/* mapa */
+.mapa{position:relative;flex:1;min-height:0}
+.mapa>svg{position:absolute;inset:0;width:100%;height:100%}
+.placa{position:absolute;left:12px;top:12px;background:var(--sign);color:#fff;border:2px solid #fff;outline:2px solid var(--sign);border-radius:5px;padding:3px 12px 4px;font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 4px 10px -3px rgba(0,0,0,.4)}
+.agora{position:absolute;left:12px;right:12px;top:54px;background:var(--paper);border-radius:10px;padding:8px 12px;font-size:13px;box-shadow:0 4px 12px -4px rgba(0,0,0,.3)}
+.agora b{display:block;font-size:14px}
+.filtros{position:absolute;left:0;right:0;bottom:12px;padding:0 12px;white-space:nowrap;overflow:hidden}
+.miniwrap{height:118px;border-radius:8px;overflow:hidden;position:relative;margin:10px 0}
+.miniwrap svg{width:100%;height:100%}
+.alerta{background:var(--medio-bg);color:var(--medio-ink);border-radius:8px;padding:10px 12px;font-size:14px;margin-bottom:12px}
+.alerta b{display:block}
+
+/* risco */
+.mx{width:100%;border-collapse:separate;border-spacing:3px;table-layout:fixed;margin-top:6px}
+.mx th{font-size:12px;font-weight:700;color:var(--muted);text-align:center;padding:0 0 2px}
+.mx th.now{color:var(--sign)}
+.mx th:first-child,.mx td:first-child{text-align:left;width:76px;font-size:13px;font-weight:700;color:var(--ink);padding-right:2px}
+.mx td{text-align:center;border-radius:6px;padding:6px 0;font-size:12px;font-weight:700;line-height:1.2}
+.mx td small{display:block;font-weight:400;font-size:11px}
+.mx td.alto{background:var(--alto-bg);color:var(--alto-ink)}
+.mx td.medio{background:var(--medio-bg);color:var(--medio-ink)}
+.mx td.baixo{background:var(--baixo-bg);color:var(--baixo-ink)}
+.mx td.now{outline:2px solid var(--sign)}
+
+/* estados */
+.estados{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-top:20px}
+.estado{background:var(--app);border:1px solid var(--line);border-radius:14px;padding:14px;min-height:230px}
+.estado h3{margin-bottom:10px}
+.sk{height:62px;border-radius:10px;background:#DDE4EA;margin-bottom:10px;animation:pulso 1.4s ease-in-out infinite}
+.sk:nth-child(3){animation-delay:.2s}.sk:nth-child(4){animation-delay:.4s}
+@keyframes pulso{50%{opacity:.5}}
+@media (prefers-reduced-motion:reduce){.sk{animation:none}}
+.vazio{text-align:center;color:var(--muted);padding:6px 6px 0}
+.vazio b{display:block;color:var(--ink);font-size:16px;margin-bottom:4px}
+.vazio .btn{margin-top:12px}
+
+/* tabela */
+.tw{overflow-x:auto;margin-top:16px}
+table.map{border-collapse:collapse;width:100%;min-width:760px;background:var(--paper);font-size:.92rem}
+table.map th,table.map td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+table.map th{background:var(--sign-soft);color:var(--sign)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin:16px 0 0;padding:0;list-style:none}
+.flow li{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-weight:700}
+.flow li.sep{background:none;border:none;padding:0;color:var(--muted);font-weight:400}
+.notas{max-width:70ch;color:var(--muted);margin-top:8px}
+.notas li{margin-bottom:4px}
+</style>
+</head>
+<body>
+
+<!-- ícones e mapa reutilizados nas telas -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-mapa" viewBox="0 0 24 24"><path d="M12 21s-6-5.6-6-10.5a6 6 0 0 1 12 0C18 15.4 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.2"/></symbol>
+    <symbol id="i-lista" viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></symbol>
+    <symbol id="i-risco" viewBox="0 0 24 24"><path d="M5 20V12M12 20V5M19 20v-5"/></symbol>
+
+    <symbol id="mapart" viewBox="0 0 282 520">
+      <rect width="282" height="520" fill="#DCE5EB"/>
+      <g transform="translate(0 70)">
+      <g fill="#E8EEF2">
+        <rect x="14" y="150" width="62" height="40" transform="rotate(33 45 170)"/>
+        <rect x="190" y="150" width="58" height="44" transform="rotate(33 219 172)"/>
+        <rect x="60" y="270" width="64" height="44" transform="rotate(33 92 292)"/>
+        <rect x="200" y="300" width="60" height="42" transform="rotate(33 230 321)"/>
+        <rect x="110" y="40" width="60" height="40" transform="rotate(33 140 60)"/>
+      </g>
+      <path d="M118 138l50 12 8 24-44-6z" fill="#C9E0D0"/>
+      <circle cx="210" cy="262" r="62" fill="#C73A2E" opacity=".27"/>
+      <circle cx="58" cy="108" r="54" fill="#D99A00" opacity=".30"/>
+      <circle cx="92" cy="262" r="56" fill="#2E8B6A" opacity=".24"/>
+      <g stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round">
+        <path d="M8 213L117 45M74 255L182 88M139 298L248 130M197 335L306 167"/>
+      </g>
+      <path d="M30 98L-6 34" stroke="#fff" stroke-width="8" fill="none"/>
+      <line x1="-5" y1="90" x2="290" y2="280" stroke="#fff" stroke-width="15"/>
+      <line x1="-5" y1="90" x2="290" y2="280" stroke="#B8C6D1" stroke-width="1" stroke-dasharray="5 4"/>
+      <text transform="translate(86 163) rotate(33)" font-size="10.5" font-weight="700" fill="#0E3B6B" style="paint-order:stroke;stroke:#fff;stroke-width:3px">Av. Paulista</text>
+      <g fill="#fff" stroke="#00835C" stroke-width="3">
+        <circle cx="36" cy="112" r="6"/><circle cx="141" cy="180" r="6"/><circle cx="240" cy="244" r="6"/>
+      </g>
+      <g font-size="10" font-weight="700" fill="#00583E" style="paint-order:stroke;stroke:#fff;stroke-width:3px">
+        <text x="44" y="130">Consolação</text>
+        <text x="100" y="200">Trianon-Masp</text>
+        <text x="196" y="266">Brigadeiro</text>
+      </g>
+      <g fill="#C73A2E" stroke="#fff" stroke-width="2">
+        <circle cx="182" cy="268" r="6"/><circle cx="208" cy="238" r="6"/><circle cx="226" cy="284" r="6"/>
+        <circle cx="160" cy="214" r="6"/><circle cx="70" cy="138" r="6"/><circle cx="46" cy="86" r="6"/>
+        <circle cx="96" cy="258" r="6"/><circle cx="122" cy="226" r="6"/><circle cx="240" cy="204" r="6"/>
+      </g>
+      <circle cx="150" cy="150" r="18" fill="#1B6DE0" opacity=".2"/>
+      <circle cx="150" cy="150" r="7" fill="#1B6DE0" stroke="#fff" stroke-width="3"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+<header>
+  <h1>Mockup do app mobile</h1>
+  <p class="lead">Telas do app do cidadão para o mapa de relatos de roubo na Av. Paulista (React Native + Expo + TypeScript). Os textos, relatos e números são de exemplo, com dados simulados.</p>
+  <p class="lead">Outras páginas: <a href="fundamentos.html">fundamentos do design</a> (logo, cores, tipografia) e <a href="componentes.html">componentes</a> (iOS, Android, rede e movimento).</p>
+  <span class="proposta">A tela de mapa é uma proposta. O time ainda precisa confirmar (AGENTS.md, seção 7).</span>
+  <div class="legend" aria-label="Legenda de risco">
+    <span><i style="background:var(--baixo)"></i>Risco baixo</span>
+    <span><i style="background:var(--medio)"></i>Risco médio</span>
+    <span><i style="background:var(--alto)"></i>Risco alto</span>
+    <span><i style="background:var(--metro)"></i>Estação de metrô</span>
+    <span><i style="background:var(--me)"></i>Você está aqui</span>
+  </div>
+</header>
+
+<h2>Telas</h2>
+<p class="lead">Do primeiro acesso ao envio de um relato.</p>
+
+<div class="grid">
+
+  <!-- Identificação -->
+  <figure>
+    <div class="phone"><div class="screen">
+      <div class="status"><span>20:41</span><span>5G</span></div>
+      <div class="body" style="padding:36px 20px 0">
+        <b style="font-size:26px;line-height:1.15;color:var(--sign)">Mapa de Relatos</b>
+        <p style="color:var(--muted);margin:6px 0 28px">Veja onde roubos foram relatados na Av. Paulista e registre o que aconteceu com você.</p>
+        <div class="field"><label>Apelido</label><div class="input">coto_sp</div></div>
+        <div class="field"><label>RM</label><div class="input">RM559579</div></div>
+        <p class="hint" style="margin-bottom:18px">Os relatos são anônimos. Não use seu nome real.</p>
+        <div class="btn">Entrar</div>
+        <p class="hint" style="text-align:center;margin-top:12px">Da próxima vez você entra direto.</p>
+      </div>
+    </div></div>
+    <figcaption>
+      <h3>Identificação</h3>
+      <p>Apelido e RM. O app guarda os dois e pula esta tela ao reabrir.</p>
+      <p class="meta">Sem chamada à API. Guardado no aparelho (AsyncStorage).</p>
+    </figcaption>
+  </figure>
+
+  <!-- Mapa -->
+  <figure>
+    <div class="phone"><div class="screen">
+      <div class="status"><span>20:41</span><span>5G</span></div>
+      <div class="body">
+        <div class="mapa">
+          <svg viewBox="0 0 282 520" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Mapa esquemático da Av. Paulista com relatos"><use href="#mapart" width="282" height="520"/></svg>
+          <div class="placa">Av. Paulista</div>
+          <div class="agora"><b>Agora, à noite: risco alto</b>Bela Vista tem a maior chance de ocorrência neste horário.</div>
+          <div class="filtros"><span class="filtro on">Todos</span><span class="filtro">Celular</span><span class="filtro">Bolsa</span><span class="filtro">Veículo</span></div>
+          <div class="fab"><b>+</b>Novo relato</div>
+        </div>
+        <div class="tabs">
+          <div class="tab on"><svg><use href="#i-mapa"/></svg>Mapa</div>
+          <div class="tab"><svg><use href="#i-lista"/></svg>Relatos</div>
+          <div class="tab"><svg><use href="#i-risco"/></svg>Risco</div>
+        </div>
+      </div>
+    </div></div>
+    <figcaption>
+      <h3>Mapa (proposta)</h3>
+      <p>Pinos dos relatos aprovados, cor da região pelo risco e sua posição. O aviso do topo vem da previsão do horário atual.</p>
+      <p class="meta">Mapa esquemático, fora de escala. Usa <code>GET /api/relatos</code> e <code>GET /api/previsoes</code>.</p>
+    </figcaption>
+  </figure>
+
+  <!-- Lista -->
+  <figure>
+    <div class="phone"><div class="screen">
+      <div class="status"><span>20:41</span><span>5G</span></div>
+      <div class="body">
+        <div class="bar"><b>Relatos</b><small>Últimos 7 dias na Av. Paulista</small></div>
+        <div style="padding:10px 12px 0;white-space:nowrap;overflow:hidden;flex:none">
+          <span class="filtro on">Todos</span><span class="filtro">Bela Vista</span><span class="filtro">Consolação</span><span class="filtro">Cerq. César</span>
+        </div>
+        <div style="padding:12px 12px 0;flex:1;overflow:hidden">
+          <div class="card"><div class="t">Celular, Bela Vista<span class="chip ok">Aprovado</span></div><div class="d">Levaram meu celular no ponto de ônibus</div><div class="w">Ontem, 21h35, noite</div></div>
+          <div class="card"><div class="t">Bolsa ou mochila, Consolação<span class="chip ok">Aprovado</span></div><div class="d">Puxaram a mochila perto da estação</div><div class="w">Ontem, 18h10, noite</div></div>
+          <div class="card"><div class="t">Bicicleta, Cerq. César<span class="chip pend">Pendente</span></div><div class="d">Bicicleta levada do bicicletário</div><div class="w">Segunda, 14h20, tarde</div></div>
+          <div class="card"><div class="t">Veículo, Bela Vista<span class="chip ok">Aprovado</span></div><div class="d">Arrombaram o carro estacionado</div><div class="w">Domingo, 03h05, madrugada</div></div>
+        </div>
+        <div class="fab"><b>+</b>Novo relato</div>
+        <div class="tabs">
+          <div class="tab"><svg><use href="#i-mapa"/></svg>Mapa</div>
+          <div class="tab on"><svg><use href="#i-lista"/></svg>Relatos</div>
+          <div class="tab"><svg><use href="#i-risco"/></svg>Risco</div>
+        </div>
+      </div>
+    </div></div>
+    <figcaption>
+      <h3>Lista de relatos</h3>
+      <p>Filtro por bairro, estado de cada relato e atalho para registrar um novo.</p>
+      <p class="meta">Usa <code>GET /api/relatos?bairro=</code>. Tem estados de carregando, erro e vazio (abaixo).</p>
+    </figcaption>
+  </figure>
+
+  <!-- Detalhe -->
+  <figure>
+    <div class="phone"><div class="screen">
+      <div class="status"><span>20:41</span><span>5G</span></div>
+      <div class="body">
+        <div class="bar"><small>‹ Relatos</small><b>Celular</b></div>
+        <div style="padding:14px 16px;flex:1;overflow:hidden">
+          <div style="display:flex;gap:8px;margin-bottom:10px"><span class="chip ok">Aprovado</span><span class="chip pend">Enviado pelo app</span></div>
+          <p style="font-size:17px;margin-bottom:12px">Levaram meu celular no ponto de ônibus</p>
+          <div class="card" style="font-size:14px">
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span class="hint">Bairro</span><b>Bela Vista</b></div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span class="hint">Quando</span><b>10/11/2026, 21h35</b></div>
+            <div style="display:flex;justify-content:space-between"><span class="hint">Local aproximado</span><b>-23.561, -46.656</b></div>
+          </div>
+          <div class="miniwrap"><svg viewBox="82 248 200 120" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Mapa com a região do relato"><use href="#mapart" width="282" height="520"/><circle cx="208" cy="308" r="13" fill="none" stroke="#0E3B6B" stroke-width="3"/></svg></div>
+          <p class="hint">O local é aproximado para proteger quem relatou. Este mapa não substitui o boletim de ocorrência.</p>
+        </div>
+      </div>
+    </div></div>
+    <figcaption>
+      <h3>Detalhe do relato</h3>
+      <p>Todos os campos do relato, sem endereço exato nem dados de pessoas.</p>
+      <p class="meta">Usa <code>GET /api/relatos/{id}</code>.</p>
+    </figcaption>
+  </figure>
+
+  <!-- Novo relato -->
+  <figure>
+    <div class="phone"><div class="screen">
+      <div class="status"><span>20:41</span><span>5G</span></div>
+      <div class="body">
+        <div class="bar"><small>‹ Cancelar</small><b>Novo relato</b></div>
+        <div style="padding:14px 16px;flex:1;overflow:hidden">
+          <div class="field"><label>O que aconteceu?</label>
+            <span class="filtro on">Celular</span><span class="filtro">Bolsa ou mochila</span><span class="filtro" style="margin-top:6px">Veículo</span><span class="filtro">Bicicleta</span><span class="filtro">Comércio</span><span class="filtro">Outro</span>
+          </div>
+          <div class="field"><label>Conte em poucas palavras (opcional)</label><div class="input" style="min-height:64px">Levaram meu celular no ponto de ônibus</div><div class="hint" style="text-align:right">38/280</div></div>
+          <div class="field"><label>Quando</label><div class="input" style="display:flex;justify-content:space-between">Hoje, 20h35<span style="color:var(--sign);font-weight:700">Alterar</span></div></div>
+          <div class="field"><label>Onde</label>
+            <div class="input" style="background:var(--baixo-bg);border-color:var(--baixo);color:var(--baixo-ink);font-size:14px"><b>Usando sua localização</b><br>Bela Vista, perto de -23.561, -46.656</div>
+          </div>
+          <p class="hint" style="margin-bottom:12px">Não escreva nomes, telefones nem placas.</p>
+          <div class="btn">Enviar relato</div>
+        </div>
+      </div>
+    </div></div>
+    <figcaption>
+      <h3>Novo relato</h3>
+      <p>Tipo, descrição curta, horário e local. A localização do celular preenche o campo "Onde".</p>
+      <p class="meta">Usa <code>POST /api/relatos</code> e a localização do aparelho. Após enviar: "Relato enviado. Ele aparece no mapa depois da moderação."</p>
+    </figcaption>
+  </figure>
+
+  <!-- Novo relato: erro e permissão negada -->
+  <figure>
+    <div class="phone"><div class="screen">
+      <div class="status"><span>20:42</span><span>5G</span></div>
+      <div class="body">
+        <div class="bar"><small>‹ Cancelar</small><b>Novo relato</b></div>
+        <div style="padding:14px 16px;flex:1;overflow:hidden">
+          <div class="field"><label>O que aconteceu?</label>
+            <span class="filtro" style="border-color:var(--alto)">Celular</span><span class="filtro" style="border-color:var(--alto)">Bolsa ou mochila</span><span class="filtro" style="margin-top:6px;border-color:var(--alto)">Veículo</span><span class="filtro" style="border-color:var(--alto)">Bicicleta</span>
+            <div class="errmsg">Escolha o tipo do relato.</div>
+          </div>
+          <div class="field"><label>Onde</label>
+            <div class="alerta"><b>Localização desativada</b>Escolha o local no mapa ou ative a localização nas configurações do aparelho.</div>
+            <div class="btn alt" style="margin-bottom:8px">Escolher no mapa</div>
+            <div class="btn alt">Abrir configurações</div>
+          </div>
+          <div class="btn off" style="margin-top:16px">Enviar relato</div>
+        </div>
+      </div>
+    </div></div>
+    <figcaption>
+      <h3>Erro de validação e permissão negada</h3>
+      <p>O formulário diz o que falta. Sem permissão de localização, o app oferece outro caminho em vez de travar.</p>
+      <p class="meta">Critério: recurso nativo com a permissão tratada e formulário validado.</p>
+    </figcaption>
+  </figure>
+
+  <!-- Risco -->
+  <figure>
+    <div class="phone"><div class="screen">
+      <div class="status"><span>20:41</span><span>5G</span></div>
+      <div class="body">
+        <div class="bar"><b>Risco por região</b><small>Previsão para hoje, quinta-feira</small></div>
+        <div style="padding:12px 12px;flex:1;overflow:hidden">
+          <table class="mx" aria-label="Risco por bairro e faixa horária">
+            <thead><tr><th></th><th>Madr.</th><th>Manhã</th><th>Tarde</th><th class="now">Noite</th></tr></thead>
+            <tbody>
+              <tr><td>Bela Vista</td><td class="medio">Médio<small>0,48</small></td><td class="baixo">Baixo<small>0,21</small></td><td class="medio">Médio<small>0,44</small></td><td class="alto now">Alto<small>0,82</small></td></tr>
+              <tr><td>Consolação</td><td class="medio">Médio<small>0,41</small></td><td class="baixo">Baixo<small>0,19</small></td><td class="medio">Médio<small>0,46</small></td><td class="medio now">Médio<small>0,58</small></td></tr>
+              <tr><td>Cerq. César</td><td class="baixo">Baixo<small>0,20</small></td><td class="baixo">Baixo<small>0,12</small></td><td class="medio">Médio<small>0,40</small></td><td class="baixo now">Baixo<small>0,33</small></td></tr>
+            </tbody>
+          </table>
+          <p class="hint" style="margin-top:12px">A coluna "Noite" é o horário de agora. Os números vão de 0 a 1: quanto maior, maior o risco.</p>
+          <div class="card" style="margin-top:14px">
+            <div class="t">Dica para agora</div>
+            <div class="d">Prefira ruas movimentadas e evite usar o celular perto do ponto de ônibus na Bela Vista.</div>
+          </div>
+          <p class="hint">Previsão feita por um modelo de IA treinado com dados simulados.</p>
+        </div>
+        <div class="tabs">
+          <div class="tab"><svg><use href="#i-mapa"/></svg>Mapa</div>
+          <div class="tab"><svg><use href="#i-lista"/></svg>Relatos</div>
+          <div class="tab on"><svg><use href="#i-risco"/></svg>Risco</div>
+        </div>
+      </div>
+    </div></div>
+    <figcaption>
+      <h3>Risco por região</h3>
+      <p>Nível de risco por bairro e faixa horária, com o horário atual destacado. É onde a previsão do modelo de IA aparece para o cidadão.</p>
+      <p class="meta">Usa <code>GET /api/previsoes</code>.</p>
+    </figcaption>
+  </figure>
+
+</div>
+
+<h2>Estados da lista</h2>
+<p class="lead">A lista de relatos precisa mostrar os três estados (critério de funcionalidade).</p>
+<div class="estados">
+  <div class="estado" aria-label="Estado carregando">
+    <h3>Carregando</h3>
+    <div class="sk"></div><div class="sk"></div><div class="sk"></div>
+  </div>
+  <div class="estado" aria-label="Estado de erro">
+    <h3>Erro</h3>
+    <div class="alerta" style="background:var(--alto-bg);color:var(--alto-ink)"><b>Não foi possível carregar os relatos</b>Verifique a conexão e tente de novo.</div>
+    <div class="btn">Tentar de novo</div>
+    <p class="hint" style="margin-top:10px">Se a API não responder, o app mostra relatos de exemplo e avisa.</p>
+  </div>
+  <div class="estado" aria-label="Estado vazio">
+    <h3>Vazio</h3>
+    <div class="vazio"><b>Nenhum relato neste filtro</b>Mude o bairro ou registre o que aconteceu com você.
+      <div class="btn alt">Novo relato</div>
+    </div>
+  </div>
+</div>
+
+<h2>Da tela ao código</h2>
+<p class="lead">Estrutura sugerida (Expo Router). Pode mudar quando o projeto for criado.</p>
+<div class="tw">
+<table class="map">
+  <thead><tr><th>Tela</th><th>Arquivo (sugestão)</th><th>API</th><th>O que a nota cobra</th></tr></thead>
+  <tbody>
+    <tr><td>Identificação</td><td><code>app/index.tsx</code></td><td>Nenhuma</td><td>Identificação lembrada ao reabrir</td></tr>
+    <tr><td>Mapa (proposta)</td><td><code>app/(tabs)/mapa.tsx</code></td><td><code>GET /api/relatos</code>, <code>GET /api/previsoes</code></td><td>Localização como recurso nativo</td></tr>
+    <tr><td>Relatos</td><td><code>app/(tabs)/relatos.tsx</code></td><td><code>GET /api/relatos</code></td><td>Lista com carregando, erro e vazio</td></tr>
+    <tr><td>Detalhe</td><td><code>app/relato/[id].tsx</code></td><td><code>GET /api/relatos/{id}</code></td><td>Navegação com 3 telas ou mais</td></tr>
+    <tr><td>Novo relato</td><td><code>app/novo.tsx</code></td><td><code>POST /api/relatos</code></td><td>Formulário validado, localização e permissão tratada</td></tr>
+    <tr><td>Risco</td><td><code>app/(tabs)/risco.tsx</code></td><td><code>GET /api/previsoes</code></td><td>Integração com o modelo de IA</td></tr>
+  </tbody>
+</table>
+</div>
+
+<ul class="notas">
+  <li>Chamadas à API ficam em <code>services/</code>, com dados de exemplo (mock) quando a API não responde.</li>
+  <li>Validação do formulário em funções puras (<code>validation/</code>), fáceis de testar.</li>
+  <li>TypeScript estrito, sem <code>any</code>. Os tipos <code>Relato</code> e <code>PrevisaoRisco</code> seguem o formato do AGENTS.md, seção 4.</li>
+  <li>Texto mínimo de 14 px, contraste alto e risco sempre com rótulo em texto, nunca só cor.</li>
+</ul>
+
+</div>
+</body>
+</html>

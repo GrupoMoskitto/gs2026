@@ -1,0 +1,61 @@
+/* Tokens de design do app (mockups). Fonte da verdade visual até existir mobile/src/theme/.
+   Claro por padrão. Qualquer elemento com data-theme="dark" troca para o escuro. */
+
+:root, [data-theme="light"]{
+  /* marca: da cor original da logo (#B0DCFC) até o azul marinho */
+  --brand-50:#F0F7FE; --brand-100:#DCEEFD; --brand-200:#B0DCFC; --brand-300:#7DBEF3;
+  --brand-400:#4A9BE0; --brand-500:#1F6FC8; --brand-600:#14509A; --brand-700:#0E3B6B;
+  --brand-800:#0A2B4F; --brand-900:#071D36;
+
+  /* neutros (cinza azulado) */
+  --n-0:#FFFFFF; --n-50:#F6F8FA; --n-100:#EAEFF3; --n-200:#D3DBE3; --n-300:#B5C1CD;
+  --n-400:#8493A3; --n-600:#586878; --n-700:#3B4856; --n-800:#243241; --n-900:#16212C; --n-950:#0B1520;
+
+  /* papéis semânticos */
+  --bg:var(--n-50);          --surface:var(--n-0);     --surface-2:var(--n-100);
+  --line:var(--n-200);       --text:var(--n-900);      --text-muted:var(--n-600);
+  --primary:var(--brand-500); --on-primary:#FFFFFF;    --primary-soft:var(--brand-100); --on-primary-soft:var(--brand-700);
+  --focus:var(--brand-400);
+  --glass:rgba(255,255,255,.62); --glass-line:rgba(255,255,255,.7);
+
+  /* estados e risco (sempre com rótulo em texto, nunca só cor) */
+  --success:#2E8B6A; --success-soft:#D3EBE1; --on-success-soft:#14573F;
+  --warning:#D99A00; --warning-soft:#FBEBC2; --on-warning-soft:#5E4100;
+  --danger:#C73A2E;  --danger-soft:#F8DAD6;  --on-danger-soft:#7F1D14;
+  --risk-baixo:var(--success); --risk-medio:var(--warning); --risk-alto:var(--danger);
+  --metro:#00835C; --me:#1B6DE0;
+}
+
+[data-theme="dark"]{
+  --bg:#0B1520; --surface:#121F2D; --surface-2:#1A2A3C;
+  --line:#2A3C50; --text:#EAF1F7; --text-muted:#9FB1C2;
+  --primary:var(--brand-300); --on-primary:#071D36; --primary-soft:#16344F; --on-primary-soft:var(--brand-200);
+  --focus:var(--brand-300);
+  --glass:rgba(18,31,45,.55); --glass-line:rgba(255,255,255,.14);
+  --success:#5FCFA6; --success-soft:#14392E; --on-success-soft:#A8EBD1;
+  --warning:#F2C14E; --warning-soft:#40310B; --on-warning-soft:#F8DE9C;
+  --danger:#FF8A7D;  --danger-soft:#471A16;  --on-danger-soft:#FFC9C2;
+  --metro:#3FD0A0; --me:#6BA9FF;
+}
+
+:root{
+  /* espaçamento (grade de 4) */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px; --sp-8:32px; --sp-10:40px;
+  /* raios */
+  --r-xs:6px; --r-sm:10px; --r-md:14px; --r-lg:20px; --r-xl:28px; --r-pill:999px;
+  /* alvo de toque mínimo: 44pt (iOS) e 48dp (Android) */
+  --touch-ios:44px; --touch-android:48px;
+  /* movimento */
+  --dur-fast:120ms; --dur-base:220ms; --dur-slow:360ms;
+  --ease-standard:cubic-bezier(.2,0,0,1);       /* entrada e saída padrão */
+  --ease-accel:cubic-bezier(.3,0,1,1);          /* saída de cena */
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);   /* sheet, confirmação (leve overshoot) */
+  /* tipografia: o app usa a fonte do sistema para parecer nativo */
+  --font-ios:-apple-system,"SF Pro Text","SF Pro Display",system-ui,sans-serif;
+  --font-android:Roboto,"Google Sans","Noto Sans",system-ui,sans-serif;
+  --font-doc:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+
+@media (prefers-reduced-motion:reduce){
+  :root{--dur-fast:0ms;--dur-base:0ms;--dur-slow:0ms}
+}

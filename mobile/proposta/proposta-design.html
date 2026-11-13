@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Proposta de design do app mobile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../mockup/tokens.css">
+<style>
+@page{size:960px 540px;margin:0}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff}
+body{font-family:var(--font-doc);counter-reset:pg;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.s{width:960px;height:540px;position:relative;overflow:hidden;break-after:page;page-break-after:always;padding:40px 56px 56px;background:var(--bg);color:var(--text);counter-increment:pg}
+.s:last-child{break-after:auto;page-break-after:auto}
+.s::before{content:"Proposta de design, Mapa de Relatos de Roubo";position:absolute;left:56px;bottom:20px;font-size:11px;color:var(--text-muted)}
+.s::after{content:counter(pg);position:absolute;right:56px;bottom:20px;font-size:11px;color:var(--text-muted)}
+.cover::before,.cover::after{display:none}
+h1{font-size:33px;line-height:1.14;margin:0 0 10px;color:var(--brand-700);max-width:800px;letter-spacing:-.01em}
+h2{font-size:17px;margin:0 0 4px;color:var(--brand-700)}
+h3{font-size:14.5px;margin:0 0 3px}
+p{margin:0 0 8px;font-size:14.5px;line-height:1.5}
+.lead{font-size:15.5px;color:var(--text-muted);max-width:640px}
+.mut{color:var(--text-muted)}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85em;background:#E2E9EF;padding:1px 5px;border-radius:4px}
+ul{margin:0;padding-left:18px}
+li{font-size:14px;line-height:1.45;margin-bottom:4px}
+.row{display:flex;gap:24px}
+.col{flex:1;min-width:0}
+.bar{border-left:4px solid var(--brand-400);padding:2px 0 2px 14px}
+img{display:block}
+
+/* capa */
+.cover{background:var(--brand-800);color:#fff;padding:64px 64px}
+.cover h1{color:#fff;font-size:50px;line-height:1.05;margin:26px 0 12px}
+.cover .sub{font-size:20px;color:var(--brand-200);margin-bottom:34px;max-width:620px}
+.cover .meta{font-size:13.5px;color:var(--brand-100);line-height:1.7}
+.cover .logo{position:absolute;right:64px;top:64px;height:210px}
+.cover .stripe{position:absolute;left:0;right:0;bottom:0;height:10px;background:var(--brand-500)}
+
+/* diversos */
+.tilesx{display:flex;gap:12px;margin-top:10px}
+.tx{flex:1;border-radius:12px;height:132px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;font-size:12px}
+.tx img{height:70px}
+.sw{display:flex;flex-direction:column;justify-content:flex-end;border-radius:8px;padding:7px 6px;font-size:10.5px;line-height:1.25;height:70px;flex:1}
+.sw b{font-size:11.5px}
+.swrow{display:flex;gap:5px;margin-top:6px}
+.risks{display:flex;gap:8px;margin-top:10px}
+.rk{border-radius:10px;padding:7px 12px;font-weight:700;font-size:13px;display:flex;gap:8px;align-items:center}
+.rk i{width:11px;height:11px;border-radius:50%;display:inline-block}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th,td{text-align:left;padding:6px 10px;border-bottom:1px solid var(--n-200);vertical-align:baseline}
+th{background:var(--brand-100);color:var(--brand-700);font-size:12px}
+td small{color:var(--text-muted);font-size:10.5px;margin-left:4px}
+.phones{display:flex;gap:18px;margin-top:10px}
+.ph{text-align:left;width:178px}
+.ph img{height:330px;width:auto;filter:drop-shadow(0 8px 14px rgba(11,24,38,.28))}
+.ph h3{margin-top:12px;font-size:13.5px}
+.ph p{font-size:11.5px;color:var(--text-muted);line-height:1.4;margin:0}
+.flow{display:flex;align-items:stretch;gap:10px;margin-top:14px}
+.fb{background:#fff;border-radius:12px;padding:14px 16px;flex:1;border:1.5px solid var(--n-200)}
+.fb.main{border-color:var(--brand-400);background:var(--brand-50)}
+.fb h3{color:var(--brand-700)}
+.fb p{font-size:12.5px;color:var(--text-muted);margin:0}
+.arrow{align-self:center;font-size:22px;color:var(--brand-400)}
+.pic{background:#fff;border-radius:12px;padding:8px;border:1px solid var(--n-200)}
+.pic img{width:100%;height:auto;border-radius:6px}
+.pic .cap{font-size:11px;color:var(--text-muted);margin:6px 2px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.step{background:#fff;border-radius:12px;padding:12px 14px;border:1.5px solid var(--n-200)}
+.step b{color:var(--brand-700)}
+.timeline{display:flex;gap:10px;margin-top:14px}
+.tl{flex:1;background:#fff;border-radius:12px;padding:12px 14px;border-top:5px solid var(--brand-400)}
+.tl h3{color:var(--brand-700)}
+.tl p{font-size:12.5px;color:var(--text-muted);margin:0}
+.q{background:var(--warning-soft);color:var(--on-warning-soft);border-radius:8px;padding:7px 11px;font-size:12px;display:inline-block}
+</style>
+</head>
+<body>
+
+<!-- 1. Capa -->
+<section class="s cover">
+  <img class="logo" src="../assets/brand/logo-mark-light.svg" alt="Logo do projeto">
+  <h1>Proposta de design</h1>
+  <div class="sub">App do cidadão do Mapa de Relatos de Roubo, Av. Paulista, São Paulo</div>
+  <div class="meta">
+    Global Solution FIAP 2026.2, desafio CitizenTech<br>
+    Engenharia de Software, 3º ano (Ago), disciplina Mobile Development &amp; IOT<br>
+    Equipe: Gabriel Kato, Gabriel Couto, João Vitor de Matos e Marcelo Affonso<br>
+    12 de novembro de 2026
+  </div>
+  <div class="stripe"></div>
+</section>
+
+<!-- 2. O que o app faz -->
+<section class="s">
+  <h1>Em 30 segundos, o morador relata um roubo e vê o risco da região</h1>
+  <p class="lead">Quem anda pela Av. Paulista (Bela Vista, Cerqueira César e Consolação) não tem onde ver, de forma simples, onde e quando os roubos acontecem. O app junta o que a comunidade relata e mostra isso de volta.</p>
+  <div class="row" style="margin-top:22px">
+    <div class="col bar"><h2>Relatar</h2><p>Tipo, local e horário, em poucos toques. Anônimo, sem nome, telefone ou placa. O relato passa por moderação antes de aparecer.</p></div>
+    <div class="col bar"><h2>Ver</h2><p>O mapa mostra os relatos aprovados, e a cor de cada região indica o risco. Uma lista traz o mesmo conteúdo, com filtro por bairro.</p></div>
+    <div class="col bar"><h2>Saber</h2><p>Uma tabela de risco por bairro e faixa horária, prevista por um modelo de inteligência artificial treinado com os relatos.</p></div>
+  </div>
+  <p class="mut" style="margin-top:26px;font-size:12.5px">Todos os dados do projeto são simulados. Nenhum dado pessoal real é usado. O mapa não substitui o boletim de ocorrência.</p>
+</section>
+
+<!-- 3. Princípios -->
+<section class="s">
+  <h1>Quatro princípios guiam o design</h1>
+  <p class="lead">Vêm das regras do app (<code>mobile/REGRAS.md</code>) e valem para toda tela.</p>
+  <div class="grid2" style="margin-top:20px;gap:20px 36px">
+    <div class="bar"><h2>Nativo de verdade</h2><p>No iOS, Liquid Glass (iOS 26 ou mais novo). No Android, Material 3. Usamos os componentes do sistema, com plano B para versões antigas. Cor da marca, logo e tom ficam iguais nas duas.</p></div>
+    <div class="bar"><h2>Pensado como aplicativo</h2><p>Abas e pilha, gestos, áreas seguras, teclado e retrato primeiro. Alvos de toque de 44 pt (iOS) e 48 dp (Android). Nada de layout de site adaptado.</p></div>
+    <div class="bar"><h2>Calmo e confiável</h2><p>Um azul de ação, neutros frios e o risco sempre com rótulo em texto, nunca só cor. Textos em frase, sem alarmismo, em português claro.</p></div>
+    <div class="bar"><h2>Feito para rede ruim</h2><p>Tempo limite, nova tentativa com espera crescente, dados salvos e fila de envio. O app avisa o que está acontecendo e continua útil sem conexão.</p></div>
+  </div>
+</section>
+
+<!-- 4. Logo -->
+<section class="s">
+  <h1>A logo vira o ponto de partida da identidade</h1>
+  <div class="row" style="margin-top:6px">
+    <div class="col" style="flex:1.5">
+      <p class="lead" style="font-size:14.5px">O arquivo original tinha ruído e pixels soltos. Refizemos em vetor a partir da grade de pixels (63 por 65), removendo 41 pixels soltos e sem acrescentar nenhum. A cor muda conforme o fundo, e o desenho não.</p>
+      <div class="tilesx">
+        <div class="tx" style="background:#fff;color:var(--n-700)"><img src="../assets/brand/logo-mark.svg" alt="">Fundo claro</div>
+        <div class="tx" style="background:var(--brand-800);color:var(--brand-100)"><img src="../assets/brand/logo-mark-light.svg" alt="">Fundo escuro</div>
+        <div class="tx" style="background:var(--brand-500);color:#fff"><img src="../assets/brand/logo-mark-white.svg" alt="">Fundo da marca</div>
+      </div>
+    </div>
+    <div class="col" style="flex:1">
+      <h2>Ícone do app</h2>
+      <div style="display:flex;gap:14px;align-items:flex-end;margin:8px 0 14px">
+        <div style="width:96px;height:96px;border-radius:22px;overflow:hidden;background:var(--brand-700)"><img src="../assets/brand/app-icon.svg" alt="" style="width:100%;height:100%"></div>
+        <div style="width:96px;height:96px;border-radius:50%;overflow:hidden;background:var(--brand-700)"><img src="../assets/brand/app-icon.svg" alt="" style="width:100%;height:100%"></div>
+        <div style="width:48px;height:48px;border-radius:11px;overflow:hidden;background:var(--brand-700)"><img src="../assets/brand/app-icon.svg" alt="" style="width:100%;height:100%"></div>
+      </div>
+      <ul>
+        <li>iOS com cantos do sistema, Android com ícone adaptativo (máscara redonda ou quadrada).</li>
+        <li>Tamanho mínimo de 24 pt. Abaixo disso, só o ícone do app.</li>
+        <li>Área de proteção de 1/4 da altura em volta.</li>
+        <li>Sem esticar, girar ou trocar a cor fora da paleta.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Paleta -->
+<section class="s">
+  <h1>Um azul de ação, neutros frios e risco com rótulo</h1>
+  <p class="lead" style="font-size:14.5px">A rampa de marca parte do azul original da logo (<code>#B0DCFC</code>) e chega ao azul marinho. Os valores abaixo têm contraste calculado: 4,5 ou mais para texto comum.</p>
+  <div class="swrow">
+    <div class="sw" style="background:var(--brand-50);color:#0B1520"><b>50</b>#F0F7FE</div>
+    <div class="sw" style="background:var(--brand-100);color:#0B1520"><b>100</b>#DCEEFD</div>
+    <div class="sw" style="background:var(--brand-200);color:#0B1520"><b>200</b>#B0DCFC</div>
+    <div class="sw" style="background:var(--brand-300);color:#0B1520"><b>300</b>#7DBEF3</div>
+    <div class="sw" style="background:var(--brand-400);color:#0B1520"><b>400</b>#4A9BE0</div>
+    <div class="sw" style="background:var(--brand-500);color:#fff"><b>500 ação</b>#1F6FC8, 5,0:1</div>
+    <div class="sw" style="background:var(--brand-600);color:#fff"><b>600</b>#14509A</div>
+    <div class="sw" style="background:var(--brand-700);color:#fff"><b>700</b>#0E3B6B</div>
+    <div class="sw" style="background:var(--brand-800);color:#fff"><b>800</b>#0A2B4F</div>
+    <div class="sw" style="background:var(--brand-900);color:#fff"><b>900</b>#071D36</div>
+  </div>
+  <div class="swrow" style="margin-top:8px">
+    <div class="sw" style="background:#fff;color:#0B1520;height:50px;border:1px solid var(--n-200)"><b>0</b>#FFFFFF</div>
+    <div class="sw" style="background:var(--n-50);color:#0B1520;height:50px"><b>50</b>#F6F8FA</div>
+    <div class="sw" style="background:var(--n-100);color:#0B1520;height:50px"><b>100</b>#EAEFF3</div>
+    <div class="sw" style="background:var(--n-200);color:#0B1520;height:50px"><b>200</b>#D3DBE3</div>
+    <div class="sw" style="background:var(--n-400);color:#0B1520;height:50px"><b>400</b>#8493A3</div>
+    <div class="sw" style="background:var(--n-600);color:#fff;height:50px"><b>600</b>#586878</div>
+    <div class="sw" style="background:var(--n-800);color:#fff;height:50px"><b>800</b>#243241</div>
+    <div class="sw" style="background:var(--n-900);color:#fff;height:50px"><b>900</b>#16212C</div>
+    <div class="sw" style="background:var(--n-950);color:#fff;height:50px"><b>950</b>#0B1520</div>
+  </div>
+  <div class="row" style="margin-top:16px;gap:28px">
+    <div class="col">
+      <h2>Risco, sempre com texto</h2>
+      <div class="risks">
+        <div class="rk" style="background:var(--success-soft);color:var(--on-success-soft)"><i style="background:var(--success)"></i>Risco baixo</div>
+        <div class="rk" style="background:var(--warning-soft);color:var(--on-warning-soft)"><i style="background:var(--warning)"></i>Risco médio</div>
+        <div class="rk" style="background:var(--danger-soft);color:var(--on-danger-soft)"><i style="background:var(--danger)"></i>Risco alto</div>
+      </div>
+      <div class="risks" data-theme="dark" style="background:var(--bg);padding:8px;border-radius:12px;margin-top:8px">
+        <div class="rk" style="background:var(--success-soft);color:var(--on-success-soft)"><i style="background:var(--success)"></i>Risco baixo</div>
+        <div class="rk" style="background:var(--warning-soft);color:var(--on-warning-soft)"><i style="background:var(--warning)"></i>Risco médio</div>
+        <div class="rk" style="background:var(--danger-soft);color:var(--on-danger-soft)"><i style="background:var(--danger)"></i>Risco alto</div>
+      </div>
+    </div>
+    <div class="col">
+      <h2>Claro e escuro por papéis</h2>
+      <p style="font-size:13px">O app usa papéis (fundo, superfície, texto, ação), e cada papel tem valor no claro e no escuro. As cores de risco não mudam com o tema do sistema, porque carregam significado.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Tipografia e medidas -->
+<section class="s">
+  <h1>Tipografia do sistema e medidas de 4 em 4</h1>
+  <div class="row" style="gap:30px;margin-top:6px">
+    <div class="col" style="flex:1.7">
+      <p class="lead" style="font-size:14px">SF Pro no iOS e Roboto no Android. É isso que faz o texto parecer nativo e respeitar o tamanho escolhido no aparelho.</p>
+      <table>
+        <thead><tr><th>Papel</th><th>iOS</th><th>Android</th></tr></thead>
+        <tbody>
+          <tr><td>Título da tela</td><td style="font-family:var(--font-ios);font-weight:700;font-size:17px">Relatos<small>34, negrito</small></td><td style="font-family:var(--font-android);font-size:16px">Relatos<small>28</small></td></tr>
+          <tr><td>Título de seção</td><td style="font-family:var(--font-ios)">Risco por região<small>22</small></td><td style="font-family:var(--font-android)">Risco por região<small>22</small></td></tr>
+          <tr><td>Título do cartão</td><td style="font-family:var(--font-ios);font-weight:600">Celular, Bela Vista<small>17</small></td><td style="font-family:var(--font-android);font-weight:500">Celular, Bela Vista<small>16</small></td></tr>
+          <tr><td>Texto</td><td style="font-family:var(--font-ios)">Levaram meu celular<small>17</small></td><td style="font-family:var(--font-android)">Levaram meu celular<small>16</small></td></tr>
+          <tr><td>Texto secundário</td><td style="font-family:var(--font-ios);color:var(--n-600)">Ontem, 21h35<small>15</small></td><td style="font-family:var(--font-android);color:var(--n-600)">Ontem, 21h35<small>14</small></td></tr>
+          <tr><td>Legenda</td><td style="font-family:var(--font-ios);color:var(--n-600)">Local aproximado<small>13</small></td><td style="font-family:var(--font-android);color:var(--n-600)">Local aproximado<small>12</small></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <h2>Espaçamento</h2>
+      <div style="display:flex;gap:10px;align-items:flex-end;margin:8px 0 16px">
+        <span style="width:4px;height:4px;background:var(--brand-400);display:block"></span><span style="width:8px;height:8px;background:var(--brand-400);display:block"></span><span style="width:12px;height:12px;background:var(--brand-400);display:block"></span><span style="width:16px;height:16px;background:var(--brand-400);display:block"></span><span style="width:24px;height:24px;background:var(--brand-400);display:block"></span><span style="width:32px;height:32px;background:var(--brand-400);display:block"></span><span style="width:40px;height:40px;background:var(--brand-400);display:block"></span>
+      </div>
+      <h2>Raios</h2>
+      <div style="display:flex;gap:8px;margin:8px 0 16px">
+        <div style="width:38px;height:38px;border:2px solid var(--brand-400);background:var(--brand-100);border-radius:6px"></div>
+        <div style="width:38px;height:38px;border:2px solid var(--brand-400);background:var(--brand-100);border-radius:10px"></div>
+        <div style="width:38px;height:38px;border:2px solid var(--brand-400);background:var(--brand-100);border-radius:14px"></div>
+        <div style="width:38px;height:38px;border:2px solid var(--brand-400);background:var(--brand-100);border-radius:20px"></div>
+        <div style="width:38px;height:38px;border:2px solid var(--brand-400);background:var(--brand-100);border-radius:999px"></div>
+      </div>
+      <h2>Toque</h2>
+      <p style="font-size:13px">Alvo mínimo de 44 pt no iOS e 48 dp no Android. O ícone pode ser menor, mas a área de toque não, com pelo menos 8 de distância entre alvos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Fluxo -->
+<section class="s">
+  <h1>Do primeiro acesso ao relato enviado</h1>
+  <p class="lead">Seis telas, três delas em abas. O botão de novo relato fica à mão no mapa e na lista.</p>
+  <div class="flow" style="margin-top:26px">
+    <div class="fb"><h3>Identificação</h3><p>Apelido e RM. O app lembra e pula a tela ao reabrir.</p></div>
+    <div class="arrow">&rarr;</div>
+    <div class="fb main" style="flex:1.6"><h3>Abas</h3><p style="margin-bottom:8px">Navegação principal, sempre à vista.</p>
+      <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="rk" style="background:#fff;color:var(--brand-700);padding:4px 10px;font-size:12px">Mapa (proposta)</span><span class="rk" style="background:#fff;color:var(--brand-700);padding:4px 10px;font-size:12px">Relatos</span><span class="rk" style="background:#fff;color:var(--brand-700);padding:4px 10px;font-size:12px">Risco</span></div></div>
+    <div class="arrow">&rarr;</div>
+    <div class="fb"><h3>Detalhe</h3><p>Todos os campos do relato, sem endereço exato nem dados de pessoas.</p></div>
+  </div>
+  <div class="flow" style="margin-top:14px">
+    <div class="fb" style="flex:1.1;background:var(--brand-50);border-color:var(--brand-300)"><h3>Novo relato</h3><p>Tipo, descrição curta, quando e onde. A localização do celular preenche o campo "Onde". Se a permissão for negada, a pessoa escolhe o local no mapa.</p></div>
+    <div class="fb" style="flex:1"><h3>Se não houver conexão</h3><p>O relato fica salvo no aparelho como "Aguardando envio" e sai sozinho quando a rede volta.</p></div>
+    <div class="fb" style="flex:1"><h3>Depois do envio</h3><p>"Relato enviado. Ele aparece no mapa depois da moderação."</p></div>
+  </div>
+</section>
+
+<!-- 8. Telas principais -->
+<section class="s">
+  <h1>As telas principais</h1>
+  <div class="phones">
+    <div class="ph"><img src="img/tela-identificacao.png" alt="Tela de identificação"><h3>Identificação</h3><p>Apelido e RM, lembrados ao reabrir.</p></div>
+    <div class="ph"><img src="img/tela-mapa.png" alt="Tela de mapa"><h3>Mapa (proposta)</h3><p>Pinos dos relatos, cor por risco e aviso do horário.</p></div>
+    <div class="ph"><img src="img/tela-lista.png" alt="Tela de lista"><h3>Lista de relatos</h3><p>Filtro por bairro e estado de cada relato.</p></div>
+    <div class="ph"><img src="img/tela-detalhe.png" alt="Tela de detalhe"><h3>Detalhe</h3><p>Campos do relato e mapa com local aproximado.</p></div>
+  </div>
+</section>
+
+<!-- 9. Cadastro e risco -->
+<section class="s">
+  <h1>Cadastro validado e risco por região</h1>
+  <div class="row" style="gap:26px">
+    <div class="phones" style="margin-top:6px;flex:none">
+      <div class="ph"><img src="img/tela-novo.png" alt="Tela de novo relato"><h3>Novo relato</h3><p>Tipo, descrição, quando e onde.</p></div>
+      <div class="ph"><img src="img/tela-novo-erro.png" alt="Erro e permissão negada"><h3>Erro e permissão</h3><p>Diz o que falta e oferece outro caminho.</p></div>
+      <div class="ph"><img src="img/tela-risco.png" alt="Tela de risco"><h3>Risco por região</h3><p>Bairro por faixa horária, com o horário atual destacado.</p></div>
+    </div>
+    <div class="col" style="padding-top:10px">
+      <h2>O que a validação diz</h2>
+      <p style="font-size:13px">Cada erro explica o que fazer ("Escolha o tipo do relato", "O RM tem 6 números depois de RM"), sem pedir desculpas nem culpar a pessoa.</p>
+      <h2 style="margin-top:12px">Localização</h2>
+      <p style="font-size:13px">É o recurso nativo do app. Com permissão negada, o botão enviar continua possível: escolher o local no mapa ou abrir as configurações.</p>
+      <h2 style="margin-top:12px">Risco</h2>
+      <p style="font-size:13px">A previsão vem do modelo de IA via <code>GET /api/previsoes</code>. A coluna "Noite" aparece destacada porque é o horário de agora.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 10. Nativo -->
+<section class="s">
+  <h1>Mesmo conteúdo, forma nativa em cada plataforma</h1>
+  <p class="lead" style="font-size:14.5px">À esquerda, iOS com Liquid Glass. À direita, Android com Material 3. O vidro aqui é uma aproximação em CSS: no app, vem do sistema.</p>
+  <div class="pic" style="margin-top:8px"><img src="img/comp-nav-abas.png" alt="Barra de abas iOS e Android"><div class="cap">Barra de abas: cápsula flutuante de vidro no iOS, barra fixa com indicador em pílula no Android.</div></div>
+  <div class="pic" style="margin-top:8px"><img src="img/comp-ctl-botoes.png" alt="Botões iOS e Android" style="max-height:92px;width:auto;margin:0 auto"><div class="cap">Botões: cápsulas de 44 pt no iOS, botões de 40 dp com alvo de 48 dp no Android.</div></div>
+  <p class="q" style="margin-top:10px">Cada efeito nativo tem plano B. Antes de adotar, testar no Expo Go de verdade: a documentação diz que funciona, mas guias da comunidade divergem.</p>
+</section>
+
+<!-- 11. Domínio -->
+<section class="s">
+  <h1>Componentes do domínio, com o risco em texto</h1>
+  <div class="row" style="gap:14px;margin-top:4px;align-items:flex-start">
+    <div style="width:416px;flex:none;display:flex;flex-direction:column;gap:10px">
+      <div class="pic"><img src="img/comp-dom-0.png" alt="Cabeçalho de risco e cartões de relato"></div>
+      <div class="pic"><img src="img/comp-dom-2.png" alt="Células da matriz de risco" style="width:300px"></div>
+    </div>
+    <div style="width:408px;flex:none;display:flex;flex-direction:column;gap:10px">
+      <div class="pic"><img src="img/comp-dom-1.png" alt="Selos de risco e de status" style="width:230px"></div>
+      <div class="pic"><img src="img/comp-dom-3.png" alt="Pinos e zonas no mapa"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12. Rede ruim -->
+<section class="s">
+  <h1>Pensado para conexão ruim</h1>
+  <div class="row" style="gap:26px">
+    <div class="col" style="flex:1.1">
+      <h2>No app</h2>
+      <ul>
+        <li>Tempo limite em toda chamada e cancelamento.</li>
+        <li>Nova tentativa com espera crescente e variação aleatória, só em chamadas seguras de repetir.</li>
+        <li>Cache da última resposta, para mostrar dados salvos.</li>
+        <li>Quatro estados: carregando, erro, vazio e sem conexão.</li>
+        <li>Relato criado sem conexão vai para uma fila.</li>
+      </ul>
+      <h2 style="margin-top:12px">Na API (proposta, combinar com o João)</h2>
+      <ul>
+        <li>Respostas comprimidas e paginadas.</li>
+        <li><code>ETag</code> para não baixar o que não mudou.</li>
+        <li><code>Idempotency-Key</code> no <code>POST /api/relatos</code>, para não duplicar relato ao repetir.</li>
+      </ul>
+    </div>
+    <div class="col" style="flex:none;width:400px;display:flex;flex-direction:column;gap:8px">
+      <div class="pic"><img src="img/comp-rede-1.png" alt="Relato aguardando envio"></div>
+      <div class="pic"><img src="img/comp-rede-2.png" alt="Erro com nova tentativa"></div>
+      <div style="display:flex;gap:8px;align-items:flex-start">
+        <div class="pic" style="width:196px;flex:none"><img src="img/comp-rede-0.png" alt="Avisos de conexão"></div>
+        <div class="pic" style="width:196px;flex:none"><img src="img/comp-rede-3.png" alt="Confirmação de envio"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13. Movimento e acessibilidade -->
+<section class="s">
+  <h1>Movimento que responde e acessibilidade desde o início</h1>
+  <div class="row" style="gap:30px;margin-top:6px">
+    <div class="col">
+      <h2>Movimento</h2>
+      <table>
+        <thead><tr><th>Token</th><th>Valor</th><th>Uso</th></tr></thead>
+        <tbody>
+          <tr><td><code>dur-fast</code></td><td>120 ms</td><td>Pressionar, trocar seleção</td></tr>
+          <tr><td><code>dur-base</code></td><td>220 ms</td><td>Avisos, troca de cor de um selo</td></tr>
+          <tr><td><code>dur-slow</code></td><td>360 ms</td><td>Folha inferior, mudança de tela</td></tr>
+          <tr><td><code>ease-standard</code></td><td>.2, 0, 0, 1</td><td>Quase tudo</td></tr>
+          <tr><td><code>ease-spring</code></td><td>.34, 1.56, .64, 1</td><td>Folha e confirmações</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12.5px;margin-top:10px">Retorno tátil leve ao selecionar, de sucesso ao enviar o relato e de aviso quando a validação falha. Com "reduzir movimento" ativo, o tempo vira zero e o conteúdo continua.</p>
+    </div>
+    <div class="col">
+      <h2>Acessibilidade</h2>
+      <ul>
+        <li>Os 9 pares de texto e fundo testados passam de 4,5 para 1, no claro e no escuro.</li>
+        <li>Alvos de 44 pt e 48 dp, com área de toque maior que o ícone.</li>
+        <li>O texto cresce com o tamanho escolhido no aparelho, e o cartão continua legível em 150%.</li>
+        <li>Foco visível, e o selo de risco é lido como "Risco alto, Bela Vista, à noite".</li>
+        <li>Risco nunca só por cor: ícone, texto e cor juntos.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 14. Referências -->
+<section class="s">
+  <h1>O que levamos das referências</h1>
+  <p class="lead" style="font-size:14px">Fonte: repositório awesome-design-md, com arquivos <code>DESIGN.md</code> de marcas conhecidas. São arquivos de sites, então servem de referência de cor, tipografia e tom, não de componente nativo. Lemos os resumos de Apple e Uber. Do Airbnb só a descrição geral.</p>
+  <div class="row" style="margin-top:16px;gap:18px">
+    <div class="col bar"><h2>Apple</h2><p style="font-size:13px">Interface quase invisível, uma só cor de ação (azul), texto de corpo em 17, estado pressionado com leve redução de escala e vidro só em barras.</p><p class="mut" style="font-size:12.5px">Não levamos: o ritmo de "telas de produto", que é de site.</p></div>
+    <div class="col bar"><h2>Uber</h2><p style="font-size:13px">Uma ação principal por tela, títulos em frase, cartões planos sem sombra e clareza em mapa com folha.</p><p class="mut" style="font-size:12.5px">Não levamos: preto como cor de marca e pílula em tudo, porque o formato vem do sistema.</p></div>
+    <div class="col bar"><h2>Airbnb</h2><p style="font-size:13px">Filtros em chips, cartões com respiro e cantos arredondados.</p><p class="mut" style="font-size:12.5px">Sem fotos no nosso caso (dados anônimos), então cor e hierarquia carregam a tela.</p></div>
+  </div>
+  <p class="mut" style="margin-top:20px;font-size:12.5px">Wise, Revolut e Spotify estão na lista de próximos estudos, ainda não lidos.</p>
+</section>
+
+<!-- 15. Nota -->
+<section class="s">
+  <h1>Como a proposta cobre a avaliação de Mobile</h1>
+  <div class="grid2" style="margin-top:12px">
+    <div class="step"><b>Funcionalidade, 40%</b><p style="font-size:13px;margin:4px 0 0">Três telas ou mais com navegação, lista com carregando, erro e vazio, formulário validado que cria um relato e identificação lembrada ao reabrir.</p></div>
+    <div class="step"><b>Qualidade TypeScript, 30%</b><p style="font-size:13px;margin:4px 0 0">Modo estrito, sem <code>any</code>, tipos em <code>Relato</code>, <code>PrevisaoRisco</code>, rotas e respostas, e <code>tsc --noEmit</code> limpo.</p></div>
+    <div class="step"><b>Recurso nativo, 20%</b><p style="font-size:13px;margin:4px 0 0">Localização preenchendo o relato, com a permissão negada tratada. O app é nativo, sem WebView.</p></div>
+    <div class="step"><b>Organização e documentação, 10%</b><p style="font-size:13px;margin:4px 0 0">Camada <code>services/</code>, validação em funções puras, <code>README.md</code> com a Ficha da CitizenTech e <code>DECISOES.md</code>.</p></div>
+  </div>
+  <h2 style="margin-top:18px">Entregáveis (19/11, 23h55)</h2>
+  <p style="font-size:13px">ZIP da pasta do app sem <code>node_modules</code>, README, DECISOES.md, array <code>authors</code> com nome e RM de todos no <code>package.json</code> e vídeo de demonstração de até 2 minutos.</p>
+</section>
+
+<!-- 16. Decisões em aberto -->
+<section class="s">
+  <h1>Decisões em aberto e riscos</h1>
+  <div class="grid2" style="margin-top:10px">
+    <div class="step"><b>Tela de mapa</b><p style="font-size:13px;margin:4px 0 0">É a ideia original (mapa interativo), mas está como proposta. Precisa da confirmação do time. Testar <code>react-native-maps</code> no Expo Go cedo.</p></div>
+    <div class="step"><b>Fluxo de moderação</b><p style="font-size:13px;margin:4px 0 0">O app em C# não usa a API, então ninguém aprova os relatos. Decidir se o C# chama a API, se o app mostra os pendentes ou se fica só na narrativa.</p></div>
+    <div class="step"><b>Expo Go e módulos nativos</b><p style="font-size:13px;margin:4px 0 0">Vidro do iOS 26 e componentes do Material 3 podem exigir development build. Se exigirem, entra o plano B.</p></div>
+    <div class="step"><b>Contrato da API</b><p style="font-size:13px;margin:4px 0 0">Paginação, <code>ETag</code> e chave de idempotência mudam o contrato. Combinar com o João antes.</p></div>
+    <div class="step"><b>Granularidade do modelo</b><p style="font-size:13px;margin:4px 0 0">Com 3 bairros e 4 faixas há só 12 combinações. Zonas mais finas deixam o mapa e a previsão mais úteis.</p></div>
+    <div class="step"><b>Paleta e logo</b><p style="font-size:13px;margin:4px 0 0">A rampa de marca e a recoloração da logo são propostas. O time pode trocar a cor no <code>tokens.css</code>.</p></div>
+  </div>
+</section>
+
+<!-- 17. Próximos passos -->
+<section class="s">
+  <h1>Próximos passos</h1>
+  <p class="lead">Calendário proposto, dentro dos prazos internos do projeto.</p>
+  <div class="timeline">
+    <div class="tl"><h3>13/11</h3><p>IA entrega o CSV simulado. João passa as rotas da API rodando local. Confirmar tela de mapa e moderação.</p></div>
+    <div class="tl"><h3>14 e 15/11</h3><p>Criar o projeto Expo com tema (<code>tokens</code>), navegação, identificação e <code>services/</code> com dados de mentira.</p></div>
+    <div class="tl"><h3>16/11</h3><p>Lista, detalhe, novo relato com localização, risco por região e estados de rede.</p></div>
+    <div class="tl"><h3>17/11</h3><p>Cada parte funcionando sozinha. <code>tsc --noEmit</code> limpo.</p></div>
+    <div class="tl"><h3>18/11</h3><p>App mostrando o risco da API no IIS. Vídeo de 2 min gravado.</p></div>
+    <div class="tl"><h3>19/11</h3><p>Envio no Teams até 23h55.</p></div>
+  </div>
+  <p class="mut" style="margin-top:26px;font-size:12.5px">Material de apoio no repositório: <code>mobile/mockup/</code> (telas, fundamentos e componentes), <code>mobile/assets/brand/</code> (logo) e <code>mobile/REGRAS.md</code>.</p>
+</section>
+
+</body>
+</html>
