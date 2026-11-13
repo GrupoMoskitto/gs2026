@@ -1,0 +1,76 @@
+import { GlassView } from 'expo-glass-effect';
+import * as Haptics from 'expo-haptics';
+import { Platform, Pressable, StyleSheet } from 'react-native';
+
+import { alvoToque, raio, useTema } from '@/theme';
+import { Icone, type NomeIcone } from './Icone';
+import { useVidro } from './Superficie';
+import { Texto } from './Texto';
+
+interface Props {
+  rotulo: string;
+  selecionado: boolean;
+  aoPressionar: () => void;
+  icone?: NomeIcone;
+  /** "radio" escolhe uma opção do grupo; "checkbox" permite marcar várias. */
+  papel?: 'radio' | 'checkbox';
+}
+
+/**
+ * Opção selecionável (tipo, bairro, quando). No iOS 26 é vidro interativo. O selecionado inverte para a cor
+ * do texto (tinta neutra), deixando o azul para os dados e para a ação principal.
+ * O tamanho não muda com a seleção (mesmo peso de texto e mesma borda), para a fileira não se mexer.
+ */
+export function Chip({ rotulo, selecionado, aoPressionar, icone, papel = 'radio' }: Props) {
+  const { cores } = useTema();
+  const vidro = useVidro();
+  const corTexto = selecionado ? cores.fundo : cores.texto;
+  return (
+    <Pressable
+      accessibilityRole={papel}
+      accessibilityState={papel === 'checkbox' ? { checked: selecionado } : { selected: selecionado }}
+      accessibilityLabel={rotulo}
+      onPress={() => {
+        if (Platform.OS !== 'web') void Haptics.selectionAsync();
+        aoPressionar();
+      }}
+      android_ripple={{ color: `${cores.primaria}22` }}
+      style={[
+        estilos.base,
+        {
+          backgroundColor: vidro ? 'transparent' : selecionado ? cores.texto : cores.superficie,
+          borderColor: selecionado ? cores.texto : cores.linha,
+          borderWidth: vidro ? StyleSheet.hairlineWidth : 1,
+        },
+      ]}
+    >
+      {vidro ? (
+        <GlassView
+          pointerEvents="none"
+          style={StyleSheet.absoluteFill}
+          glassEffectStyle="regular"
+          isInteractive
+          tintColor={selecionado ? `${cores.texto}E6` : undefined}
+        />
+      ) : null}
+      {icone ? <Icone nome={icone} tamanho={18} cor={corTexto} /> : null}
+      {/* Mesmo peso nos dois estados: negrito é mais largo e o chip crescia ao ser selecionado. */}
+      <Texto variante="corpo" cor={corTexto}>
+        {rotulo}
+      </Texto>
+    </Pressable>
+  );
+}
+
+const estilos = StyleSheet.create({
+  base: {
+    minHeight: alvoToque,
+    paddingHorizontal: 14,
+    borderRadius: raio.pilula,
+    borderCurve: 'continuous',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    overflow: 'hidden',
+  },
+});
