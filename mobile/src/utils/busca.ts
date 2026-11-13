@@ -1,7 +1,5 @@
-// Busca de lugares por nome, sem diferença de maiúsculas e acentos ("consolacao" acha "Consolação").
 import type { TipoLocal } from '@/config/locais';
 
-/** Tira acentos, passa para minúsculas e apara os espaços. */
 export function normalizar(texto: string): string {
   return texto
     .normalize('NFD')
@@ -13,10 +11,7 @@ export function normalizar(texto: string): string {
 // Em empate, o que é do projeto vem antes do que é da região.
 const PRIORIDADE: Record<TipoLocal, number> = { bairro: 0, estacao: 1, distrito: 2, municipio: 3 };
 
-/**
- * Devolve até `limite` lugares. Quem começa com o texto vem primeiro, depois quem tem uma palavra
- * começando com ele, depois quem apenas contém. Texto vazio não devolve nada.
- */
+/** Até `limite` lugares: o nome começa com o texto, depois uma palavra começa, depois apenas contém. */
 export function buscarLocais<T extends { nome: string; tipo: TipoLocal }>(locais: readonly T[], texto: string, limite = 6): T[] {
   const termo = normalizar(texto);
   if (termo === '') return [];

@@ -1,5 +1,3 @@
-// Seletor de opções nativo no iOS: o Picker do SwiftUI (segmentado ou menu), pelo @expo/ui.
-// Substitui os grupos de chips desenhados à mão. O Android usa SeletorOpcoes.tsx (Jetpack Compose).
 import { Host, Picker, Text } from '@expo/ui/swift-ui';
 import { pickerStyle, tag } from '@expo/ui/swift-ui/modifiers';
 import { StyleSheet } from 'react-native';

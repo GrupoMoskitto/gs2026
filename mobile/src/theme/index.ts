@@ -84,12 +84,10 @@ export const coresEscuras: Cores = {
   eu: '#6BA9FF',
 };
 
-/** Espaçamento em grade de 4. */
 export const espaco = { 1: 4, 2: 8, 3: 12, 4: 16, 5: 20, 6: 24, 8: 32, 10: 40 } as const;
 
 export const raio = { xs: 6, sm: 10, md: 14, lg: 20, xl: 28, pilula: 999 } as const;
 
-/** Alvo de toque mínimo: 44 pt no iOS, 48 dp no Android. */
 export const alvoToque = Platform.OS === 'ios' ? 44 : 48;
 
 export const duracao = { rapida: 120, base: 220, lenta: 360 } as const;
@@ -100,7 +98,6 @@ export const duracao = { rapida: 120, base: 220, lenta: 360 } as const;
  */
 export const ESPACO_ABAS = Platform.OS === 'ios' ? 96 : 0;
 
-/** Margem lateral das telas. */
 export const MARGEM = 16;
 
 export interface Tema {
@@ -113,7 +110,6 @@ export function useTema(): Tema {
   return { cores: escuro ? coresEscuras : coresClaras, escuro };
 }
 
-/** Cor e cores suaves de cada nível de risco. O texto "Risco alto" sempre acompanha a cor. */
 export function coresDoRisco(cores: Cores, nivel: NivelRisco) {
   switch (nivel) {
     case 'baixo':
@@ -136,7 +132,6 @@ export function coresDoStatus(cores: Cores, status: StatusRelato) {
   }
 }
 
-/** Tamanhos de texto. Seguem a escala do sistema (iOS: Dynamic Type; Android: sp). */
 export const tipografia = {
   titulo: { fontSize: 28, lineHeight: 34, fontWeight: '700' as const },
   subtitulo: { fontSize: 20, lineHeight: 26, fontWeight: '600' as const },

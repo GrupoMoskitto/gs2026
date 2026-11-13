@@ -6,17 +6,11 @@
 const url = process.env.EXPO_PUBLIC_API_URL?.trim() ?? '';
 
 export const CONFIG_API = {
-  /** Vazio = sem API configurada (modo exemplo) */
   baseUrl: url.replace(/\/+$/, ''),
-  /** Tempo limite de cada tentativa, em milissegundos */
   tempoLimiteMs: 8000,
-  /** Tentativas além da primeira, só em chamadas seguras de repetir */
   novasTentativas: 3,
-  /** Espera base do backoff exponencial, em milissegundos */
   esperaBaseMs: 500,
-  /** Teto da espera entre tentativas, em milissegundos */
   esperaMaximaMs: 8000,
-  /** Quanto tempo um dado salvo ainda vale como "recente", em milissegundos */
   validadeCacheMs: 5 * 60 * 1000,
 } as const;
 

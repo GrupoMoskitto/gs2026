@@ -8,7 +8,6 @@ import { useEnvioDaFila } from '@/hooks/useConexao';
 import { aplicarTema, lerPreferenciaTema } from '@/services/tema';
 import { useTema } from '@/theme';
 
-// Mantém a tela de abertura até sabermos se a pessoa já se identificou e qual tema ela escolheu.
 void SplashScreen.preventAutoHideAsync();
 
 function Navegacao() {
@@ -34,7 +33,6 @@ function Navegacao() {
     if (pronto) void SplashScreen.hideAsync();
   }, [pronto]);
 
-  // Esvazia a fila de relatos pendentes ao abrir e sempre que a conexão volta.
   useEnvioDaFila();
 
   if (!pronto) return null;

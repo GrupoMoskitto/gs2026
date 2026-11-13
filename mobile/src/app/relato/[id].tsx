@@ -1,4 +1,3 @@
-// Detalhe de um relato, com o risco da região no horário de agora.
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';

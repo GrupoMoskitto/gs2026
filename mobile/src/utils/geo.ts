@@ -1,4 +1,3 @@
-// Funções de geografia, sem React: dá para testar no Node.
 import { LUGARES } from '@/config/locais';
 import { CAIXA_REGIAO } from '@/config/regiao';
 import type { Bairro } from '@/types/dominio';
@@ -22,7 +21,6 @@ export function dentroDaRegiao(p: Ponto): boolean {
   );
 }
 
-/** Distância aproximada em metros (fórmula de haversine). */
 export function distanciaMetros(a: Ponto, b: Ponto): number {
   const raioTerra = 6371000;
   const rad = (g: number) => (g * Math.PI) / 180;

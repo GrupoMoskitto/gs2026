@@ -1,4 +1,3 @@
-// Conferência do que chega da API. O JSON vem como `unknown`; estas funções confirmam o formato antes de usar.
 import {
   FAIXAS_HORARIAS,
   NIVEIS_RISCO,
@@ -47,7 +46,6 @@ export function ehPrevisao(valor: unknown): valor is PrevisaoRisco {
   );
 }
 
-/** Aceita só os itens válidos de uma lista. Se a resposta não for lista, devolve null. */
 export function filtrarLista<T>(valor: unknown, confere: (item: unknown) => item is T): T[] | null {
   if (!Array.isArray(valor)) return null;
   return valor.filter(confere);

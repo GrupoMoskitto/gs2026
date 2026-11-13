@@ -1,5 +1,4 @@
-// Guarda no aparelho (AsyncStorage): cache das respostas, fila de envio e identificação.
-// Toda leitura e escrita é protegida: se o armazenamento falhar, o app segue sem ele.
+// Guarda no aparelho (AsyncStorage). Se o armazenamento falhar, o app segue sem ele.
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PREFIXO = 'mapa-relatos:';
@@ -35,7 +34,6 @@ interface Salvo<T> {
   salvoEm: string;
 }
 
-/** Cache da última resposta, com a hora em que foi salva. */
 export async function lerCache<T>(chave: string): Promise<Salvo<T> | null> {
   return lerJson<Salvo<T>>(`cache:${chave}`);
 }

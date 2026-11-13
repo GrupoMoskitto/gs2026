@@ -1,9 +1,5 @@
-// Lugares do app. Tudo local: nada daqui sai do aparelho.
-//   - Os 3 bairros da Av. Paulista e as 3 estações de metrô vêm de config/regiao.ts.
-//   - Municípios da Região Metropolitana e distritos da capital vêm de data/locais.json,
-//     gerado por scripts/gerar-locais.mjs (IBGE para os nomes; OpenStreetMap para o ponto dos distritos).
-// LOCAIS é o que a busca do mapa encontra. LUGARES é o subconjunto que pode ser o local de um relato
-// (campo `bairro` do contrato): bairros da Paulista, distritos da capital e municípios das outras cidades.
+// Lugares do app, todos locais. LOCAIS é o que a busca encontra; LUGARES é o que pode ser o local de um relato (campo `bairro`).
+// Municípios e distritos vêm de data/locais.json, gerado por scripts/gerar-locais.mjs.
 import dados from '@/data/locais.json';
 import { CENTRO_BAIRRO, ESTACOES_METRO, type BairroPaulista } from './regiao';
 
@@ -47,7 +43,6 @@ const DO_IBGE: Local[] = dados.flatMap((l) =>
 
 export const LOCAIS: readonly Local[] = [...BAIRROS_PROJETO, ...ESTACOES, ...DO_IBGE];
 
-/** Lugar que pode ser o local de um relato: tem um código (`slug`) aceito no campo `bairro`. */
 export interface Lugar extends Local {
   slug: string;
 }
@@ -75,10 +70,8 @@ export function nomeDoLugar(slug: string): string {
   return POR_CODIGO.get(slug)?.nome ?? 'Local não identificado';
 }
 
-/** O que aparece antes de a pessoa digitar. */
 export const LOCAIS_SUGERIDOS: readonly Local[] = [...BAIRROS_PROJETO, ...ESTACOES];
 
-/** Quanto do mapa mostrar ao chegar no local: um bairro pede zoom perto; um município, longe. */
 export function deltaDoLocal(l: Local): number {
   if (l.id === CODIGO_CAPITAL) return 0.25;
   switch (l.tipo) {

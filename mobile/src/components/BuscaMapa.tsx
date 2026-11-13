@@ -10,17 +10,12 @@ import { Texto } from './Texto';
 
 interface Props {
   aoEscolher: (local: Local) => void;
-  /** Avisa quando a pessoa começa ou termina de buscar, para a tela esconder o que ficaria por baixo da lista. */
   aoBuscando: (buscando: boolean) => void;
-  /** Quantas opções de filtro estão marcadas. */
   filtrosAtivos: number;
   aoAbrirFiltros: () => void;
 }
 
-/**
- * Barra flutuante do mapa: campo de busca e botão de filtros. A busca é local (lista em config/locais.ts),
- * então nada do que a pessoa digita sai do aparelho.
- */
+/** Barra flutuante do mapa: busca (local, nada sai do aparelho) e botão de filtros. */
 export function BuscaMapa({ aoEscolher, aoBuscando, filtrosAtivos, aoAbrirFiltros }: Props) {
   const { cores } = useTema();
   const [texto, setTexto] = useState('');

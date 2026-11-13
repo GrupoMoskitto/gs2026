@@ -1,5 +1,3 @@
-// Validação do formulário de novo relato. Sem React: dá para testar no Node.
-// As mesmas regras valem na API (AGENTS.md, seção 4): a validação do app é só para avisar cedo.
 import { lugarDe } from '@/config/locais';
 import { CAIXA_REGIAO } from '@/config/regiao';
 import {
@@ -19,7 +17,6 @@ export interface EntradaRelato {
   descricao: string;
   latitude: number | null;
   longitude: number | null;
-  /** Quando aconteceu */
   ocorridoEm: Date;
 }
 
@@ -79,7 +76,6 @@ export function validarNovoRelato(
   return { ok: true, valor: novo };
 }
 
-/** Validação do apelido e do RM na tela de identificação. */
 export function validarIdentificacao(
   apelido: string,
   rm: string,

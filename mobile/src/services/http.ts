@@ -1,6 +1,5 @@
-// Cliente HTTP pensado para celular: tempo limite, cancelamento e nova tentativa com espera crescente.
-// Regras (mobile/REGRAS.md, seção 5): só repete o que é seguro repetir (GET e PATCH);
-// POST só repete com chave de idempotência.
+// Cliente HTTP para rede ruim: tempo limite, cancelamento e nova tentativa com espera crescente.
+// Só repete o que é seguro (GET e PATCH); POST só com chave de idempotência.
 import { CONFIG_API } from '@/config/api';
 import { ErroApi } from './erro';
 import { calcularEspera, statusRepetivel } from './retry';
@@ -10,11 +9,8 @@ export type Metodo = 'GET' | 'POST' | 'PATCH';
 export interface OpcoesHttp {
   metodo?: Metodo;
   corpo?: unknown;
-  /** Para cancelar a chamada (por exemplo, ao sair da tela) */
   sinal?: AbortSignal;
-  /** Evita duplicar o POST quando a chamada é repetida */
   chaveIdempotencia?: string;
-  /** Quantas vezes repetir depois da primeira falha. Padrão: o valor de CONFIG_API */
   novasTentativas?: number;
 }
 
@@ -41,7 +37,6 @@ function esperar(ms: number, sinal?: AbortSignal): Promise<void> {
   });
 }
 
-/** Uma única tentativa, com tempo limite. */
 async function tentar(url: string, opcoes: OpcoesHttp, metodo: Metodo): Promise<unknown> {
   const controle = new AbortController();
   let estourou = false;
@@ -74,7 +69,6 @@ async function tentar(url: string, opcoes: OpcoesHttp, metodo: Metodo): Promise<
       const corpo = (await resposta.json()) as { erro?: unknown };
       if (typeof corpo.erro === 'string') mensagem = corpo.erro;
     } catch {
-      // resposta sem JSON: segue com a mensagem padrão
     }
     if (resposta.status === 400 || resposta.status === 422) {
       throw new ErroApi('validacao', mensagem || 'Os dados enviados não foram aceitos.', resposta.status);
@@ -99,7 +93,6 @@ function repetivel(erro: ErroApi): boolean {
   return erro.codigo === 'servidor' && erro.status !== undefined && statusRepetivel(erro.status);
 }
 
-/** Chama a API. Devolve o JSON da resposta ou lança ErroApi (mensagem em português). */
 export async function chamarApi(caminho: string, opcoes: OpcoesHttp = {}): Promise<unknown> {
   if (CONFIG_API.baseUrl === '') throw new ErroApi('rede', 'A API ainda não foi configurada.');
   const metodo = opcoes.metodo ?? 'GET';

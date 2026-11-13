@@ -12,15 +12,10 @@ interface Props {
   selecionado: boolean;
   aoPressionar: () => void;
   icone?: NomeIcone;
-  /** "radio" escolhe uma opção do grupo; "checkbox" permite marcar várias. */
   papel?: 'radio' | 'checkbox';
 }
 
-/**
- * Opção selecionável (tipo, bairro, quando). No iOS 26 é vidro interativo. O selecionado inverte para a cor
- * do texto (tinta neutra), deixando o azul para os dados e para a ação principal.
- * O tamanho não muda com a seleção (mesmo peso de texto e mesma borda), para a fileira não se mexer.
- */
+/** Opção selecionável. O selecionado inverte para tinta neutra: o azul fica para dados e ação principal. */
 export function Chip({ rotulo, selecionado, aoPressionar, icone, papel = 'radio' }: Props) {
   const { cores } = useTema();
   const vidro = useVidro();

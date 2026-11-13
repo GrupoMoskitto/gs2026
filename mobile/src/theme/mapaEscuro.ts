@@ -1,5 +1,4 @@
 // Estilo escuro do Google Maps (Android). No iOS o Apple Maps usa `userInterfaceStyle`.
-// Esconde também os comércios, para o mapa ficar mais limpo e os pontos do app aparecerem.
 import type { ComponentProps } from 'react';
 import type MapView from 'react-native-maps';
 

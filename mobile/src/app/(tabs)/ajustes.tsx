@@ -1,4 +1,3 @@
-// Ajustes: aparência (tema), conta (identificação e sair), dados e envios, e sobre o app.
 import Constants from 'expo-constants';
 import { useEffect, useState } from 'react';
 import { Alert, Linking, ScrollView, StyleSheet, View } from 'react-native';

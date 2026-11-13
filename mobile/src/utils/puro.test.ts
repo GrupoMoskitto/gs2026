@@ -1,4 +1,3 @@
-// Testes da camada pura (geo, tempo, validação, retry). Rodar: npm test
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
@@ -41,7 +40,6 @@ describe('geo', () => {
 describe('tempo', () => {
   it('monta a ISO com fuso -03:00', () => {
     assert.equal(isoSaoPaulo(new Date('2026-11-10T21:35:00-03:00')), '2026-11-10T21:35:00-03:00');
-    // mesmo instante em UTC volta no fuso de São Paulo
     assert.equal(isoSaoPaulo(new Date('2026-11-11T00:35:00Z')), '2026-11-10T21:35:00-03:00');
   });
   it('divide o dia em faixas', () => {

@@ -1,4 +1,3 @@
-// Opções do cabeçalho nativo. No iOS, título grande que encolhe ao rolar; no Android, barra do Material.
 import type { Stack } from 'expo-router';
 import type { ComponentProps } from 'react';
 import { Platform } from 'react-native';

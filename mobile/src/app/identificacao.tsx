@@ -1,8 +1,4 @@
-// Primeira tela: identificação com apelido e RM. Fica salva no aparelho e não é login (não há senha).
-//
-// Desenho: texto alinhado à esquerda, uma frase forte, campos limpos e um único botão de ação.
-// Sem cartão em volta do formulário e sem ícones decorativos. Princípios tirados de Revolut (precisão e
-// hierarquia), Linear (restrição, uma cor de ação) e Apple (espaço em branco), do awesome-design-md.
+// Identificação com apelido e RM, lembrada no aparelho. Não é login (não há senha).
 import { Redirect } from 'expo-router';
 import { useRef, useState, type ComponentRef } from 'react';
 import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, TextInput, View } from 'react-native';
@@ -44,7 +40,6 @@ export default function Identificacao() {
     await entrar(r.valor);
   }
 
-  // Depois de entrar (a sessão passa a existir), segue para o mapa.
   if (sessao !== null) return <Redirect href="/mapa" />;
 
   const estiloCampo = (id: CampoId) => [

@@ -11,7 +11,6 @@ const CHAVE_FILA = 'fila';
 const ouvintes = new Set<(fila: RelatoPendente[]) => void>();
 let enviando = false;
 
-/** Chave única para cada relato. Não precisa ser um UUID formal, só não repetir. */
 export function gerarChave(): string {
   const parte = () => Math.floor(Math.random() * 0x100000000).toString(16).padStart(8, '0');
   return `${Date.now().toString(16)}-${parte()}-${parte()}`;
@@ -27,7 +26,6 @@ async function salvarFila(fila: RelatoPendente[]): Promise<void> {
   ouvintes.forEach((ouvir) => ouvir(fila));
 }
 
-/** Avisa quando a fila muda. Devolve a função para parar de ouvir. */
 export function assinarFila(ouvir: (fila: RelatoPendente[]) => void): () => void {
   ouvintes.add(ouvir);
   return () => {
@@ -52,11 +50,7 @@ export interface ResumoEnvio {
   restantes: number;
 }
 
-/**
- * Tenta enviar tudo que está na fila, do mais antigo para o mais novo.
- * Para no primeiro erro de rede (não adianta insistir sem conexão).
- * Relato que o servidor recusa (400) sai da fila: repetir não vai mudar a resposta.
- */
+/** Envia a fila do mais antigo ao mais novo. Para no primeiro erro de rede; relato recusado (400) sai da fila. */
 export async function enviarFila(sinal?: AbortSignal): Promise<ResumoEnvio> {
   if (enviando) return { enviados: [], restantes: (await lerFila()).length };
   enviando = true;

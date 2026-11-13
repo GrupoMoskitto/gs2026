@@ -1,6 +1,4 @@
-// Preferência de tema: seguir o sistema, ou forçar claro ou escuro. Fica salva no aparelho.
-// `Appearance.setColorScheme` troca o esquema do app inteiro, inclusive os componentes nativos
-// (abas, cabeçalhos, mapa e vidro), não só as nossas cores.
+// Tema escolhido nos Ajustes, salvo no aparelho. `Appearance.setColorScheme` troca o app inteiro, inclusive os componentes nativos.
 import { Appearance } from 'react-native';
 
 import { gravarJson, lerJson } from './armazenamento';

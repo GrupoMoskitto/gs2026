@@ -13,7 +13,6 @@ interface Props {
   aoFechar: () => void;
   tipos: readonly TipoRelato[];
   aoMudarTipos: (tipos: TipoRelato[]) => void;
-  /** Quantos relatos aparecem no mapa com os filtros de agora. */
   total: number;
 }
 
@@ -21,7 +20,6 @@ function alternar<T>(lista: readonly T[], item: T): T[] {
   return lista.includes(item) ? lista.filter((x) => x !== item) : [...lista, item];
 }
 
-/** Folha de filtros do mapa. No iOS é a folha nativa de página; no Android sobe de baixo com fundo escurecido. */
 export function FolhaFiltros({ visivel, aoFechar, tipos, aoMudarTipos, total }: Props) {
   const { cores } = useTema();
   const insets = useSafeAreaInsets();

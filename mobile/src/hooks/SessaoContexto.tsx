@@ -1,11 +1,9 @@
-// Identificação do usuário (apelido + RM) disponível em todo o app.
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 
 import { gravarSessao, lerSessao, limparSessao } from '@/services/sessao';
 import type { Sessao } from '@/types/dominio';
 
 interface Valor {
-  /** false enquanto lemos o armazenamento; a tela de abertura segue visível */
   carregada: boolean;
   sessao: Sessao | null;
   entrar: (sessao: Sessao) => Promise<void>;

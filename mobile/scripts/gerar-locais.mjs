@@ -22,7 +22,6 @@ async function json(url, opcoes) {
   return r.json();
 }
 
-/** Centroide do maior anel externo (fórmula da área de Gauss). Serve para centralizar o mapa. */
 function centroide(geometria) {
   const aneis = geometria.type === 'Polygon' ? [geometria.coordinates[0]] : geometria.coordinates.map((p) => p[0]);
   let melhor = null;
@@ -50,7 +49,6 @@ function caixa(geometria) {
   return { lngMin: Math.min(...lngs), lngMax: Math.max(...lngs), latMin: Math.min(...lats), latMax: Math.max(...lats) };
 }
 
-// 1) Municípios da região metropolitana
 const rm = (await json(`${IBGE}/v1/localidades/regioes-metropolitanas/04901`))[0];
 // A capital aparece em todas as sub-regiões da lista do IBGE: deduplica pelo código.
 const municipiosRM = [...new Map(rm['sub-regioes-metropolitanas'].flatMap((s) => s.municipios).map((m) => [m.id, m])).values()];
@@ -71,7 +69,6 @@ for (const m of municipiosRM) {
 }
 if (!caixaCapital) throw new Error('Não achei a malha da capital.');
 
-// 2) Distritos da capital: nomes do IBGE, pontos do Nominatim
 const distritos = await json(`${IBGE}/v1/localidades/municipios/${CAPITAL}/distritos`);
 const falhas = [];
 for (const d of distritos) {

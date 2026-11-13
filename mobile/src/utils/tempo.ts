@@ -1,12 +1,10 @@
 // Datas e horários no fuso de São Paulo (UTC-3, sem horário de verão desde 2019).
-// Sem React nem bibliotecas: dá para testar no Node.
 import type { FaixaHoraria } from '@/types/dominio';
 
 const DESLOCAMENTO_MS = -3 * 60 * 60 * 1000;
 
 const dois = (n: number) => String(n).padStart(2, '0');
 
-/** Data e hora de parede em São Paulo, como números. */
 function partesSp(data: Date) {
   const sp = new Date(data.getTime() + DESLOCAMENTO_MS);
   return {
@@ -19,7 +17,6 @@ function partesSp(data: Date) {
   };
 }
 
-/** ISO 8601 com fuso, como a API espera: 2026-11-10T21:35:00-03:00 */
 export function isoSaoPaulo(data: Date): string {
   const p = partesSp(data);
   return `${p.ano}-${dois(p.mes)}-${dois(p.dia)}T${dois(p.hora)}:${dois(p.minuto)}:00-03:00`;
@@ -36,7 +33,6 @@ export function faixaAtual(agora: Date = new Date()): FaixaHoraria {
   return faixaDaHora(partesSp(agora).hora);
 }
 
-/** "21h35" */
 export function formatarHora(iso: string): string {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return '';
@@ -44,7 +40,6 @@ export function formatarHora(iso: string): string {
   return `${p.hora}h${dois(p.minuto)}`;
 }
 
-/** "Hoje", "Ontem" ou "10/11" */
 export function formatarDia(iso: string, agora: Date = new Date()): string {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return '';
@@ -57,14 +52,12 @@ export function formatarDia(iso: string, agora: Date = new Date()): string {
   return `${dois(a.dia)}/${dois(a.mes)}`;
 }
 
-/** "Ontem, 21h35" */
 export function formatarQuando(iso: string, agora: Date = new Date()): string {
   const dia = formatarDia(iso, agora);
   const hora = formatarHora(iso);
   return dia && hora ? `${dia}, ${hora}` : '';
 }
 
-/** Opções rápidas de "quando aconteceu", em minutos atrás. */
 export const OPCOES_QUANDO = [
   { id: 'agora', rotulo: 'Agora', minutosAtras: 0 },
   { id: '1h', rotulo: '1 hora atrás', minutosAtras: 60 },

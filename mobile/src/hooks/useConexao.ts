@@ -1,4 +1,3 @@
-// Estado da conexão do aparelho. Quando a rede volta, esvazia a fila de relatos pendentes.
 import NetInfo from '@react-native-community/netinfo';
 import { useEffect, useState } from 'react';
 
@@ -6,7 +5,6 @@ import { assinarFila, enviarFila, lerFila } from '@/services/fila';
 import type { Relato } from '@/types/dominio';
 import type { RelatoPendente } from '@/types/servicos';
 
-/** true = conectado (ou ainda não sabemos). Só vira false quando o sistema diz que está sem rede. */
 export function useConexao(): boolean {
   const [conectado, setConectado] = useState(true);
   useEffect(() => {
@@ -17,7 +15,6 @@ export function useConexao(): boolean {
   return conectado;
 }
 
-/** Relatos esperando envio. Atualiza sozinho quando a fila muda. */
 export function useFila(): RelatoPendente[] {
   const [fila, setFila] = useState<RelatoPendente[]>([]);
   useEffect(() => {
@@ -36,7 +33,6 @@ export function useFila(): RelatoPendente[] {
   return fila;
 }
 
-/** Tenta enviar a fila quando o app abre e toda vez que a conexão volta. */
 export function useEnvioDaFila(aoEnviar?: (enviados: Relato[]) => void): void {
   useEffect(() => {
     let ativo = true;

@@ -1,5 +1,3 @@
-// Risco da região: o que o modelo de ML prevê para cada distrito/município e faixa horária (GET /api/previsoes).
-// Mostra os lugares de maior risco agora e deixa escolher um lugar para ver as 4 faixas do dia.
 import { useMemo, useState } from 'react';
 import { Pressable, RefreshControl, ScrollView, StyleSheet, TextInput, View } from 'react-native';
 

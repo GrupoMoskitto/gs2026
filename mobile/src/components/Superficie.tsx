@@ -1,15 +1,12 @@
-// Superfície base (cartão, barra, pílula). No iOS 26 vira vidro líquido nativo; no resto, um fundo sólido.
-// Plano B: iOS anterior ao 26, Android e "Reduzir transparência" ligado usam o visual sólido.
+// Superfície base: vidro líquido no iOS 26; fundo sólido no resto e com "Reduzir transparência".
 import { GlassView, isGlassEffectAPIAvailable, isLiquidGlassAvailable } from 'expo-glass-effect';
 import { useEffect, useState } from 'react';
 import { AccessibilityInfo, Platform, StyleSheet, View, type StyleProp, type ViewProps, type ViewStyle } from 'react-native';
 
 import { raio, useTema } from '@/theme';
 
-// As duas checagens: o sistema é iOS 26+ e a API de vidro existe neste build (Expo Go incluso).
 const VIDRO_DISPONIVEL = Platform.OS === 'ios' && isLiquidGlassAvailable() && isGlassEffectAPIAvailable();
 
-/** Vidro só quando o aparelho suporta e a pessoa não pediu para reduzir a transparência. */
 export function useVidro(): boolean {
   const [reduzir, setReduzir] = useState(false);
   useEffect(() => {
@@ -27,7 +24,6 @@ export function useVidro(): boolean {
   return VIDRO_DISPONIVEL && !reduzir;
 }
 
-/** Fundo de campo de texto: translúcido sobre vidro, sólido do tema nos outros casos. */
 export function useFundoCampo(): string {
   const { cores, escuro } = useTema();
   const vidro = useVidro();
@@ -41,11 +37,8 @@ const RAIO: Record<Variante, number> = { cartao: raio.lg, barra: raio.xl, pilula
 
 interface Props extends ViewProps {
   variante?: Variante;
-  /** Cor que tinge o vidro (iOS 26). Use uma cor com transparência, por exemplo "#FBEBC2B3" */
   tinta?: string;
-  /** Fundo sólido usado quando não há vidro. Padrão: superfície do tema */
   fundoSolido?: string;
-  /** Sempre opaca, mesmo no iOS 26. Para itens de lista, que não flutuam sobre nada. */
   opaca?: boolean;
   style?: StyleProp<ViewStyle>;
 }

@@ -4,15 +4,10 @@ import { NativeTabs } from 'expo-router/native-tabs';
 import { useSessao } from '@/hooks/SessaoContexto';
 import { useTema } from '@/theme';
 
-/**
- * Barra de abas nativa do sistema: UITabBar com o vidro do iOS 26 e o Material no Android.
- * Cada aba é uma pasta com a sua própria pilha, que dá o cabeçalho nativo.
- */
 export default function AbasLayout() {
   const { cores } = useTema();
   const { sessao } = useSessao();
 
-  // Sem identificação (por exemplo, depois de "Sair da conta"), volta para a tela de identificação.
   if (sessao === null) return <Redirect href="/identificacao" />;
 
   return (

@@ -1,5 +1,3 @@
-// Novo relato: tipo, local (GPS ou distrito/município), quando aconteceu e descrição. Validação antes de enviar.
-// Sem conexão, o relato vai para a fila do aparelho e é enviado depois.
 import * as Haptics from 'expo-haptics';
 import * as Location from 'expo-location';
 import { router } from 'expo-router';

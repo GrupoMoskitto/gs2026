@@ -16,12 +16,10 @@ interface Props {
   icone?: NomeIcone;
   carregando?: boolean;
   desativado?: boolean;
-  /** Descrição lida pelo leitor de tela, quando o rótulo sozinho não bastar */
   descricaoAcessivel?: string;
   style?: StyleProp<ViewStyle>;
 }
 
-/** Botão com alvo de toque de 44 pt (iOS) ou 48 dp (Android), retorno tátil e ondulação nativa no Android. */
 export function Botao({
   rotulo,
   aoPressionar,
@@ -36,7 +34,6 @@ export function Botao({
   const vidro = useVidro() && variante !== 'texto';
   const bloqueado = desativado || carregando;
 
-  // Com vidro (iOS 26+), o fundo do botão é o próprio vidro, tingido com a cor da marca no primário.
   const fundo = vidro
     ? 'transparent'
     : variante === 'primario'

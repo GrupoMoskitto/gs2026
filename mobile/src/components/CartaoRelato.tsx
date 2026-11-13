@@ -26,11 +26,9 @@ export function iconeDoTipo(tipo: Relato['tipo']): NomeIcone {
 interface Props {
   relato: Relato;
   aoPressionar: () => void;
-  /** Cartão que flutua sobre o mapa: vira vidro no iOS 26. Em listas fica opaco. */
   flutuante?: boolean;
 }
 
-/** Cartão de relato. Opaco nas listas; vidro só quando flutua sobre o mapa. O selo de status é sempre sólido. */
 export function CartaoRelato({ relato, aoPressionar, flutuante = false }: Props) {
   const { cores } = useTema();
   const titulo = `${ROTULO_TIPO[relato.tipo]}, ${nomeDoLugar(relato.bairro)}`;

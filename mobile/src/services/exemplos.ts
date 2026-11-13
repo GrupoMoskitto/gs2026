@@ -15,7 +15,6 @@ import {
 import { arredondar3 } from '@/utils/geo';
 import { isoSaoPaulo } from '@/utils/tempo';
 
-/** Gerador pseudoaleatório simples (LCG), com semente fixa. */
 function criarSorteio(semente: number) {
   let estado = semente;
   return () => {
@@ -48,7 +47,6 @@ function pesoDoLugar(l: Lugar): number {
   return 1;
 }
 
-/** Número entre 0 e 1 que depende só do texto: o mesmo lugar tem sempre o mesmo valor. */
 function hashEntre0e1(texto: string): number {
   let h = 2166136261;
   for (let i = 0; i < texto.length; i += 1) {
@@ -69,7 +67,6 @@ function sortearLugar(sorteio: () => number): Lugar {
   return LUGARES[LUGARES.length - 1];
 }
 
-/** Gera `quantidade` relatos simulados, espalhados pela região. O mais novo tem `id` com final 0001. */
 export function gerarRelatosExemplo(quantidade: number, agora: Date = new Date()): Relato[] {
   const sorteio = criarSorteio(2026);
   const relatos: Relato[] = [];
@@ -78,7 +75,6 @@ export function gerarRelatosExemplo(quantidade: number, agora: Date = new Date()
     const lugar = sortearLugar(sorteio);
     const tipo: TipoRelato = TIPOS_RELATO[Math.floor(sorteio() * TIPOS_RELATO.length)];
 
-    // mais ocorrências à noite e perto das estações (AGENTS.md, seção 4)
     let faixa: FaixaHoraria = 'noite';
     let acumulado = 0;
     const total = Object.values(PESO_FAIXA).reduce((a, b) => a + b, 0);
@@ -93,7 +89,6 @@ export function gerarRelatosExemplo(quantidade: number, agora: Date = new Date()
     const horaBase = { madrugada: 0, manha: 6, tarde: 12, noite: 18 }[faixa];
     const hora = horaBase + Math.floor(sorteio() * 6);
 
-    // Na Av. Paulista, mais perto das estações (AGENTS.md, seção 4). No resto, espalhado em volta do centro do lugar.
     const naPaulista = lugar.tipo === 'bairro';
     const centro = naPaulista && sorteio() < 0.6 ? ESTACOES_METRO[Math.floor(sorteio() * ESTACOES_METRO.length)] : lugar;
     const espalhar = naPaulista ? 0.006 : lugar.tipo === 'municipio' ? 0.05 : 0.02;
@@ -125,8 +120,6 @@ export function gerarRelatosExemplo(quantidade: number, agora: Date = new Date()
   return relatos.sort((a, b) => b.ocorrido_em.localeCompare(a.ocorrido_em));
 }
 
-// Os 3 bairros da Paulista mantêm os valores do início do projeto; os demais lugares recebem um valor
-// simulado que depende só do código do lugar.
 const BASE_PAULISTA: Record<string, Record<FaixaHoraria, number>> = {
   bela_vista: { madrugada: 0.55, manha: 0.22, tarde: 0.41, noite: 0.82 },
   cerqueira_cesar: { madrugada: 0.3, manha: 0.15, tarde: 0.28, noite: 0.52 },

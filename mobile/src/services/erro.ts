@@ -1,6 +1,5 @@
 import type { CodigoErro } from '@/types/servicos';
 
-/** Erro de uma chamada à API. A mensagem já vem em português e pode ser mostrada à pessoa. */
 export class ErroApi extends Error {
   readonly codigo: CodigoErro;
   readonly status?: number;

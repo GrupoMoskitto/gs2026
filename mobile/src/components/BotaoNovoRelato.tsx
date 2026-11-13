@@ -4,7 +4,6 @@ import { Platform, StyleSheet, View } from 'react-native';
 import { ESPACO_ABAS } from '@/theme';
 import { Botao } from './Botao';
 
-/** Botão flutuante estendido (padrão do Material 3), também usado no iOS por ser a ação principal das telas. */
 export function BotaoNovoRelato() {
   return (
     <View style={estilos.caixa} pointerEvents="box-none">

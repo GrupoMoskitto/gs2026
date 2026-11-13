@@ -1,4 +1,3 @@
-// Selos de risco e de status. O texto sempre acompanha a cor e o ícone: quem não distingue cores entende.
 import { StyleSheet, View } from 'react-native';
 
 import { coresDoRisco, coresDoStatus, raio, useTema } from '@/theme';

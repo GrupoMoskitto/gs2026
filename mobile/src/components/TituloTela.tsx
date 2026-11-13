@@ -5,15 +5,10 @@ import { Texto } from './Texto';
 
 interface Props {
   titulo: string;
-  /** Margem lateral. Use 0 quando a tela já tem a sua própria */
   margem?: number;
 }
 
-/**
- * Título da tela dentro do conteúdo, logo abaixo da barra de status.
- * Substitui o título grande do cabeçalho nativo, que no iOS 26 é translúcido, deixa um vazio grande
- * no topo e esconde o que fica embaixo dele.
- */
+/** Título dentro do conteúdo: o cabeçalho grande nativo é translúcido no iOS 26 e esconde o que fica embaixo. */
 export function TituloTela({ titulo, margem = 16 }: Props) {
   const insets = useSafeAreaInsets();
   return (

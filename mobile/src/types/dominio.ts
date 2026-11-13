@@ -4,11 +4,7 @@
 export const TIPOS_RELATO = ['celular', 'bolsa_mochila', 'veiculo', 'bicicleta', 'comercio', 'outro'] as const;
 export type TipoRelato = (typeof TIPOS_RELATO)[number];
 
-/**
- * Código do lugar do relato. O nome do campo continua `bairro` por compatibilidade com a API.
- * Vale o distrito (na capital) ou o município (no resto da região metropolitana de São Paulo).
- * Os 3 códigos da Av. Paulista (bela_vista, cerqueira_cesar, consolacao) seguem válidos. Lista em config/locais.ts.
- */
+/** Código do lugar (distrito na capital, município no resto da região). O campo segue `bairro` por compatibilidade com a API. */
 export type Bairro = string;
 
 export const STATUS_RELATO = ['pendente', 'aprovado', 'rejeitado'] as const;
@@ -30,17 +26,14 @@ export interface Relato {
   latitude: number;
   longitude: number;
   bairro: Bairro;
-  /** ISO 8601 com fuso, por exemplo 2026-11-10T21:35:00-03:00 */
   ocorrido_em: string;
   status: StatusRelato;
   origem: Origem;
 }
 
-/** O que o app envia no POST /api/relatos. O status nasce "pendente" no servidor. */
 export interface NovoRelato {
   tipo: TipoRelato;
   descricao?: string;
-  /** 3 casas decimais, para não expor o endereço exato */
   latitude: number;
   longitude: number;
   bairro: Bairro;
@@ -52,11 +45,9 @@ export interface PrevisaoRisco {
   bairro: Bairro;
   faixa_horaria: FaixaHoraria;
   nivel_risco: NivelRisco;
-  /** de 0 a 1 */
   score: number;
 }
 
-/** Identificação lembrada ao reabrir o app. Apelido e RM, sem dados pessoais. */
 export interface Sessao {
   apelido: string;
   rm: string;

@@ -1,6 +1,3 @@
-// Seletor de opções nativo no Android: Material 3 em Jetpack Compose, pelo @expo/ui
-// (botões segmentados ou menu suspenso). O iOS usa SeletorOpcoes.ios.tsx (Picker do SwiftUI).
-// Este arquivo é o padrão para qualquer plataforma que não seja iOS.
 import { DropdownMenu, DropdownMenuItem, Host, OutlinedButton, SegmentedButton, SingleChoiceSegmentedButtonRow, Text } from '@expo/ui/jetpack-compose';
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';

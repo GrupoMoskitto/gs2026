@@ -1,4 +1,3 @@
-// Previsões de risco (GET /api/previsoes). Mesma ordem de tentativa dos relatos: API, cópia salva, exemplo.
 import { API_CONFIGURADA } from '@/config/api';
 import type { Bairro, FaixaHoraria, NivelRisco, PrevisaoRisco } from '@/types/dominio';
 import type { OpcoesChamada, Resultado } from '@/types/servicos';
@@ -36,15 +35,12 @@ export async function listarPrevisoes(
   return { dados, fonte: 'exemplo', atualizadoEm: new Date().toISOString() };
 }
 
-/** Nível de risco de um bairro numa faixa. Sem previsão, devolve null (a tela mostra "sem dados"). */
 export function riscoDe(previsoes: PrevisaoRisco[], bairro: Bairro, faixa: FaixaHoraria): PrevisaoRisco | null {
   return previsoes.find((p) => p.bairro === bairro && p.faixa_horaria === faixa) ?? null;
 }
 
-/** Ordem para achar o pior bairro: alto vem antes de médio e de baixo. */
 const PESO_NIVEL: Record<NivelRisco, number> = { baixo: 0, medio: 1, alto: 2 };
 
-/** Bairro de maior risco numa faixa (desempata pelo score). */
 export function piorBairro(previsoes: PrevisaoRisco[], faixa: FaixaHoraria): PrevisaoRisco | null {
   const dessaFaixa = previsoes.filter((p) => p.faixa_horaria === faixa);
   if (dessaFaixa.length === 0) return null;

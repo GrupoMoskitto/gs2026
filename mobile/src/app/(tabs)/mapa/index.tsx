@@ -1,7 +1,3 @@
-// Mapa: relatos aprovados como pontos e cada distrito/município pintado pelo risco de agora.
-// PROPOSTA do time (AGENTS.md, seção 7, item 2). Os pontos e as zonas sempre têm texto, nunca só cor.
-// No topo: busca de lugar (move o mapa) e filtro (tipo de roubo). A legenda de risco fica dentro da faixa
-// do topo, para o canto inferior esquerdo ficar livre para a atribuição do Apple Maps.
 import { router } from 'expo-router';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, Keyboard, StyleSheet, View } from 'react-native';
@@ -30,9 +26,7 @@ import type { Bairro, NivelRisco, TipoRelato } from '@/types/dominio';
 import { ROTULO_FAIXA_FRASE, ROTULO_RISCO } from '@/utils/rotulos';
 import { faixaAtual } from '@/utils/tempo';
 
-// Abre mostrando a capital inteira; a busca leva a qualquer distrito ou município da região metropolitana.
 const REGIAO_INICIAL = { ...CENTRO_MAPA, latitudeDelta: 0.45, longitudeDelta: 0.45 };
-// Tamanho da zona pintada: o bairro da Paulista é pequeno, o distrito médio e o município grande.
 const RAIO_ZONA_M = { bairro: 420, estacao: 0, distrito: 1500, municipio: 4500 } as const;
 
 export default function TelaMapa() {
@@ -54,7 +48,6 @@ export default function TelaMapa() {
     recarregarRelatos();
     recarregarPrevisoes();
   }, [recarregarRelatos, recarregarPrevisoes]);
-  // Ao voltar para a aba, atualiza em segundo plano, sem indicador.
   const atualizarTudo = useCallback(() => {
     atualizarRelatos();
     atualizarPrevisoes();
@@ -70,12 +63,10 @@ export default function TelaMapa() {
   const nivelDoBairro = (b: Bairro): NivelRisco | null => riscoDe(listaPrevisoes, b, agora)?.nivel_risco ?? null;
   const pior = piorBairro(listaPrevisoes, agora);
 
-  // Sem nada marcado, mostra todos. Marcado mais de um tipo, vale qualquer um deles.
   const filtrosAtivos = tipos.length;
   const listaRelatos = (relatos.estado.fase === 'pronto' ? relatos.estado.resultado.dados : []).filter(
     (r) => tipos.length === 0 || tipos.includes(r.tipo),
   );
-  // Se o filtro tirou o relato aberto do mapa, o cartão some junto.
   const selecionado = listaRelatos.find((r) => r.id === selecionadoId) ?? null;
 
   function irPara(local: Local) {
@@ -100,7 +91,6 @@ export default function TelaMapa() {
         }}
         showsCompass={false}
         toolbarEnabled={false}
-        // O mapa segue o tema escolhido nos Ajustes, não só o do sistema.
         userInterfaceStyle={escuro ? 'dark' : 'light'}
         customMapStyle={escuro ? ESTILO_MAPA_ESCURO : ESTILO_MAPA_CLARO}
         // O padding inferior levanta a atribuição do Apple Maps (canto inferior esquerdo) acima da barra de abas.
@@ -127,7 +117,6 @@ export default function TelaMapa() {
           const ativo = selecionado?.id === r.id;
           const tamanho = ativo ? 24 : 14;
           return (
-            // Ponto pequeno no lugar do pino padrão: menos peso e menos sobreposição.
             // A chave muda com a seleção para o marcador redesenhar com o novo tamanho.
             <Marker
               key={`${r.id}-${ativo ? 'a' : 'n'}-${escuro ? 'e' : 'c'}`}
@@ -160,10 +149,8 @@ export default function TelaMapa() {
       <View style={[estilos.topo, { top: insets.top + 8 }]} pointerEvents="box-none">
         <BuscaMapa aoEscolher={irPara} aoBuscando={setBuscando} filtrosAtivos={filtrosAtivos} aoAbrirFiltros={() => setFiltrosAbertos(true)} />
 
-        {/* Enquanto a pessoa busca, a lista de resultados ocupa o lugar do resto. */}
         {buscando ? null : (
           <>
-            {/* Só avisa o que muda a leitura (sem conexão ou dados salvos). O aviso de "exemplo" fica nas outras abas. */}
             {fonteRelatos !== null && (fonteRelatos === 'cache' || !conectado) ? (
               <View style={estilos.margem}>
                 <AvisoFonte fonte={fonteRelatos} conectado={conectado} />

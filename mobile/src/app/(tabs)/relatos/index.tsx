@@ -1,5 +1,3 @@
-// Lista de relatos: título e busca fixos no topo; abaixo, carregando, erro, vazio, sem conexão
-// e puxar para atualizar. O topo fica sempre na tela, mesmo enquanto a lista carrega.
 import { router } from 'expo-router';
 import { useMemo, useRef, useState, type ComponentRef } from 'react';
 import { FlatList, Pressable, RefreshControl, StyleSheet, TextInput, View } from 'react-native';
@@ -56,7 +54,6 @@ export default function TelaRelatos() {
   const fila = useFila();
   // Busca todos uma vez e filtra no aparelho: digitar na busca é instantâneo, sem spinner.
   const { estado, recarregando, recarregar, atualizar } = useRecurso((sinal) => listarRelatos({}, { sinal }), []);
-  // Ao voltar para a aba, atualiza em segundo plano, sem indicador de recarga.
   useRecarregarAoVoltar(atualizar);
 
   const termo = normalizar(busca);
@@ -70,7 +67,6 @@ export default function TelaRelatos() {
   return (
     <View style={[estilos.tela, { backgroundColor: cores.fundo }]}>
 
-      {/* Topo fixo: não rola com a lista e não some durante o carregamento. */}
       <View style={estilos.topo}>
         <TituloTela titulo="Relatos" />
         <View style={[estilos.busca, { backgroundColor: fundoCampo, borderColor: cores.linha }]}>

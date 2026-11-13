@@ -1,4 +1,3 @@
-// Relatos: lista, detalhe e criação. Ordem de tentativa na leitura: API, cópia salva no aparelho, exemplo.
 import { API_CONFIGURADA } from '@/config/api';
 import type { NovoRelato, Relato } from '@/types/dominio';
 import type {

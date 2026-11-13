@@ -1,4 +1,3 @@
-// Os quatro estados de toda tela com dados: carregando, erro, vazio e aviso de conexão/dados de exemplo.
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
 import { useTema, raio } from '@/theme';
@@ -68,7 +67,6 @@ export function Vazio({
   );
 }
 
-/** Faixa sobre a lista dizendo de onde vêm os dados, quando não são os do servidor agora. */
 export function AvisoFonte({ fonte, conectado }: { fonte: FonteDados; conectado: boolean }) {
   const { cores } = useTema();
   if (fonte === 'api' && conectado) return null;
