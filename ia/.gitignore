@@ -1,0 +1,13 @@
+docs/
+*.xlsx
+*.xls
+*.xlsm
+*.ods
+data/bruto/
+.venv/
+.~lock.*#
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+.taste-skill/
+web/dist/
