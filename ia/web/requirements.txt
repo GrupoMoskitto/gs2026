@@ -1,0 +1,4 @@
+# Só o que o site precisa (usado na imagem Docker). O ambiente completo da IA está em ../requirements.txt.
+flask==3.1.3
+pandas==3.1.1
+gunicorn==23.0.0

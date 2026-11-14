@@ -1,0 +1,14 @@
+# Contexto do build do site: fora as planilhas brutas, o venv e o que o site não usa
+.venv/
+docs/
+notebooks/
+model/
+figuras/
+tests/
+scripts/
+risco/
+**/__pycache__/
+.pytest_cache/
+data/relatos_*.csv
+data/previsoes_paulista.json
+web/dist
