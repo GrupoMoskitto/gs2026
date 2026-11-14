@@ -84,7 +84,7 @@ export function BuscaMapa({ aoEscolher, aoBuscando, filtrosAtivos, aoAbrirFiltro
         <Superficie opaca variante="cartao" style={estilos.lista}>
           {!digitando ? (
             <Texto variante="legendaForte" suave style={estilos.sugestao}>
-              Perto da Av. Paulista
+              Sugestões
             </Texto>
           ) : null}
           {resultados.length === 0 ? (

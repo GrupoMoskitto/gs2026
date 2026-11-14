@@ -1,6 +1,6 @@
-# Mapa de Relatos de Roubo
+# Moskitto Radar
 
-> **Nome provisório.** Projeto da **Global Solution FIAP 2026.2: CitizenTech**, Engenharia de Software, 3º ano (Ago).
+> Mapa de relatos de roubo. Projeto da **Global Solution FIAP 2026.2: CitizenTech**, Engenharia de Software, 3º ano (Ago).
 > **Prazo final das entregas: 19/11/2026, 23h55.**
 
 Este repositório é um **monorepo**: reúne os trabalhos de **todas as disciplinas** da GS. Todas trabalham em cima da **mesma solução**, e cada disciplina constrói uma parte dela.

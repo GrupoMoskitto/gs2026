@@ -1,10 +1,10 @@
-# Mapa de Relatos de Roubo · App do cidadão (mobile)
+# Moskitto Radar · App do cidadão (mobile)
 
 ## Ficha da CitizenTech
 
 | Campo | Resposta |
 |---|---|
-| **Nome da CitizenTech** | Mapa de Relatos de Roubo (nome de trabalho; o time ainda pode trocar) |
+| **Nome da CitizenTech** | Moskitto Radar (mapa de relatos de roubo) |
 | **Cidade e bairro** | São Paulo · Av. Paulista (Bela Vista, Cerqueira César e Consolação) |
 | **Cidadão beneficiado** | Quem circula pela Av. Paulista e quer saber onde e quando o risco é maior. *A pessoa real ouvida: o time ainda precisa preencher.* |
 | **Problema, em uma frase** | Não há um lugar simples onde o morador veja, no celular, onde e quando os roubos acontecem. |

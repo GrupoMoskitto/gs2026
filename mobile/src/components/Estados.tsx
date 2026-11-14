@@ -70,6 +70,8 @@ export function Vazio({
 export function AvisoFonte({ fonte, conectado }: { fonte: FonteDados; conectado: boolean }) {
   const { cores } = useTema();
   if (fonte === 'api' && conectado) return null;
+  // Só para gravar o vídeo de apresentação: esconde a faixa de "dados de exemplo". Sem a variável, ela aparece.
+  if (fonte === 'exemplo' && conectado && process.env.EXPO_PUBLIC_MODO_VIDEO === '1') return null;
 
   let titulo: string;
   let texto: string;

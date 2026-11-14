@@ -64,17 +64,17 @@ export default function Identificacao() {
             source={escuro ? LOGO_ESCURA : LOGO_CLARA}
             style={estilos.logo}
             resizeMode="contain"
-            accessibilityLabel="Logo do Mapa de Relatos"
+            accessibilityLabel="Logo do Moskitto Radar"
           />
-          <Texto variante="corpoForte">Mapa de Relatos</Texto>
+          <Texto variante="corpoForte">Moskitto Radar</Texto>
         </View>
 
         <View style={estilos.meio}>
           <View style={estilos.texto}>
             <Texto variante="titulo" style={estilos.titulo}>
-              Onde e quando o risco é maior na Av. Paulista.
+              Onde e quando o risco é maior em São Paulo.
             </Texto>
-            <Texto suave>Relate o que aconteceu e veja a previsão por bairro e horário.</Texto>
+            <Texto suave>Relate o que aconteceu e veja a previsão por local e horário.</Texto>
           </View>
 
           <View style={estilos.campos}>

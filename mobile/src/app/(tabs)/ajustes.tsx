@@ -126,9 +126,9 @@ export default function TelaAjustes() {
       </Secao>
 
       <Secao titulo="Sobre">
-        <Linha rotulo="Aplicativo" valor="Mapa de Relatos de Roubo" />
+        <Linha rotulo="Aplicativo" valor="Moskitto Radar" />
         <Linha rotulo="Versão" valor={Constants.expoConfig?.version ?? '–'} />
-        <Linha rotulo="Região" valor="Av. Paulista, São Paulo" />
+        <Linha rotulo="Região" valor="Região Metropolitana de São Paulo" />
         <Linha rotulo="ODS" valor="11 (principal), 9 e 10" />
         <Texto variante="legenda" suave>
           Projeto da Global Solution 2026.2 da FIAP (CitizenTech). Todos os dados são simulados.

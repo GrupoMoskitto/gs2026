@@ -1,4 +1,4 @@
-# AGENTS.md: Mapa de Relatos de Roubo · GS CitizenTech FIAP 2026.2
+# AGENTS.md: Moskitto Radar · GS CitizenTech FIAP 2026.2
 
 Guia para qualquer agente de código (qualquer harness, IDE ou CLI) que for usado na GS.
 

@@ -52,7 +52,7 @@
     "doctor": "expo-doctor"
   },
   "private": true,
-  "description": "App do cidadão do Mapa de Relatos de Roubo (GS CitizenTech FIAP 2026.2, Av. Paulista)",
+  "description": "App do cidadão do Moskitto Radar, mapa de relatos de roubo (GS CitizenTech FIAP 2026.2, Região Metropolitana de São Paulo)",
   "authors": [
     {
       "name": "Gabriel Kato",
