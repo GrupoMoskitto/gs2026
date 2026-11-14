@@ -149,6 +149,13 @@ h2.secao { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
 .mapa > svg { cursor: grab; user-select: none; -webkit-user-select: none; }
 .mapa.arrastando > svg { cursor: grabbing; }
 .mapa > svg { display: block; width: 100%; height: auto; }
+.mapa { background: var(--surface-2); }
+/* o OSM é colorido e as ruas vermelhas brigariam com o risco alto: o fundo vai em cinza claro, ou invertido no escuro */
+.mapa .fundo { pointer-events: none; filter: grayscale(1) contrast(.85) brightness(1.06); opacity: .75; }
+:root[data-theme="dark"] .mapa .fundo { filter: grayscale(1) invert(1) contrast(.8) brightness(.9); opacity: .6; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .mapa .fundo { filter: grayscale(1) invert(1) contrast(.8) brightness(.9); opacity: .6; } }
+.creditos-mapa { position: absolute; z-index: 2; left: 0; bottom: 0; margin: 0; padding: 2px 8px; font-size: 11px; color: var(--text-muted); background: color-mix(in srgb, var(--surface) 82%, transparent); border-top-right-radius: 6px; }
+.creditos-mapa a { color: inherit; }
 .mapa .anel { fill: none; stroke: var(--anel); stroke-width: 1; }
 .mapa .eixo { stroke: var(--anel); stroke-width: 1; stroke-dasharray: 2 4; }
 .mapa .km { font-size: 11px; fill: var(--text-muted); }

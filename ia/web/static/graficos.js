@@ -131,6 +131,8 @@
     dica.style.top = `${Math.max(8, top)}px`;
   }
   const esconderDica = () => dica.classList.remove('on');
+  // no celular o toque não gera "sair de cima": a dica some quando a página rola
+  addEventListener('scroll', esconderDica, { passive: true });
   function comDica(alvo, html) {
     alvo.addEventListener('pointermove', (e) => { if (e.pointerType !== 'touch') mostrarDica(html(), e.clientX, e.clientY); });
     alvo.addEventListener('pointerleave', esconderDica);
@@ -204,16 +206,18 @@
 
   // Mapa: radar com anéis de distância até a Sé
   const SE = D.lugares.find((l) => l.nome === 'Sé') || { lat: -23.5505, lng: -46.634 };
-  const KM_GRAU = 111.32;
   const ZMAX = 8;
+  // Web Mercator em unidades de mundo (0 a 1), a mesma projeção dos blocos do mapa de fundo
+  const mercX = (lng) => (lng + 180) / 360;
+  const mercY = (lat) => { const f = lat * Math.PI / 180; return (1 - Math.log(Math.tan(f) + 1 / Math.cos(f)) / Math.PI) / 2; };
+  const KM_MUNDO = 40075.017 * Math.cos(SE.lat * Math.PI / 180);  // km por unidade de mundo na latitude da Sé
   const lats = D.lugares.map((l) => l.lat), lngs = D.lugares.map((l) => l.lng);
-  const B = { minLat: Math.min(...lats), maxLat: Math.max(...lats), minLng: Math.min(...lngs), maxLng: Math.max(...lngs) };
-  const cosLat = Math.cos(((B.minLat + B.maxLat) / 2) * Math.PI / 180);
+  const B = { x0: mercX(Math.min(...lngs)), x1: mercX(Math.max(...lngs)), y0: mercY(Math.max(...lats)), y1: mercY(Math.min(...lats)) };
   const maxPorTipo = Object.fromEntries(Object.entries(ROUBO).map(([k, r]) => [k, Math.max(...D.lugares.flatMap((l) => FAIXAS.map((f) => l.faixas[f][r.campo])))]));
 
   const MP = {
-    caixa: $('#g-mapa'), W: 0, H: 0, k: 1, base: new Map(), z: 1, tx: 0, ty: 0,
-    svg: null, gAneis: null, gPontos: null, gRotulos: null, anelSel: null, pontos: new Map(),
+    caixa: $('#g-mapa'), W: 0, H: 0, S: 1, ox: 0, oy: 0, base: new Map(), z: 1, tx: 0, ty: 0,
+    svg: null, gFundo: null, gVelhos: null, blocos: new Map(), zBloco: -1, gAneis: null, gPontos: null, gRotulos: null, anelSel: null, pontos: new Map(),
     raio: new Map(), rotulos: [], pararVista: () => {}, pararRaios: () => {}, sujo: false,
   };
 
@@ -231,9 +235,9 @@
     MP.W = W;
     const PAD = W < 500 ? 16 : 28;
     const H = MP.H = Math.round(Math.min(W * 0.72, 500));
-    const k = MP.k = Math.min((W - 2 * PAD) / ((B.maxLng - B.minLng) * cosLat), (H - 2 * PAD) / (B.maxLat - B.minLat));
-    const ox = (W - (B.maxLng - B.minLng) * cosLat * k) / 2, oy = (H - (B.maxLat - B.minLat) * k) / 2;
-    const proj = (lat, lng) => [ox + (lng - B.minLng) * cosLat * k, oy + (B.maxLat - lat) * k];
+    const S = MP.S = Math.min((W - 2 * PAD) / (B.x1 - B.x0), (H - 2 * PAD) / (B.y1 - B.y0));
+    const ox = MP.ox = (W - (B.x1 - B.x0) * S) / 2, oy = MP.oy = (H - (B.y1 - B.y0) * S) / 2;
+    const proj = (lat, lng) => [ox + (mercX(lng) - B.x0) * S, oy + (mercY(lat) - B.y0) * S];
     for (const l of D.lugares) MP.base.set(l.codigo, proj(l.lat, l.lng));
     MP.base.set('_se', proj(SE.lat, SE.lng));
     MP.tx *= proporcao; MP.ty *= proporcao;
@@ -241,6 +245,9 @@
     MP.svg?.remove();
     const svg = MP.svg = el('svg', { viewBox: `0 0 ${W} ${H}`, width: W, height: H });
     caixa.prepend(svg);
+    MP.gVelhos = el('g', { class: 'fundo' }, svg);
+    MP.gFundo = el('g', { class: 'fundo' }, svg);
+    MP.blocos.clear(); MP.zBloco = -1;
     MP.gAneis = el('g', {}, svg);
     MP.gPontos = el('g', {}, svg);
     MP.anelSel = el('circle', { class: 'sel-anel' }, svg);
@@ -266,7 +273,7 @@
     const g = MP.gAneis;
     g.innerHTML = '';
     const [cx, cy] = naTela('_se');
-    const kmPx = (MP.k / KM_GRAU) * MP.z;
+    const kmPx = (MP.S / KM_MUNDO) * MP.z;
     el('line', { x1: cx, x2: cx, y1: 0, y2: MP.H, class: 'eixo' }, g);
     el('line', { x1: 0, x2: MP.W, y1: cy, y2: cy, class: 'eixo' }, g);
     const passo = MP.z >= 5 ? 2 : MP.z >= 2.2 ? 5 : 10;
@@ -279,8 +286,49 @@
     if (cy > 30 && cy < MP.H) texto(g, cx + 6, 14, 'N', { class: 'km' });
   }
 
+  // Mapa de fundo: blocos do OpenStreetMap, em cinza pelo CSS (no tema escuro, invertidos).
+  // Ao trocar de nível de zoom, os blocos antigos ficam embaixo até os novos carregarem.
+  const urlBloco = (z, x, y) => `https://tile.openstreetmap.org/${z}/${x}/${y}.png`;
+  const posBloco = (b, img) => {
+    const n = 2 ** b.z, lado = (MP.S * MP.z) / n;
+    img.setAttribute('x', ((MP.ox + (b.x / n - B.x0) * MP.S) * MP.z + MP.tx).toFixed(1));
+    img.setAttribute('y', ((MP.oy + (b.y / n - B.y0) * MP.S) * MP.z + MP.ty).toFixed(1));
+    img.setAttribute('width', (lado + 0.6).toFixed(1));  // um pouco de sobra esconde a costura entre blocos
+    img.setAttribute('height', (lado + 0.6).toFixed(1));
+  };
+  function desenharFundo() {
+    const esc = MP.S * MP.z;  // pixels de tela por unidade de mundo
+    const z = limitar(Math.round(Math.log2(esc / 256)), 0, 19), n = 2 ** z;
+    if (z !== MP.zBloco) {
+      MP.gVelhos.replaceChildren(...MP.gFundo.children);
+      MP.blocos.clear();
+      MP.zBloco = z;
+    }
+    const mundo = (sx, sy) => [B.x0 + ((sx - MP.tx) / MP.z - MP.ox) / MP.S, B.y0 + ((sy - MP.ty) / MP.z - MP.oy) / MP.S];
+    const [xa, ya] = mundo(0, 0), [xb, yb] = mundo(MP.W, MP.H);
+    const i0 = limitar(Math.floor(xa * n), 0, n - 1), i1 = limitar(Math.floor(xb * n), 0, n - 1);
+    const j0 = limitar(Math.floor(ya * n), 0, n - 1), j1 = limitar(Math.floor(yb * n), 0, n - 1);
+    const precisa = new Set();
+    for (let x = i0; x <= i1; x++) for (let y = j0; y <= j1; y++) {
+      const chave = `${z}/${x}/${y}`;
+      precisa.add(chave);
+      if (MP.blocos.has(chave)) continue;
+      const img = el('image', { preserveAspectRatio: 'none' }, MP.gFundo);
+      img._b = { z, x, y };
+      const pronto = () => { img._ok = true; if ([...MP.blocos.values()].every((i) => i._ok)) MP.gVelhos.replaceChildren(); };
+      img.addEventListener('load', pronto);
+      img.addEventListener('error', pronto);  // sem rede, os pontos ficam sobre o fundo liso
+      img.setAttribute('href', urlBloco(z, x, y));
+      MP.blocos.set(chave, img);
+    }
+    for (const [chave, img] of MP.blocos) if (!precisa.has(chave)) { img.remove(); MP.blocos.delete(chave); }
+    for (const img of MP.blocos.values()) posBloco(img._b, img);
+    for (const img of MP.gVelhos.children) posBloco(img._b, img);
+  }
+
   function render() {
     MP.sujo = false;
+    desenharFundo();
     desenharAneis();
     for (const l of D.lugares) {
       const c = MP.pontos.get(l.codigo);
@@ -1041,7 +1089,7 @@
     const ys = [y(TR[0].media_3m), y(TR[0].real), y(TR[0].modelo)];
     texto(svg, x(0) + 4, ys[0] + (ys[0] < Math.min(ys[1], ys[2]) ? -8 : 16), 'Média de 3 meses', { class: 'fraco' });
     const meses = [...TR.map((r) => r.mes), ...AG.previstos];
-    meses.forEach((m, i) => { if (W >= 520 || i % 2 === 0) texto(svg, x(i), H - 6, `${MESES[Number(m.slice(5)) - 1]}/${m.slice(2, 4)}`, { 'text-anchor': 'middle' }); });
+    meses.forEach((m, i) => { if (W >= 520 || i % 2 === 0) texto(svg, x(i), H - 6, W < 520 ? MESES[Number(m.slice(5)) - 1] : `${MESES[Number(m.slice(5)) - 1]}/${m.slice(2, 4)}`, { 'text-anchor': 'middle' }); });
     const cursor = el('g', { visibility: 'hidden' }, svg);
     const fio = el('line', { y1: T, y2: T + ih, stroke: 'var(--text-muted)', 'stroke-width': 1 }, cursor);
     const area = el('rect', { x: L, y: T, width: iw, height: ih, fill: 'transparent' }, svg);

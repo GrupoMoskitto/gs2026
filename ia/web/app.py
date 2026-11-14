@@ -46,12 +46,12 @@ def cabecalhos_de_seguranca(resposta):
         "default-src 'self'; "
         f"script-src 'self' 'nonce-{nonce}'; "
         "style-src 'self' 'unsafe-inline'; "  # os gráficos pintam cores com style=""
-        "img-src 'self' data:; connect-src 'self'; font-src 'self'; "
+        "img-src 'self' data: https://tile.openstreetmap.org; connect-src 'self'; font-src 'self'; "
         "object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
     )
     resposta.headers["X-Content-Type-Options"] = "nosniff"
     resposta.headers["X-Frame-Options"] = "DENY"
-    resposta.headers["Referrer-Policy"] = "no-referrer"
+    resposta.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"  # os blocos do OSM pedem a origem
     resposta.headers["Permissions-Policy"] = "geolocation=(), camera=(), microphone=()"
     return resposta
 

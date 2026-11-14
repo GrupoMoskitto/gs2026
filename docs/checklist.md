@@ -36,11 +36,11 @@ Marque conforme for concluindo. Um integrante envia cada entrega.
 - [ ] ZIP do projeto + `.txt` com RM, nome completo e link do repositório
 
 ### IA & Machine Learning
-- [ ] Notebook reproduzível (`.ipynb` ou Colab)
-- [ ] Dataset e origem
-- [ ] Modelo treinado + métrica de avaliação
-- [ ] Previsão aparecendo na solução
-- [ ] README com decisões e como rodar
+- [x] Notebook reproduzível (`.ipynb` ou Colab)
+- [x] Dataset e origem
+- [x] Modelo treinado + métrica de avaliação
+- [ ] Previsão aparecendo na solução (`previsoes.json` pronto; falta a API carregar)
+- [x] README com decisões e como rodar
 - [ ] Vídeo de até 2 min
 
 ### Mobile Development & IOT
