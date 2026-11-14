@@ -37,7 +37,7 @@ def politica(hashes: list[str]) -> str:
         "default-src 'self'; "
         f"script-src 'self' {' '.join(hashes)}; "
         "style-src 'self' 'unsafe-inline'; "  # os gráficos pintam cores com style=""
-        "img-src 'self' data:; connect-src 'self'; font-src 'self'; "
+        "img-src 'self' data: https://tile.openstreetmap.org; connect-src 'self'; font-src 'self'; "
         "object-src 'none'; base-uri 'none'; form-action 'none'"
     )
 
@@ -51,7 +51,7 @@ def montar_html() -> str:
     hashes = [_hash(corpo) for attrs, corpo in re.findall(r"<script([^>]*)>(.*?)</script>", html, re.S)
               if "src=" not in attrs and "application/json" not in attrs]
     metas = (f'\n  <meta http-equiv="Content-Security-Policy" content="{politica(hashes)}">'
-             '\n  <meta name="referrer" content="no-referrer">')
+             '\n  <meta name="referrer" content="strict-origin-when-cross-origin">')
     return html.replace("<head>", "<head>" + metas, 1)
 
 
