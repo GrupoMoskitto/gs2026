@@ -5,10 +5,10 @@
 | Campo | Resposta |
 |---|---|
 | **Nome da CitizenTech** | Moskitto Radar (mapa de relatos de roubo) |
-| **Cidade e bairro** | São Paulo · Av. Paulista (Bela Vista, Cerqueira César e Consolação) |
-| **Cidadão beneficiado** | Quem circula pela Av. Paulista e quer saber onde e quando o risco é maior. *A pessoa real ouvida: o time ainda precisa preencher.* |
+| **Cidade e bairro** | Região Metropolitana de São Paulo: distritos da capital e municípios vizinhos (o projeto começou pela Av. Paulista) |
+| **Cidadão beneficiado** | Quem mora ou circula pela região metropolitana e quer saber onde e quando o risco é maior. *A pessoa real ouvida: o time ainda precisa preencher.* |
 | **Problema, em uma frase** | Não há um lugar simples onde o morador veja, no celular, onde e quando os roubos acontecem. |
-| **Como funciona** | A pessoa relata um roubo no app (local, horário e tipo, sem dados pessoais). A API guarda os relatos, um modelo de aprendizado de máquina prevê o risco por bairro e faixa horária, e o app mostra isso no mapa e na lista. |
+| **Como funciona** | A pessoa relata um roubo no app (local, horário e tipo, sem dados pessoais). A API guarda os relatos, um modelo de aprendizado de máquina prevê o risco por lugar e faixa horária, e o app mostra isso no mapa e na lista. |
 | **O que cada parte faz** | **Mobile:** este app. **API (SOA):** guarda e serve os relatos. **ML:** prevê o risco. **C#:** app de moderação. **ESP32:** botão de pânico que também gera relatos. **OS:** Windows Server com IIS. **Segurança e testes:** relatório de riscos, diagrama e pitch. |
 | **Link do repositório** | <https://github.com/GrupoMoskitto/gs2026> |
 | **Indicador de impacto** | *A definir pelo time (documento de Testing).* |
@@ -42,13 +42,39 @@ sistema, **Liquid Glass** no iOS 26 e **Material 3** no Android, com plano B par
 | Detalhe | `src/app/relato/[id].tsx` | Um relato, mini mapa e risco da região |
 | Novo relato | `src/app/novo.tsx` | Formulário validado; localização do celular com **permissão negada tratada** |
 
+## Vídeo
+
+Apresentação do app (1 min 09 s), gravada no emulador Android com dados simulados.
+
+https://github.com/user-attachments/assets/c512c137-4e47-4dd3-8c8a-e3014b73f04b
+
+## Prints
+
+Emulador Android (Pixel 8) no Expo Go, sem a API ligada: o app usa os **dados de exemplo** e avisa isso na faixa azul.
+A identidade na tela (Marina, RM123456) é fictícia. Todas as imagens estão em [`prints/`](prints/), inclusive
+[`17-ajustes-escuro.png`](prints/17-ajustes-escuro.png).
+
+| | | | |
+|---|---|---|---|
+| <img src="prints/01-identificacao-escuro.png" width="200" alt="Identificação"> | <img src="prints/02-mapa.png" width="200" alt="Mapa"> | <img src="prints/03-mapa-relato.png" width="200" alt="Relato no mapa"> | <img src="prints/04-busca-no-mapa.png" width="200" alt="Busca de lugar"> |
+| *Identificação* | *Mapa* | *Relato no mapa* | *Busca de lugar* |
+| <img src="prints/05-relatos.png" width="200" alt="Relatos"> | <img src="prints/06-detalhe.png" width="200" alt="Detalhe"> | <img src="prints/07-risco.png" width="200" alt="Risco"> | <img src="prints/14-ajustes.png" width="200" alt="Ajustes"> |
+| *Relatos* | *Detalhe* | *Risco* | *Ajustes* |
+| <img src="prints/08-novo-relato.png" width="200" alt="Novo relato"> | <img src="prints/09-validacao.png" width="200" alt="Validação"> | <img src="prints/10-permissao-localizacao.png" width="200" alt="Pedido de permissão"> | <img src="prints/11-permissao-negada.png" width="200" alt="Permissão negada"> |
+| *Novo relato* | *Validação* | *Pedido de permissão* | *Permissão negada* |
+| <img src="prints/12-formulario-preenchido.png" width="200" alt="Formulário preenchido"> | <img src="prints/13-relato-salvo.png" width="200" alt="Relato salvo"> | <img src="prints/15-mapa-escuro.png" width="200" alt="Mapa (escuro)"> | <img src="prints/16-relatos-escuro.png" width="200" alt="Relatos (escuro)"> |
+| *Formulário preenchido* | *Relato salvo* | *Mapa (escuro)* | *Relatos (escuro)* |
+
+O fluxo do recurso nativo aparece em sequência: o pedido de permissão do sistema (10), a recusa tratada com um aviso e a busca
+manual (11) e o relato salvo na fila do aparelho porque não há conexão com a API (13).
+
 ## Como rodar
 
 Precisa de Node 20 ou mais novo e do app **Expo Go** no celular (ou um emulador).
 
 ```bash
 cd mobile
-  npm install
+npm install
 cp .env.example .env     # opcional: aponta para a API do João
 npx expo start           # leia o QR Code com o Expo Go
 ```
@@ -63,7 +89,7 @@ npx expo start           # leia o QR Code com o Expo Go
 ```bash
 npm run typecheck   # tsc --noEmit (tem que sair limpo)
 npm run lint        # expo lint
-npm test            # testes da camada pura (validação, tempo, geografia, retry)
+npm test            # 29 testes da camada pura (validação, tempo, geografia, retry)
 npx expo-doctor     # 20 de 20 verificações
 ```
 
@@ -83,6 +109,7 @@ mobile/
 │   └── config/       API e caixa de coordenadas da região
 ├── assets/           ícone do app e logo (assets/brand)
 ├── mockup/           mockups HTML do design (tokens.css é a fonte visual)
+├── prints/           prints das telas (evidências)
 └── proposta/         PDF da proposta de design
 ```
 
@@ -119,20 +146,22 @@ Em `src/services/` (regras em [`REGRAS.md`](REGRAS.md), seção 5):
 
 ## Evidências
 
-- [ ] Prints das telas no Expo Go (iOS e Android)
-- [ ] Vídeo demo de até 2 minutos
+- [x] Testado no Expo Go: iPhone (iOS 26) e emulador Android (Pixel 8)
+- [x] [Prints das telas](#prints) no emulador Android, em [`prints/`](prints/)
+- [x] [Vídeo demo](#vídeo) de até 2 minutos
 - [x] `npx tsc --noEmit` limpo, sem `any`
+- [x] `npm run lint` sem erros
 - [x] `npx expo-doctor`: 20 de 20 verificações
-- [x] `npm test`: 18 testes passando
+- [x] `npm test`: 29 testes passando
 
 ## Entregas (19/11, 23h55)
 
 - [x] App em React Native + Expo, **TypeScript estrito**
 - [ ] ZIP da pasta do app **sem `node_modules`**, com os RMs no nome
 - [x] `README.md` com a Ficha da CitizenTech
-- [x] [`DECISOES.md`](DECISOES.md) *(rascunho: conferir antes de enviar)*
+- [x] [`DECISOES.md`](DECISOES.md) *(falta o autor completar as referências de design)*
 - [x] Array `authors` no `package.json` (nome e RM de todos)
-- [ ] Vídeo demo de até 2 minutos
+- [x] [Vídeo demo](#vídeo) de até 2 minutos
 
 ## Avaliação
 
@@ -155,7 +184,8 @@ Em `src/services/` (regras em [`REGRAS.md`](REGRAS.md), seção 5):
 
 ## Status
 
-Código completo e verificado por `tsc`, lint, testes e empacotamento do Metro. **Ainda não testado no Expo Go
-em um aparelho real**: faça isso antes de gravar o vídeo (veja a seção Pendências no [`DECISOES.md`](DECISOES.md)).
+App completo, verificado por `tsc`, lint, testes e `expo-doctor`, e testado no Expo Go em iPhone (iOS 26) e no
+emulador Android. Vídeo demo gravado e prints das telas em [`prints/`](prints/). Falta para a entrega: o ZIP sem `node_modules`
+(veja as pendências no [`DECISOES.md`](DECISOES.md)).
 
 Detalhes da disciplina: [`docs/disciplinas.md`](../docs/disciplinas.md#5-mobile-development--iot)

@@ -1,11 +1,10 @@
 # Decisões de projeto · Mobile
 
-Rascunho do documento exigido pela GS (1 a 2 páginas). Conferir e ajustar antes de enviar.
+Documento exigido pela GS (1 a 2 páginas).
 
 ## O que o app faz
 
-O cidadão se identifica com apelido e RM, vê os relatos e o risco da Av. Paulista e registra um relato novo
-(tipo, local, horário e descrição curta). Não há dado pessoal: o local é aproximado (3 casas decimais, cerca
+O cidadão se identifica com apelido e RM, vê os relatos e o risco da Região Metropolitana de São Paulo e registra um relato novo (tipo, local, horário e descrição curta). Não há dado pessoal: o local é aproximado (3 casas decimais, cerca
 de 100 m) e a descrição é opcional.
 
 ## Decisões e motivos
@@ -63,8 +62,8 @@ A seção 5 do `REGRAS.md` propõe mudanças no servidor. O app já funciona sem
 
 ## Pendências e limites conhecidos
 
-- **Não testado em um aparelho real.** `tsc`, lint, testes e o empacotamento do Metro passam, mas falta abrir
-  no Expo Go (iOS e Android) e conferir o mapa, a permissão de localização e as abas.
+- **Testado no Expo Go** em iPhone (iOS 26) e no emulador Android (Pixel 8): mapa, abas, busca, formulário e
+  identificação lembrada ao reabrir. Prints do Android em `prints/`.
 - **Caixa de coordenadas provisória** (`src/config/regiao.ts`). A decisão 5 do `AGENTS.md` está em aberto;
   API, C# e app precisam usar os mesmos limites.
 - **Mapa é proposta** (decisão 2 do `AGENTS.md`). Se o time não aprovar, a aba sai sem afetar o resto.
@@ -72,4 +71,4 @@ A seção 5 do `REGRAS.md` propõe mudanças no servidor. O app já funciona sem
   falar com a API.
 - **Pinos do mapa coloridos pelo risco do bairro** no horário de agora: é uma simplificação até o ML definir
   zonas mais finas (decisão 3).
-- Sem testes de interface automatizados: só a camada pura (18 testes).
+- Sem testes de interface automatizados: só a camada pura (29 testes).

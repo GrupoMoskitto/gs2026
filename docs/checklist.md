@@ -44,18 +44,18 @@ Marque conforme for concluindo. Um integrante envia cada entrega.
 - [ ] Vídeo de até 2 min
 
 ### Mobile Development & IOT
-- [ ] React Native + Expo + TypeScript estrito, sem `any`, sem WebView
-- [ ] `tsc --noEmit` limpo
-- [ ] 3+ telas com navegação
-- [ ] Lista com carregando, erro e vazio
-- [ ] Formulário validado que cria item
-- [ ] Identificação lembrada ao reabrir
-- [ ] Recurso nativo com permissão tratada
-- [ ] Camada `services/`
-- [ ] `README.md` (Ficha + como rodar) e `DECISOES.md` (1 a 2 páginas)
-- [ ] Array `authors` no `package.json` (nome e RM de todos)
+- [x] React Native + Expo + TypeScript estrito, sem `any`, sem WebView
+- [x] `tsc --noEmit` limpo
+- [x] 3+ telas com navegação
+- [x] Lista com carregando, erro e vazio
+- [x] Formulário validado que cria item
+- [x] Identificação lembrada ao reabrir
+- [x] Recurso nativo com permissão tratada
+- [x] Camada `services/`
+- [x] `README.md` (Ficha + como rodar) e `DECISOES.md` (1 a 2 páginas)
+- [x] Array `authors` no `package.json` (nome e RM de todos)
 - [ ] ZIP sem `node_modules`
-- [ ] Vídeo demo de até 2 min
+- [x] Vídeo demo de até 2 min
 
 ### Operating Systems
 - [ ] Windows Server em VM: domínio, DNS, IP fixo, hostname (2)
