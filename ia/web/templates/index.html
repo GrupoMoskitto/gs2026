@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Moskitto Radar · Risco de roubo</title>
+  <meta name="description" content="Onde e quando o risco de roubo é maior na Grande São Paulo, com dados públicos da SSP-SP e um modelo de aprendizado de máquina.">
+  <link rel="icon" href="{{ url_for('static', filename='marca/logo-mark.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
+  <script nonce="{{ nonce }}">
+    // aplica o tema salvo antes de desenhar a página (evita piscar)
+    const q = new URLSearchParams(location.search).get('tema');
+    if (q === 'escuro' || q === 'claro') document.documentElement.dataset.theme = q === 'escuro' ? 'dark' : 'light';
+    else try { const t = localStorage.getItem('moskitto-tema'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+{%- set ic = url_for('static', filename='icones.svg') %}
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="barra">
+    <div class="coluna barra-in">
+      <a class="marca" href="#conteudo">
+        <img class="logo so-claro" src="{{ url_for('static', filename='marca/logo-mark.svg') }}" alt="" width="30" height="29">
+        <img class="logo so-escuro" src="{{ url_for('static', filename='marca/logo-mark-light.svg') }}" alt="" width="30" height="29">
+        <span>Moskitto Radar</span>
+      </a>
+      <nav class="menu" aria-label="Partes do relatório">
+        <a href="#onde">Mapa</a>{% if dados.agora %}<a href="#agora">Este mês</a>{% endif %}<a href="#quando">Horários</a>{% if dados.perfil %}<a href="#como">Como acontece</a>{% endif %}<a href="#modelo">Modelo</a><a href="#dados">Dados</a>
+      </nav>
+      <div class="acoes">
+        <button class="botao-icone" id="tema" type="button" aria-label="Usar tema escuro">
+          <svg class="ic so-claro" aria-hidden="true"><use href="{{ ic }}#i-lua"/></svg>
+          <svg class="ic so-escuro" aria-hidden="true"><use href="{{ ic }}#i-sol"/></svg>
+        </button>
+        <a class="botao" href="{{ url_for('baixar_previsoes') }}" download>
+          <svg class="ic" aria-hidden="true"><use href="{{ ic }}#i-baixar"/></svg><span>Baixar previsões</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo" class="coluna">
+    <div class="titulo">
+      <div>
+        <h1>Risco de roubo na Grande São Paulo</h1>
+        <p class="achado" id="achado"></p>
+        <p class="origem">Fonte dos roubos: <a href="https://www.ssp.sp.gov.br/estatistica/consultas" target="_blank" rel="noopener noreferrer">Secretaria da Segurança Pública de SP, Consultas, Base de Dados</a>
+          (bases <i>Celulares Subtraídos</i>, <i>Veículos Subtraídos</i>{% if dados.perfil %} e <i>Objetos Subtraídos</i>{% endif %}, <span id="origem-periodo"></span>).
+          Posição dos lugares: IBGE e OpenStreetMap. <a href="#dados">Como os dados foram tratados</a></p>
+      </div>
+      <p class="carimbo" id="carimbo"></p>
+    </div>
+
+    <dl class="painel numeros">
+      <div><dt>Roubos analisados</dt><dd class="num" id="k-roubos"></dd><dd class="sub" id="k-roubos-sub"></dd></div>
+      <div><dt>Lugares com previsão</dt><dd class="num" id="k-lugares"></dd><dd class="sub" id="k-lugares-sub"></dd></div>
+      <div><dt>Roubos à noite</dt><dd class="num" id="k-noite"></dd><dd class="sub">das 18h à meia-noite</dd></div>
+      <div><dt>Acerto no teste de 2026</dt><dd class="num" id="k-acerto"></dd><dd class="sub" id="k-acerto-sub"></dd></div>
+    </dl>
+
+    <section id="onde" class="bloco" aria-label="Onde o risco é maior">
+      <div class="linha mapa-e-lista">
+        <figure class="painel painel-mapa">
+          <div>
+            <div class="cab">
+              <h2>Mapa de risco</h2>
+              <div class="seg" role="radiogroup" aria-label="Faixa do dia" id="faixas"></div>
+            </div>
+            <p class="nota" id="nota-mapa"></p>
+          </div>
+          <div class="filtros" role="group" aria-label="Filtros do mapa">
+            <div class="chips" id="f-nivel" role="group" aria-label="Nível de risco"></div>
+            <label class="seletor"><span class="sr">Lugares</span>
+              <select id="f-lugar">
+                <option value="todos">Todos os lugares</option>
+                <option value="capital">Só a capital</option>
+                <option value="vizinhas">Só as cidades vizinhas</option>
+              </select>
+              <svg class="ic" aria-hidden="true"><use href="{{ ic }}#i-seta"/></svg>
+            </label>
+            <label class="seletor"><span class="sr">Tipo de roubo</span>
+              <select id="f-roubo">
+                <option value="todos">Todos os roubos</option>
+                <option value="celular">Roubo de celular</option>
+                <option value="veiculo">Roubo de veículo</option>
+              </select>
+              <svg class="ic" aria-hidden="true"><use href="{{ ic }}#i-seta"/></svg>
+            </label>
+            <button class="limpar" id="limpar" type="button" hidden>Limpar filtros</button>
+          </div>
+          <div class="mapa" id="g-mapa" tabindex="0" role="application" aria-roledescription="mapa"
+               aria-label="Mapa de risco. Arraste para mover; use mais e menos para aproximar e afastar.">
+            <div class="zoom" role="group" aria-label="Zoom do mapa">
+              <button type="button" id="z-mais" aria-label="Aproximar"><svg class="ic" aria-hidden="true"><use href="{{ ic }}#i-mais"/></svg></button>
+              <button type="button" id="z-menos" aria-label="Afastar"><svg class="ic" aria-hidden="true"><use href="{{ ic }}#i-menos"/></svg></button>
+              <button type="button" id="z-tudo" aria-label="Ver a região toda"><svg class="ic" aria-hidden="true"><use href="{{ ic }}#i-tudo"/></svg></button>
+            </div>
+          </div>
+          <div class="mapa-rodape">
+            <p class="contagem" id="contagem" aria-live="polite"></p>
+            <p class="nota" id="dica-uso"></p>
+          </div>
+          <p class="fonte-mapa">Fonte: roubos registrados na <a href="https://www.ssp.sp.gov.br/estatistica/consultas" target="_blank" rel="noopener noreferrer">SSP-SP</a>; posições do IBGE e do OpenStreetMap; nível previsto pelo nosso modelo.</p>
+          <details class="tabela"><summary>Ver como tabela</summary><div id="t-mapa-tab"></div></details>
+        </figure>
+
+        <aside class="painel trilho">
+          <div class="destaque" aria-live="polite">
+            <p class="quando" id="d-quando"></p>
+            <h2 id="d-titulo"></h2>
+            <div id="d-selo"></div>
+            <p class="nota" id="d-nota"></p>
+          </div>
+          <div class="lista">
+            <h2 class="h-lista" id="t-lista"></h2>
+            <ol class="ranking" id="ranking"></ol>
+          </div>
+        </aside>
+      </div>
+
+      <section class="painel lugar" aria-labelledby="l-nome">
+        <div class="cab">
+          <div>
+            <h2 id="l-nome"></h2>
+            <p class="nota" id="l-tipo"></p>
+          </div>
+          <label class="busca">
+            <svg class="ic" aria-hidden="true"><use href="{{ ic }}#i-busca"/></svg>
+            <span class="sr">Buscar um lugar</span>
+            <input id="busca" type="search" list="lista-lugares" placeholder="Buscar bairro ou cidade" autocomplete="off">
+          </label>
+          <datalist id="lista-lugares"></datalist>
+        </div>
+        <ol class="faixas" id="l-faixas" aria-live="polite"></ol>
+      </section>
+    </section>
+
+    {% if dados.agora %}
+    <section id="agora" class="bloco" aria-labelledby="t-agora">
+      <div>
+        <h2 class="secao" id="t-agora">Quantos roubos esperar este mês</h2>
+        <p class="explica" id="nota-agora"></p>
+      </div>
+      <div class="linha agora-linha">
+        <figure class="painel pergunta" aria-labelledby="a-titulo">
+          <div class="cab">
+            <div>
+              <p class="quando" id="a-lugar"></p>
+              <h3 id="a-titulo"></h3>
+              <p class="nota" id="a-faixa-provavel"></p>
+            </div>
+            <div class="seg pequeno" role="radiogroup" aria-label="Faixa do dia" id="a-faixas"></div>
+          </div>
+          <div id="g-agora" class="grafico" role="img"></div>
+          <p class="nota" id="a-legenda"></p>
+          <div class="relatos" role="group" aria-labelledby="r-tit">
+            <h4 id="r-tit">E se os moradores relatarem pelo app?</h4>
+            <div class="relatos-controles">
+              <label class="deslizar">
+                <span>Relatos aprovados neste mês: <b class="num" id="r-n">0</b></span>
+                <input type="range" id="r-relatos" min="0" max="30" step="1" value="0">
+              </label>
+              <div>
+                <span class="rot-seg" id="r-adesao-rot">Vítimas que relatam pelo app</span>
+                <div class="seg pequeno" role="radiogroup" aria-labelledby="r-adesao-rot" id="r-adesao"></div>
+              </div>
+            </div>
+            <p class="resultado" id="r-resultado" aria-live="polite"></p>
+            <p class="nota" id="r-explica"></p>
+          </div>
+          <details class="tabela"><summary>Ver como tabela</summary><div id="t-agora-tab"></div></details>
+        </figure>
+
+        <aside class="painel respostas" aria-labelledby="t-respostas">
+          <h3 id="t-respostas">O que o modelo responde</h3>
+          <dl class="qa">
+            <div>
+              <dt>Onde e quando o risco é maior?</dt>
+              <dd id="qa-nivel"></dd>
+            </div>
+            <div>
+              <dt>Quantos roubos esperar este mês?</dt>
+              <dd id="qa-mes"></dd>
+            </div>
+            <div>
+              <dt>Para que servem os relatos?</dt>
+              <dd id="qa-relatos"></dd>
+            </div>
+          </dl>
+          <div>
+            <p class="rot-barras">Queda do erro da previsão do mês, por parte das vítimas que relata</p>
+            <div id="g-ganho"></div>
+            <p class="nota">Simulação: cada roubo real de 2026 vira relato no app com essa chance. A adesão de verdade ainda não existe.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+    {% endif %}
+
+    <section id="quando" class="bloco" aria-labelledby="t-quando">
+      <h2 class="secao" id="t-quando">Quando os roubos acontecem</h2>
+      <div class="linha duas">
+        <figure class="painel">
+          <div class="cab">
+            <h3 id="t-horas"></h3>
+            <div class="seg pequeno" role="radiogroup" aria-label="Dias" id="f-dias"></div>
+          </div>
+          <p class="nota" id="nota-horas"></p>
+          <div id="g-horas" class="grafico" role="img"></div>
+          <details class="tabela"><summary>Ver como tabela</summary><div id="t-horas-tab"></div></details>
+        </figure>
+        <figure class="painel">
+          <h3 id="t-calor"></h3>
+          <p class="nota">Roubos por dia da semana e hora. Quanto mais escuro, mais roubos. Passe o mouse numa barra ao lado para ver a hora aqui.</p>
+          <div id="g-calor" class="calor" role="img"></div>
+          <div class="escala" id="escala-calor"></div>
+        </figure>
+      </div>
+      <figure class="painel">
+        <div class="cab">
+          <div>
+            <h3 id="t-mensal"></h3>
+            <p class="nota" id="nota-mensal"></p>
+          </div>
+          <table class="tab-num tipos" id="tipos"></table>
+        </div>
+        <div id="g-mensal" class="grafico" role="img"></div>
+        <details class="tabela"><summary>Ver como tabela</summary><div id="t-mensal-tab"></div></details>
+      </figure>
+    </section>
+
+    {% if dados.perfil %}
+    <section id="como" class="bloco" aria-labelledby="t-como">
+      <div>
+        <h2 class="secao" id="t-como">Como os roubos acontecem</h2>
+        <p class="explica" id="nota-como"></p>
+      </div>
+      <div class="linha tres">
+        <figure class="painel">
+          <h3 id="t-levados"></h3>
+          <p class="nota" id="nota-levados"></p>
+          <div id="g-levados"></div>
+        </figure>
+        <figure class="painel">
+          <h3 id="t-conduta"></h3>
+          <p class="nota" id="nota-conduta"></p>
+          <div id="g-conduta"></div>
+        </figure>
+        <figure class="painel">
+          <h3 id="t-local"></h3>
+          <p class="nota">Tipo de lugar registrado no boletim.</p>
+          <div id="g-local"></div>
+        </figure>
+      </div>
+    </section>
+    {% endif %}
+
+    <section id="modelo" class="bloco" aria-labelledby="t-modelo">
+      <h2 class="secao" id="t-modelo">Como o modelo decide o nível</h2>
+      <p class="explica">Duas perguntas, dois testes. O nível (baixo, médio ou alto) é a posição de cada lugar e faixa
+        entre os outros. A previsão do mês é a contagem de roubos{% if dados.agora %}, testada mais abaixo{% endif %}.
+        Nos dois casos, o modelo é testado em 2026 contra regras simples que qualquer um poderia usar.</p>
+      <ol class="painel passos">
+        <li><b>Célula</b><span>Cada lugar em cada faixa do dia, em dia útil ou fim de semana: 129 × 4 × 2 = 1.032 células.</span></li>
+        <li><b>Taxa</b><span>Roubos da célula divididos pelos dias do período.</span></li>
+        <li><b>Nível</b><span id="passo-nivel"></span></li>
+        <li><b>Teste por tempo</b><span>Aprende com 2024 para prever 2025 e é testado prevendo 2026 a partir de 2025.</span></li>
+      </ol>
+      <div class="linha duas">
+        <figure class="painel">
+          <h3 id="t-comp"></h3>
+          <p class="nota">F1 macro no teste de 2026. Quanto maior, melhor.</p>
+          <div id="g-comp"></div>
+          <p class="explica">O risco de um lugar muda pouco de um ano para o outro, então repetir o ano anterior já acerta muito.
+            O modelo fica à frente e ainda dá a probabilidade de cada nível, que vira a pontuação do app.</p>
+        </figure>
+        <figure class="painel">
+          <h3 id="t-matriz"></h3>
+          <p class="nota">Nível real nas linhas e previsto nas colunas, com a parte de cada linha.</p>
+          <div id="g-matriz" class="matriz" role="table" aria-label="Matriz de confusão do teste de 2026"></div>
+        </figure>
+      </div>
+      {% if dados.agora %}
+      <figure class="painel" id="teste-mes">
+        <div class="cab">
+          <div>
+            <h3 id="t-teste-mes"></h3>
+            <p class="nota" id="nota-teste-mes"></p>
+          </div>
+        </div>
+        <div class="linha teste-mes">
+          <div id="g-teste-mes" class="grafico" role="img"></div>
+          <div>
+            <p class="rot-barras">Erro médio por mês no total da região (roubos). Quanto menor, melhor.</p>
+            <div id="g-erros"></div>
+          </div>
+        </div>
+        <details class="tabela"><summary>Ver como tabela</summary><div id="t-teste-mes-tab"></div></details>
+      </figure>
+      {% endif %}
+    </section>
+
+    <section id="dados" class="bloco" aria-labelledby="t-dados">
+      <h2 class="secao" id="t-dados">De onde vêm os dados</h2>
+      <div class="linha duas">
+        <div class="painel">
+          <h3 id="t-funil"></h3>
+          <p class="nota">Cada etapa da limpeza das planilhas baixadas do <a href="https://www.ssp.sp.gov.br/estatistica/consultas" target="_blank" rel="noopener noreferrer">portal da SSP-SP</a>.</p>
+          <table class="tab-num funil" id="g-funil"></table>
+          <p class="nota explica-funil">O que saiu em cada etapa: furtos, perdas e outras naturezas (só roubo entra); o
+            mesmo BO repetido em várias linhas, uma por objeto levado; ocorrências fora da Região Metropolitana; e
+            registros fora do período ou sem hora ou sem local.</p>
+        </div>
+        <div class="painel fontes">
+          <h3>Fontes e privacidade</h3>
+          <dl>
+            <dt>Roubos</dt>
+            <dd>Dados abertos da Secretaria da Segurança Pública do Estado de São Paulo (SSP-SP), em
+              <a href="https://www.ssp.sp.gov.br/estatistica/consultas" target="_blank" rel="noopener noreferrer">ssp.sp.gov.br, Estatística, Consultas, Base de Dados</a>: as planilhas
+              <i>Celulares Subtraídos</i> e <i>Veículos Subtraídos</i>{% if dados.perfil %} (e <i>Objetos Subtraídos</i>, para a
+              linha de outros objetos e a parte sobre como os roubos acontecem; o modelo usa só celular e veículo){% endif %} de 2024, 2025 e 2026, baixadas em novembro de 2026.
+              Cada linha é um boletim de ocorrência; usamos só os roubos. A SSP avisa que são dados brutos, sem
+              padronização, e não estatística oficial.</dd>
+            <dt>Lugares</dt>
+            <dd>Nomes e códigos de município e distrito do <a href="https://www.ibge.gov.br/" target="_blank" rel="noopener noreferrer">IBGE</a>; centro de
+              cada lugar pelo IBGE e pelo <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>
+              (licença ODbL).</dd>
+            <dt>Modelo</dt>
+            <dd>Níveis, pontuações e previsões do mês calculados por nós (RandomForest treinado com esses roubos), não pela SSP.
+              O efeito dos relatos do app é uma simulação.</dd>
+            <dt>Privacidade</dt>
+            <dd>As planilhas originais, com endereço, CEP e placa, não saem do computador. O site só mostra contagens por lugar, dia e faixa.</dd>
+            <dt>Limites</dt>
+            <dd>O nível é relativo à região, não um risco absoluto. Roubos que ninguém registrou não aparecem em nenhuma base.</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="coluna">
+      <div class="rodape-in">
+        <div class="rodape-marca">
+          <div class="marca">
+            <img class="logo so-claro" src="{{ url_for('static', filename='marca/logo-mark.svg') }}" alt="" width="30" height="29">
+            <img class="logo so-escuro" src="{{ url_for('static', filename='marca/logo-mark-light.svg') }}" alt="" width="30" height="29">
+            <span>Moskitto Radar</span>
+          </div>
+          <p>Global Solution CitizenTech, FIAP 2026.2.<br>Parte de Inteligência Artificial e Machine Learning.</p>
+        </div>
+        <div>
+          <h2 class="rodape-tit">Equipe</h2>
+          <ul class="equipe">
+            <li><span>Gabriel Couto</span><span class="rm">RM559579</span></li>
+            <li><span>Gabriel Kato</span><span class="rm">RM560000</span></li>
+            <li><span>João Vitor de Matos</span><span class="rm">RM559246</span></li>
+            <li><span>Marcelo Affonso</span><span class="rm">RM559790</span></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="rodape-tit">Fontes</h2>
+          <ul class="rodape-links">
+            <li><a href="https://www.ssp.sp.gov.br/estatistica/consultas" target="_blank" rel="noopener noreferrer">SSP-SP, bases de dados</a><span>roubos de celular, de veículo{% if dados.perfil %} e de objetos{% endif %}</span></li>
+            <li><a href="https://www.ibge.gov.br/" target="_blank" rel="noopener noreferrer">IBGE</a><span>nomes, códigos e centros</span></li>
+            <li><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a><span>centros dos lugares (ODbL)</span></li>
+          </ul>
+        </div>
+      </div>
+      <p class="rodape-fim">Dados abertos e agregados, sem nenhuma ocorrência individual. O nível de risco é previsto pelo modelo deste projeto, não pela SSP.</p>
+    </div>
+  </footer>
+
+  <div class="dica" id="dica" role="tooltip" hidden></div>
+  <script id="dados-json" type="application/json">{{ dados | tojson }}</script>
+  <script nonce="{{ nonce }}">window.ICONES = {{ ic | tojson }};</script>
+  <script nonce="{{ nonce }}" src="{{ url_for('static', filename='graficos.js') }}"></script>
+</body>
+</html>

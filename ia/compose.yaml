@@ -1,0 +1,16 @@
+services:
+  site:
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    image: moskitto-radar-ia:latest
+    container_name: moskitto-radar-ia
+    ports:
+      - "${PORT:-5000}:5000"
+    volumes:
+      - ./web:/app/web:ro,z
+      - ./data:/app/data:ro,z
+    environment:
+      GUNICORN_CMD_ARGS: "--reload"
+      RECARREGAR_TEMPLATES: "1"
+    restart: unless-stopped
