@@ -1,0 +1,35 @@
+{
+  "linhas_lidas": 1725179,
+  "bos_roubo": 320673,
+  "fora_do_periodo": 7057,
+  "fora_da_rmsp": 54886,
+  "sem_coordenada": 17415,
+  "tentados": 0,
+  "sem_hora": 2227,
+  "roubos_contados": 239088,
+  "periodo": {
+    "inicio": "2024-01-01",
+    "fim": "2026-08-31"
+  },
+  "fim_por_base": {
+    "celular": "2026-08-31",
+    "veiculo": "2026-09-30"
+  },
+  "por_ano": {
+    "2024": 102617,
+    "2025": 86575,
+    "2026": 49896
+  },
+  "arquivos": {
+    "celular": [
+      "CelularesSubtraidos_2024.xlsx",
+      "CelularesSubtraidos_2025.xlsx",
+      "CelularesSubtraidos_2026.xlsx"
+    ],
+    "veiculo": [
+      "VeiculosSubtraidos_2024.xlsx",
+      "VeiculosSubtraidos_2025.xlsx",
+      "VeiculosSubtraidos_2026.xlsx"
+    ]
+  }
+}

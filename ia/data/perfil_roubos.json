@@ -1,0 +1,439 @@
+{
+  "periodo": {
+    "inicio": "2024-01-01",
+    "fim": "2026-08-31"
+  },
+  "arquivos": {
+    "celular": [
+      "CelularesSubtraidos_2024.xlsx",
+      "CelularesSubtraidos_2025.xlsx",
+      "CelularesSubtraidos_2026.xlsx"
+    ],
+    "veiculo": [
+      "VeiculosSubtraidos_2024.xlsx",
+      "VeiculosSubtraidos_2025.xlsx",
+      "VeiculosSubtraidos_2026.xlsx"
+    ],
+    "objetos": [
+      "ObjetosSubtraidos_2024.xlsx",
+      "ObjetosSubtraidos_2025.xlsx",
+      "ObjetosSubtraidos_2026.xlsx"
+    ]
+  },
+  "etapas": {
+    "linhas_lidas": 6751599,
+    "fora_do_periodo": 10941,
+    "fora_da_rmsp": 86372,
+    "bos_roubo": 500706,
+    "bos_validos": 403393
+  },
+  "total_bos": 403393,
+  "cobertura": {
+    "celular_ou_veiculo": {
+      "bos": 258730,
+      "pct": 0.6414
+    },
+    "outros_objetos": {
+      "bos": 144663,
+      "pct": 0.3586
+    }
+  },
+  "levados": [
+    {
+      "rotulo": "Celular",
+      "bos": 227594,
+      "pct": 0.5642
+    },
+    {
+      "rotulo": "Documentos",
+      "bos": 117774,
+      "pct": 0.292
+    },
+    {
+      "rotulo": "Veículo",
+      "bos": 52523,
+      "pct": 0.1302
+    },
+    {
+      "rotulo": "Dinheiro",
+      "bos": 44522,
+      "pct": 0.1104
+    },
+    {
+      "rotulo": "Joias e relógios",
+      "bos": 25815,
+      "pct": 0.064
+    },
+    {
+      "rotulo": "Bolsa, mochila ou mala",
+      "bos": 11057,
+      "pct": 0.0274
+    },
+    {
+      "rotulo": "Roupas e acessórios",
+      "bos": 9564,
+      "pct": 0.0237
+    },
+    {
+      "rotulo": "Notebook ou tablet",
+      "bos": 8893,
+      "pct": 0.022
+    }
+  ],
+  "levados_com_celular": [
+    {
+      "rotulo": "Documentos",
+      "bos": 56604,
+      "pct": 0.2495
+    },
+    {
+      "rotulo": "Veículo",
+      "bos": 20689,
+      "pct": 0.0912
+    },
+    {
+      "rotulo": "Dinheiro",
+      "bos": 17098,
+      "pct": 0.0754
+    },
+    {
+      "rotulo": "Joias e relógios",
+      "bos": 11393,
+      "pct": 0.0502
+    },
+    {
+      "rotulo": "Bolsa, mochila ou mala",
+      "bos": 7643,
+      "pct": 0.0337
+    },
+    {
+      "rotulo": "Roupas e acessórios",
+      "bos": 5961,
+      "pct": 0.0263
+    },
+    {
+      "rotulo": "Notebook ou tablet",
+      "bos": 4320,
+      "pct": 0.019
+    }
+  ],
+  "bos_com_celular": 226896,
+  "conduta": [
+    {
+      "rotulo": "Roubo do veículo",
+      "bos": 48383,
+      "pct": 0.1199
+    },
+    {
+      "rotulo": "A pé, na rua",
+      "bos": 45115,
+      "pct": 0.1118
+    },
+    {
+      "rotulo": "Dentro do veículo",
+      "bos": 7814,
+      "pct": 0.0194
+    },
+    {
+      "rotulo": "Comércio",
+      "bos": 3864,
+      "pct": 0.0096
+    },
+    {
+      "rotulo": "Carga",
+      "bos": 2981,
+      "pct": 0.0074
+    },
+    {
+      "rotulo": "Em casa",
+      "bos": 1930,
+      "pct": 0.0048
+    },
+    {
+      "rotulo": "Transporte coletivo",
+      "bos": 526,
+      "pct": 0.0013
+    },
+    {
+      "rotulo": "Motorista de aplicativo",
+      "bos": 452,
+      "pct": 0.0011
+    },
+    {
+      "rotulo": "Saída de banco ou caixa",
+      "bos": 258,
+      "pct": 0.0006
+    },
+    {
+      "rotulo": "Outros ou não informado",
+      "bos": 292070,
+      "pct": 0.724
+    }
+  ],
+  "local": [
+    {
+      "rotulo": "Rua",
+      "bos": 374464,
+      "pct": 0.9283
+    },
+    {
+      "rotulo": "Terminal ou estação",
+      "bos": 9036,
+      "pct": 0.0224
+    },
+    {
+      "rotulo": "Comércio",
+      "bos": 4028,
+      "pct": 0.01
+    },
+    {
+      "rotulo": "Casa",
+      "bos": 3259,
+      "pct": 0.0081
+    },
+    {
+      "rotulo": "Estacionamento",
+      "bos": 3015,
+      "pct": 0.0075
+    },
+    {
+      "rotulo": "Outros lugares",
+      "bos": 2190,
+      "pct": 0.0054
+    },
+    {
+      "rotulo": "Rodovia",
+      "bos": 1298,
+      "pct": 0.0032
+    },
+    {
+      "rotulo": "Outros ou não informado",
+      "bos": 6103,
+      "pct": 0.0151
+    }
+  ],
+  "conduta_por_faixa": {
+    "Outros ou não informado": {
+      "madrugada": 56232,
+      "manha": 55697,
+      "tarde": 61121,
+      "noite": 118713
+    },
+    "A pé, na rua": {
+      "madrugada": 10403,
+      "manha": 8826,
+      "tarde": 8552,
+      "noite": 16995
+    },
+    "Dentro do veículo": {
+      "madrugada": 542,
+      "manha": 2756,
+      "tarde": 2856,
+      "noite": 1632
+    },
+    "Transporte coletivo": {
+      "madrugada": 67,
+      "manha": 144,
+      "tarde": 120,
+      "noite": 192
+    },
+    "Em casa": {
+      "madrugada": 570,
+      "manha": 407,
+      "tarde": 477,
+      "noite": 461
+    },
+    "Roubo do veículo": {
+      "madrugada": 7435,
+      "manha": 7432,
+      "tarde": 9781,
+      "noite": 22532
+    },
+    "Comércio": {
+      "madrugada": 761,
+      "manha": 848,
+      "tarde": 918,
+      "noite": 1316
+    },
+    "Motorista de aplicativo": {
+      "madrugada": 110,
+      "manha": 66,
+      "tarde": 69,
+      "noite": 201
+    },
+    "Carga": {
+      "madrugada": 263,
+      "manha": 1541,
+      "tarde": 865,
+      "noite": 278
+    },
+    "Saída de banco ou caixa": {
+      "madrugada": 1,
+      "manha": 114,
+      "tarde": 112,
+      "noite": 28
+    }
+  },
+  "por_mes": [
+    {
+      "mes": "2024-01",
+      "celular_ou_veiculo": 9377,
+      "outros_objetos": 5308
+    },
+    {
+      "mes": "2024-02",
+      "celular_ou_veiculo": 9586,
+      "outros_objetos": 5154
+    },
+    {
+      "mes": "2024-03",
+      "celular_ou_veiculo": 9917,
+      "outros_objetos": 3385
+    },
+    {
+      "mes": "2024-04",
+      "celular_ou_veiculo": 9748,
+      "outros_objetos": 5453
+    },
+    {
+      "mes": "2024-05",
+      "celular_ou_veiculo": 9597,
+      "outros_objetos": 5183
+    },
+    {
+      "mes": "2024-06",
+      "celular_ou_veiculo": 9619,
+      "outros_objetos": 5294
+    },
+    {
+      "mes": "2024-07",
+      "celular_ou_veiculo": 9141,
+      "outros_objetos": 5139
+    },
+    {
+      "mes": "2024-08",
+      "celular_ou_veiculo": 8993,
+      "outros_objetos": 5050
+    },
+    {
+      "mes": "2024-09",
+      "celular_ou_veiculo": 8476,
+      "outros_objetos": 4612
+    },
+    {
+      "mes": "2024-10",
+      "celular_ou_veiculo": 9325,
+      "outros_objetos": 5194
+    },
+    {
+      "mes": "2024-11",
+      "celular_ou_veiculo": 9190,
+      "outros_objetos": 5146
+    },
+    {
+      "mes": "2024-12",
+      "celular_ou_veiculo": 9822,
+      "outros_objetos": 5492
+    },
+    {
+      "mes": "2025-01",
+      "celular_ou_veiculo": 8755,
+      "outros_objetos": 5316
+    },
+    {
+      "mes": "2025-02",
+      "celular_ou_veiculo": 8227,
+      "outros_objetos": 4706
+    },
+    {
+      "mes": "2025-03",
+      "celular_ou_veiculo": 9103,
+      "outros_objetos": 4824
+    },
+    {
+      "mes": "2025-04",
+      "celular_ou_veiculo": 7940,
+      "outros_objetos": 4190
+    },
+    {
+      "mes": "2025-05",
+      "celular_ou_veiculo": 8112,
+      "outros_objetos": 4402
+    },
+    {
+      "mes": "2025-06",
+      "celular_ou_veiculo": 7506,
+      "outros_objetos": 4356
+    },
+    {
+      "mes": "2025-07",
+      "celular_ou_veiculo": 8032,
+      "outros_objetos": 4734
+    },
+    {
+      "mes": "2025-08",
+      "celular_ou_veiculo": 7682,
+      "outros_objetos": 4734
+    },
+    {
+      "mes": "2025-09",
+      "celular_ou_veiculo": 7363,
+      "outros_objetos": 4365
+    },
+    {
+      "mes": "2025-10",
+      "celular_ou_veiculo": 7356,
+      "outros_objetos": 4179
+    },
+    {
+      "mes": "2025-11",
+      "celular_ou_veiculo": 6863,
+      "outros_objetos": 4136
+    },
+    {
+      "mes": "2025-12",
+      "celular_ou_veiculo": 6624,
+      "outros_objetos": 4066
+    },
+    {
+      "mes": "2026-01",
+      "celular_ou_veiculo": 6221,
+      "outros_objetos": 4151
+    },
+    {
+      "mes": "2026-02",
+      "celular_ou_veiculo": 6177,
+      "outros_objetos": 3988
+    },
+    {
+      "mes": "2026-03",
+      "celular_ou_veiculo": 6867,
+      "outros_objetos": 4546
+    },
+    {
+      "mes": "2026-04",
+      "celular_ou_veiculo": 6840,
+      "outros_objetos": 3862
+    },
+    {
+      "mes": "2026-05",
+      "celular_ou_veiculo": 7025,
+      "outros_objetos": 3620
+    },
+    {
+      "mes": "2026-06",
+      "celular_ou_veiculo": 6384,
+      "outros_objetos": 3530
+    },
+    {
+      "mes": "2026-07",
+      "celular_ou_veiculo": 6445,
+      "outros_objetos": 3439
+    },
+    {
+      "mes": "2026-08",
+      "celular_ou_veiculo": 6417,
+      "outros_objetos": 3109
+    }
+  ]
+}

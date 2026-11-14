@@ -1,0 +1,74 @@
+[
+  {
+    "bairro": "bela_vista",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.43
+  },
+  {
+    "bairro": "bela_vista",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.51
+  },
+  {
+    "bairro": "bela_vista",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "bela_vista",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "cerqueira_cesar",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.2
+  },
+  {
+    "bairro": "cerqueira_cesar",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.25
+  },
+  {
+    "bairro": "cerqueira_cesar",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.43
+  },
+  {
+    "bairro": "cerqueira_cesar",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.86
+  },
+  {
+    "bairro": "consolacao",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "alto",
+    "score": 0.6
+  },
+  {
+    "bairro": "consolacao",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.49
+  },
+  {
+    "bairro": "consolacao",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.58
+  },
+  {
+    "bairro": "consolacao",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.87
+  }
+]
