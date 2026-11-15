@@ -26,6 +26,8 @@ de 100 m) e a descrição é opcional.
 | **Rede ruim como caso normal** | Tempo limite, cancelamento, nova tentativa com espera crescente e variação aleatória, cache e fila offline. |
 | **`POST` só repete com `Idempotency-Key`** | Repetir um envio sem a chave poderia duplicar o relato. A chave precisa ser aceita pela API (ver "Combinar com o João"). |
 | **Dados de exemplo como último recurso** | O app abre e demonstra tudo mesmo sem API, e **avisa na tela** que são exemplos. O enunciado pede o mock. |
+| **Aba Risco com o resumo do modelo** (`src/data/resumo_modelo.json`, gerado por `ia/scripts/exportar_app.py`) | A API só manda nível e nota. Roubos por dia, hora do dia, o que levam, previsão do mês e acerto do modelo vêm de um resumo de 19 KB da `ia/`, sem dado pessoal. Os gráficos são `View` simples, sem biblioteca nova, com rótulo e número escritos ao lado da cor. |
+| **Previsão do modelo guardada no app** (`src/data/previsoes.json`, `services/modelo.ts`) | Sem API, o risco não é inventado: é a saída do modelo de ML da `ia/`, treinado com os roubos da SSP-SP. A faixa diz "Previsão do modelo". Um teste confere que a cópia é igual à da `ia/` e que cobre os 129 lugares nas 4 faixas. |
 | **Validação em funções puras** (`src/utils/validacao.ts`) | Dá para testar no Node, sem celular. As mesmas regras valem na API; a do app só avisa cedo. |
 | **Sem biblioteca de estado nem de requisições** | O app é pequeno. Um hook próprio (`useRecurso`) cobre carregando, erro, pronto e recarregando e é fácil de explicar. |
 | **`react-native-maps`** no mapa | A documentação do Expo diz que funciona no Expo Go sem configuração. É a base da tela de mapa (proposta). |
@@ -49,7 +51,8 @@ O app já trabalha com a região metropolitana de São Paulo, mas o `AGENTS.md` 
   Enquanto a API aceitar só os 3 códigos antigos, um relato de outro lugar volta com erro 400.
 - **Coto (IA):** o gerador do CSV e o modelo passam a ter um lugar por linha (cerca de 125 lugares no lugar de 3 bairros).
 - **Kato e Marcelo:** o ponto do botão de pânico e o texto do público-alvo precisam apontar para a região nova.
-- **Dados do app:** os relatos e o risco de exemplo são simulados para a região toda, com mais ocorrências no centro expandido.
+- **Dados do app:** os relatos de exemplo são simulados para a região toda, com mais ocorrências no centro expandido. O
+  risco vem do modelo de ML (`ia/data/previsoes.json`), com os mesmos 129 códigos de lugar.
 
 ## Combinar com o João (API)
 
@@ -69,6 +72,6 @@ A seção 5 do `REGRAS.md` propõe mudanças no servidor. O app já funciona sem
 - **Mapa é proposta** (decisão 2 do `AGENTS.md`). Se o time não aprovar, a aba sai sem afetar o resto.
 - **Moderação** (decisão 1): o app mostra o status de cada relato. Quem aprova ainda depende de como o C# vai
   falar com a API.
-- **Pinos do mapa coloridos pelo risco do bairro** no horário de agora: é uma simplificação até o ML definir
-  zonas mais finas (decisão 3).
-- Sem testes de interface automatizados: só a camada pura (29 testes).
+- **Pinos do mapa coloridos pelo risco do lugar** no horário de agora, com a granularidade que o ML adotou
+  (distrito na capital, município fora dela).
+- Sem testes de interface automatizados: só a camada pura e a previsão guardada (40 testes).

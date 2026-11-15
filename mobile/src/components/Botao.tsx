@@ -66,7 +66,7 @@ export function Botao({
       {vidro ? (
         <GlassView
           pointerEvents="none"
-          style={StyleSheet.absoluteFill}
+          style={[StyleSheet.absoluteFill, estilos.vidro]}
           glassEffectStyle="regular"
           isInteractive
           tintColor={variante === 'primario' ? cores.primaria : undefined}
@@ -96,6 +96,7 @@ const estilos = StyleSheet.create({
     justifyContent: 'center',
     overflow: 'hidden',
   },
+  vidro: { borderRadius: (alvoToque + 4) / 2 },
   conteudo: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   pressionado: { opacity: 0.8, transform: [{ scale: 0.98 }] },
   desativado: { opacity: 0.5 },

@@ -1,0 +1,3098 @@
+[
+  {
+    "bairro": "bela_vista",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.43
+  },
+  {
+    "bairro": "bela_vista",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.51
+  },
+  {
+    "bairro": "bela_vista",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "bela_vista",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "cerqueira_cesar",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.2
+  },
+  {
+    "bairro": "cerqueira_cesar",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.25
+  },
+  {
+    "bairro": "cerqueira_cesar",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.43
+  },
+  {
+    "bairro": "cerqueira_cesar",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.86
+  },
+  {
+    "bairro": "consolacao",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "alto",
+    "score": 0.6
+  },
+  {
+    "bairro": "consolacao",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.49
+  },
+  {
+    "bairro": "consolacao",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.58
+  },
+  {
+    "bairro": "consolacao",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.87
+  },
+  {
+    "bairro": "dis_355030801",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030801",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030801",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030801",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030802",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.06
+  },
+  {
+    "bairro": "dis_355030802",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.23
+  },
+  {
+    "bairro": "dis_355030802",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030802",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.91
+  },
+  {
+    "bairro": "dis_355030804",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030804",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030804",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030804",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.48
+  },
+  {
+    "bairro": "dis_355030805",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.11
+  },
+  {
+    "bairro": "dis_355030805",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.06
+  },
+  {
+    "bairro": "dis_355030805",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.11
+  },
+  {
+    "bairro": "dis_355030805",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "dis_355030806",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030806",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.47
+  },
+  {
+    "bairro": "dis_355030806",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.49
+  },
+  {
+    "bairro": "dis_355030806",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.91
+  },
+  {
+    "bairro": "dis_355030808",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030808",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030808",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030808",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.38
+  },
+  {
+    "bairro": "dis_355030809",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.22
+  },
+  {
+    "bairro": "dis_355030809",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.23
+  },
+  {
+    "bairro": "dis_355030809",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.53
+  },
+  {
+    "bairro": "dis_355030809",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.76
+  },
+  {
+    "bairro": "dis_355030810",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.15
+  },
+  {
+    "bairro": "dis_355030810",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.36
+  },
+  {
+    "bairro": "dis_355030810",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "dis_355030810",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.83
+  },
+  {
+    "bairro": "dis_355030811",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.09
+  },
+  {
+    "bairro": "dis_355030811",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.06
+  },
+  {
+    "bairro": "dis_355030811",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.09
+  },
+  {
+    "bairro": "dis_355030811",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.75
+  },
+  {
+    "bairro": "dis_355030812",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030812",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030812",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030812",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.12
+  },
+  {
+    "bairro": "dis_355030813",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030813",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030813",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030813",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.42
+  },
+  {
+    "bairro": "dis_355030814",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030814",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030814",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030814",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030815",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.1
+  },
+  {
+    "bairro": "dis_355030815",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.49
+  },
+  {
+    "bairro": "dis_355030815",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "dis_355030815",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030816",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.19
+  },
+  {
+    "bairro": "dis_355030816",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.24
+  },
+  {
+    "bairro": "dis_355030816",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030816",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.82
+  },
+  {
+    "bairro": "dis_355030817",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030817",
+    "faixa_horaria": "manha",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030817",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "alto",
+    "score": 0.81
+  },
+  {
+    "bairro": "dis_355030817",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030818",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.07
+  },
+  {
+    "bairro": "dis_355030818",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030818",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030818",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.49
+  },
+  {
+    "bairro": "dis_355030819",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030819",
+    "faixa_horaria": "manha",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030819",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030819",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030820",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030820",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030820",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030820",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030821",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030821",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.06
+  },
+  {
+    "bairro": "dis_355030821",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.1
+  },
+  {
+    "bairro": "dis_355030821",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "dis_355030822",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "dis_355030822",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "dis_355030822",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.48
+  },
+  {
+    "bairro": "dis_355030822",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030823",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.57
+  },
+  {
+    "bairro": "dis_355030823",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.47
+  },
+  {
+    "bairro": "dis_355030823",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.45
+  },
+  {
+    "bairro": "dis_355030823",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030824",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030824",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030824",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030824",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.47
+  },
+  {
+    "bairro": "dis_355030825",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.37
+  },
+  {
+    "bairro": "dis_355030825",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.14
+  },
+  {
+    "bairro": "dis_355030825",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030825",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.56
+  },
+  {
+    "bairro": "dis_355030827",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.09
+  },
+  {
+    "bairro": "dis_355030827",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.36
+  },
+  {
+    "bairro": "dis_355030827",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.46
+  },
+  {
+    "bairro": "dis_355030827",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030828",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030828",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030828",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030828",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.17
+  },
+  {
+    "bairro": "dis_355030829",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030829",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.06
+  },
+  {
+    "bairro": "dis_355030829",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.14
+  },
+  {
+    "bairro": "dis_355030829",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.8
+  },
+  {
+    "bairro": "dis_355030830",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.48
+  },
+  {
+    "bairro": "dis_355030830",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.17
+  },
+  {
+    "bairro": "dis_355030830",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.17
+  },
+  {
+    "bairro": "dis_355030830",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.91
+  },
+  {
+    "bairro": "dis_355030831",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030831",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.11
+  },
+  {
+    "bairro": "dis_355030831",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.13
+  },
+  {
+    "bairro": "dis_355030831",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "dis_355030832",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.1
+  },
+  {
+    "bairro": "dis_355030832",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.45
+  },
+  {
+    "bairro": "dis_355030832",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "dis_355030832",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030833",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030833",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.06
+  },
+  {
+    "bairro": "dis_355030833",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030833",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.41
+  },
+  {
+    "bairro": "dis_355030834",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030834",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030834",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.06
+  },
+  {
+    "bairro": "dis_355030834",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.51
+  },
+  {
+    "bairro": "dis_355030835",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.2
+  },
+  {
+    "bairro": "dis_355030835",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.45
+  },
+  {
+    "bairro": "dis_355030835",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.51
+  },
+  {
+    "bairro": "dis_355030835",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030836",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.47
+  },
+  {
+    "bairro": "dis_355030836",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030836",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.38
+  },
+  {
+    "bairro": "dis_355030836",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.79
+  },
+  {
+    "bairro": "dis_355030837",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.5
+  },
+  {
+    "bairro": "dis_355030837",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030837",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.41
+  },
+  {
+    "bairro": "dis_355030837",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030838",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.08
+  },
+  {
+    "bairro": "dis_355030838",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.19
+  },
+  {
+    "bairro": "dis_355030838",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.17
+  },
+  {
+    "bairro": "dis_355030838",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.51
+  },
+  {
+    "bairro": "dis_355030839",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.19
+  },
+  {
+    "bairro": "dis_355030839",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030839",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030839",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.58
+  },
+  {
+    "bairro": "dis_355030840",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030840",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030840",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.06
+  },
+  {
+    "bairro": "dis_355030840",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030841",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030841",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030841",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030841",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.23
+  },
+  {
+    "bairro": "dis_355030842",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.15
+  },
+  {
+    "bairro": "dis_355030842",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030842",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.18
+  },
+  {
+    "bairro": "dis_355030842",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.88
+  },
+  {
+    "bairro": "dis_355030843",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.54
+  },
+  {
+    "bairro": "dis_355030843",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.49
+  },
+  {
+    "bairro": "dis_355030843",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.38
+  },
+  {
+    "bairro": "dis_355030843",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030844",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030844",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030844",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030844",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030845",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030845",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030845",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.08
+  },
+  {
+    "bairro": "dis_355030845",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.1
+  },
+  {
+    "bairro": "dis_355030846",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "alto",
+    "score": 0.76
+  },
+  {
+    "bairro": "dis_355030846",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.47
+  },
+  {
+    "bairro": "dis_355030846",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.51
+  },
+  {
+    "bairro": "dis_355030846",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030848",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.06
+  },
+  {
+    "bairro": "dis_355030848",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030848",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.51
+  },
+  {
+    "bairro": "dis_355030848",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030849",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030849",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.18
+  },
+  {
+    "bairro": "dis_355030849",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.46
+  },
+  {
+    "bairro": "dis_355030849",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.57
+  },
+  {
+    "bairro": "dis_355030850",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030850",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030850",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030850",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "dis_355030851",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030851",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030851",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030851",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.41
+  },
+  {
+    "bairro": "dis_355030852",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030852",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030852",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030852",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030853",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030853",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030853",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030853",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.08
+  },
+  {
+    "bairro": "dis_355030854",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.06
+  },
+  {
+    "bairro": "dis_355030854",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.38
+  },
+  {
+    "bairro": "dis_355030854",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "dis_355030854",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.88
+  },
+  {
+    "bairro": "dis_355030855",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030855",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030855",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030855",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030856",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.15
+  },
+  {
+    "bairro": "dis_355030856",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.23
+  },
+  {
+    "bairro": "dis_355030856",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.49
+  },
+  {
+    "bairro": "dis_355030856",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.15
+  },
+  {
+    "bairro": "dis_355030857",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030857",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030857",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030857",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.48
+  },
+  {
+    "bairro": "dis_355030859",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.16
+  },
+  {
+    "bairro": "dis_355030859",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.09
+  },
+  {
+    "bairro": "dis_355030859",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.19
+  },
+  {
+    "bairro": "dis_355030859",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "dis_355030860",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.06
+  },
+  {
+    "bairro": "dis_355030860",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030860",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.39
+  },
+  {
+    "bairro": "dis_355030860",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.87
+  },
+  {
+    "bairro": "dis_355030861",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030861",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030861",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030861",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.53
+  },
+  {
+    "bairro": "dis_355030862",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "dis_355030862",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.52
+  },
+  {
+    "bairro": "dis_355030862",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.54
+  },
+  {
+    "bairro": "dis_355030862",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030863",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030863",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030863",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030863",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.5
+  },
+  {
+    "bairro": "dis_355030864",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030864",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030864",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030864",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.41
+  },
+  {
+    "bairro": "dis_355030865",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.06
+  },
+  {
+    "bairro": "dis_355030865",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030865",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.07
+  },
+  {
+    "bairro": "dis_355030865",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.51
+  },
+  {
+    "bairro": "dis_355030866",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "alto",
+    "score": 0.94
+  },
+  {
+    "bairro": "dis_355030866",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "dis_355030866",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "alto",
+    "score": 0.82
+  },
+  {
+    "bairro": "dis_355030866",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030867",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030867",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030867",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.16
+  },
+  {
+    "bairro": "dis_355030867",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.46
+  },
+  {
+    "bairro": "dis_355030868",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.2
+  },
+  {
+    "bairro": "dis_355030868",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.38
+  },
+  {
+    "bairro": "dis_355030868",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.5
+  },
+  {
+    "bairro": "dis_355030868",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.93
+  },
+  {
+    "bairro": "dis_355030869",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.31
+  },
+  {
+    "bairro": "dis_355030869",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.18
+  },
+  {
+    "bairro": "dis_355030869",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030869",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "dis_355030871",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.49
+  },
+  {
+    "bairro": "dis_355030871",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.53
+  },
+  {
+    "bairro": "dis_355030871",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "dis_355030871",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030872",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030872",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030872",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.08
+  },
+  {
+    "bairro": "dis_355030872",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.49
+  },
+  {
+    "bairro": "dis_355030873",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.36
+  },
+  {
+    "bairro": "dis_355030873",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030873",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.37
+  },
+  {
+    "bairro": "dis_355030873",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.52
+  },
+  {
+    "bairro": "dis_355030874",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030874",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030874",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030874",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.27
+  },
+  {
+    "bairro": "dis_355030875",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.24
+  },
+  {
+    "bairro": "dis_355030875",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.25
+  },
+  {
+    "bairro": "dis_355030875",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.2
+  },
+  {
+    "bairro": "dis_355030875",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.47
+  },
+  {
+    "bairro": "dis_355030876",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.07
+  },
+  {
+    "bairro": "dis_355030876",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030876",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.16
+  },
+  {
+    "bairro": "dis_355030876",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.5
+  },
+  {
+    "bairro": "dis_355030877",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.06
+  },
+  {
+    "bairro": "dis_355030877",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030877",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.37
+  },
+  {
+    "bairro": "dis_355030877",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.78
+  },
+  {
+    "bairro": "dis_355030878",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.5
+  },
+  {
+    "bairro": "dis_355030878",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "dis_355030878",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "alto",
+    "score": 0.93
+  },
+  {
+    "bairro": "dis_355030878",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030880",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.15
+  },
+  {
+    "bairro": "dis_355030880",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.21
+  },
+  {
+    "bairro": "dis_355030880",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030880",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.75
+  },
+  {
+    "bairro": "dis_355030882",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030882",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030882",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030882",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.51
+  },
+  {
+    "bairro": "dis_355030883",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.12
+  },
+  {
+    "bairro": "dis_355030883",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.47
+  },
+  {
+    "bairro": "dis_355030883",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "dis_355030883",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "dis_355030884",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030884",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030884",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030884",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.41
+  },
+  {
+    "bairro": "dis_355030885",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030885",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030885",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030885",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.19
+  },
+  {
+    "bairro": "dis_355030886",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.17
+  },
+  {
+    "bairro": "dis_355030886",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.36
+  },
+  {
+    "bairro": "dis_355030886",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.47
+  },
+  {
+    "bairro": "dis_355030886",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.76
+  },
+  {
+    "bairro": "dis_355030887",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.16
+  },
+  {
+    "bairro": "dis_355030887",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.08
+  },
+  {
+    "bairro": "dis_355030887",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.09
+  },
+  {
+    "bairro": "dis_355030887",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.51
+  },
+  {
+    "bairro": "dis_355030888",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030888",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030888",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.08
+  },
+  {
+    "bairro": "dis_355030888",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.45
+  },
+  {
+    "bairro": "dis_355030889",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030889",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030889",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.09
+  },
+  {
+    "bairro": "dis_355030889",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.41
+  },
+  {
+    "bairro": "dis_355030890",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.09
+  },
+  {
+    "bairro": "dis_355030890",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.42
+  },
+  {
+    "bairro": "dis_355030890",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "dis_355030890",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.94
+  },
+  {
+    "bairro": "dis_355030891",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030891",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030891",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.07
+  },
+  {
+    "bairro": "dis_355030891",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.5
+  },
+  {
+    "bairro": "dis_355030892",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030892",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030892",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030892",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.22
+  },
+  {
+    "bairro": "dis_355030893",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030893",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030893",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.13
+  },
+  {
+    "bairro": "dis_355030893",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.53
+  },
+  {
+    "bairro": "dis_355030894",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.09
+  },
+  {
+    "bairro": "dis_355030894",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.14
+  },
+  {
+    "bairro": "dis_355030894",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030894",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.52
+  },
+  {
+    "bairro": "dis_355030895",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030895",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030895",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "dis_355030895",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.41
+  },
+  {
+    "bairro": "dis_355030896",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.56
+  },
+  {
+    "bairro": "dis_355030896",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.24
+  },
+  {
+    "bairro": "dis_355030896",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "dis_355030896",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.92
+  },
+  {
+    "bairro": "mun_3503901",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3503901",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3503901",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3503901",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3505708",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "mun_3505708",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.25
+  },
+  {
+    "bairro": "mun_3505708",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "mun_3505708",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.51
+  },
+  {
+    "bairro": "mun_3506607",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3506607",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3506607",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3506607",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3509007",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3509007",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3509007",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3509007",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3509205",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3509205",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3509205",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3509205",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3510609",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.57
+  },
+  {
+    "bairro": "mun_3510609",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "mun_3510609",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.57
+  },
+  {
+    "bairro": "mun_3510609",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "mun_3513009",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.1
+  },
+  {
+    "bairro": "mun_3513009",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "mun_3513009",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.18
+  },
+  {
+    "bairro": "mun_3513009",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.83
+  },
+  {
+    "bairro": "mun_3513801",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.57
+  },
+  {
+    "bairro": "mun_3513801",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "mun_3513801",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.58
+  },
+  {
+    "bairro": "mun_3513801",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "mun_3515004",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.56
+  },
+  {
+    "bairro": "mun_3515004",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.5
+  },
+  {
+    "bairro": "mun_3515004",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.52
+  },
+  {
+    "bairro": "mun_3515004",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.77
+  },
+  {
+    "bairro": "mun_3515103",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3515103",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3515103",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3515103",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3515707",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.23
+  },
+  {
+    "bairro": "mun_3515707",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.12
+  },
+  {
+    "bairro": "mun_3515707",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.25
+  },
+  {
+    "bairro": "mun_3515707",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.57
+  },
+  {
+    "bairro": "mun_3516309",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.06
+  },
+  {
+    "bairro": "mun_3516309",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3516309",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3516309",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "mun_3516408",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3516408",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3516408",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3516408",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.26
+  },
+  {
+    "bairro": "mun_3518305",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3518305",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3518305",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3518305",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3518800",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "mun_3518800",
+    "faixa_horaria": "manha",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "mun_3518800",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "mun_3518800",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "mun_3522208",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.43
+  },
+  {
+    "bairro": "mun_3522208",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.42
+  },
+  {
+    "bairro": "mun_3522208",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.41
+  },
+  {
+    "bairro": "mun_3522208",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.9
+  },
+  {
+    "bairro": "mun_3522505",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.21
+  },
+  {
+    "bairro": "mun_3522505",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.22
+  },
+  {
+    "bairro": "mun_3522505",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.13
+  },
+  {
+    "bairro": "mun_3522505",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "mun_3523107",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "alto",
+    "score": 0.75
+  },
+  {
+    "bairro": "mun_3523107",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.45
+  },
+  {
+    "bairro": "mun_3523107",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.51
+  },
+  {
+    "bairro": "mun_3523107",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "mun_3525003",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3525003",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3525003",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3525003",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3526209",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3526209",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3526209",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3526209",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3528502",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3528502",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3528502",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3528502",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3529401",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.48
+  },
+  {
+    "bairro": "mun_3529401",
+    "faixa_horaria": "manha",
+    "nivel_risco": "medio",
+    "score": 0.45
+  },
+  {
+    "bairro": "mun_3529401",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.39
+  },
+  {
+    "bairro": "mun_3529401",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.92
+  },
+  {
+    "bairro": "mun_3530607",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "mun_3530607",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.18
+  },
+  {
+    "bairro": "mun_3530607",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.2
+  },
+  {
+    "bairro": "mun_3530607",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.41
+  },
+  {
+    "bairro": "mun_3534401",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.59
+  },
+  {
+    "bairro": "mun_3534401",
+    "faixa_horaria": "manha",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "mun_3534401",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "mun_3534401",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "mun_3539103",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3539103",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3539103",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3539103",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3539806",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.1
+  },
+  {
+    "bairro": "mun_3539806",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3539806",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.06
+  },
+  {
+    "bairro": "mun_3539806",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.44
+  },
+  {
+    "bairro": "mun_3543303",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3543303",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3543303",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3543303",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.06
+  },
+  {
+    "bairro": "mun_3544103",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3544103",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3544103",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3544103",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3545001",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3545001",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3545001",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3545001",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3546801",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3546801",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3546801",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3546801",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3547304",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3547304",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3547304",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3547304",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3547809",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "mun_3547809",
+    "faixa_horaria": "manha",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "mun_3547809",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "mun_3547809",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "mun_3548708",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "alto",
+    "score": 0.84
+  },
+  {
+    "bairro": "mun_3548708",
+    "faixa_horaria": "manha",
+    "nivel_risco": "alto",
+    "score": 0.79
+  },
+  {
+    "bairro": "mun_3548708",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "mun_3548708",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.95
+  },
+  {
+    "bairro": "mun_3548807",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3548807",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3548807",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3548807",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.08
+  },
+  {
+    "bairro": "mun_3549953",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3549953",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3549953",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3549953",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3552502",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.42
+  },
+  {
+    "bairro": "mun_3552502",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.14
+  },
+  {
+    "bairro": "mun_3552502",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "medio",
+    "score": 0.35
+  },
+  {
+    "bairro": "mun_3552502",
+    "faixa_horaria": "noite",
+    "nivel_risco": "medio",
+    "score": 0.55
+  },
+  {
+    "bairro": "mun_3552809",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "medio",
+    "score": 0.52
+  },
+  {
+    "bairro": "mun_3552809",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.22
+  },
+  {
+    "bairro": "mun_3552809",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.22
+  },
+  {
+    "bairro": "mun_3552809",
+    "faixa_horaria": "noite",
+    "nivel_risco": "alto",
+    "score": 0.83
+  },
+  {
+    "bairro": "mun_3556453",
+    "faixa_horaria": "madrugada",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3556453",
+    "faixa_horaria": "manha",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3556453",
+    "faixa_horaria": "tarde",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  },
+  {
+    "bairro": "mun_3556453",
+    "faixa_horaria": "noite",
+    "nivel_risco": "baixo",
+    "score": 0.05
+  }
+]

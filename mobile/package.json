@@ -49,7 +49,8 @@
     "lint": "expo lint",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test \"src/**/*.test.ts\"",
-    "doctor": "expo-doctor"
+    "doctor": "expo-doctor",
+    "modelo": "node -e \"for (const f of ['previsoes.json', 'resumo_modelo.json']) require('fs').copyFileSync('../ia/data/' + f, 'src/data/' + f)\""
   },
   "private": true,
   "description": "App do cidadão do Moskitto Radar, mapa de relatos de roubo (GS CitizenTech FIAP 2026.2, Região Metropolitana de São Paulo)",

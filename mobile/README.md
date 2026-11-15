@@ -37,20 +37,21 @@ sistema, **Liquid Glass** no iOS 26 e **Material 3** no Android, com plano B par
 | Identificação | `src/app/identificacao.tsx` | Apelido + RM, lembrados ao reabrir o app |
 | Mapa *(proposta)* | `src/app/(tabs)/mapa/` | Relatos aprovados como pontos e cada bairro pintado pelo risco de agora. Busca de lugar, filtro por tipo e bairro, legenda de risco |
 | Relatos | `src/app/(tabs)/relatos/` | Lista com filtro por bairro, carregando, erro, vazio, sem conexão e puxar para atualizar |
-| Risco | `src/app/(tabs)/risco/` | Previsão por bairro e faixa horária (`GET /api/previsoes`) |
+| Risco | `src/app/(tabs)/risco/` | Previsão por lugar e faixa (`GET /api/previsoes`): escolha da faixa, quantos lugares em cada nível, ranking com roubos por dia, detalhe do lugar (faixas, celular × veículo, previsão do mês), roubos por hora, o que levam e o acerto do modelo |
 | Ajustes | `src/app/(tabs)/ajustes.tsx` | Tema (automático, claro, escuro), conta e sair, relatos aguardando envio, privacidade e sobre o app |
 | Detalhe | `src/app/relato/[id].tsx` | Um relato, mini mapa e risco da região |
 | Novo relato | `src/app/novo.tsx` | Formulário validado; localização do celular com **permissão negada tratada** |
 
 ## Vídeo
 
-Apresentação do app (1 min 09 s), gravada no emulador Android com dados simulados.
+Apresentação do app (1 min 21 s), gravada no emulador Android. O risco é a previsão do modelo e os relatos são simulados.
 
-https://github.com/user-attachments/assets/c512c137-4e47-4dd3-8c8a-e3014b73f04b
+https://github.com/user-attachments/assets/f44601a9-3d3b-4cec-b5fc-79ba27c66a56
 
 ## Prints
 
 Emulador Android (Pixel 8) no Expo Go, sem a API ligada: o app usa os **dados de exemplo** e avisa isso na faixa azul.
+Os prints são de antes da integração com o modelo: o risco mostrado neles ainda era de exemplo. O vídeo já mostra o modelo.
 A identidade na tela (Marina, RM123456) é fictícia. Todas as imagens estão em [`prints/`](prints/), inclusive
 [`17-ajustes-escuro.png`](prints/17-ajustes-escuro.png).
 
@@ -79,17 +80,20 @@ cp .env.example .env     # opcional: aponta para a API do João
 npx expo start           # leia o QR Code com o Expo Go
 ```
 
-- **Sem `.env`**, o app roda com **dados de exemplo** e avisa isso na tela (faixa azul no topo).
+- **Sem `.env`**, o app roda com **relatos de exemplo** e com a **previsão real do modelo de ML** (cópia de
+  `ia/data/previsoes.json` em `src/data/`), e avisa isso na tela (faixa azul no topo).
 - **Com a API**, ponha o IP do computador na mesma rede Wi-Fi em `EXPO_PUBLIC_API_URL`
   (no celular, `localhost` é o próprio celular).
-- Se a API cair, o app mostra a **última resposta salva** e, sem ela, os dados de exemplo.
+- Se a API cair, o app mostra a **última resposta salva** e, sem ela, os relatos de exemplo e a previsão do modelo.
+- Depois de treinar o modelo de novo na `ia/`, rode `npm run modelo` para atualizar a cópia (um teste avisa se
+  ela ficar diferente).
 
 **Verificações**
 
 ```bash
 npm run typecheck   # tsc --noEmit (tem que sair limpo)
 npm run lint        # expo lint
-npm test            # 29 testes da camada pura (validação, tempo, geografia, retry)
+npm test            # 40 testes: camada pura (validação, tempo, geografia, retry, aviso de envio, aba Risco) e dados do modelo
 npx expo-doctor     # 20 de 20 verificações
 ```
 
@@ -101,8 +105,8 @@ mobile/
 │   ├── app/          rotas (Expo Router): cada arquivo é uma tela
 │   ├── components/   interface: Botao, Chip, Superficie (vidro), Selos, Estados, CartaoRelato
 │   ├── hooks/        useRecurso (carregando/erro/pronto), useConexao, SessaoContexto
-│   ├── data/         locais.json (lugares da busca, gerado por scripts/gerar-locais.mjs)
-│   ├── services/     chamadas à API: http (retry), relatos, previsoes, fila, cache, exemplos
+│   ├── data/         locais.json (lugares da busca, gerado por scripts/gerar-locais.mjs) e previsoes.json (saída do ML)
+│   ├── services/     chamadas à API: http (retry), relatos, previsoes, modelo, fila, cache, exemplos
 │   ├── theme/        cores (claro e escuro), espaço, raios, tipografia
 │   ├── types/        formato dos dados (AGENTS.md, seção 4)
 │   ├── utils/        validação, tempo, geografia, rótulos (sem React, testáveis)
@@ -141,7 +145,7 @@ Em `src/services/` (regras em [`REGRAS.md`](REGRAS.md), seção 5):
 - Tempo limite de 8 s em toda chamada e cancelamento ao sair da tela.
 - **Nova tentativa com espera crescente e variação aleatória**, só em chamadas seguras de repetir.
   `POST` só repete com `Idempotency-Key`.
-- Cache da última resposta e **dados de exemplo** como último recurso.
+- Cache da última resposta e, como último recurso, **relatos de exemplo** e a **previsão do modelo** guardada no app.
 - Relato criado **sem conexão vai para uma fila** no aparelho e é enviado quando a rede volta.
 
 ## Evidências
@@ -152,7 +156,7 @@ Em `src/services/` (regras em [`REGRAS.md`](REGRAS.md), seção 5):
 - [x] `npx tsc --noEmit` limpo, sem `any`
 - [x] `npm run lint` sem erros
 - [x] `npx expo-doctor`: 20 de 20 verificações
-- [x] `npm test`: 29 testes passando
+- [x] `npm test`: 40 testes passando
 
 ## Entregas (19/11, 23h55)
 

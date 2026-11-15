@@ -20,6 +20,13 @@ export const ROTULO_TIPO_LOCAL: Record<TipoLocal, string> = {
   municipio: 'Município da região metropolitana',
 };
 
+export const ROTULO_TIPO_CURTO: Record<TipoLocal, string> = {
+  bairro: 'Av. Paulista',
+  estacao: 'Estação',
+  distrito: 'Distrito',
+  municipio: 'Município',
+};
+
 const CODIGO_CAPITAL = 'mun-3550308';
 
 const NOME_BAIRRO: Record<BairroPaulista, string> = {

@@ -39,9 +39,9 @@ Marque conforme for concluindo. Um integrante envia cada entrega.
 - [x] Notebook reproduzível (`.ipynb` ou Colab)
 - [x] Dataset e origem
 - [x] Modelo treinado + métrica de avaliação
-- [ ] Previsão aparecendo na solução (`previsoes.json` pronto; falta a API carregar)
+- [x] Previsão aparecendo na solução (aba Risco e mapa do app, com a cópia do `previsoes.json`; falta a API do João carregar o mesmo arquivo)
 - [x] README com decisões e como rodar
-- [ ] Vídeo de até 2 min
+- [x] Vídeo de até 2 min (no README; para o Teams, subir como link do YouTube ou Drive)
 
 ### Mobile Development & IOT
 - [x] React Native + Expo + TypeScript estrito, sem `any`, sem WebView

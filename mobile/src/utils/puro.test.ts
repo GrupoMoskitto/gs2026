@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
 import { LUGARES, lugarDe, nomeDoLugar } from '@/config/locais';
-import { gerarPrevisoesExemplo, gerarRelatosExemplo } from '@/services/exemplos';
+import { gerarRelatosExemplo } from '@/services/exemplos';
 import { calcularEspera, statusRepetivel } from '@/services/retry';
 import { buscarLocais, normalizar } from './busca';
 import { arredondar3, bairroMaisProximo, dentroDaRegiao } from './geo';
@@ -194,9 +194,6 @@ describe('lugares da região metropolitana', () => {
     assert.equal(dentroDaRegiao({ latitude: -22.91, longitude: -43.17 }), false); // Rio de Janeiro
   });
 
-  it('as previsões de exemplo cobrem todos os lugares nas 4 faixas', () => {
-    assert.equal(gerarPrevisoesExemplo().length, LUGARES.length * 4);
-  });
 
   it('os relatos de exemplo ficam dentro da região e apontam para lugares conhecidos', () => {
     for (const r of gerarRelatosExemplo(220, AGORA)) {

@@ -42,7 +42,7 @@ export function Chip({ rotulo, selecionado, aoPressionar, icone, papel = 'radio'
       {vidro ? (
         <GlassView
           pointerEvents="none"
-          style={StyleSheet.absoluteFill}
+          style={[StyleSheet.absoluteFill, estilos.vidro]}
           glassEffectStyle="regular"
           isInteractive
           tintColor={selecionado ? `${cores.texto}E6` : undefined}
@@ -68,4 +68,6 @@ const estilos = StyleSheet.create({
     gap: 6,
     overflow: 'hidden',
   },
+  // O vidro do iOS 26 não herda o arredondamento do Pressable: sem raio próprio, aparece quadrado ao tocar.
+  vidro: { borderRadius: alvoToque / 2 },
 });

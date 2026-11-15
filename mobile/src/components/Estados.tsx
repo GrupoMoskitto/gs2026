@@ -1,5 +1,6 @@
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
+import { API_CONFIGURADA } from '@/config/api';
 import { useTema, raio } from '@/theme';
 import type { FonteDados } from '@/types/servicos';
 import { Botao } from './Botao';
@@ -71,7 +72,7 @@ export function AvisoFonte({ fonte, conectado }: { fonte: FonteDados; conectado:
   const { cores } = useTema();
   if (fonte === 'api' && conectado) return null;
   // Só para gravar o vídeo de apresentação: esconde a faixa de "dados de exemplo". Sem a variável, ela aparece.
-  if (fonte === 'exemplo' && conectado && process.env.EXPO_PUBLIC_MODO_VIDEO === '1') return null;
+  if ((fonte === 'exemplo' || fonte === 'modelo') && conectado && process.env.EXPO_PUBLIC_MODO_VIDEO === '1') return null;
 
   let titulo: string;
   let texto: string;
@@ -81,12 +82,28 @@ export function AvisoFonte({ fonte, conectado }: { fonte: FonteDados; conectado:
 
   if (!conectado) {
     titulo = 'Sem conexão.';
-    texto = fonte === 'exemplo' ? 'Mostrando dados de exemplo.' : 'Mostrando dados salvos.';
+    texto =
+      fonte === 'exemplo'
+        ? 'Mostrando dados de exemplo.'
+        : fonte === 'modelo'
+          ? 'Mostrando a previsão do modelo guardada no app.'
+          : 'Mostrando dados salvos.';
     icone = 'cloud-offline-outline';
-  } else if (fonte === 'cache') {
+  } else if (fonte === 'cache' || API_CONFIGURADA) {
     titulo = 'Servidor fora do ar.';
-    texto = 'Mostrando dados salvos.';
+    texto =
+      fonte === 'modelo'
+        ? 'Mostrando a previsão do modelo guardada no app.'
+        : fonte === 'exemplo'
+          ? 'Mostrando dados de exemplo.'
+          : 'Mostrando dados salvos.';
     icone = 'cloud-offline-outline';
+  } else if (fonte === 'modelo') {
+    titulo = 'Previsão do modelo.';
+    texto = 'Treinado com os roubos da SSP-SP. A API ainda não está conectada.';
+    icone = 'analytics-outline';
+    fundo = cores.primariaSuave;
+    letra = cores.sobrePrimariaSuave;
   } else {
     titulo = 'Dados de exemplo.';
     texto = 'A API ainda não está conectada.';

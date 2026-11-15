@@ -16,8 +16,10 @@ relatos, um modelo de ML aponta onde e quando o risco é maior, e isso aparece n
 Um app em C# modera os relatos e um botão de pânico (ESP32) também gera relatos.
 Tudo roda num Windows Server com IIS.
 
-- **Região:** Av. Paulista, São Paulo (bairros Bela Vista, Cerqueira César e Consolação)
-- **Dados:** simulados. **Nenhum dado pessoal real.**
+- **Região:** Região Metropolitana de São Paulo: 3 bairros da Av. Paulista (Bela Vista, Cerqueira César e Consolação,
+  onde o projeto começou), 88 distritos da capital e 38 municípios vizinhos. São 129 lugares no total.
+- **Dados:** os relatos são simulados. O modelo de ML usa as contagens agregadas de roubos da SSP-SP, que são públicas.
+  **Nenhum dado pessoal real.**
 - **ODS:** 11 (principal), 9 e 10
 - **Entrega:** quinta, 19/11, até 23h55, no Teams. Quem é dono da matéria faz o envio.
 
@@ -70,7 +72,10 @@ referências do awesome-design, API pensada para rede ruim e a logo do projeto.
 ```
 
 - `tipo`: `celular`, `bolsa_mochila`, `veiculo`, `bicicleta`, `comercio`, `outro`
-- `bairro`: `bela_vista`, `cerqueira_cesar`, `consolacao`
+- `bairro`: o código do lugar. Pode ser `bela_vista`, `cerqueira_cesar` ou `consolacao`, `dis_<código IBGE>` para
+  os distritos da capital (ex.: `dis_355030801`) ou `mun_<código IBGE>` para os outros municípios (ex.: `mun_3518800`).
+  A lista completa, com 129 lugares, está em `ia/data/lugares.csv`, a mesma que o app usa. O campo continua se
+  chamando `bairro` para não quebrar a API.
 - `status`: `pendente` (padrão), `aprovado`, `rejeitado`
 - `origem`: `mobile`, `desktop`, `iot`
 - `descricao`: opcional, até 280 caracteres. Coordenadas com 3 casas decimais (não expor endereço exato).
@@ -95,9 +100,15 @@ referências do awesome-design, API pensada para rede ruim e a logo do projeto.
 | PATCH | `/api/relatos/{id}/status` | `{ "status": "aprovado" }` |
 | GET | `/api/previsoes?bairro=` | previsões de risco |
 
-**Dados simulados:** `relatos_simulados.csv` com as mesmas colunas do Relato, ~1.000 linhas,
-gerado por um script Python com seed fixa (resultado sempre igual). Mais ocorrências à noite e perto
-das estações Consolação, Trianon-Masp e Brigadeiro.
+**Dados simulados:** `ia/data/relatos_simulados.csv` tem as mesmas colunas do Relato e 10.000 linhas. É gerado por
+`ia/scripts/gerar_relatos.py` com seed 42, então o resultado é sempre igual. Lugar, dia e faixa horária são
+sorteados na proporção dos roubos reais da SSP-SP. Na Paulista, os relatos se concentram perto das estações
+Consolação, Trianon-Masp e Brigadeiro.
+Para uma API que aceite só os 3 bairros, há duas versões reduzidas: `relatos_paulista.csv` (1.000 linhas) e
+`previsoes_paulista.json`.
+
+**Previsões:** `ia/data/previsoes.json` tem 516 linhas, 129 lugares × 4 faixas. O app leva uma cópia em
+`mobile/src/data/` e a usa quando a API não responde.
 
 ---
 
@@ -142,13 +153,14 @@ Cada matéria tem: **stack**, **fazer**, **entregar** e **nota** (o que o profes
 #### IA/ML: `ia/`
 
 - **Stack:** Python, pandas, scikit-learn, Jupyter ou Colab.
+- **Situação (15/11):** pronto. Ver `ia/README.md`: dados reais da SSP-SP e RandomForest com F1 macro 0,819.
 - **Fazer:**
   - Script que gera o `relatos_simulados.csv` (**até sex 13/11**, o João depende dele)
   - Notebook: carregar dados → análise → features (bairro, faixa horária, dia da semana) → modelo
     (ex.: RandomForest prevendo `nivel_risco`) → separar treino e teste → métrica (acurácia, F1)
   - Exportar `previsoes.json` no formato da seção 4 (é assim que a previsão aparece na solução)
   - Definir e documentar como `nivel_risco` é calculado para cada linha de treino (seção 7, item 3)
-  - Declarar no README que os dados são **sintéticos** e como foram gerados
+  - Declarar no README a origem dos dados: o modelo usa a base pública da SSP-SP e os relatos são **simulados**
 - **Entregar:** `.ipynb` + vídeo de até 2 min · repo com dataset, origem dos dados e README
 - **Nota:** dados 2,0 · preparação 2,0 · modelo 3,0 · métrica 2,0 · integração 1,0
 
@@ -243,10 +255,12 @@ Ainda não decididas pelo time. Resolver antes de implementar o que depende dela
 1. **Fluxo de moderação.** O C# não usa a API, então ninguém chama `PATCH /api/relatos/{id}/status` e os
    relatos ficam `pendente`. Opções: o C# passa a chamar a API; ou o app mostra também os pendentes; ou
    o C# fica como demo isolada e o fluxo é descrito só na narrativa.
-2. **Mapa.** A ideia original é um mapa interativo e dinâmico, mas não há tela de mapa nem página web no
-   escopo. Proposta: tela de mapa no app mobile (pinos dos relatos aprovados, cor por risco).
-3. **Granularidade do ML.** Com 3 bairros × 4 faixas há só 12 combinações, e o modelo vira uma tabela de
-   consulta. Definir zonas mais finas (grade ou proximidade das estações) ou hora no lugar da faixa, e
-   como `nivel_risco` é calculado nas linhas de treino.
+2. **Mapa.** A ideia original é um mapa interativo e dinâmico. Proposta: tela de mapa no app mobile, com os pinos
+   dos relatos aprovados e a cor pelo risco. **Ela já está implementada no app** (`mobile/src/app/(tabs)/mapa/`) e
+   falta o time aprovar.
+3. ~~**Granularidade do ML.**~~ **Decidido pelo Coto (14/11):** o modelo trabalha com os 129 lugares da região
+   metropolitana × 4 faixas, separando dia útil e fim de semana. `alto` são as células acima do percentil 80 de roubos
+   por dia, e `baixo` as que ficam até o percentil 50. Os detalhes estão em `ia/README.md`. **Falta o João confirmar** que a API
+   aceita os códigos `dis_*` e `mun_*` no campo `bairro`.
 4. **Front-end web.** Existe ou não. Se existir, quem faz e onde fica (provável: servido pela API, hospedado no IIS).
 5. **Limites de coordenadas.** Uma única caixa (lat/long mínimo e máximo da região) para a API, o C# e o app validarem igual.
