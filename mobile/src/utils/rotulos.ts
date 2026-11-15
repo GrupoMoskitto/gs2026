@@ -25,6 +25,13 @@ export const ROTULO_FAIXA_FRASE: Record<FaixaHoraria, string> = {
   noite: 'à noite',
 };
 
+export const HORAS_FAIXA: Record<FaixaHoraria, string> = {
+  madrugada: '0h às 6h',
+  manha: '6h às 12h',
+  tarde: '12h às 18h',
+  noite: '18h à 0h',
+};
+
 export const ROTULO_RISCO: Record<NivelRisco, string> = {
   baixo: 'Baixo',
   medio: 'Médio',

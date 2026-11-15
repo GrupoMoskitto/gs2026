@@ -1,6 +1,6 @@
 import type { Bairro, NovoRelato, Relato, StatusRelato, TipoRelato } from './dominio';
 
-export type FonteDados = 'api' | 'cache' | 'exemplo';
+export type FonteDados = 'api' | 'cache' | 'modelo' | 'exemplo';
 
 export interface Resultado<T> {
   dados: T;

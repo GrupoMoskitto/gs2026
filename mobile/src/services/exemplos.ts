@@ -6,8 +6,6 @@ import {
   FAIXAS_HORARIAS,
   TIPOS_RELATO,
   type FaixaHoraria,
-  type NivelRisco,
-  type PrevisaoRisco,
   type Relato,
   type StatusRelato,
   type TipoRelato,
@@ -45,15 +43,6 @@ function pesoDoLugar(l: Lugar): number {
   if (CENTRO_EXPANDIDO.has(l.nome)) return 6;
   if (l.tipo === 'municipio') return MUNICIPIOS_GRANDES.has(l.nome) ? 2.5 : 0.4;
   return 1;
-}
-
-function hashEntre0e1(texto: string): number {
-  let h = 2166136261;
-  for (let i = 0; i < texto.length; i += 1) {
-    h ^= texto.charCodeAt(i);
-    h = Math.imul(h, 16777619);
-  }
-  return (h >>> 0) / 4294967296;
 }
 
 const PESO_TOTAL_LUGARES = LUGARES.reduce((soma, l) => soma + pesoDoLugar(l), 0);
@@ -118,39 +107,4 @@ export function gerarRelatosExemplo(quantidade: number, agora: Date = new Date()
   }
 
   return relatos.sort((a, b) => b.ocorrido_em.localeCompare(a.ocorrido_em));
-}
-
-const BASE_PAULISTA: Record<string, Record<FaixaHoraria, number>> = {
-  bela_vista: { madrugada: 0.55, manha: 0.22, tarde: 0.41, noite: 0.82 },
-  cerqueira_cesar: { madrugada: 0.3, manha: 0.15, tarde: 0.28, noite: 0.52 },
-  consolacao: { madrugada: 0.48, manha: 0.21, tarde: 0.4, noite: 0.71 },
-};
-
-const FATOR_FAIXA: Record<FaixaHoraria, number> = { madrugada: 0.65, manha: 0.3, tarde: 0.55, noite: 1 };
-
-export function nivelDoScore(score: number): NivelRisco {
-  if (score >= 0.6) return 'alto';
-  if (score >= 0.35) return 'medio';
-  return 'baixo';
-}
-
-function scoreDe(lugar: Lugar, faixa: FaixaHoraria): number {
-  const fixo = BASE_PAULISTA[lugar.slug];
-  if (fixo) return fixo[faixa];
-  let base = 0.35 + 0.5 * hashEntre0e1(lugar.slug);
-  if (CENTRO_EXPANDIDO.has(lugar.nome)) base += 0.12;
-  if (lugar.tipo === 'municipio' && !MUNICIPIOS_GRANDES.has(lugar.nome)) base -= 0.1;
-  const score = Math.min(0.95, Math.max(0.05, base * FATOR_FAIXA[faixa]));
-  return Math.round(score * 100) / 100;
-}
-
-export function gerarPrevisoesExemplo(): PrevisaoRisco[] {
-  const lista: PrevisaoRisco[] = [];
-  for (const lugar of LUGARES) {
-    for (const faixa of FAIXAS_HORARIAS) {
-      const score = scoreDe(lugar, faixa);
-      lista.push({ bairro: lugar.slug, faixa_horaria: faixa, nivel_risco: nivelDoScore(score), score });
-    }
-  }
-  return lista;
 }

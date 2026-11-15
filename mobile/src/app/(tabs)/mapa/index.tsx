@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Keyboard, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Keyboard, Platform, StyleSheet, View } from 'react-native';
 import MapView, { Circle, Marker } from 'react-native-maps';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -18,16 +18,20 @@ import { CENTRO_MAPA } from '@/config/regiao';
 import { useConexao } from '@/hooks/useConexao';
 import { useRecarregarAoVoltar } from '@/hooks/useRecarregarAoVoltar';
 import { useRecurso } from '@/hooks/useRecurso';
-import { listarPrevisoes, piorBairro, riscoDe } from '@/services/previsoes';
+import { taxaNaFaixa } from '@/services/modelo';
+import { listarPrevisoes, riscoDe } from '@/services/previsoes';
 import { listarRelatos } from '@/services/relatos';
 import { coresDoRisco, ESPACO_ABAS, useTema } from '@/theme';
 import { ESTILO_MAPA_CLARO, ESTILO_MAPA_ESCURO } from '@/theme/mapaEscuro';
 import type { Bairro, NivelRisco, TipoRelato } from '@/types/dominio';
 import { ROTULO_FAIXA_FRASE, ROTULO_RISCO } from '@/utils/rotulos';
+import { maioresRiscos } from '@/utils/risco';
 import { faixaAtual } from '@/utils/tempo';
 
 const REGIAO_INICIAL = { ...CENTRO_MAPA, latitudeDelta: 0.45, longitudeDelta: 0.45 };
 const RAIO_ZONA_M = { bairro: 420, estacao: 0, distrito: 1500, municipio: 4500 } as const;
+// O iOS 26 já recua a barra de abas; isto alinha o selo do Apple Maps com o botão "Novo relato".
+const RECUO_SELO_APPLE = Platform.OS === 'ios' ? 38 : 0;
 
 export default function TelaMapa() {
   const { cores, escuro } = useTema();
@@ -61,13 +65,18 @@ export default function TelaMapa() {
   const fonteRelatos = relatos.estado.fase === 'pronto' ? relatos.estado.resultado.fonte : null;
   const listaPrevisoes = previsoes.estado.fase === 'pronto' ? previsoes.estado.resultado.dados : [];
   const nivelDoBairro = (b: Bairro): NivelRisco | null => riscoDe(listaPrevisoes, b, agora)?.nivel_risco ?? null;
-  const pior = piorBairro(listaPrevisoes, agora);
+  const pior = maioresRiscos(listaPrevisoes, agora, 1, (b) => taxaNaFaixa(b, agora))[0] ?? null;
 
   const filtrosAtivos = tipos.length;
   const listaRelatos = (relatos.estado.fase === 'pronto' ? relatos.estado.resultado.dados : []).filter(
     (r) => tipos.length === 0 || tipos.includes(r.tipo),
   );
   const selecionado = listaRelatos.find((r) => r.id === selecionadoId) ?? null;
+
+  // No iOS o initialRegion às vezes é ignorado e o mapa abre no globo inteiro.
+  const aoMapaPronto = useCallback(() => {
+    mapa.current?.animateToRegion(REGIAO_INICIAL, 0);
+  }, []);
 
   function irPara(local: Local) {
     const delta = deltaDoLocal(local);
@@ -85,6 +94,7 @@ export default function TelaMapa() {
         ref={mapa}
         style={StyleSheet.absoluteFill}
         initialRegion={REGIAO_INICIAL}
+        onMapReady={aoMapaPronto}
         onPress={() => {
           Keyboard.dismiss();
           setSelecionadoId(null);
@@ -93,8 +103,7 @@ export default function TelaMapa() {
         toolbarEnabled={false}
         userInterfaceStyle={escuro ? 'dark' : 'light'}
         customMapStyle={escuro ? ESTILO_MAPA_ESCURO : ESTILO_MAPA_CLARO}
-        // O padding inferior levanta a atribuição do Apple Maps (canto inferior esquerdo) acima da barra de abas.
-        mapPadding={{ top: 0, left: 0, right: 0, bottom: ESPACO_ABAS }}
+        mapPadding={{ top: 0, left: 0, right: 0, bottom: RECUO_SELO_APPLE }}
         accessibilityLabel="Mapa com os relatos e o risco de cada distrito e município"
       >
         {LUGARES.map((lugar) => {

@@ -4,6 +4,7 @@ import { Alert, Linking, ScrollView, StyleSheet, View } from 'react-native';
 
 import { Botao } from '@/components/Botao';
 import { Chip } from '@/components/Chip';
+import { FundoBarraStatus } from '@/components/FundoBarraStatus';
 import { Superficie } from '@/components/Superficie';
 import { Texto } from '@/components/Texto';
 import { TituloTela } from '@/components/TituloTela';
@@ -13,6 +14,7 @@ import { useConexao, useFila } from '@/hooks/useConexao';
 import { enviarFila } from '@/services/fila';
 import { lerPreferenciaTema, salvarPreferenciaTema, type PreferenciaTema } from '@/services/tema';
 import { ESPACO_ABAS, useTema } from '@/theme';
+import { avisoDoEnvio } from '@/utils/avisoEnvio';
 
 const REPOSITORIO = 'https://github.com/GrupoMoskitto/gs2026';
 
@@ -57,7 +59,10 @@ export default function TelaAjustes() {
   async function enviarAgora() {
     setEnviando(true);
     try {
-      await enviarFila();
+      const aviso = avisoDoEnvio(await enviarFila());
+      if (aviso) Alert.alert(aviso.titulo, aviso.texto);
+    } catch {
+      Alert.alert('Não foi possível enviar', 'Os relatos continuam guardados no aparelho. Tente de novo em instantes.');
     } finally {
       setEnviando(false);
     }
@@ -150,6 +155,7 @@ export default function TelaAjustes() {
         />
       </Secao>
     </ScrollView>
+    <FundoBarraStatus />
     </View>
   );
 }

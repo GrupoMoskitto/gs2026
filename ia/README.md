@@ -89,6 +89,8 @@ Detalhes, figuras e escolhas estão no notebook [`notebooks/modelo_risco.ipynb`]
 | Arquivo | Quem usa |
 |---|---|
 | `data/previsoes.json` | API do João (`GET /api/previsoes`) → mapa e aba Risco do app |
+| `data/resumo_modelo.json` (`scripts/exportar_app.py`) | Aba Risco do app: roubos por dia de cada lugar, hora do dia, o que levam, previsão do mês e métricas |
+| Cópia em `mobile/src/data/previsoes.json` | O app usa a previsão do modelo quando a API não responde (faixa "Previsão do modelo"). Atualizar com `npm run modelo` no `mobile/` |
 | `data/relatos_simulados.csv` | API do João (carga inicial) |
 | `data/previsao_mensal.json` · `data/perfil_roubos.json` | Site de resultados (`web/`) |
 

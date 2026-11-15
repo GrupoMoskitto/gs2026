@@ -1,10 +1,10 @@
 import { API_CONFIGURADA } from '@/config/api';
-import type { Bairro, FaixaHoraria, NivelRisco, PrevisaoRisco } from '@/types/dominio';
+import type { Bairro, FaixaHoraria, PrevisaoRisco } from '@/types/dominio';
 import type { OpcoesChamada, Resultado } from '@/types/servicos';
 import { ehErroApi, ErroApi } from './erro';
 import { gravarCache, lerCache } from './armazenamento';
-import { gerarPrevisoesExemplo } from './exemplos';
 import { chamarApi } from './http';
+import { previsoesDoModelo } from './modelo';
 import { ehPrevisao, filtrarLista } from './tipos';
 
 const CHAVE = 'previsoes';
@@ -30,24 +30,11 @@ export async function listarPrevisoes(
       }
     }
   }
-  const todas = gerarPrevisoesExemplo();
+  const todas = previsoesDoModelo();
   const dados = bairro ? todas.filter((p) => p.bairro === bairro) : todas;
-  return { dados, fonte: 'exemplo', atualizadoEm: new Date().toISOString() };
+  return { dados, fonte: 'modelo', atualizadoEm: new Date().toISOString() };
 }
 
 export function riscoDe(previsoes: PrevisaoRisco[], bairro: Bairro, faixa: FaixaHoraria): PrevisaoRisco | null {
   return previsoes.find((p) => p.bairro === bairro && p.faixa_horaria === faixa) ?? null;
-}
-
-const PESO_NIVEL: Record<NivelRisco, number> = { baixo: 0, medio: 1, alto: 2 };
-
-export function piorBairro(previsoes: PrevisaoRisco[], faixa: FaixaHoraria): PrevisaoRisco | null {
-  const dessaFaixa = previsoes.filter((p) => p.faixa_horaria === faixa);
-  if (dessaFaixa.length === 0) return null;
-  return dessaFaixa.reduce((a, b) => {
-    if (PESO_NIVEL[b.nivel_risco] !== PESO_NIVEL[a.nivel_risco]) {
-      return PESO_NIVEL[b.nivel_risco] > PESO_NIVEL[a.nivel_risco] ? b : a;
-    }
-    return b.score > a.score ? b : a;
-  });
 }
