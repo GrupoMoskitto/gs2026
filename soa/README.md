@@ -32,6 +32,9 @@ soa/
 
 ## Como rodar
 
+Precisa do [.NET 10 SDK](https://dotnet.microsoft.com/download). Para os comandos de migration, também do
+`dotnet-ef` (`dotnet tool install --global dotnet-ef`).
+
 ```bash
 cd soa/MoskittoRadar.Api
 dotnet run
