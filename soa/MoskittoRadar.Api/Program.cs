@@ -17,6 +17,7 @@ if (!Path.IsPathRooted(conexao.DataSource))
 Directory.CreateDirectory(Path.GetDirectoryName(conexao.DataSource)!);
 
 builder.Services.AddDbContext<AppDbContext>(opcoes => opcoes.UseSqlite(conexao.ToString()));
+builder.Services.Configure<CaixaRegiao>(builder.Configuration.GetSection("Regiao"));
 
 // JSON no formato comum do projeto: chaves em snake_case ("ocorrido_em") e enums pelo código ("bolsa_mochila").
 void ConfigurarJson(JsonSerializerOptions json)
@@ -29,13 +30,19 @@ builder.Services.AddControllers()
     .AddJsonOptions(opcoes => ConfigurarJson(opcoes.JsonSerializerOptions))
     .ConfigureApiBehaviorOptions(opcoes =>
     {
+        // Sem o ProblemDetails padrão em 404/415 etc.: o UseStatusCodePages abaixo escreve { "erro": "..." }.
+        opcoes.SuppressMapClientErrors = true;
+
         // JSON malformado ou campo com tipo errado: 400 com { "erro": "..." }, não o ProblemDetails padrão.
         opcoes.InvalidModelStateResponseFactory = contexto =>
         {
-            var mensagem = contexto.ModelState
+            var campo = contexto.ModelState
                 .Where(item => item.Value?.Errors.Count > 0)
-                .Select(item => $"{(item.Key.TrimStart('$', '.') is { Length: > 0 } campo ? campo : "corpo")}: formato inválido")
-                .FirstOrDefault() ?? "Requisição inválida.";
+                .Select(item => item.Key.TrimStart('$', '.'))
+                .FirstOrDefault(chave => chave.Length > 0);
+            var mensagem = campo is null
+                ? "JSON inválido."
+                : $"JSON inválido ou com tipo errado no campo {campo}.";
             return new BadRequestObjectResult(new RespostaErro(mensagem));
         };
     });

@@ -20,3 +20,31 @@ GET {{api}}/api/relatos/00000000-0000-0000-0000-000000000000
 
 ### Previsões de um lugar (4 faixas)
 GET {{api}}/api/previsoes?bairro=bela_vista
+
+### Cria relato -> 201 (status sempre "pendente"; ajuste ocorrido_em para os últimos 30 dias)
+POST {{api}}/api/relatos
+Content-Type: application/json
+Idempotency-Key: exemplo-123
+
+{
+  "tipo": "celular",
+  "descricao": "Levaram meu celular no ponto de ônibus",
+  "latitude": -23.561,
+  "longitude": -46.656,
+  "bairro": "bela_vista",
+  "ocorrido_em": "2026-11-16T10:30:00-03:00",
+  "origem": "mobile"
+}
+
+### Mesmo envio de novo -> 200 com o MESMO relato (não duplica)
+POST {{api}}/api/relatos
+Content-Type: application/json
+Idempotency-Key: exemplo-123
+
+{}
+
+### Inválido -> 400 { "erro": "..." }
+POST {{api}}/api/relatos
+Content-Type: application/json
+
+{ "tipo": "carro", "latitude": -22.9, "longitude": -43.2, "bairro": "rio", "origem": "mobile" }

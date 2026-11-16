@@ -68,7 +68,30 @@ O JSON segue o formato comum do projeto (`AGENTS.md`, seção 4): chaves em snak
 | GET | `/api/health` | `200 { "status": "ok", "banco": "ok", ... }`, ou `503` se o banco falhar |
 | GET | `/api/relatos?bairro=&tipo=&status=&limite=` | array dos mais recentes, até 200 (máx. 1000 com `limite`); total no cabeçalho `X-Total-Count`; `400` se um filtro for inválido |
 | GET | `/api/relatos/{id}` | o relato, ou `404` |
+| POST | `/api/relatos` | `201` com o relato criado (sempre `pendente`) e cabeçalho `Location`; `400` se inválido; `200` com o relato já existente se a `Idempotency-Key` repetir |
 | GET | `/api/previsoes?bairro=` | array das previsões (516 sem filtro, 4 com `bairro`); `400` se o lugar não existir |
+
+### Validação do POST
+
+| Campo | Regra |
+|---|---|
+| `tipo` | obrigatório: `celular`, `bolsa_mochila`, `veiculo`, `bicicleta`, `comercio` ou `outro` |
+| `descricao` | opcional, até 280 caracteres (espaços nas pontas são removidos) |
+| `latitude`, `longitude` | obrigatórias, dentro da caixa da região; gravadas com 3 casas decimais |
+| `bairro` | obrigatório, um dos 129 códigos da tabela `lugares` |
+| `ocorrido_em` | obrigatório, com fuso (`2026-11-10T21:35:00-03:00`), nos últimos 30 dias e não no futuro (5 min de folga) |
+| `origem` | obrigatória: `mobile`, `desktop` ou `iot` |
+| `id`, `status` | ignorados se vierem: a API gera o id e todo relato novo é `pendente` |
+
+Todos os problemas voltam juntos numa mensagem só, ex.: `{ "erro": "tipo é obrigatório. bairro é obrigatório." }`.
+
+**Caixa de coordenadas (provisória):** latitude de -24.1 a -23.15 e longitude de -47.1 a -45.75, a mesma do app
+(`mobile/src/config/regiao.ts`). Fica em `appsettings.json`, seção `Regiao`, e ainda é decisão em aberto do time
+(`AGENTS.md`, seção 7, item 5).
+
+**Relato duplicado:** o app manda o cabeçalho `Idempotency-Key` em cada relato (inclusive os que ficaram na fila
+sem internet). Se a mesma chave chegar de novo, a API não cria outro: devolve `200` com o relato original e o
+cabeçalho `Idempotent-Replayed: true`. O índice único no banco garante isso mesmo com envios simultâneos.
 
 Exemplos prontos em `MoskittoRadar.Api/MoskittoRadar.Api.http`.
 
@@ -97,7 +120,8 @@ cp ../ia/data/lugares.csv ../ia/data/relatos_simulados.csv ../ia/data/previsoes.
 - [x] Domínio, banco e migrations
 - [x] Carga do CSV simulado e das previsões
 - [x] Rotas de consulta (health, relatos, previsões)
-- [ ] Rotas de criação e moderação
+- [x] Rota de criação (POST) com validação e idempotência
+- [ ] Rota de moderação (PATCH)
 - [ ] Testes no Insomnia
 - [ ] Publicação para o IIS
 
