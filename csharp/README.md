@@ -1,36 +1,83 @@
-# csharp: C# Software Development
+# Moskitto Radar · Moderação (C#)
 
-**Papel no projeto:** aplicação desktop em **Windows Forms** para o moderador/administrador: revisar relatos pendentes, aprovar, rejeitar e consultar o histórico.
+App desktop em **Windows Forms** para moderar os relatos de roubo do Moskitto Radar, a CitizenTech da equipe na
+GS FIAP 2026.2. O moderador vê a fila de relatos pendentes, ordenada por prioridade, e aprova ou rejeita cada um.
 
-## Entregas (19/11, 23h55)
+## Problema e pessoa beneficiada
 
-- [ ] Projeto Windows Forms em C#, com POO (classes, encapsulamento)
-- [ ] Versionamento semântico com **pull request**
-- [ ] `README.md`: problema escolhido, pessoa real beneficiada, execução, tecnologias e nome da equipe
-- [ ] ZIP do projeto + `.txt` com **RM, nome completo e link do repositório**
-- [ ] Apenas um integrante envia
+- **Problema:** roubo de celular, bolsa, bicicleta e veículo na Região Metropolitana de São Paulo, começando pela
+  Av. Paulista. Quem anda pela cidade não sabe onde e em que horário o risco é maior.
+- **Quem ganha:** quem se desloca a pé ou de transporte público (estudantes, trabalhadores, idosos), que passa a
+  consultar relatos da própria comunidade antes de sair.
+- **Onde entra este app:** antes de um relato aparecer para todos, alguém precisa conferir se ele faz sentido.
+  Este app é o terminal desse moderador.
 
-## Avaliação
+## Como rodar
 
-O PDF não traz a rubrica detalhada. Confirmar com o professor.
+Precisa do [.NET 10 SDK](https://dotnet.microsoft.com/download) no Windows.
 
-## Pontos de partida
+```bash
+cd csharp
+dotnet run --project MoskittoRadar.Moderacao
+```
 
-- Modelar o domínio em classes (Relato, Moderação…)
-- Validações e fluxos de decisão
-- Persistência básica (local ou via API do `soa/`)
-- Telas simples e intuitivas para quem opera o terminal
+Ou abra `MoskittoRadar.Moderacao.slnx` no Visual Studio e aperte F5.
 
-## Estrutura sugerida
+1. Digite um apelido e escolha **Moderador** (aprova e rejeita) ou **Cidadão** (só consulta e relata).
+2. A lista abre nos pendentes, do mais prioritário para o menos. Filtre por tipo, status e bairro.
+3. Selecione um relato para ver o detalhe. **Aprovar** ou **Rejeitar** (pede o motivo).
+4. **Novo relato** cadastra um roubo. Valores inválidos são recusados com uma mensagem.
+
+Os relatos ficam em memória: são **simulados** (`Services/DadosSimulados.cs`) e voltam ao início ao fechar o app.
+Nenhum dado pessoal real.
+
+## Como o código usa POO
+
+| Conceito | Onde |
+|---|---|
+| **Classe abstrata** | `Relato` (com `CalcularPrioridade()` e `Descrever()`) e `Usuario` |
+| **Herança** | `RouboCelular`, `RouboVeiculo`, `RouboBicicleta` herdam de `Relato`; `Cidadao` e `Moderador` herdam de `Usuario` |
+| **Polimorfismo** | cada roubo calcula a prioridade do seu jeito (veículo começa mais alto, bicicleta compartilhada perde um ponto); a tela só pergunta `usuario.PodeModerar` |
+| **Encapsulamento** | campos privados e propriedades que validam: coordenada fora da região, data no futuro, descrição acima de 280 caracteres, bairro vazio, apelido curto. O status só muda pela moderação, e só uma vez |
 
 ```
 csharp/
-├── README.md
-└── (solução .sln e projeto Windows Forms a criar)
+├── MoskittoRadar.Moderacao/
+│   ├── Models/     Relato e subclasses, Usuario, Cidadao, Moderador, StatusRelato
+│   ├── Services/   RepositorioRelatos (lista em memória) e DadosSimulados
+│   ├── Forms/      FormEntrada, FormPrincipal, FormNovoRelato
+│   └── Program.cs
+├── evidencias/     prints do app funcionando
+├── CHANGELOG.md    versões (versionamento semântico)
+├── entrega.txt     RM, nome completo e link do repositório
+└── empacotar.ps1   gera o ZIP da entrega
 ```
 
-## Status
+**Prioridade (1 a 10):** base do tipo (celular 3, veículo 5, bicicleta 2) + 3 de madrugada ou 2 à noite, mais o
+detalhe de cada tipo (transporte público +2, moto +1, bicicleta compartilhada −1).
 
-Não iniciado.
+## Tecnologias
 
-Detalhes da disciplina: [`docs/disciplinas.md`](../docs/disciplinas.md#3-c-software-development)
+C# 14, .NET 10, Windows Forms. Sem banco e sem API: os dados ficam em memória.
+
+## Versões
+
+Versionamento semântico (`MAIOR.MENOR.CORREÇÃO`), com a versão no `.csproj`, o histórico no
+[`CHANGELOG.md`](CHANGELOG.md) e cada entrega por **pull request** na `main`.
+
+## Entrega
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\empacotar.ps1
+```
+
+Gera `csharp/entrega/` com o ZIP do projeto (sem `bin/` e `obj/`) e o `entrega.txt`. Os dois vão para a tarefa do Teams.
+
+## Equipe
+
+| Nome | RM |
+|---|---|
+| João Vitor de Matos | RM559246 |
+| Gabriel Couto | RM559579 |
+| Gabriel Kato | RM560000 |
+| Marcelo Affonso | RM559790 |

@@ -1,0 +1,9 @@
+Moskitto Radar - C# Software Development - GS FIAP 2026.2
+
+RM559246 - Joao Vitor de Matos
+RM559579 - Gabriel Couto
+RM560000 - Gabriel Kato
+RM559790 - Marcelo Affonso
+
+Repositorio: https://github.com/GrupoMoskitto/gs2026
+Pasta do projeto: csharp/
