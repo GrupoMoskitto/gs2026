@@ -14,6 +14,10 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Moderacao> Moderacoes => Set<Moderacao>();
     public DbSet<PrevisaoRisco> Previsoes => Set<PrevisaoRisco>();
 
+    /// <summary>O código é um dos 129 lugares? Usado para validar o campo "bairro".</summary>
+    public Task<bool> LugarExiste(string codigo, CancellationToken cancelamento) =>
+        Lugares.AnyAsync(l => l.Codigo == codigo, cancelamento);
+
     protected override void ConfigureConventions(ModelConfigurationBuilder configuracao)
     {
         // Datas como número ordenável (ver DataUtcConverter) e enums com o código do JSON.
@@ -46,7 +50,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             relato.Property(r => r.ChaveIdempotencia).HasMaxLength(100);
 
             relato.HasOne(r => r.Lugar)
-                .WithMany(l => l.Relatos)
+                .WithMany()
                 .HasForeignKey(r => r.Bairro)
                 .OnDelete(DeleteBehavior.Restrict);
 
@@ -75,7 +79,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             previsao.ToTable("previsoes");
             previsao.Property(p => p.Bairro).HasMaxLength(20).IsRequired();
             previsao.HasOne(p => p.Lugar)
-                .WithMany(l => l.Previsoes)
+                .WithMany()
                 .HasForeignKey(p => p.Bairro)
                 .OnDelete(DeleteBehavior.Cascade);
 

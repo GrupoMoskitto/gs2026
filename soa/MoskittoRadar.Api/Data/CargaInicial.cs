@@ -25,33 +25,21 @@ public static class CargaInicial
     public static void Executar(AppDbContext db, string pastaDados, ILogger logger)
     {
         using var transacao = db.Database.BeginTransaction();
-
-        if (!db.Lugares.Any())
-        {
-            var lugares = LerLugares(Path.Combine(pastaDados, "lugares.csv"));
-            db.Lugares.AddRange(lugares);
-            db.SaveChanges();
-            logger.LogInformation("Carga inicial: {Quantidade} lugares", lugares.Count);
-        }
-
-        if (!db.Relatos.Any())
-        {
-            var relatos = LerRelatos(Path.Combine(pastaDados, "relatos_simulados.csv"));
-            db.Relatos.AddRange(relatos);
-            db.SaveChanges();
-            logger.LogInformation("Carga inicial: {Quantidade} relatos simulados", relatos.Count);
-        }
-
-        if (!db.Previsoes.Any())
-        {
-            var previsoes = LerPrevisoes(Path.Combine(pastaDados, "previsoes.json"));
-            db.Previsoes.AddRange(previsoes);
-            db.SaveChanges();
-            logger.LogInformation("Carga inicial: {Quantidade} previsões de risco", previsoes.Count);
-        }
-
+        Carregar(db, db.Lugares, () => LerLugares(Path.Combine(pastaDados, "lugares.csv")), "lugares", logger);
+        Carregar(db, db.Relatos, () => LerRelatos(Path.Combine(pastaDados, "relatos_simulados.csv")), "relatos simulados", logger);
+        Carregar(db, db.Previsoes, () => LerPrevisoes(Path.Combine(pastaDados, "previsoes.json")), "previsões de risco", logger);
         transacao.Commit();
         db.ChangeTracker.Clear();
+    }
+
+    /// <summary>Só lê o arquivo e grava se a tabela estiver vazia.</summary>
+    private static void Carregar<T>(AppDbContext db, DbSet<T> tabela, Func<List<T>> ler, string nome, ILogger logger) where T : class
+    {
+        if (tabela.Any()) return;
+        var itens = ler();
+        tabela.AddRange(itens);
+        db.SaveChanges();
+        logger.LogInformation("Carga inicial: {Quantidade} {Nome}", itens.Count, nome);
     }
 
     private static List<Lugar> LerLugares(string arquivo) =>
@@ -84,21 +72,12 @@ public static class CargaInicial
             };
         }).ToList();
 
-    private static List<PrevisaoRisco> LerPrevisoes(string arquivo)
-    {
-        var linhas = JsonSerializer.Deserialize<List<PrevisaoJson>>(File.ReadAllText(arquivo), OpcoesJson)
-            ?? throw new InvalidDataException($"{arquivo} está vazio.");
-        return linhas.Select(p => new PrevisaoRisco
-        {
-            Bairro = p.Bairro,
-            FaixaHoraria = p.FaixaHoraria,
-            NivelRisco = p.NivelRisco,
-            Score = p.Score,
-        }).ToList();
-    }
-
-    /// <summary>Formato de cada linha de previsoes.json.</summary>
-    private sealed record PrevisaoJson(string Bairro, FaixaHoraria FaixaHoraria, NivelRisco NivelRisco, double Score);
+    // previsoes.json tem o mesmo formato que a API devolve (PrevisaoResposta).
+    private static List<PrevisaoRisco> LerPrevisoes(string arquivo) =>
+        (JsonSerializer.Deserialize<List<PrevisaoResposta>>(File.ReadAllText(arquivo), OpcoesJson)
+            ?? throw new InvalidDataException($"{arquivo} está vazio."))
+        .Select(p => new PrevisaoRisco { Bairro = p.Bairro, FaixaHoraria = p.FaixaHoraria, NivelRisco = p.NivelRisco, Score = p.Score })
+        .ToList();
 
     private static T LerEnum<T>(string codigo, string arquivo) where T : struct, Enum =>
         CodigoEnumConverter<T>.TentarLer(codigo, out var valor)

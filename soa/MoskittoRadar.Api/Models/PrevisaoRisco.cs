@@ -22,13 +22,4 @@ public class PrevisaoRisco
 
     /// <summary>Quando a previsão foi carregada no banco.</summary>
     public DateTimeOffset GeradoEm { get; set; } = DateTimeOffset.UtcNow;
-
-    /// <summary>Faixa horária de um horário qualquer (0–6 madrugada, 6–12 manhã, 12–18 tarde, 18–24 noite).</summary>
-    public static FaixaHoraria FaixaDe(DateTimeOffset momento) => momento.Hour switch
-    {
-        < 6 => FaixaHoraria.Madrugada,
-        < 12 => FaixaHoraria.Manha,
-        < 18 => FaixaHoraria.Tarde,
-        _ => FaixaHoraria.Noite,
-    };
 }

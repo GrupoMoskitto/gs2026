@@ -105,7 +105,7 @@ O JSON segue o formato comum do projeto (`AGENTS.md`, seção 4): chaves em snak
 Todos os problemas voltam juntos numa mensagem só, ex.: `{ "erro": "tipo é obrigatório. bairro é obrigatório." }`.
 
 **Caixa de coordenadas (provisória):** latitude de -24.1 a -23.15 e longitude de -47.1 a -45.75, a mesma do app
-(`mobile/src/config/regiao.ts`). Fica em `appsettings.json`, seção `Regiao`, e ainda é decisão em aberto do time
+(`mobile/src/config/regiao.ts`). Fica em `Models/Regiao.cs` e ainda é decisão em aberto do time
 (`AGENTS.md`, seção 7, item 5).
 
 **Relato duplicado:** o app manda o cabeçalho `Idempotency-Key` em cada relato (inclusive os que ficaram na fila

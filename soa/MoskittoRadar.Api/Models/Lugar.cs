@@ -20,8 +20,4 @@ public class Lugar
 
     /// <summary>Código IBGE do município (os bairros e distritos da capital repetem o de São Paulo).</summary>
     public string CodIbge { get; set; } = "";
-
-    public List<Relato> Relatos { get; set; } = [];
-
-    public List<PrevisaoRisco> Previsoes { get; set; } = [];
 }
