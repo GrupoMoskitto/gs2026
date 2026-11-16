@@ -1,35 +1,32 @@
-# soa: Arquitetura Orientada a Serviços e Web Services
+# Moskitto Radar · API (SOA)
 
-**Papel no projeto:** backend do mapa de relatos. API REST e banco de dados que guardam e servem os relatos para todos os outros clientes (mobile, web, desktop, IoT).
+API REST do Moskitto Radar, a CitizenTech da equipe na GS FIAP 2026.2. Guarda os relatos de roubo da Região
+Metropolitana de São Paulo e serve a previsão de risco do modelo de ML. É usada pelo app mobile, pelo botão de
+pânico (ESP32) e pela moderação, e roda no IIS do Windows Server.
 
-## Entregas (19/11, 23h55)
+**Stack:** ASP.NET Core Web API (.NET 10), Entity Framework Core 10, SQLite.
 
-- [ ] Repositório com o código completo
-- [ ] README com instruções de execução, descrição da solução e nomes dos integrantes
-- [ ] Evidências da aplicação
-- [ ] Envio do link do GitHub
+## Integrantes
 
-## Avaliação (10,0)
-
-| Critério | Pontos |
+| Nome | RM |
 |---|---|
-| Estruturação do domínio | 3,0 |
-| Conexão com banco de dados | 3,0 |
-| Migrações | 2,5 |
-| Testes manuais (Insomnia) | 1,5 |
+| João Vitor de Matos | RM559246 |
+| Gabriel Couto | RM559579 |
+| Gabriel Kato | RM560000 |
+| Marcelo Affonso | RM559790 |
 
-## Esboço
-
-- Entidades: Relato, Lugar, Moderação, PrevisaoRisco (pasta `MoskittoRadar.Api/Models/`)
-- Endpoints (sugestão): criar relato, listar com filtros, detalhe, moderar, previsão de risco
-- Coleção do Insomnia versionada aqui
-
-## Estrutura sugerida
+## Estrutura
 
 ```
 soa/
-├── README.md
-└── (código, migrações e coleção do Insomnia a criar)
+├── MoskittoRadar.Api/
+│   ├── Controllers/   rotas (relatos, previsões, health)
+│   ├── Models/        domínio: Relato, Lugar, Moderacao, PrevisaoRisco, enums
+│   ├── Data/          AppDbContext, conversores e carga inicial
+│   ├── Migrations/    migrations do EF Core
+│   └── Dados/         CSV e JSON do Coto (carga inicial)
+├── insomnia/          coleção do Insomnia (25 requisições)
+└── evidencias/        prints dos testes
 ```
 
 ## Como rodar
@@ -136,6 +133,15 @@ Na primeira execução, `Data/CargaInicial.cs` carrega os arquivos da pasta `Mos
 cp ../ia/data/lugares.csv ../ia/data/relatos_simulados.csv ../ia/data/previsoes.json MoskittoRadar.Api/Dados/
 ```
 
+## Testes manuais (Insomnia)
+
+1. Suba a API (`dotnet run`).
+2. No Insomnia: **Import** → `insomnia/moskitto-radar.insomnia.json`.
+3. As requisições estão em pastas na ordem (health, consultar, criar, moderar, previsões, erros).
+   O nome de cada uma diz o status esperado (ex.: `POST fora da região (Rio) → 400`).
+
+Os POST usam a data atual (`now`), então não vencem. Os prints ficam em [`evidencias/`](evidencias/README.md).
+
 ## Status
 
 - [x] Domínio, banco e migrations
@@ -144,7 +150,8 @@ cp ../ia/data/lugares.csv ../ia/data/relatos_simulados.csv ../ia/data/previsoes.
 - [x] Rota de criação (POST) com validação e idempotência
 - [x] Rota de moderação (PATCH)
 - [x] Acesso pelo celular (perfil `celular` + CORS)
-- [ ] Testes no Insomnia
+- [x] Coleção do Insomnia (25 requisições, todas conferidas)
+- [ ] Prints das evidências
 - [ ] Publicação para o IIS
 
 Detalhes da disciplina: [`docs/disciplinas.md`](../docs/disciplinas.md#1-arquitetura-orientada-a-serviços-soa-e-web-services)
