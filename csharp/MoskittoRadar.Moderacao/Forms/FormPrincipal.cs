@@ -16,6 +16,7 @@ public class FormPrincipal : Form
     {
         Dock = DockStyle.Fill, ReadOnly = true, AllowUserToAddRows = false, MultiSelect = false, RowHeadersVisible = false,
         SelectionMode = DataGridViewSelectionMode.FullRowSelect, AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
+        BackgroundColor = SystemColors.Window,
     };
     private readonly TextBox txtDetalhe = new TextBox { Dock = DockStyle.Fill, Multiline = true, ReadOnly = true, Font = new Font("Segoe UI", 10) };
     private readonly Button btnAprovar = new Button { Text = "Aprovar", Width = 110 };

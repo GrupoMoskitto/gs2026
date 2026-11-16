@@ -1,14 +1,18 @@
 # Evidências · C#
 
-Prints do app funcionando. Salve aqui como `NN-nome.png`.
+Prints do app funcionando (Windows 11, .NET 10). Os relatos são simulados.
 
-| # | Print | Mostra |
-|---|---|---|
-| 01 | `01-entrada.png` | tela de entrada (apelido + moderador/cidadão) |
-| 02 | `02-pendentes.png` | fila de pendentes ordenada por prioridade, com o detalhe |
-| 03 | `03-filtros.png` | lista filtrada por tipo e bairro |
-| 04 | `04-aprovar.png` | relato aprovado e o contador do rodapé atualizado |
-| 05 | `05-rejeitar.png` | caixa do motivo e o relato rejeitado |
-| 06 | `06-novo-relato.png` | cadastro de um relato novo |
-| 07 | `07-validacao.png` | mensagem de erro (ex.: coordenada fora da região) |
-| 08 | `08-cidadao.png` | entrando como cidadão: aprovar e rejeitar desligados |
+| # | Mostra |
+|---|---|
+| [01](01-entrada.png) | Entrada: apelido e papel (moderador ou cidadão) |
+| [02](02-pendentes.png) | Fila de pendentes, da maior prioridade para a menor, com o detalhe do relato |
+| [03](03-filtros.png) | Filtro por tipo (celular) e bairro (Bela Vista) |
+| [04](04-aprovar.png) | Relato aprovado: aparece em "Aprovado", com quem moderou |
+| [05](05-rejeitar-motivo.png) · [05b](05-rejeitar.png) | Rejeitar pede o motivo; o relato fica rejeitado com o motivo |
+| [06](06-novo-relato.png) · [06b](06-novo-relato-na-fila.png) | Novo relato preenchido; ele entra na fila como pendente, com prioridade 7 |
+| [07](07-validacao.png) | Validação da classe: coordenada do Rio de Janeiro é recusada |
+| [08](08-cidadao.png) | Entrando como cidadão: Aprovar e Rejeitar ficam desligados (polimorfismo: `PodeModerar`) |
+
+![Fila de pendentes](02-pendentes.png)
+![Rejeitar com motivo](05-rejeitar-motivo.png)
+![Validação](07-validacao.png)
