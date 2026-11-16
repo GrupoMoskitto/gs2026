@@ -1,0 +1,6 @@
+@api = http://localhost:5207
+
+GET {{api}}/openapi/v1.json
+Accept: application/json
+
+###
