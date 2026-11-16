@@ -1,6 +1,22 @@
 @api = http://localhost:5207
 
-GET {{api}}/openapi/v1.json
-Accept: application/json
+### Teste de vida
+GET {{api}}/api/health
 
-###
+### Lista (até 200, mais recentes primeiro; total no cabeçalho X-Total-Count)
+GET {{api}}/api/relatos
+
+### Lista com filtros
+GET {{api}}/api/relatos?bairro=bela_vista&tipo=celular&status=aprovado&limite=10
+
+### Filtro inválido -> 400 { "erro": "..." }
+GET {{api}}/api/relatos?tipo=carro
+
+### Detalhe
+GET {{api}}/api/relatos/eec144d8-57a4-4f63-9bda-1766b599975e
+
+### Detalhe inexistente -> 404
+GET {{api}}/api/relatos/00000000-0000-0000-0000-000000000000
+
+### Previsões de um lugar (4 faixas)
+GET {{api}}/api/previsoes?bairro=bela_vista

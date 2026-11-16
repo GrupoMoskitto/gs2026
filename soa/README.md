@@ -58,6 +58,20 @@ SQLite com Entity Framework Core 10. As tabelas são criadas pela migration `Ini
 - As datas são gravadas como número (UTC + fuso), porque o SQLite não ordena `DateTimeOffset`
   guardado como texto. Ver `Data/Conversores.cs`.
 
+## Rotas
+
+O JSON segue o formato comum do projeto (`AGENTS.md`, seção 4): chaves em snake_case e valores pelo código
+(`bolsa_mochila`, `pendente`). Todo erro volta como `{ "erro": "mensagem" }`.
+
+| Método | Rota | Resposta |
+|---|---|---|
+| GET | `/api/health` | `200 { "status": "ok", "banco": "ok", ... }`, ou `503` se o banco falhar |
+| GET | `/api/relatos?bairro=&tipo=&status=&limite=` | array dos mais recentes, até 200 (máx. 1000 com `limite`); total no cabeçalho `X-Total-Count`; `400` se um filtro for inválido |
+| GET | `/api/relatos/{id}` | o relato, ou `404` |
+| GET | `/api/previsoes?bairro=` | array das previsões (516 sem filtro, 4 com `bairro`); `400` se o lugar não existir |
+
+Exemplos prontos em `MoskittoRadar.Api/MoskittoRadar.Api.http`.
+
 ## Dados iniciais
 
 Na primeira execução, `Data/CargaInicial.cs` carrega os arquivos da pasta `MoskittoRadar.Api/Dados/`:
@@ -82,7 +96,8 @@ cp ../ia/data/lugares.csv ../ia/data/relatos_simulados.csv ../ia/data/previsoes.
 
 - [x] Domínio, banco e migrations
 - [x] Carga do CSV simulado e das previsões
-- [ ] Rotas da API
+- [x] Rotas de consulta (health, relatos, previsões)
+- [ ] Rotas de criação e moderação
 - [ ] Testes no Insomnia
 - [ ] Publicação para o IIS
 
