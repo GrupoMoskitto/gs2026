@@ -168,7 +168,7 @@ Testado localmente em modo Production a partir do pacote: banco criado, 10.000 r
 - [x] Rota de moderação (PATCH)
 - [x] Acesso pelo celular (perfil `celular` + CORS)
 - [x] Coleção do Insomnia (25 requisições, todas conferidas)
-- [ ] Prints das evidências
+- [x] Prints das evidências (`evidencias/`)
 - [x] Pacote para o IIS (`publicar.ps1`)
 
 Detalhes da disciplina: [`docs/disciplinas.md`](../docs/disciplinas.md#1-arquitetura-orientada-a-serviços-soa-e-web-services)
