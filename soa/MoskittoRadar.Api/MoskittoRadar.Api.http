@@ -48,3 +48,9 @@ POST {{api}}/api/relatos
 Content-Type: application/json
 
 { "tipo": "carro", "latitude": -22.9, "longitude": -43.2, "bairro": "rio", "origem": "mobile" }
+
+### Moderação -> 200 com o relato atualizado (troque o id)
+PATCH {{api}}/api/relatos/eec144d8-57a4-4f63-9bda-1766b599975e/status
+Content-Type: application/json
+
+{ "status": "aprovado", "motivo": "conferido" }

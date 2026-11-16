@@ -69,6 +69,7 @@ O JSON segue o formato comum do projeto (`AGENTS.md`, seção 4): chaves em snak
 | GET | `/api/relatos?bairro=&tipo=&status=&limite=` | array dos mais recentes, até 200 (máx. 1000 com `limite`); total no cabeçalho `X-Total-Count`; `400` se um filtro for inválido |
 | GET | `/api/relatos/{id}` | o relato, ou `404` |
 | POST | `/api/relatos` | `201` com o relato criado (sempre `pendente`) e cabeçalho `Location`; `400` se inválido; `200` com o relato já existente se a `Idempotency-Key` repetir |
+| PATCH | `/api/relatos/{id}/status` | corpo `{ "status": "aprovado", "motivo": "opcional" }`; `200` com o relato atualizado, `400` se o status for inválido, `404` se o relato não existir. Cada mudança fica registrada na tabela `moderacoes` |
 | GET | `/api/previsoes?bairro=` | array das previsões (516 sem filtro, 4 com `bairro`); `400` se o lugar não existir |
 
 ### Validação do POST
@@ -121,7 +122,7 @@ cp ../ia/data/lugares.csv ../ia/data/relatos_simulados.csv ../ia/data/previsoes.
 - [x] Carga do CSV simulado e das previsões
 - [x] Rotas de consulta (health, relatos, previsões)
 - [x] Rota de criação (POST) com validação e idempotência
-- [ ] Rota de moderação (PATCH)
+- [x] Rota de moderação (PATCH)
 - [ ] Testes no Insomnia
 - [ ] Publicação para o IIS
 

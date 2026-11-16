@@ -14,6 +14,9 @@ public record NovoRelato(
     DateTimeOffset? OcorridoEm,
     string? Origem);
 
+/// <summary>Corpo do PATCH /api/relatos/{id}/status. motivo é opcional.</summary>
+public record MudancaStatus(string? Status, string? Motivo);
+
 /// <summary>
 /// Caixa de coordenadas aceita (Região Metropolitana de São Paulo). Vem do appsettings.json, seção "Regiao".
 /// PROVISÓRIO: é decisão em aberto do time (AGENTS.md, seção 7, item 5). Os valores padrão são os mesmos do app

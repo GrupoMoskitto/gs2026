@@ -144,6 +144,25 @@ public class RelatosController(AppDbContext db) : ControllerBase
         return CreatedAtAction(nameof(Obter), new { id = relato.Id }, RelatoResposta.De(relato));
     }
 
+    /// <summary>Moderação: muda o status do relato e guarda a decisão na tabela moderacoes. 200 com o relato atualizado.</summary>
+    [HttpPatch("{id}/status")]
+    public async Task<ActionResult<RelatoResposta>> MudarStatus(string id, [FromBody] MudancaStatus? mudanca, CancellationToken cancelamento)
+    {
+        if (!CodigoEnumConverter<StatusRelato>.TentarLer(mudanca?.Status, out var status))
+            return BadRequest(new RespostaErro("status deve ser pendente, aprovado ou rejeitado."));
+
+        var motivo = mudanca!.Motivo?.Trim();
+        if (motivo?.Length > 200)
+            return BadRequest(new RespostaErro("motivo pode ter até 200 caracteres."));
+
+        if (!Guid.TryParse(id, out var guid) || await db.Relatos.FindAsync([guid], cancelamento) is not { } relato)
+            return NotFound(new RespostaErro("Relato não encontrado."));
+
+        relato.Moderar(status, string.IsNullOrEmpty(motivo) ? null : motivo);
+        await db.SaveChangesAsync(cancelamento);
+        return RelatoResposta.De(relato);
+    }
+
     private Task<Relato?> BuscarPorChave(string chave, CancellationToken cancelamento) =>
         db.Relatos.AsNoTracking().FirstOrDefaultAsync(r => r.ChaveIdempotencia == chave, cancelamento);
 
