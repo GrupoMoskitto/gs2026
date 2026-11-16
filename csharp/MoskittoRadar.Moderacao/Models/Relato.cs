@@ -22,13 +22,13 @@ public abstract class Relato
 
     protected Relato(double latitude, double longitude, string bairro, DateTime ocorridoEm, string descricao)
     {
-        Id = proximoId++;
         Latitude = latitude;
         Longitude = longitude;
         Bairro = bairro;
         OcorridoEm = ocorridoEm;
         Descricao = descricao;
         Status = StatusRelato.Pendente;
+        Id = proximoId++; // só depois de validar: relato recusado não gasta número
     }
 
     public int Id { get; }

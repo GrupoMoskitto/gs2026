@@ -1,16 +1,20 @@
+using MoskittoRadar.Moderacao.Forms;
+using MoskittoRadar.Moderacao.Services;
+
 namespace MoskittoRadar.Moderacao;
 
-static class Program
+internal static class Program
 {
-    /// <summary>
-    ///  The main entry point for the application.
-    /// </summary>
     [STAThread]
-    static void Main()
+    private static void Main()
     {
-        // To customize application configuration such as set high DPI settings or default font,
-        // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
-        Application.Run(new Form1());
-    }    
+
+        using var entrada = new FormEntrada();
+        if (entrada.ShowDialog() != DialogResult.OK || entrada.Usuario == null) return;
+
+        var repositorio = new RepositorioRelatos();
+        DadosSimulados.Carregar(repositorio);
+        Application.Run(new FormPrincipal(repositorio, entrada.Usuario));
+    }
 }
