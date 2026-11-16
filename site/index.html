@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Moskitto Radar: onde e quando o risco de roubo é maior na Grande São Paulo. Projeto da Global Solution FIAP 2026.2." />
+    <meta name="theme-color" content="#F0F7FE" />
+    <script>
+      (function () {
+        var t = null;
+        try { t = localStorage.getItem('tema'); } catch (e) {}
+        if (t !== 'claro' && t !== 'escuro') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'escuro' : 'claro';
+        document.documentElement.dataset.tema = t;
+        if (t === 'escuro') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#07121E');
+      })();
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/marca/logo-mark.svg" />
+    <title>Moskitto Radar · onde e quando o risco de roubo é maior</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
