@@ -1,199 +1,121 @@
-# Moskitto Radar
+<h1 align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="site/public/marca/logo-mark-white.svg">
+    <img src="site/public/marca/logo-mark.svg" alt="" width="52" valign="middle">
+  </picture>&nbsp;Moskitto Radar
+</h1>
+<p align="center">Onde e quando o risco de roubo é maior na <strong>Grande São Paulo</strong>: um app para relatar roubos e um modelo de IA que aponta o risco de cada lugar e horário.</p>
+<p align="center">
+  <img alt="React Native" src="https://img.shields.io/badge/React%20Native-Expo-000020?style=flat&logo=expo&logoColor=white" />&nbsp;
+  <img alt="scikit-learn" src="https://img.shields.io/badge/scikit--learn-RandomForest-F7931E?style=flat&logo=scikitlearn&logoColor=white" />&nbsp;
+  <img alt="ASP.NET Core" src="https://img.shields.io/badge/ASP.NET%20Core-SQLite-512BD4?style=flat&logo=dotnet&logoColor=white" />&nbsp;
+  <img alt="ESP32" src="https://img.shields.io/badge/ESP32-Wokwi-E7352C?style=flat&logo=espressif&logoColor=white" />&nbsp;
+  <img alt="ODS 11" src="https://img.shields.io/badge/ODS-11%20%C2%B7%209%20%C2%B7%2010-1F6FC8?style=flat" />
+</p>
+<p align="center"><a href="https://gs2026.cotoo.dev"><strong>gs2026.cotoo.dev</strong></a></p>
+<p align="center">Global Solution FIAP 2026.2 · CitizenTech · Engenharia de Software, 3º ano · Entrega em 19/11/2026</p>
 
-> Mapa de relatos de roubo. Projeto da **Global Solution FIAP 2026.2: CitizenTech**, Engenharia de Software, 3º ano (Ago).
-> **Prazo final das entregas: 19/11/2026, 23h55.**
+<br>
 
-Este repositório é um **monorepo**: reúne os trabalhos de **todas as disciplinas** da GS. Todas trabalham em cima da **mesma solução**, e cada disciplina constrói uma parte dela.
-
-## Estrutura: uma pasta por matéria
-
-As pastas são organizadas **por matéria**, com nomes curtos e abreviados. Cada uma tem o seu próprio `README.md` com o papel da disciplina no projeto, as entregas exigidas e o status.
-
-```
-.
-├── README.md        ← este arquivo (visão geral + specs)
-├── docs/            ← contexto extraído do PDF da GS (briefing, regras, rubricas, checklist)
-│
-├── soa/             ← Arquitetura Orientada a Serviços e Web Services
-├── cyber/           ← Cybersecurity
-├── csharp/          ← C# Software Development
-├── ia/              ← Inteligência Artificial & Machine Learning
-├── mobile/          ← Mobile Development & IOT
-├── os/              ← Operating Systems
-├── physical/        ← Physical Computing: IOT & IOB
-└── testing/         ← Testing, Compliance & Quality Assurance
-```
-
-| Pasta | Matéria | Papel no projeto |
-|---|---|---|
-| [`soa/`](soa/) | Arquitetura Orientada a Serviços e Web Services | API REST e banco de dados: o núcleo que guarda e serve os relatos |
-| [`cyber/`](cyber/) | Cybersecurity | Gestão de riscos, privacidade e proteção dos dados |
-| [`csharp/`](csharp/) | C# Software Development | App desktop (Windows Forms) de moderação e administração |
-| [`ia/`](ia/) | IA & Machine Learning | Modelo que prevê o risco por região e horário |
-| [`mobile/`](mobile/) | Mobile Development & IOT | App do cidadão: ver o mapa e registrar relatos |
-| [`os/`](os/) | Operating Systems | Infraestrutura Windows Server que hospeda a aplicação web |
-| [`physical/`](physical/) | Physical Computing: IOT & IOB | Dispositivo ESP32 (Wokwi): relato rápido e aviso de zona de risco |
-| [`testing/`](testing/) | Testing, Compliance & QA | Arquitetura (TOGAF/ArchiMate) e pitch |
-
-O contexto completo do desafio está em [`docs/`](docs/README.md).
+<p align="center">
+  <a href="https://gs2026.cotoo.dev">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="docs/imagens/site-escuro.webp">
+      <img src="docs/imagens/site-claro.webp" alt="A capa do site: o título, os números do modelo e a simulação do app com o mapa de risco" width="820">
+    </picture>
+  </a>
+</p>
 
 ---
 
-## A ideia
+### Sobre
 
-Criar um **mapa de relatos de roubo totalmente interativo e dinâmico**.
+O morador relata um roubo pelo app: o local aproximado, o horário e o tipo, sem nenhum dado pessoal. Um modelo de
+machine learning, treinado com os roubos públicos da SSP-SP, aponta onde e em que horário o risco é maior, e o app
+mostra isso num mapa e numa tela de previsão.
 
-Pessoas registram onde e quando foram vítimas ou testemunhas de um roubo ou furto. Esses relatos viram pontos num mapa que se atualiza em tempo real e pode ser explorado por filtros de tipo, período e região. O objetivo é que o cidadão decida por onde andar, a que horas e com que cuidado, com base em dados da própria comunidade.
+A cobertura é a Região Metropolitana de São Paulo, com **129 lugares**: os 3 bairros da Av. Paulista, onde o projeto
+começou, 88 distritos da capital e 38 municípios vizinhos.
 
-### Alinhamento com a GS
-
-| Pergunta do briefing | Resposta (genérica, a refinar) |
-|---|---|
-| Quem é o cidadão beneficiado? | Quem se desloca a pé ou de transporte público pela cidade: estudantes, trabalhadores, idosos e moradores de bairros com pouca informação de segurança |
-| Qual problema será resolvido? | Falta de informação acessível e atualizada sobre onde e quando ocorrem roubos, o que impede escolhas mais seguras |
-| Como a solução funcionará? | Relatos de várias origens → API → mapa interativo + previsão de risco |
-| Quais tecnologias? | Ver [Arquitetura](#arquitetura-geral) |
-| Quem participa do ecossistema? | Cidadãos, moderadores, comunidade local e, futuramente, órgãos de segurança pública |
-| Como medir o impacto? | Ver [Indicadores de impacto](#indicadores-de-impacto) |
-
-**ODS conectados:** ODS 11 (Cidades e comunidades sustentáveis) como principal. ODS 9 (inovação e infraestrutura) e ODS 10 (redução das desigualdades) como secundários. A justificativa por meta deve ser detalhada na [Ficha da CitizenTech](docs/ficha-citizentech.md).
-
----
-
-## Specs gerais
-
-> Specs **genéricas e iniciais**. Servem de base comum para todas as disciplinas e devem ser refinadas pela equipe.
-
-### Requisitos funcionais
-
-| ID | Requisito |
-|---|---|
-| RF01 | O usuário registra um relato com tipo, localização, data/hora e descrição opcional |
-| RF02 | Os relatos aparecem em um **mapa interativo** (zoom, arrastar, clicar em um ponto para ver o detalhe) |
-| RF03 | O mapa tem **filtros** por tipo de ocorrência, período e região |
-| RF04 | O mapa **atualiza dinamicamente**, sem recarregar a página, quando entram novos relatos |
-| RF05 | O mapa pode mostrar pontos individuais ou uma **visão agregada** (mapa de calor ou clusters) |
-| RF06 | O usuário se identifica e a identificação é lembrada ao reabrir o app |
-| RF07 | Relatos novos passam por **moderação** (aprovar, rejeitar, marcar como duplicado) antes de aparecer no mapa |
-| RF08 | O sistema mostra uma **previsão de risco** por região e horário, gerada pelo modelo de ML |
-| RF09 | O relato pode ser enviado por **vários canais**: app mobile, web, desktop e dispositivo IoT |
-| RF10 | O usuário recebe um **aviso** ao entrar ou se aproximar de uma zona de maior risco |
-
-### Requisitos não funcionais
-
-| ID | Requisito |
-|---|---|
-| RNF01 | **Privacidade:** nenhum dado pessoal real. Relatos são anônimos e sem identificação de pessoas, placas ou documentos |
-| RNF02 | **Localização imprecisa:** coordenadas arredondadas ou deslocadas, sem expor endereço exato de residência |
-| RNF03 | **Dados simulados ou públicos**, sempre com a origem citada |
-| RNF04 | **Segurança desde a concepção:** entradas validadas, consultas parametrizadas e portas sensíveis fechadas |
-| RNF05 | **Simplicidade e acessibilidade:** textos legíveis, bom contraste, linguagem simples, telas pequenas |
-| RNF06 | **Tolerância a falhas:** o serviço e o site se recuperam sozinhos após uma falha |
-| RNF07 | **Rastreabilidade:** logs de auditoria de acesso e de ações de moderação |
-| RNF08 | **Repositório organizado:** cada parte tem README claro e nomes que façam sentido |
-
-### Modelo de dados (genérico)
-
-| Entidade | Campos principais |
-|---|---|
-| **Relato** | `id`, `tipo`, `descricao`, `latitude`, `longitude`, `ocorrido_em`, `criado_em`, `status`, `origem` |
-| **Usuário** | `id`, `apelido` (ou identificador anônimo), `papel` (cidadão / moderador) |
-| **Moderação** | `id`, `relato_id`, `moderador_id`, `decisao`, `motivo`, `decidido_em` |
-| **Previsão de risco** | `região`, `faixa_horária`, `nível_de_risco`, `gerado_em` |
-
-- **Tipo:** celular, bolsa/mochila, veículo, bicicleta, comércio, outro.
-- **Status:** pendente, aprovado, rejeitado.
-- **Origem:** mobile, web, desktop, iot.
-
-### Arquitetura geral
+### Como funciona
 
 ```mermaid
-flowchart TB
-    subgraph clientes["Clientes (canais de relato)"]
-        MOB["App Mobile<br/>React Native + Expo<br/>(mobile/)"]
-        WEB["Mapa Web<br/>(a definir)"]
-        DESK["Painel do moderador<br/>C# Windows Forms<br/>(csharp/)"]
-        IOT["Dispositivo ESP32<br/>Wokwi<br/>(physical/)"]
-    end
-
-    subgraph host["Hospedagem: Windows Server + IIS (os/)"]
-        API["API REST<br/>(soa/)"]
-        DB[("Banco de dados")]
-    end
-
-    ML["Modelo de ML<br/>Python<br/>(ia/)"]
-    SEC["Gestão de riscos e controles<br/>(cyber/)"]
-
-    MOB & WEB & DESK & IOT -->|"HTTP / JSON"| API
-    API <-->|"relatos"| DB
-    DB -->|"relatos aprovados"| ML
-    ML -->|"previsão de risco"| API
-    SEC -.->|"protege"| host
-    SEC -.->|"protege"| clientes
+flowchart LR
+    APP["App do cidadão - mobile"]
+    IOT["Botão de pânico ESP32 - physical"]
+    API["API e banco - soa"]
+    ML["Modelo de risco - ia"]
+    APP -- relato --> API
+    IOT -- relato --> API
+    ML -- previsões --> API
+    API -- relatos e risco --> APP
 ```
 
-| Camada | Disciplina | Responsabilidade |
-|---|---|---|
-| Backend / API / banco | `soa/` | Domínio, API REST, banco de dados, migrações, testes no Insomnia |
-| App do cidadão | `mobile/` | Mapa, lista, detalhe, cadastro de relato, recurso nativo (localização/câmera) |
-| Painel do moderador | `csharp/` | Windows Forms para moderar e administrar relatos |
-| Inteligência | `ia/` | Modelo de previsão de risco, treinado e avaliado, e integrado à solução |
-| Dispositivo | `physical/` | Circuito ESP32 no Wokwi, integrado à solução |
-| Infraestrutura | `os/` | Windows Server (AD, DNS, IIS, GPO) hospedando a aplicação web |
-| Segurança | `cyber/` | Gestão de riscos, controles técnicos e evidências |
-| Arquitetura e narrativa | `testing/` | Diagrama ArchiMate/TOGAF, documento descritivo e pitch |
+A API roda num Windows Server com IIS (`os/`). O app de moderação em C# (`csharp/`) roda à parte, com relatos em
+memória. A segurança da solução está em `cyber/`, e a arquitetura e o pitch, em `testing/`.
 
-**Ainda em aberto:** onde fica o front-end web do mapa. Provável opção: servido pelo backend (`soa/`) e hospedado no IIS (`os/`). A equipe deve decidir.
+### As partes
 
-### Fluxo principal
+Cada matéria da GS constrói uma parte da mesma solução. Cada pasta tem o seu README com o que foi feito, como rodar e
+onde estão as evidências.
 
-1. O cidadão registra um relato (mobile, web ou dispositivo).
-2. A API valida e salva o relato como **pendente**.
-3. O moderador (desktop C#) aprova ou rejeita.
-4. O relato aprovado aparece no mapa de todos, em tempo real.
-5. O modelo de ML usa os relatos aprovados para atualizar a previsão de risco por região e horário.
-6. O mapa e o app exibem a previsão e avisam quando o usuário se aproxima de uma zona de risco.
+| Pasta | Matéria | O que tem |
+| --- | --- | --- |
+| [`mobile/`](mobile/) | Mobile Development & IoT | App do cidadão (React Native + Expo): mapa, relatos, previsão e vídeo demo |
+| [`ia/`](ia/) | IA & Machine Learning | Modelo que prevê o risco por lugar e horário, com os dados da SSP-SP |
+| [`soa/`](soa/) | Arquitetura Orientada a Serviços | API REST e banco de dados dos relatos |
+| [`csharp/`](csharp/) | C# Software Development | App de moderação dos relatos |
+| [`physical/`](physical/) | Physical Computing | Botão de pânico no ESP32 (Wokwi) que gera relatos |
+| [`os/`](os/) | Operating Systems | Windows Server, AD, DNS e IIS hospedando a API |
+| [`cyber/`](cyber/) | Cybersecurity | Gestão de riscos e controles de segurança |
+| [`testing/`](testing/) | Testing, Compliance & QA | Arquitetura (ArchiMate) e pitch |
+| [`site/`](site/) | Toda a solução | Página que apresenta e demonstra as partes juntas |
 
-### Indicadores de impacto
+### Site
 
-Sugestões iniciais, a refinar:
-- Número de relatos registrados e aprovados
-- Tempo entre o relato e sua aparição no mapa
-- Cobertura: regiões e bairros com relatos
-- Precisão do modelo de previsão (métrica definida pela disciplina de IA)
-- Usuários que consultaram o mapa antes de um deslocamento
+O [**site**](https://gs2026.cotoo.dev) apresenta a solução inteira numa página só:
 
-### Fora de escopo (por enquanto)
+- **Simulação do app:** um celular na capa que dá para tocar, com o mapa de risco, os relatos e o envio de um relato.
+- **Risco ao vivo:** o mapa dos 129 lugares com a previsão do modelo, por lugar e faixa do dia.
+- **O app e o modelo:** loops gravados do app e os números do modelo, como o pico de roubos e o F1.
+- **Do relato ao mapa:** as seis etapas do caminho de um relato, cada uma com um exemplo que dá para mexer.
+- **As oito partes e a equipe:** o que cada matéria entrega e quem faz.
 
-- Integração oficial com a polícia ou emissão de boletim de ocorrência
-- Identificação ou acusação de pessoas
-- Dados pessoais reais
-- Cobertura de várias cidades
-
-> O mapa **não substitui** o registro oficial de ocorrência.
+O código está em [`site/`](site/).
 
 ---
 
-## Combinados da equipe
+### Dados e privacidade
 
-Vindos do briefing da GS (detalhes em [`docs/desafio-3es.md`](docs/desafio-3es.md)):
+- Os relatos do app são **simulados**. O modelo usa as contagens agregadas de roubos da SSP-SP, que são públicas.
+- **Nenhum dado pessoal real**: sem nome, documento ou placa, e o local é sempre aproximado.
 
-- **Simples primeiro:** melhor uma função que funciona do que dez pela metade.
-- **Pense em quem vai usar:** cidadão real, não especialista.
-- **IA como copiloto:** registrar os prompts em `prompts.md` e saber explicar cada linha.
-- **Todo mundo constrói:** cada integrante sabe explicar o projeto inteiro.
+> [!IMPORTANT]
+> O app **não substitui** o boletim de ocorrência.
 
-## Equipe
+**ODS:** 11 (Cidades e comunidades sustentáveis) como principal, 9 e 10 como secundários.
 
-| Nome | RM |
-|---|---|
-| Gabriel Kato | RM560000 |
-| Gabriel Couto | RM559579 |
-| João Vitor de Matos | RM559246 |
-| Marcelo Affonso | RM559790 |
+### Equipe
 
-## Links
+| Nome | RM | Partes |
+| --- | --- | --- |
+| Gabriel Couto | RM559579 | `ia/` · `mobile/` |
+| Gabriel Kato | RM560000 | `os/` · `physical/` |
+| João Vitor de Matos | RM559246 | `soa/` · `csharp/` |
+| Marcelo Affonso | RM559790 | `cyber/` · `testing/` |
 
-- Contexto da GS: [`docs/`](docs/README.md)
-- Checklist de entregas: [`docs/checklist.md`](docs/checklist.md)
-- Ficha da CitizenTech: [`docs/ficha-citizentech.md`](docs/ficha-citizentech.md)
+### Documentação
+
+| Guia | O que cobre |
+| --- | --- |
+| [Especificação](docs/especificacao.md) | Requisitos, modelo de dados, arquitetura e fluxo |
+| [Contexto da GS](docs/README.md) | Briefing, regras e rubricas de cada matéria |
+| [Checklist de entregas](docs/checklist.md) | O que falta em cada parte |
+| [Ficha da CitizenTech](docs/ficha-citizentech.md) | A ficha do projeto |
+| [`AGENTS.md`](AGENTS.md) | Formato comum dos dados, rotas da API e quem faz o quê |
+
+---
+
+<p align="center">
+  Feito para a Global Solution FIAP 2026.2, com dados públicos e relatos simulados.
+</p>
