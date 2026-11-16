@@ -16,6 +16,7 @@
 | [disciplinas.md](disciplinas.md) | Parte 4: entregas e critérios de cada disciplina |
 | [ficha-citizentech.md](ficha-citizentech.md) | Modelo da Ficha da CitizenTech (para o README do repositório) |
 | [checklist.md](checklist.md) | Checklist consolidado de entregas por disciplina |
+| [especificacao.md](especificacao.md) | Especificação do Moskitto Radar: requisitos, modelo de dados, arquitetura e fluxo |
 
 ## Resumo em 30 segundos
 
