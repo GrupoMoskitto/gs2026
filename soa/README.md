@@ -39,7 +39,8 @@ cd soa/MoskittoRadar.Api
 dotnet run
 ```
 
-Ao subir, a API aplica as migrations sozinha e cria o banco em `App_Data/moskitto.db`.
+Ao subir, a API aplica as migrations sozinha, cria o banco em `App_Data/moskitto.db` e, se ele estiver vazio,
+carrega os dados iniciais (ver abaixo). Para começar do zero, apague a pasta `App_Data/`.
 Para criar uma migration nova: `dotnet ef migrations add <Nome>`.
 
 ## Banco de dados
@@ -57,10 +58,30 @@ SQLite com Entity Framework Core 10. As tabelas são criadas pela migration `Ini
 - As datas são gravadas como número (UTC + fuso), porque o SQLite não ordena `DateTimeOffset`
   guardado como texto. Ver `Data/Conversores.cs`.
 
+## Dados iniciais
+
+Na primeira execução, `Data/CargaInicial.cs` carrega os arquivos da pasta `MoskittoRadar.Api/Dados/`:
+
+| Arquivo | Linhas | Tabela |
+|---|---|---|
+| `lugares.csv` | 129 | `lugares` |
+| `relatos_simulados.csv` | 10.000 (7.494 aprovados, 1.810 pendentes, 696 rejeitados) | `relatos` |
+| `previsoes.json` | 516 (129 lugares × 4 faixas) | `previsoes` |
+
+- São **cópias** de `ia/data/` (Coto). Ficam dentro da API para irem junto no publish para o IIS.
+- Os relatos são **simulados** (`ia/scripts/gerar_relatos.py`, seed 42), sem nenhum dado pessoal.
+  As previsões vêm do modelo treinado com os dados públicos da SSP-SP.
+- Cada tabela só é carregada se estiver vazia: reiniciar a API não duplica nada.
+- Se o Coto atualizar os dados, copie de novo e apague `App_Data/`:
+
+```bash
+cp ../ia/data/lugares.csv ../ia/data/relatos_simulados.csv ../ia/data/previsoes.json MoskittoRadar.Api/Dados/
+```
+
 ## Status
 
 - [x] Domínio, banco e migrations
-- [ ] Carga do CSV simulado e das previsões
+- [x] Carga do CSV simulado e das previsões
 - [ ] Rotas da API
 - [ ] Testes no Insomnia
 - [ ] Publicação para o IIS

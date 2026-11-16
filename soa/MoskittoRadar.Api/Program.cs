@@ -17,10 +17,13 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
-// Aplica as migrations pendentes ao subir. Assim o banco nasce sozinho no IIS, sem rodar comando no servidor.
+// Ao subir: aplica as migrations pendentes e, se o banco estiver vazio, carrega os dados do Coto.
+// Assim o banco nasce sozinho no IIS, sem rodar comando no servidor.
 using (var escopo = app.Services.CreateScope())
 {
-    escopo.ServiceProvider.GetRequiredService<AppDbContext>().Database.Migrate();
+    var db = escopo.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+    CargaInicial.Executar(db, Path.Combine(app.Environment.ContentRootPath, "Dados"), app.Logger);
 }
 
 if (app.Environment.IsDevelopment())

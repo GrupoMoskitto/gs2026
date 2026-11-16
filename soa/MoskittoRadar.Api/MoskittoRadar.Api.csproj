@@ -15,4 +15,11 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.15" />
   </ItemGroup>
 
+  <!-- Dados do Coto (ia/data) copiados para cá: vão junto no publish para o IIS. -->
+  <ItemGroup>
+    <Content Remove="Dados\**" />
+    <None Remove="Dados\**" />
+    <Content Include="Dados\**" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>
