@@ -43,6 +43,26 @@ Ao subir, a API aplica as migrations sozinha, cria o banco em `App_Data/moskitto
 carrega os dados iniciais (ver abaixo). Para começar do zero, apague a pasta `App_Data/`.
 Para criar uma migration nova: `dotnet ef migrations add <Nome>`.
 
+## Acesso pelo celular (app do Coto)
+
+1. Suba a API ouvindo na rede local:
+
+   ```bash
+   dotnet run --launch-profile celular
+   ```
+
+2. Descubra o IP do computador no **Wi-Fi** com `ipconfig` (ex.: `192.168.0.10`; não use o do VirtualBox, `192.168.56.x`).
+3. Libere a porta 5207 no firewall do Windows (uma vez, no PowerShell como administrador):
+
+   ```powershell
+   New-NetFirewallRule -DisplayName "Moskitto API 5207" -Direction Inbound -Protocol TCP -LocalPort 5207 -Action Allow -Profile Private
+   ```
+
+4. No app, crie `mobile/.env` com `EXPO_PUBLIC_API_URL=http://<IP>:5207` e reinicie o Expo.
+5. Teste no navegador do celular: `http://<IP>:5207/api/health`.
+
+O celular e o computador precisam estar na mesma rede Wi-Fi. A API também libera CORS (para o Expo Web e o site).
+
 ## Banco de dados
 
 SQLite com Entity Framework Core 10. As tabelas são criadas pela migration `Inicial`:
@@ -123,6 +143,7 @@ cp ../ia/data/lugares.csv ../ia/data/relatos_simulados.csv ../ia/data/previsoes.
 - [x] Rotas de consulta (health, relatos, previsões)
 - [x] Rota de criação (POST) com validação e idempotência
 - [x] Rota de moderação (PATCH)
+- [x] Acesso pelo celular (perfil `celular` + CORS)
 - [ ] Testes no Insomnia
 - [ ] Publicação para o IIS
 

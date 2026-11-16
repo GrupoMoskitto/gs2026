@@ -48,6 +48,14 @@ builder.Services.AddControllers()
     });
 builder.Services.AddOpenApi();
 
+// CORS: o app nativo não precisa, mas o Expo Web e o site do projeto (navegador) precisam.
+// A API é pública e sem login, então qualquer origem pode ler e enviar relatos.
+builder.Services.AddCors(opcoes => opcoes.AddDefaultPolicy(politica => politica
+    .AllowAnyOrigin()
+    .WithMethods("GET", "POST", "PATCH")
+    .WithHeaders("Content-Type", "Accept", "Idempotency-Key")
+    .WithExposedHeaders("X-Total-Count", "Location", "Idempotent-Replayed")));
+
 var app = builder.Build();
 
 // Ao subir: aplica as migrations pendentes e, se o banco estiver vazio, carrega os dados do Coto.
@@ -87,6 +95,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseCors();
 app.MapControllers();
 
 app.Run();
