@@ -1,0 +1,130 @@
+codigo,nome,tipo,latitude,longitude,cod_ibge
+bela_vista,Bela Vista,bairro,-23.5615,-46.6535,3550308
+cerqueira_cesar,Cerqueira César,bairro,-23.565,-46.664,3550308
+consolacao,Consolação,bairro,-23.5545,-46.66,3550308
+dis_355030801,Água Rasa,distrito,-23.565,-46.574,3550308
+dis_355030802,Alto de Pinheiros,distrito,-23.55,-46.708,3550308
+dis_355030804,Aricanduva,distrito,-23.578,-46.511,3550308
+dis_355030805,Artur Alvim,distrito,-23.54,-46.485,3550308
+mun_3503901,Arujá,municipio,-23.386,-46.321,3503901
+dis_355030806,Barra Funda,distrito,-23.525,-46.668,3550308
+mun_3505708,Barueri,municipio,-23.506,-46.879,3505708
+dis_355030808,Belém,distrito,-23.535,-46.595,3550308
+mun_3506607,Biritiba Mirim,municipio,-23.624,-46.019,3506607
+dis_355030809,Bom Retiro,distrito,-23.525,-46.638,3550308
+dis_355030810,Brás,distrito,-23.545,-46.616,3550308
+dis_355030811,Brasilândia,distrito,-23.465,-46.691,3550308
+dis_355030812,Butantã,distrito,-23.569,-46.728,3550308
+dis_355030813,Cachoeirinha,distrito,-23.463,-46.661,3550308
+mun_3509007,Caieiras,municipio,-23.379,-46.744,3509007
+mun_3509205,Cajamar,municipio,-23.35,-46.871,3509205
+dis_355030814,Cambuci,distrito,-23.566,-46.614,3550308
+dis_355030815,Campo Belo,distrito,-23.63,-46.67,3550308
+dis_355030816,Campo Grande,distrito,-23.672,-46.685,3550308
+dis_355030817,Campo Limpo,distrito,-23.636,-46.763,3550308
+dis_355030818,Cangaiba,distrito,-23.506,-46.531,3550308
+dis_355030819,Capão Redondo,distrito,-23.672,-46.779,3550308
+mun_3510609,Carapicuíba,municipio,-23.549,-46.84,3510609
+dis_355030820,Carrão,distrito,-23.55,-46.539,3550308
+dis_355030821,Casa Verde,distrito,-23.506,-46.656,3550308
+dis_355030822,Cidade Ademar,distrito,-23.673000000000002,-46.655,3550308
+dis_355030823,Cidade Dutra,distrito,-23.714,-46.699,3550308
+dis_355030824,Cidade Lider,distrito,-23.563,-46.494,3550308
+dis_355030825,Cidade Tiradentes,distrito,-23.58,-46.397,3550308
+mun_3513009,Cotia,municipio,-23.674,-46.959,3513009
+dis_355030827,Cursino,distrito,-23.628,-46.619,3550308
+mun_3513801,Diadema,municipio,-23.699,-46.612,3513801
+mun_3515004,Embu das Artes,municipio,-23.65,-46.847,3515004
+mun_3515103,Embu-Guaçu,municipio,-23.855,-46.829,3515103
+dis_355030828,Ermelino Matarazzo,distrito,-23.49,-46.482,3550308
+mun_3515707,Ferraz de Vasconcelos,municipio,-23.562,-46.372,3515707
+mun_3516309,Francisco Morato,municipio,-23.273,-46.72,3516309
+mun_3516408,Franco da Rocha,municipio,-23.315,-46.733,3516408
+dis_355030829,Freguesia do Ó,distrito,-23.487,-46.695,3550308
+dis_355030830,Grajaú,distrito,-23.78,-46.674,3550308
+dis_355030831,Guaianases,distrito,-23.552,-46.407,3550308
+mun_3518305,Guararema,municipio,-23.426,-46.059,3518305
+mun_3518800,Guarulhos,municipio,-23.405,-46.456,3518800
+dis_355030833,Iguatemi,distrito,-23.611,-46.425,3550308
+dis_355030834,Ipiranga,distrito,-23.589,-46.606,3550308
+dis_355030835,Itaim Bibi,distrito,-23.584,-46.678,3550308
+dis_355030836,Itaim Paulista,distrito,-23.502,-46.4,3550308
+mun_3522208,Itapecerica da Serra,municipio,-23.736,-46.861,3522208
+mun_3522505,Itapevi,municipio,-23.551,-46.967,3522505
+mun_3523107,Itaquaquecetuba,municipio,-23.464,-46.332,3523107
+dis_355030837,Itaquera,distrito,-23.542,-46.471,3550308
+dis_355030838,Jabaquara,distrito,-23.649,-46.645,3550308
+dis_355030839,Jaçanã,distrito,-23.463,-46.582,3550308
+dis_355030840,Jaguara,distrito,-23.514,-46.747,3550308
+dis_355030841,Jaguaré,distrito,-23.549,-46.744,3550308
+mun_3525003,Jandira,municipio,-23.544,-46.897,3525003
+dis_355030842,Jaraguá,distrito,-23.447,-46.736,3550308
+dis_355030843,Jardim Ângela,distrito,-23.713,-46.769,3550308
+dis_355030844,Jardim Helena,distrito,-23.48,-46.42,3550308
+dis_355030845,Jardim Paulista,distrito,-23.565,-46.66,3550308
+dis_355030846,Jardim São Luís,distrito,-23.674,-46.741,3550308
+mun_3526209,Juquitiba,municipio,-23.956,-47.025,3526209
+dis_355030896,Lajeado,distrito,-23.535,-46.409,3550308
+dis_355030848,Lapa,distrito,-23.522,-46.704,3550308
+dis_355030849,Liberdade,distrito,-23.567,-46.632,3550308
+dis_355030850,Limão,distrito,-23.503,-46.675,3550308
+mun_3528502,Mairiporã,municipio,-23.317,-46.56,3528502
+dis_355030851,Mandaqui,distrito,-23.464,-46.642,3550308
+dis_355030852,Marsilac,distrito,-23.908,-46.706,3550308
+mun_3529401,Mauá,municipio,-23.663,-46.447,3529401
+dis_355030832,Moema,distrito,-23.597,-46.663,3550308
+mun_3530607,Mogi das Cruzes,municipio,-23.57,-46.186,3530607
+dis_355030853,Mooca,distrito,-23.561,-46.597,3550308
+dis_355030854,Morumbi,distrito,-23.597,-46.707,3550308
+mun_3534401,Osasco,municipio,-23.529,-46.791,3534401
+dis_355030855,Parelheiros,distrito,-23.827,-46.728,3550308
+dis_355030856,Pari,distrito,-23.533,-46.616,3550308
+dis_355030857,Parque do Carmo,distrito,-23.579,-46.458,3550308
+dis_355030859,Penha,distrito,-23.533,-46.543,3550308
+dis_355030860,Perdizes,distrito,-23.54,-46.671,3550308
+dis_355030861,Perus,distrito,-23.408,-46.752,3550308
+dis_355030862,Pinheiros,distrito,-23.567,-46.702,3550308
+mun_3539103,Pirapora do Bom Jesus,municipio,-23.379,-46.982,3539103
+dis_355030863,Pirituba,distrito,-23.486,-46.722,3550308
+mun_3539806,Poá,municipio,-23.53,-46.349,3539806
+dis_355030864,Ponte Rasa,distrito,-23.511,-46.487,3550308
+dis_355030865,Raposo Tavares,distrito,-23.592,-46.781,3550308
+dis_355030866,República,distrito,-23.545,-46.642,3550308
+mun_3543303,Ribeirão Pires,municipio,-23.698,-46.402,3543303
+mun_3544103,Rio Grande da Serra,municipio,-23.739,-46.378,3544103
+dis_355030867,Rio Pequeno,distrito,-23.571,-46.759,3550308
+dis_355030868,Sacomã,distrito,-23.601,-46.603,3550308
+mun_3545001,Salesópolis,municipio,-23.58,-45.844,3545001
+dis_355030869,Santa Cecília,distrito,-23.53,-46.652,3550308
+mun_3546801,Santa Isabel,municipio,-23.289,-46.242,3546801
+mun_3547304,Santana de Parnaíba,municipio,-23.45,-46.916,3547304
+dis_355030871,Santo Amaro,distrito,-23.656,-46.719,3550308
+mun_3547809,Santo André,municipio,-23.723,-46.449,3547809
+mun_3548708,São Bernardo do Campo,municipio,-23.814,-46.55,3548708
+mun_3548807,São Caetano do Sul,municipio,-23.624,-46.568,3548807
+dis_355030895,São Domingos,distrito,-23.494,-46.742,3550308
+mun_3549953,São Lourenço da Serra,municipio,-23.85,-46.936,3549953
+dis_355030872,São Lucas,distrito,-23.589,-46.545,3550308
+dis_355030873,São Mateus,distrito,-23.598,-46.482,3550308
+dis_355030874,São Miguel,distrito,-23.495,-46.439,3550308
+dis_355030875,São Rafael,distrito,-23.627,-46.455,3550308
+dis_355030876,Sapopemba,distrito,-23.604,-46.51,3550308
+dis_355030877,Saúde,distrito,-23.615,-46.643,3550308
+dis_355030878,Sé,distrito,-23.55,-46.633,3550308
+mun_3552502,Suzano,municipio,-23.61,-46.311,3552502
+mun_3552809,Taboão da Serra,municipio,-23.622,-46.804,3552809
+dis_355030880,Tatuapé,distrito,-23.54,-46.577,3550308
+dis_355030882,Tucuruvi,distrito,-23.48,-46.603,3550308
+mun_3556453,Vargem Grande Paulista,municipio,-23.621,-47.015,3556453
+dis_355030883,Vila Andrade,distrito,-23.626,-46.727,3550308
+dis_355030884,Vila Curuçá,distrito,-23.503,-46.424,3550308
+dis_355030885,Vila Formosa,distrito,-23.567,-46.546,3550308
+dis_355030886,Vila Guilherme,distrito,-23.517,-46.608,3550308
+dis_355030887,Vila Jacuí,distrito,-23.5,-46.459,3550308
+dis_355030888,Vila Leopoldina,distrito,-23.528,-46.733,3550308
+dis_355030889,Vila Maria,distrito,-23.513,-46.589,3550308
+dis_355030890,Vila Mariana,distrito,-23.584,-46.633,3550308
+dis_355030891,Vila Matilde,distrito,-23.536,-46.525,3550308
+dis_355030892,Vila Medeiros,distrito,-23.488,-46.584,3550308
+dis_355030893,Vila Prudente,distrito,-23.585,-46.583,3550308
+dis_355030894,Vila Sônia,distrito,-23.599,-46.739,3550308

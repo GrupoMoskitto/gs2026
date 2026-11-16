@@ -1,0 +1,448 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-11-16T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v10",
+  "resources": [
+    {
+      "_id": "wrk_moskitto",
+      "_type": "workspace",
+      "parentId": null,
+      "name": "Moskitto Radar API",
+      "description": "Testes manuais da API (SOA). Rode a API e use o ambiente base_url.",
+      "scope": "collection",
+      "metaSortKey": -1000
+    },
+    {
+      "_id": "env_base",
+      "_type": "environment",
+      "parentId": "wrk_moskitto",
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:5207"
+      },
+      "metaSortKey": -999
+    },
+    {
+      "_id": "fld_1",
+      "_type": "request_group",
+      "parentId": "wrk_moskitto",
+      "name": "1. Health",
+      "metaSortKey": -998
+    },
+    {
+      "_id": "req_01",
+      "_type": "request",
+      "parentId": "fld_1",
+      "name": "GET health → 200",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/health",
+      "headers": [],
+      "body": {},
+      "metaSortKey": -997
+    },
+    {
+      "_id": "fld_2",
+      "_type": "request_group",
+      "parentId": "wrk_moskitto",
+      "name": "2. Consultar relatos",
+      "metaSortKey": -996
+    },
+    {
+      "_id": "req_02",
+      "_type": "request",
+      "parentId": "fld_2",
+      "name": "GET relatos → 200 (200 itens, X-Total-Count)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/relatos",
+      "headers": [],
+      "body": {},
+      "metaSortKey": -995
+    },
+    {
+      "_id": "req_03",
+      "_type": "request",
+      "parentId": "fld_2",
+      "name": "GET relatos com filtros → 200",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/relatos?bairro=bela_vista&tipo=celular&status=aprovado&limite=5",
+      "headers": [],
+      "body": {},
+      "metaSortKey": -994
+    },
+    {
+      "_id": "req_04",
+      "_type": "request",
+      "parentId": "fld_2",
+      "name": "GET relatos de um distrito → 200",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/relatos?bairro=dis_355030801&limite=5",
+      "headers": [],
+      "body": {},
+      "metaSortKey": -993
+    },
+    {
+      "_id": "req_05",
+      "_type": "request",
+      "parentId": "fld_2",
+      "name": "GET relatos tipo inválido → 400",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/relatos?tipo=carro",
+      "headers": [],
+      "body": {},
+      "metaSortKey": -992
+    },
+    {
+      "_id": "req_06",
+      "_type": "request",
+      "parentId": "fld_2",
+      "name": "GET relatos bairro inexistente → 400",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/relatos?bairro=nao_existe",
+      "headers": [],
+      "body": {},
+      "metaSortKey": -991
+    },
+    {
+      "_id": "req_07",
+      "_type": "request",
+      "parentId": "fld_2",
+      "name": "GET relato por id → 200",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/relatos/eec144d8-57a4-4f63-9bda-1766b599975e",
+      "headers": [],
+      "body": {},
+      "metaSortKey": -990
+    },
+    {
+      "_id": "req_08",
+      "_type": "request",
+      "parentId": "fld_2",
+      "name": "GET relato inexistente → 404",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/relatos/00000000-0000-0000-0000-000000000000",
+      "headers": [],
+      "body": {},
+      "metaSortKey": -989
+    },
+    {
+      "_id": "fld_3",
+      "_type": "request_group",
+      "parentId": "wrk_moskitto",
+      "name": "3. Criar relato",
+      "metaSortKey": -988
+    },
+    {
+      "_id": "req_09",
+      "_type": "request",
+      "parentId": "fld_3",
+      "name": "POST relato válido → 201",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/relatos",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Idempotency-Key",
+          "value": "{% uuid 'v4' %}"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"tipo\": \"celular\",\n  \"descricao\": \"Levaram meu celular no ponto de ônibus\",\n  \"latitude\": -23.561,\n  \"longitude\": -46.656,\n  \"bairro\": \"bela_vista\",\n  \"ocorrido_em\": \"{% now 'iso-8601', '' %}\",\n  \"origem\": \"mobile\"\n}"
+      },
+      "metaSortKey": -987
+    },
+    {
+      "_id": "req_10",
+      "_type": "request",
+      "parentId": "fld_3",
+      "name": "POST IoT (botão de pânico) → 201",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/relatos",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"tipo\": \"outro\",\n  \"latitude\": -23.561,\n  \"longitude\": -46.656,\n  \"bairro\": \"bela_vista\",\n  \"ocorrido_em\": \"{% now 'iso-8601', '' %}\",\n  \"origem\": \"iot\"\n}"
+      },
+      "metaSortKey": -986
+    },
+    {
+      "_id": "req_11",
+      "_type": "request",
+      "parentId": "fld_3",
+      "name": "POST com chave fixa (rode 2x: 201 e depois 200, mesmo id)",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/relatos",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Idempotency-Key",
+          "value": "insomnia-demo-1"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"tipo\": \"celular\",\n  \"descricao\": \"Levaram meu celular no ponto de ônibus\",\n  \"latitude\": -23.561,\n  \"longitude\": -46.656,\n  \"bairro\": \"bela_vista\",\n  \"ocorrido_em\": \"{% now 'iso-8601', '' %}\",\n  \"origem\": \"mobile\"\n}"
+      },
+      "metaSortKey": -985
+    },
+    {
+      "_id": "req_12",
+      "_type": "request",
+      "parentId": "fld_3",
+      "name": "POST campos faltando → 400",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/relatos",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"origem\": \"mobile\"\n}"
+      },
+      "metaSortKey": -984
+    },
+    {
+      "_id": "req_13",
+      "_type": "request",
+      "parentId": "fld_3",
+      "name": "POST fora da região (Rio) → 400",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/relatos",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"tipo\": \"celular\",\n  \"descricao\": \"Levaram meu celular no ponto de ônibus\",\n  \"latitude\": -22.9,\n  \"longitude\": -43.2,\n  \"bairro\": \"bela_vista\",\n  \"ocorrido_em\": \"{% now 'iso-8601', '' %}\",\n  \"origem\": \"mobile\"\n}"
+      },
+      "metaSortKey": -983
+    },
+    {
+      "_id": "req_14",
+      "_type": "request",
+      "parentId": "fld_3",
+      "name": "POST tipo e bairro inválidos → 400",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/relatos",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"tipo\": \"carro\",\n  \"descricao\": \"Levaram meu celular no ponto de ônibus\",\n  \"latitude\": -23.561,\n  \"longitude\": -46.656,\n  \"bairro\": \"copacabana\",\n  \"ocorrido_em\": \"{% now 'iso-8601', '' %}\",\n  \"origem\": \"mobile\"\n}"
+      },
+      "metaSortKey": -982
+    },
+    {
+      "_id": "req_15",
+      "_type": "request",
+      "parentId": "fld_3",
+      "name": "POST data antiga → 400",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/relatos",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"tipo\": \"celular\",\n  \"descricao\": \"Levaram meu celular no ponto de ônibus\",\n  \"latitude\": -23.561,\n  \"longitude\": -46.656,\n  \"bairro\": \"bela_vista\",\n  \"ocorrido_em\": \"2025-01-01T10:00:00-03:00\",\n  \"origem\": \"mobile\"\n}"
+      },
+      "metaSortKey": -981
+    },
+    {
+      "_id": "req_json",
+      "_type": "request",
+      "parentId": "fld_3",
+      "name": "POST JSON quebrado → 400",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/relatos",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\"tipo\": "
+      },
+      "metaSortKey": -980
+    },
+    {
+      "_id": "fld_4",
+      "_type": "request_group",
+      "parentId": "wrk_moskitto",
+      "name": "4. Moderar",
+      "metaSortKey": -979
+    },
+    {
+      "_id": "req_17",
+      "_type": "request",
+      "parentId": "fld_4",
+      "name": "PATCH aprovar → 200",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/api/relatos/eec144d8-57a4-4f63-9bda-1766b599975e/status",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"aprovado\"\n}"
+      },
+      "metaSortKey": -978
+    },
+    {
+      "_id": "req_18",
+      "_type": "request",
+      "parentId": "fld_4",
+      "name": "PATCH rejeitar com motivo → 200",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/api/relatos/eec144d8-57a4-4f63-9bda-1766b599975e/status",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"rejeitado\",\n  \"motivo\": \"relato duplicado\"\n}"
+      },
+      "metaSortKey": -977
+    },
+    {
+      "_id": "req_19",
+      "_type": "request",
+      "parentId": "fld_4",
+      "name": "PATCH status inválido → 400",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/api/relatos/eec144d8-57a4-4f63-9bda-1766b599975e/status",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"ok\"\n}"
+      },
+      "metaSortKey": -976
+    },
+    {
+      "_id": "req_20",
+      "_type": "request",
+      "parentId": "fld_4",
+      "name": "PATCH relato inexistente → 404",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/api/relatos/00000000-0000-0000-0000-000000000000/status",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"aprovado\"\n}"
+      },
+      "metaSortKey": -975
+    },
+    {
+      "_id": "fld_5",
+      "_type": "request_group",
+      "parentId": "wrk_moskitto",
+      "name": "5. Previsões",
+      "metaSortKey": -974
+    },
+    {
+      "_id": "req_21",
+      "_type": "request",
+      "parentId": "fld_5",
+      "name": "GET previsões → 200 (516)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/previsoes",
+      "headers": [],
+      "body": {},
+      "metaSortKey": -973
+    },
+    {
+      "_id": "req_22",
+      "_type": "request",
+      "parentId": "fld_5",
+      "name": "GET previsões de um lugar → 200 (4 faixas)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/previsoes?bairro=bela_vista",
+      "headers": [],
+      "body": {},
+      "metaSortKey": -972
+    },
+    {
+      "_id": "req_23",
+      "_type": "request",
+      "parentId": "fld_5",
+      "name": "GET previsões lugar inexistente → 400",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/previsoes?bairro=xyz",
+      "headers": [],
+      "body": {},
+      "metaSortKey": -971
+    },
+    {
+      "_id": "fld_6",
+      "_type": "request_group",
+      "parentId": "wrk_moskitto",
+      "name": "6. Erros gerais",
+      "metaSortKey": -970
+    },
+    {
+      "_id": "req_24",
+      "_type": "request",
+      "parentId": "fld_6",
+      "name": "Rota inexistente → 404",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/nada",
+      "headers": [],
+      "body": {},
+      "metaSortKey": -969
+    },
+    {
+      "_id": "req_25",
+      "_type": "request",
+      "parentId": "fld_6",
+      "name": "Método errado → 405",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/api/relatos/eec144d8-57a4-4f63-9bda-1766b599975e",
+      "headers": [],
+      "body": {},
+      "metaSortKey": -968
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+@api = http://localhost:5207
+
+### Teste de vida
+GET {{api}}/api/health
+
+### Lista (até 200, mais recentes primeiro; total no cabeçalho X-Total-Count)
+GET {{api}}/api/relatos
+
+### Lista com filtros
+GET {{api}}/api/relatos?bairro=bela_vista&tipo=celular&status=aprovado&limite=10
+
+### Filtro inválido -> 400 { "erro": "..." }
+GET {{api}}/api/relatos?tipo=carro
+
+### Detalhe
+GET {{api}}/api/relatos/eec144d8-57a4-4f63-9bda-1766b599975e
+
+### Detalhe inexistente -> 404
+GET {{api}}/api/relatos/00000000-0000-0000-0000-000000000000
+
+### Previsões de um lugar (4 faixas)
+GET {{api}}/api/previsoes?bairro=bela_vista
+
+### Cria relato -> 201 (status sempre "pendente"; ajuste ocorrido_em para os últimos 30 dias)
+POST {{api}}/api/relatos
+Content-Type: application/json
+Idempotency-Key: exemplo-123
+
+{
+  "tipo": "celular",
+  "descricao": "Levaram meu celular no ponto de ônibus",
+  "latitude": -23.561,
+  "longitude": -46.656,
+  "bairro": "bela_vista",
+  "ocorrido_em": "2026-11-16T10:30:00-03:00",
+  "origem": "mobile"
+}
+
+### Mesmo envio de novo -> 200 com o MESMO relato (não duplica)
+POST {{api}}/api/relatos
+Content-Type: application/json
+Idempotency-Key: exemplo-123
+
+{}
+
+### Inválido -> 400 { "erro": "..." }
+POST {{api}}/api/relatos
+Content-Type: application/json
+
+{ "tipo": "carro", "latitude": -22.9, "longitude": -43.2, "bairro": "rio", "origem": "mobile" }
+
+### Moderação -> 200 com o relato atualizado (troque o id)
+PATCH {{api}}/api/relatos/eec144d8-57a4-4f63-9bda-1766b599975e/status
+Content-Type: application/json
+
+{ "status": "aprovado", "motivo": "conferido" }
