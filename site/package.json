@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "dados": "node scripts/dados.mjs"
+    "dados": "node scripts/dados.mjs",
+    "video": "curl -fL --create-dirs -o public/app/apresentacao.mp4 https://github.com/GrupoMoskitto/gs2026/releases/download/midia/apresentacao.mp4"
   },
   "dependencies": {
     "@fontsource/roboto": "^5.3.0",

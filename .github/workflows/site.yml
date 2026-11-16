@@ -1,5 +1,3 @@
-# Publica o site da solução (pasta site/) no GitHub Pages.
-# Roda a cada push na main que mexa no site ou nos dados do modelo, ou à mão pela aba Actions.
 name: Site no GitHub Pages
 
 on:
@@ -18,7 +16,6 @@ permissions:
   pages: write
   id-token: write
 
-# Um deploy por vez; um push novo cancela o que ainda estiver esperando.
 concurrency:
   group: pages
   cancel-in-progress: true
@@ -40,10 +37,10 @@ jobs:
 
       - run: npm ci
 
-      # Atualiza src/data com as previsões mais recentes de ia/data.
       - run: npm run dados
 
-      # Checa os tipos (tsc --noEmit) e gera site/dist.
+      - run: npm run video
+
       - run: npm run build
 
       - uses: actions/configure-pages@v6

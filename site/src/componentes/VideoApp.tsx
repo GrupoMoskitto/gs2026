@@ -12,7 +12,7 @@ export function VideoApp({ children }: { children: ReactNode }) {
         <Dialog.Content className="fixed top-1/2 left-1/2 z-50 w-[min(94vw,1100px)] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-bloco bg-black">
           <Dialog.Title className="sr-only">Apresentação do app Moskitto Radar</Dialog.Title>
           <Dialog.Description className="sr-only">Vídeo de 1 minuto e 21 segundos com as telas do app.</Dialog.Description>
-          <video src="/app/apresentacao.mp4" controls autoPlay playsInline className="aspect-video w-full" />
+          <video src="/app/apresentacao.mp4" poster="/app/apresentacao.jpg" controls autoPlay playsInline className="aspect-video w-full" />
           <Dialog.Close
             aria-label="Fechar o vídeo"
             className="absolute top-3 right-3 flex h-11 w-11 items-center justify-center rounded-full bg-superficie text-forte transition-transform hover:scale-110"

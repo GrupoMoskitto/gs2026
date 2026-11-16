@@ -11,13 +11,17 @@ npm install
 npm run dev       # abre em http://localhost:5173
 npm run build     # gera a pasta dist/, que pode ser servida por qualquer servidor de arquivos
 npm run dados     # copia de novo os dados do modelo de ../ia/data
+npm run video     # baixa o vídeo de apresentação (rode uma vez)
 ```
+
+O vídeo de apresentação (`public/app/apresentacao.mp4`) fica fora do git, como anexo do release
+[`midia`](https://github.com/GrupoMoskitto/gs2026/releases/tag/midia). Para trocar o vídeo, substitua o anexo no release.
 
 ## Publicação
 
 O site vai para o GitHub Pages pela Action [`.github/workflows/site.yml`](../.github/workflows/site.yml). Ela roda a
 cada push na `main` que mexa em `site/` ou nos dados do modelo (`ia/data`), e também à mão, na aba Actions. A Action
-copia os dados do modelo, checa os tipos, gera `dist/` e publica.
+copia os dados do modelo, baixa o vídeo, checa os tipos, gera `dist/` e publica.
 
 O site roda na raiz de um domínio próprio (`base: '/'` no `vite.config.ts`).
 
