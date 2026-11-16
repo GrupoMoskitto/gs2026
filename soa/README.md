@@ -25,6 +25,7 @@ soa/
 │   ├── Data/          AppDbContext, conversores e carga inicial
 │   ├── Migrations/    migrations do EF Core
 │   └── Dados/         CSV e JSON do Coto (carga inicial)
+├── publicar.ps1       gera o pacote para o IIS
 ├── insomnia/          coleção do Insomnia (25 requisições)
 └── evidencias/        prints dos testes
 ```
@@ -142,6 +143,22 @@ cp ../ia/data/lugares.csv ../ia/data/relatos_simulados.csv ../ia/data/previsoes.
 
 Os POST usam a data atual (`now`), então não vencem. Os prints ficam em [`evidencias/`](evidencias/README.md).
 
+## Pacote para o IIS (entrega para o Kato)
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\publicar.ps1
+```
+
+Gera `soa/publish/MoskittoRadar.Api.zip` (fora do git). O que o servidor precisa:
+
+- **ASP.NET Core Hosting Bundle (.NET 10)** instalado; o `web.config` já vem no pacote (in-process).
+- Pool de aplicativos **sem código gerenciado**.
+- Permissão de escrita só na pasta `App_Data\` do site: o banco é criado lá na primeira execução,
+  com as migrations e a carga inicial. Os dados de origem vão no pacote, em `Dados\`.
+- Teste de vida: `http://<servidor>/api/health` → `{"status":"ok","banco":"ok",...}`.
+
+Testado localmente em modo Production a partir do pacote: banco criado, 10.000 relatos carregados, OpenAPI desligado.
+
 ## Status
 
 - [x] Domínio, banco e migrations
@@ -152,6 +169,6 @@ Os POST usam a data atual (`now`), então não vencem. Os prints ficam em [`evid
 - [x] Acesso pelo celular (perfil `celular` + CORS)
 - [x] Coleção do Insomnia (25 requisições, todas conferidas)
 - [ ] Prints das evidências
-- [ ] Publicação para o IIS
+- [x] Pacote para o IIS (`publicar.ps1`)
 
 Detalhes da disciplina: [`docs/disciplinas.md`](../docs/disciplinas.md#1-arquitetura-orientada-a-serviços-soa-e-web-services)
