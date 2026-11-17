@@ -18,6 +18,14 @@ Solução demonstrando como a IoT pode ser integrada ao projeto.
 - Programa multi-threaded para aproveitar todos os dois núcleos de processamento do ESP32 (2x Xtensa LX6 32-bits) para aproveitar toda a performance da CPU.
 - Solução cost-effective, de alta performance e expansível para construir um live feed de uma ou mais câmeras na aplicação principal.
 
+## Vídeo
+
+Apresentação da câmera ao vivo (57 s): o circuito, a transmissão dos quadros, a pausa pelo botão e o encaixe na solução
+(o ponto de ônibus fica em Capão Redondo, o lugar de maior risco previsto pelo modelo). O circuito é o do
+`diagram.json`, desenhado com as peças do Wokwi, e o monitor serial segue a mesma lógica do `.cpp`.
+
+<!-- Cole aqui o link do vídeo: arraste o .mp4 para este README no editor do GitHub. -->
+
 ## Estrutura
 
 ```

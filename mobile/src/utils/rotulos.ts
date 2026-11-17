@@ -46,5 +46,5 @@ export const ROTULO_STATUS: Record<StatusRelato, string> = {
 export const ROTULO_ORIGEM: Record<Origem, string> = {
   mobile: 'App',
   desktop: 'Moderação',
-  iot: 'Botão de pânico',
+  iot: 'Dispositivo IoT',
 };

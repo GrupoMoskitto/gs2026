@@ -9,7 +9,7 @@
 | **Cidadão beneficiado** | Quem mora ou circula pela região metropolitana e quer saber onde e quando o risco é maior. *A pessoa real ouvida: o time ainda precisa preencher.* |
 | **Problema, em uma frase** | Não há um lugar simples onde o morador veja, no celular, onde e quando os roubos acontecem. |
 | **Como funciona** | A pessoa relata um roubo no app (local, horário e tipo, sem dados pessoais). A API guarda os relatos, um modelo de aprendizado de máquina prevê o risco por lugar e faixa horária, e o app mostra isso no mapa e na lista. |
-| **O que cada parte faz** | **Mobile:** este app. **API (SOA):** guarda e serve os relatos. **ML:** prevê o risco. **C#:** app de moderação. **ESP32:** botão de pânico que também gera relatos. **OS:** Windows Server com IIS. **Segurança e testes:** relatório de riscos, diagrama e pitch. |
+| **O que cada parte faz** | **Mobile:** este app. **API (SOA):** guarda e serve os relatos. **ML:** prevê o risco. **C#:** app de moderação. **ESP32:** câmera ao vivo num ponto de ônibus. **OS:** Windows Server com IIS. **Segurança e testes:** relatório de riscos, diagrama e pitch. |
 | **Link do repositório** | <https://github.com/GrupoMoskitto/gs2026> |
 | **Indicador de impacto** | *A definir pelo time (documento de Testing).* |
 | **ODS conectados** | 11 (principal), 9 e 10 |
