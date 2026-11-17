@@ -1,3 +1,5 @@
+import 'leaflet/dist/leaflet.css';
+
 import { Browser, DomEvent, canvas } from 'leaflet';
 import { LocateFixed, Minus, Plus } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';

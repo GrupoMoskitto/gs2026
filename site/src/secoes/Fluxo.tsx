@@ -42,7 +42,7 @@ function VisualRelato() {
     <div className="grid w-full items-center gap-5 sm:grid-cols-[170px_1fr]">
       <div className="mx-auto w-[160px]">
         <Celular>
-          <img src="/app/novo-relato.webp" alt="Formulário de novo relato no app" className="h-full w-full object-cover object-top" />
+          <img src="/app/novo-relato.webp" alt="Formulário de novo relato no app" loading="lazy" className="h-full w-full object-cover object-top" />
         </Celular>
       </div>
       <Codigo titulo="O que o app envia" linhas={json(RELATO)} />
@@ -86,12 +86,15 @@ function VisualCamera() {
   const [transmitindo, setTransmitindo] = useState(true);
   const [n, setN] = useState(1);
   const [aceso, setAceso] = useState(false);
+  const caixa = useRef<HTMLDivElement>(null);
+  const visivel = useInView(caixa);
+  const rodando = transmitindo && visivel;
 
   useEffect(() => {
-    if (!transmitindo) return;
+    if (!rodando) return;
     const t = setInterval(() => setN((x) => x + 1), 200);
     return () => clearInterval(t);
-  }, [transmitindo]);
+  }, [rodando]);
   useEffect(() => {
     if (!transmitindo) return;
     setAceso(true);
@@ -100,7 +103,7 @@ function VisualCamera() {
   }, [n, transmitindo]);
 
   return (
-    <div className="grid w-full min-w-0 items-center gap-5 sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+    <div ref={caixa} className="grid w-full min-w-0 items-center gap-5 sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
       <div className="grid gap-4">
         <div className="relative mx-auto aspect-[220/150] w-full max-w-[280px]">
           <svg viewBox="0 0 220 150" className="h-full w-full" aria-hidden="true">
@@ -400,7 +403,7 @@ function VisualMapa() {
     <div className="grid w-full items-center gap-6 sm:grid-cols-[190px_1fr]">
       <div className="mx-auto w-[180px]">
         <Celular>
-          <img src="/app/mapa-relato.webp" alt="Mapa do app com um relato aberto" className="h-full w-full object-cover object-top" />
+          <img src="/app/mapa-relato.webp" alt="Mapa do app com um relato aberto" loading="lazy" className="h-full w-full object-cover object-top" />
         </Celular>
       </div>
       <ul className="grid gap-2">
