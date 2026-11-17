@@ -1,0 +1,24 @@
+meta {
+  name: GET previsões → 200 (516)
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{base_url}}/api/previsoes
+  body: none
+  auth: none
+}
+
+tests {
+  test("responde 200", function () {
+    expect(res.getStatus()).to.equal(200);
+  });
+  test("516 previsões", function () {
+    expect(res.getBody().length).to.equal(516);
+  });
+}
+
+docs {
+  129 lugares × 4 faixas do dia, geradas pelo modelo de ML (`ia/`).
+}

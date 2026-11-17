@@ -1,0 +1,21 @@
+meta {
+  name: GET health → 200
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{base_url}}/api/health
+  body: none
+  auth: none
+}
+
+tests {
+  test("responde 200", function () {
+    expect(res.getStatus()).to.equal(200);
+  });
+}
+
+docs {
+  Teste de vida, usado pelo IIS. Responde `503` se o banco falhar.
+}

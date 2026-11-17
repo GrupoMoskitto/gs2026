@@ -17,6 +17,7 @@ public class JanelaEntrada : Window
     public JanelaEntrada()
     {
         Title = "Moskitto Radar · Entrar";
+        Icon = App.Icone;
         Width = 340;
         SizeToContent = SizeToContent.Height;
         CanResize = false;

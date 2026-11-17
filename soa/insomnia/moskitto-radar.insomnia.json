@@ -159,7 +159,7 @@
       "_id": "req_10",
       "_type": "request",
       "parentId": "fld_3",
-      "name": "POST IoT (botão de pânico) → 201",
+      "name": "POST IoT (dispositivo no ponto) → 201",
       "method": "POST",
       "url": "{{ _.base_url }}/api/relatos",
       "headers": [

@@ -43,7 +43,7 @@ public static class Dialogos
 
     private static Window Caixa(string titulo) => new()
     {
-        Title = titulo, Width = 380, SizeToContent = SizeToContent.Height, CanResize = false,
+        Title = titulo, Icon = App.Icone, Width = 380, SizeToContent = SizeToContent.Height, CanResize = false,
         WindowStartupLocation = WindowStartupLocation.CenterOwner,
     };
 }

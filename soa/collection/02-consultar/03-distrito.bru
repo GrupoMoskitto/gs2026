@@ -1,0 +1,21 @@
+meta {
+  name: GET relatos de um distrito → 200
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{base_url}}/api/relatos?bairro=dis_355030801&limite=5
+  body: none
+  auth: none
+}
+
+tests {
+  test("responde 200", function () {
+    expect(res.getStatus()).to.equal(200);
+  });
+}
+
+docs {
+  Distritos da capital usam o código `dis_<IBGE>`; municípios, `mun_<IBGE>`.
+}

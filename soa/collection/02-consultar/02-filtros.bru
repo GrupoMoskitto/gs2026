@@ -1,0 +1,24 @@
+meta {
+  name: GET relatos com filtros → 200
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{base_url}}/api/relatos?bairro=bela_vista&tipo=celular&status=aprovado&limite=5
+  body: none
+  auth: none
+}
+
+tests {
+  test("responde 200", function () {
+    expect(res.getStatus()).to.equal(200);
+  });
+  test("traz o total no X-Total-Count", function () {
+    expect(res.getHeader("x-total-count")).to.not.be.undefined;
+  });
+}
+
+docs {
+  Filtros `bairro`, `tipo` e `status`, e `limite` de 1 a 1000.
+}

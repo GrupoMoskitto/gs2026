@@ -1,8 +1,8 @@
 # Moskitto Radar · API (SOA)
 
 API REST do Moskitto Radar, a CitizenTech da equipe na GS FIAP 2026.2. Guarda os relatos de roubo da Região
-Metropolitana de São Paulo e serve a previsão de risco do modelo de ML. É usada pelo app mobile, pelo botão de
-pânico (ESP32) e pela moderação, e roda no IIS do Windows Server.
+Metropolitana de São Paulo e serve a previsão de risco do modelo de ML. É usada pelo app mobile e pela moderação, e roda
+no IIS do Windows Server, o mesmo servidor que recebe a transmissão da câmera do ponto de ônibus (ESP32).
 
 **Stack:** ASP.NET Core Web API (.NET 10), Entity Framework Core 10, SQLite.
 
@@ -14,6 +14,13 @@ pânico (ESP32) e pela moderação, e roda no IIS do Windows Server.
 | Gabriel Couto | RM559579 |
 | Gabriel Kato | RM560000 |
 | Marcelo Affonso | RM559790 |
+
+## Vídeo
+
+Apresentação da API (1 min 8 s): consulta com filtros, criação com idempotência, validação e moderação. As respostas
+na tela são reais, capturadas da API rodando localmente com os dados simulados.
+
+<!-- Cole aqui o link do vídeo: arraste o .mp4 para este README no editor do GitHub. -->
 
 ## Estrutura
 
@@ -102,7 +109,7 @@ O JSON segue o formato comum do projeto (`AGENTS.md`, seção 4): chaves em snak
 | `latitude`, `longitude` | obrigatórias, dentro da caixa da região; gravadas com 3 casas decimais |
 | `bairro` | obrigatório, um dos 129 códigos da tabela `lugares` |
 | `ocorrido_em` | obrigatório, com fuso (`2026-11-10T21:35:00-03:00`), nos últimos 30 dias e não no futuro (5 min de folga) |
-| `origem` | obrigatória: `mobile`, `desktop` ou `iot` |
+| `origem` | obrigatória: `mobile`, `desktop` ou `iot` (reservada para dispositivos no ponto de ônibus) |
 | `id`, `status` | ignorados se vierem: a API gera o id e todo relato novo é `pendente` |
 
 Todos os problemas voltam juntos numa mensagem só, ex.: `{ "erro": "tipo é obrigatório. bairro é obrigatório." }`.
@@ -146,6 +153,27 @@ cp ../ia/data/lugares.csv ../ia/data/relatos_simulados.csv ../ia/data/previsoes.
 
 Os POST usam a data atual (`now`), então não vencem. Os prints ficam em [`evidencias/`](evidencias/README.md).
 
+## Collection do Bruno
+
+[`collection/`](collection/) documenta a API para o [Bruno](https://www.usebruno.com): as mesmas requisições do
+Insomnia, em pastas na ordem (health, consultar, criar, moderar, previsões, erros), cada uma com a explicação e os
+testes do status esperado.
+
+1. Suba a API (`dotnet run`).
+2. No Bruno: **Open Collection** → pasta `soa/collection/`, e escolha o ambiente `local` (ou `celular`, com o IP do
+   computador).
+3. Rode a collection inteira (**Run**). "POST relato válido" guarda o id do relato novo em `relato_id`, que a pasta
+   "4. Moderar" usa.
+
+Pelo terminal, com a API no ar:
+
+```bash
+cd soa/collection
+npx @usebruno/cli run --env local
+```
+
+Resultado esperado: 26 requisições e 44 testes passando.
+
 ## Pacote para o IIS (entrega para o Kato)
 
 ```powershell
@@ -171,6 +199,7 @@ Testado localmente em modo Production a partir do pacote: banco criado, 10.000 r
 - [x] Rota de moderação (PATCH)
 - [x] Acesso pelo celular (perfil `celular` + CORS)
 - [x] Coleção do Insomnia (25 requisições, todas conferidas)
+- [x] Collection do Bruno (`collection/`, 26 requisições com testes)
 - [x] Prints das evidências (`evidencias/`)
 - [x] Pacote para o IIS (`publicar.ps1`)
 

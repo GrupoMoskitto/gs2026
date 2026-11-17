@@ -1,0 +1,30 @@
+meta {
+  name: PATCH aprovar → 200
+  type: http
+  seq: 1
+}
+
+patch {
+  url: {{base_url}}/api/relatos/{{relato_id}}/status
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "status": "aprovado"
+  }
+}
+
+tests {
+  test("responde 200", function () {
+    expect(res.getStatus()).to.equal(200);
+  });
+  test("relato aprovado", function () {
+    expect(res.getBody().status).to.equal("aprovado");
+  });
+}
+
+docs {
+  Usa o relato criado em "POST relato válido". Cada mudança fica na tabela `moderacoes`.
+}

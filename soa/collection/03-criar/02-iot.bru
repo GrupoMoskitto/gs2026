@@ -1,0 +1,28 @@
+meta {
+  name: POST relato de dispositivo IoT → 201
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base_url}}/api/relatos
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "tipo": "outro",
+    "latitude": -23.561,
+    "longitude": -46.656,
+    "bairro": "bela_vista",
+    "ocorrido_em": "{{$isoTimestamp}}",
+    "origem": "iot"
+  }
+}
+
+tests {
+  test("responde 201", function () {
+    expect(res.getStatus()).to.equal(201);
+  });
+}

@@ -1,0 +1,17 @@
+meta {
+  name: Rota inexistente → 404
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{base_url}}/api/nada
+  body: none
+  auth: none
+}
+
+tests {
+  test("responde 404", function () {
+    expect(res.getStatus()).to.equal(404);
+  });
+}

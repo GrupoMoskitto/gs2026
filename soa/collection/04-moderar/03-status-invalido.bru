@@ -1,0 +1,26 @@
+meta {
+  name: PATCH status inválido → 400
+  type: http
+  seq: 3
+}
+
+patch {
+  url: {{base_url}}/api/relatos/{{relato_id}}/status
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "status": "ok"
+  }
+}
+
+tests {
+  test("responde 400", function () {
+    expect(res.getStatus()).to.equal(400);
+  });
+  test("explica o erro", function () {
+    expect(res.getBody().erro).to.be.a("string");
+  });
+}

@@ -1,0 +1,20 @@
+meta {
+  name: GET previsões de um lugar → 200 (4 faixas)
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{base_url}}/api/previsoes?bairro=bela_vista
+  body: none
+  auth: none
+}
+
+tests {
+  test("responde 200", function () {
+    expect(res.getStatus()).to.equal(200);
+  });
+  test("uma previsão por faixa do dia", function () {
+    expect(res.getBody().length).to.equal(4);
+  });
+}

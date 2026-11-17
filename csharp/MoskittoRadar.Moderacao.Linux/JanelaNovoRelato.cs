@@ -21,6 +21,7 @@ public class JanelaNovoRelato : Window
     public JanelaNovoRelato()
     {
         Title = "Novo relato";
+        Icon = App.Icone;
         SizeToContent = SizeToContent.WidthAndHeight;
         CanResize = false;
         WindowStartupLocation = WindowStartupLocation.CenterOwner;

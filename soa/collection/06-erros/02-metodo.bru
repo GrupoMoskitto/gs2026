@@ -1,0 +1,17 @@
+meta {
+  name: Método errado → 405
+  type: http
+  seq: 2
+}
+
+delete {
+  url: {{base_url}}/api/relatos/eec144d8-57a4-4f63-9bda-1766b599975e
+  body: none
+  auth: none
+}
+
+tests {
+  test("responde 405", function () {
+    expect(res.getStatus()).to.equal(405);
+  });
+}

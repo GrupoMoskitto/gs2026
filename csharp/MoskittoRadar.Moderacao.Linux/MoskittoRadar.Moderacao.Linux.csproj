@@ -13,6 +13,7 @@
     <Compile Include="../MoskittoRadar.Moderacao/Models/*.cs" Link="Models/%(Filename)%(Extension)" />
     <Compile Include="../MoskittoRadar.Moderacao/Services/*.cs" Link="Services/%(Filename)%(Extension)" />
     <None Include="../../ia/data/lugares.csv" Link="lugares.csv" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../MoskittoRadar.Moderacao/moskitto.ico" Link="moskitto.ico" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,26 @@
+meta {
+  name: PATCH relato inexistente → 404
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{base_url}}/api/relatos/00000000-0000-0000-0000-000000000000/status
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "status": "aprovado"
+  }
+}
+
+tests {
+  test("responde 404", function () {
+    expect(res.getStatus()).to.equal(404);
+  });
+  test("explica o erro", function () {
+    expect(res.getBody().erro).to.be.a("string");
+  });
+}
