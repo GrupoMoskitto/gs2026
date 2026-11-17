@@ -33,12 +33,12 @@
 ```
 os/
 ├── README.md
-├── roteiro/        (passo a passo de configuração)
-└── evidencias/     (prints e saídas de comandos)
+└── server.md (descrição e especificações do servidor (VM) e seus serviços)
+(as outras entregas serão feitas diretamente ao professor)
 ```
 
 ## Status
 
-Não iniciado.
+Iniciado.
 
 Detalhes da disciplina: [`docs/disciplinas.md`](../docs/disciplinas.md#6-operating-systems)
