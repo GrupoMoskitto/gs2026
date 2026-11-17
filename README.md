@@ -51,8 +51,9 @@ flowchart LR
     API -- relatos e risco --> APP
 ```
 
-A API roda num Windows Server com IIS (`os/`). O app de moderação em C# (`csharp/`) roda à parte, com relatos em
-memória. A segurança da solução está em `cyber/`, e a arquitetura e o pitch, em `testing/`.
+A API roda num Windows Server com IIS (`os/`). O app de moderação em C# (`csharp/`) tem duas versões: a de
+Windows Forms, entregue na matéria, com relatos em memória, e uma para Linux, em Avalonia, que modera os relatos
+direto na API. A segurança da solução está em `cyber/`, e a arquitetura e o pitch, em `testing/`.
 
 ### As partes
 
@@ -64,7 +65,7 @@ onde estão as evidências.
 | [`mobile/`](mobile/) | Mobile Development & IoT | App do cidadão (React Native + Expo): mapa, relatos, previsão e vídeo demo |
 | [`ia/`](ia/) | IA & Machine Learning | Modelo que prevê o risco por lugar e horário, com os dados da SSP-SP |
 | [`soa/`](soa/) | Arquitetura Orientada a Serviços | API REST e banco de dados dos relatos |
-| [`csharp/`](csharp/) | C# Software Development | App de moderação dos relatos |
+| [`csharp/`](csharp/) | C# Software Development | App de moderação dos relatos, em Windows Forms e numa versão para Linux |
 | [`physical/`](physical/) | Physical Computing | Botão de pânico no ESP32 (Wokwi) que gera relatos |
 | [`os/`](os/) | Operating Systems | Windows Server, AD, DNS e IIS hospedando a API |
 | [`cyber/`](cyber/) | Cybersecurity | Gestão de riscos e controles de segurança |

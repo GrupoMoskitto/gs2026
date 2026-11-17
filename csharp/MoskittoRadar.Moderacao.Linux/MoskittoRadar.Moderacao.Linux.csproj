@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <!-- Mesmas classes do projeto Windows: só as telas mudam -->
+  <ItemGroup>
+    <Compile Include="../MoskittoRadar.Moderacao/Models/*.cs" Link="Models/%(Filename)%(Extension)" />
+    <Compile Include="../MoskittoRadar.Moderacao/Services/*.cs" Link="Services/%(Filename)%(Extension)" />
+    <None Include="../../ia/data/lugares.csv" Link="lugares.csv" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="12.1.5" />
+    <PackageReference Include="Avalonia.Desktop" Version="12.1.5" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.5" />
+  </ItemGroup>
+
+</Project>

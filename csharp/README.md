@@ -31,6 +31,23 @@ Ou abra `MoskittoRadar.Moderacao.slnx` no Visual Studio e aperte F5.
 Os relatos ficam em memória: são **simulados** (`Services/DadosSimulados.cs`) e voltam ao início ao fechar o app.
 Nenhum dado pessoal real.
 
+## Rodar no Linux
+
+Windows Forms só existe no Windows. Para o Linux, `MoskittoRadar.Moderacao.Linux/` tem as mesmas três telas em
+[Avalonia](https://avaloniaui.net), usando as **mesmas classes** de `Models/` e `Services/` (o projeto aponta para os
+arquivos do projeto Windows, sem cópia). Só as telas mudam.
+
+```bash
+cd csharp
+dotnet run --project MoskittoRadar.Moderacao.Linux
+```
+
+Diferente da versão Windows, esta lê e modera os relatos da **API** (`soa/`): a lista vem de `GET /api/relatos`,
+aprovar e rejeitar chamam `PATCH /api/relatos/{id}/status` e o relato aprovado aparece no mapa do app. Suba a API
+antes (`dotnet run` em `soa/MoskittoRadar.Api`). Outro endereço: variável `MODERACAO_API`.
+
+O ZIP de entrega (`empacotar.ps1`) continua levando só a versão Windows.
+
 ## Como o código usa POO
 
 | Conceito | Onde |
