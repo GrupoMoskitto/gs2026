@@ -22,7 +22,7 @@ import { faixaAtual, formatarQuando } from '@/utils/tempo';
 const ROTULO_ORIGEM: Record<Origem, string> = {
   mobile: 'Aplicativo do cidadão',
   desktop: 'Aplicativo do moderador',
-  iot: 'Botão de pânico',
+  iot: 'Dispositivo IoT',
 };
 
 export default function DetalheRelato() {

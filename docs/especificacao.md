@@ -78,7 +78,7 @@ flowchart TB
         MOB["App Mobile<br/>React Native + Expo<br/>(mobile/)"]
         WEB["Mapa Web<br/>(a definir)"]
         DESK["Painel do moderador<br/>C# Windows Forms<br/>(csharp/)"]
-        IOT["Dispositivo ESP32<br/>Wokwi<br/>(physical/)"]
+        IOT["Câmera ao vivo ESP32<br/>Wokwi<br/>(physical/)"]
     end
 
     subgraph host["Hospedagem: Windows Server + IIS (os/)"]
@@ -89,7 +89,8 @@ flowchart TB
     ML["Modelo de ML<br/>Python<br/>(ia/)"]
     SEC["Gestão de riscos e controles<br/>(cyber/)"]
 
-    MOB & WEB & DESK & IOT -->|"HTTP / JSON"| API
+    MOB & WEB & DESK -->|"HTTP / JSON"| API
+    IOT -->|"imagens ao vivo"| API
     API <-->|"relatos"| DB
     DB -->|"relatos aprovados"| ML
     ML -->|"previsão de risco"| API
@@ -103,8 +104,8 @@ flowchart TB
 | App do cidadão | `mobile/` | Mapa, lista, detalhe, cadastro de relato, recurso nativo (localização/câmera) |
 | Painel do moderador | `csharp/` | Windows Forms para moderar e administrar relatos |
 | Inteligência | `ia/` | Modelo de previsão de risco, treinado e avaliado, e integrado à solução |
-| Dispositivo | `physical/` | Circuito ESP32 no Wokwi, integrado à solução |
-| Infraestrutura | `os/` | Windows Server (AD, DNS, IIS, GPO) hospedando a aplicação web |
+| Dispositivo | `physical/` | Câmera ao vivo no ponto de ônibus do lugar de maior risco previsto pelo modelo: ESP32 no Wokwi transmitindo quadros ao servidor da API |
+| Infraestrutura | `os/` | Windows Server 2025 numa VM (AD, DNS, DHCP, IIS), hospedando a API ([`os/server.md`](../os/server.md)) |
 | Segurança | `cyber/` | Gestão de riscos, controles técnicos e evidências |
 | Arquitetura e narrativa | `testing/` | Diagrama ArchiMate/TOGAF, documento descritivo e pitch |
 

@@ -13,7 +13,7 @@ Este arquivo fica na **raiz do monorepo**. Contexto completo da GS: [`docs/`](do
 
 O morador relata um roubo pelo app (local, horário e tipo, sem dados pessoais). A API guarda os
 relatos, um modelo de ML aponta onde e quando o risco é maior, e isso aparece no app.
-Um app em C# modera os relatos e um botão de pânico (ESP32) também gera relatos.
+Um app em C# modera os relatos e uma câmera num ESP32 transmite ao vivo de um ponto de ônibus.
 Tudo roda num Windows Server com IIS.
 
 - **Região:** Região Metropolitana de São Paulo: 3 bairros da Av. Paulista (Bela Vista, Cerqueira César e Consolação,
@@ -205,11 +205,15 @@ Cada matéria tem: **stack**, **fazer**, **entregar** e **nota** (o que o profes
 
 - **Stack:** ESP32 no Wokwi, Arduino C++.
 - **Fazer:**
-  - Botão de pânico num ponto de ônibus: ao apertar, monta um Relato (`origem: "iot"`, local fixo) e faz
-    `POST /api/relatos` pelo Wi-Fi `Wokwi-GUEST`
-  - LED ou buzzer confirmando o envio
-  - **Atenção:** o simulador provavelmente não alcança uma API em VM local. Trate a saída do JSON no
-    Serial Monitor como caminho principal e o `POST` como extra (ou aponte para um endpoint público de teste).
+  - Câmera ao vivo num ponto de ônibus: o ESP32 emula uma câmera simples (quadros de 32×16 pixels em tons de
+    cinza) e transmite os quadros ao servidor, para um feed ao vivo na aplicação principal
+  - Encaixe na solução: o ponto fica no lugar de maior risco previsto pelo modelo (hoje Capão Redondo, risco alto
+    nas 4 faixas) e a transmissão vai para o mesmo Windows Server da API (`moskitto.br.local`)
+  - Os dois núcleos do ESP32 trabalham juntos (FreeRTOS): o núcleo 0 captura, o núcleo 1 transmite, com uma
+    fila entre eles
+  - Potenciômetro muda a imagem, botão pausa e retoma a transmissão, LED pisca a cada quadro enviado
+  - A transmissão é simulada no Serial Monitor (cabeçalho HTTP e o quadro em ASCII). A rota `/api/v1/stream`
+    ainda não existe na API.
 - **Entregar:** link do Wokwi + vídeo de até 4 min (mostrando como o circuito entra na solução) + `.txt` com os integrantes
 - **Nota:** o circuito tem que fazer parte da solução, não pode ser um projeto paralelo
 

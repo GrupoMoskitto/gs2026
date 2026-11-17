@@ -50,7 +50,7 @@ O app já trabalha com a região metropolitana de São Paulo, mas o `AGENTS.md` 
   A validação de coordenadas passa a usar a caixa da região metropolitana (latitude -24,1 a -23,15; longitude -47,1 a -45,75, provisória).
   Enquanto a API aceitar só os 3 códigos antigos, um relato de outro lugar volta com erro 400.
 - **Coto (IA):** o gerador do CSV e o modelo passam a ter um lugar por linha (cerca de 125 lugares no lugar de 3 bairros).
-- **Kato e Marcelo:** o ponto do botão de pânico e o texto do público-alvo precisam apontar para a região nova.
+- **Kato e Marcelo:** o ponto de ônibus da câmera e o texto do público-alvo precisam apontar para a região nova.
 - **Dados do app:** os relatos de exemplo são simulados para a região toda, com mais ocorrências no centro expandido. O
   risco vem do modelo de ML (`ia/data/previsoes.json`), com os mesmos 129 códigos de lugar.
 

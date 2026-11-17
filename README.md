@@ -42,12 +42,13 @@ começou, 88 distritos da capital e 38 municípios vizinhos.
 ```mermaid
 flowchart LR
     APP["App do cidadão - mobile"]
-    IOT["Botão de pânico ESP32 - physical"]
+    IOT["Câmera ao vivo ESP32 - physical"]
     API["API e banco - soa"]
     ML["Modelo de risco - ia"]
     APP -- relato --> API
-    IOT -- relato --> API
+    IOT -- imagens ao vivo --> API
     ML -- previsões --> API
+    ML -. onde pôr a câmera .-> IOT
     API -- relatos e risco --> APP
 ```
 
@@ -66,7 +67,7 @@ onde estão as evidências.
 | [`ia/`](ia/) | IA & Machine Learning | Modelo que prevê o risco por lugar e horário, com os dados da SSP-SP |
 | [`soa/`](soa/) | Arquitetura Orientada a Serviços | API REST e banco de dados dos relatos |
 | [`csharp/`](csharp/) | C# Software Development | App de moderação dos relatos, em Windows Forms e numa versão para Linux |
-| [`physical/`](physical/) | Physical Computing | Botão de pânico no ESP32 (Wokwi) que gera relatos |
+| [`physical/`](physical/) | Physical Computing | Câmera ao vivo com ESP32 (Wokwi) no ponto de ônibus do lugar de maior risco do modelo |
 | [`os/`](os/) | Operating Systems | Windows Server, AD, DNS e IIS hospedando a API |
 | [`cyber/`](cyber/) | Cybersecurity | Gestão de riscos e controles de segurança |
 | [`testing/`](testing/) | Testing, Compliance & QA | Arquitetura (ArchiMate) e pitch |
