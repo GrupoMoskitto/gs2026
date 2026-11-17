@@ -44,6 +44,7 @@ public class JanelaPrincipal : Window
         this.usuario = usuario;
 
         Title = $"Moskitto Radar · Moderação de relatos · {usuario}";
+        Icon = App.Icone;
         Width = 1080;
         Height = 620;
         WindowStartupLocation = WindowStartupLocation.CenterScreen;

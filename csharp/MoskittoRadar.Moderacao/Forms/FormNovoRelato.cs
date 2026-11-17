@@ -19,6 +19,7 @@ public class FormNovoRelato : Form
     public FormNovoRelato()
     {
         Text = "Novo relato";
+        Icon = Program.Icone;
         ClientSize = new Size(450, 330);
         FormBorderStyle = FormBorderStyle.FixedDialog;
         MaximizeBox = false;

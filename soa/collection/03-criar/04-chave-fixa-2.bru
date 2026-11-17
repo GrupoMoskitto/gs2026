@@ -1,0 +1,40 @@
+meta {
+  name: POST com a mesma chave → 200
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{base_url}}/api/relatos
+  body: json
+  auth: none
+}
+
+headers {
+  Idempotency-Key: bruno-demo-{{chave_demo}}
+}
+
+body:json {
+  {
+    "tipo": "celular",
+    "descricao": "Levaram meu celular no ponto de ônibus",
+    "latitude": -23.561,
+    "longitude": -46.656,
+    "bairro": "bela_vista",
+    "ocorrido_em": "{{$isoTimestamp}}",
+    "origem": "mobile"
+  }
+}
+
+tests {
+  test("responde 200", function () {
+    expect(res.getStatus()).to.equal(200);
+  });
+  test("devolve o relato original", function () {
+    expect(res.getHeader("idempotent-replayed")).to.equal("true");
+  });
+}
+
+docs {
+  A mesma `Idempotency-Key` não cria outro relato: volta `200` com o original e `Idempotent-Replayed: true`.
+}

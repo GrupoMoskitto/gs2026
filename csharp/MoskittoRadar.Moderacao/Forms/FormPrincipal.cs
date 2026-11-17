@@ -29,6 +29,7 @@ public class FormPrincipal : Form
         this.usuario = usuario;
 
         Text = $"Moskitto Radar · Moderação de relatos · {usuario}";
+        Icon = Program.Icone;
         ClientSize = new Size(1000, 560);
         StartPosition = FormStartPosition.CenterScreen;
 
@@ -131,7 +132,7 @@ public class FormPrincipal : Form
     /// <summary>Caixinha para digitar o motivo da rejeição. Devolve null se cancelar.</summary>
     private string? PedirMotivo()
     {
-        using var janela = new Form { Text = "Motivo da rejeição", ClientSize = new Size(360, 90), FormBorderStyle = FormBorderStyle.FixedDialog, StartPosition = FormStartPosition.CenterParent, MaximizeBox = false, MinimizeBox = false };
+        using var janela = new Form { Text = "Motivo da rejeição", Icon = Program.Icone, ClientSize = new Size(360, 90), FormBorderStyle = FormBorderStyle.FixedDialog, StartPosition = FormStartPosition.CenterParent, MaximizeBox = false, MinimizeBox = false };
         var txtMotivo = new TextBox { Location = new Point(12, 12), Width = 336, Text = "Relato duplicado" };
         var btnOk = new Button { Text = "Rejeitar", Location = new Point(248, 50), Width = 100, DialogResult = DialogResult.OK };
         janela.Controls.AddRange([txtMotivo, btnOk]);

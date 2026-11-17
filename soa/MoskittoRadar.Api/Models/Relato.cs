@@ -1,7 +1,7 @@
 namespace MoskittoRadar.Api.Models;
 
 /// <summary>
-/// Relato de roubo feito por um morador (app), pelo moderador (desktop) ou pelo botão de pânico (IoT).
+/// Relato de roubo feito por um morador (app), pelo moderador (desktop) ou por um dispositivo no ponto de ônibus (IoT).
 /// Não guarda nenhum dado pessoal: só local aproximado, horário e tipo.
 /// </summary>
 public class Relato

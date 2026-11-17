@@ -15,6 +15,7 @@ public class FormEntrada : Form
     public FormEntrada()
     {
         Text = "Moskitto Radar · Entrar";
+        Icon = Program.Icone;
         ClientSize = new Size(300, 160);
         FormBorderStyle = FormBorderStyle.FixedDialog;
         MaximizeBox = false;

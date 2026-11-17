@@ -5,6 +5,9 @@ namespace MoskittoRadar.Moderacao;
 
 internal static class Program
 {
+    /// <summary>Ícone do Moskitto (moskitto.ico, gravado no .exe pelo csproj) para todas as janelas.</summary>
+    internal static readonly Icon? Icone = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+
     [STAThread]
     private static void Main()
     {

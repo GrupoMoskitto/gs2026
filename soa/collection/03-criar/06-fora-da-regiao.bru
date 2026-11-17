@@ -1,0 +1,32 @@
+meta {
+  name: POST fora da região (Rio) → 400
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{base_url}}/api/relatos
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "tipo": "celular",
+    "descricao": "Levaram meu celular no ponto de ônibus",
+    "latitude": -22.9,
+    "longitude": -43.2,
+    "bairro": "bela_vista",
+    "ocorrido_em": "{{$isoTimestamp}}",
+    "origem": "mobile"
+  }
+}
+
+tests {
+  test("responde 400", function () {
+    expect(res.getStatus()).to.equal(400);
+  });
+  test("explica o erro", function () {
+    expect(res.getBody().erro).to.be.a("string");
+  });
+}
