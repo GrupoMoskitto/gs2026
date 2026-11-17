@@ -1,10 +1,6 @@
-// Formato comum dos dados do projeto (AGENTS.md, seção 4). Não mude sem combinar com o time.
-// As chaves ficam em snake_case porque é o que a API devolve.
-
 export const TIPOS_RELATO = ['celular', 'bolsa_mochila', 'veiculo', 'bicicleta', 'comercio', 'outro'] as const;
 export type TipoRelato = (typeof TIPOS_RELATO)[number];
 
-/** Código do lugar (distrito na capital, município no resto da região). O campo segue `bairro` por compatibilidade com a API. */
 export type Bairro = string;
 
 export const STATUS_RELATO = ['pendente', 'aprovado', 'rejeitado'] as const;

@@ -1,4 +1,3 @@
-// Identificação com apelido e RM, lembrada no aparelho. Não é login (não há senha).
 import { Redirect } from 'expo-router';
 import { useRef, useState, type ComponentRef } from 'react';
 import { Image, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, TextInput, View } from 'react-native';

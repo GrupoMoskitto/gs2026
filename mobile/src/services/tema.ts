@@ -1,4 +1,4 @@
-// Tema escolhido nos Ajustes, salvo no aparelho. `Appearance.setColorScheme` troca o app inteiro, inclusive os componentes nativos.
+// `Appearance.setColorScheme` troca o app inteiro, inclusive os componentes nativos.
 import { Appearance } from 'react-native';
 
 import { gravarJson, lerJson } from './armazenamento';

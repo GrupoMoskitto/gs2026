@@ -1,4 +1,4 @@
-// Tema do app. Valores vindos de mockup/tokens.css (a fonte visual aprovada). Mude aqui, em um só lugar.
+// Valores de mockup/tokens.css.
 import { Platform, useColorScheme } from 'react-native';
 
 import type { NivelRisco, StatusRelato } from '@/types/dominio';
@@ -92,10 +92,7 @@ export const alvoToque = Platform.OS === 'ios' ? 44 : 48;
 
 export const duracao = { rapida: 120, base: 220, lenta: 360 } as const;
 
-/**
- * Espaço que a barra de abas ocupa sobre o conteúdo. No iOS 26 ela é de vidro e flutua por cima da tela,
- * então botões e legendas fixos precisam subir esse tanto. No Android a barra fica fora do conteúdo.
- */
+/** No iOS 26 a barra de abas flutua sobre o conteúdo; no Android fica fora dele. */
 export const ESPACO_ABAS = Platform.OS === 'ios' ? 96 : 0;
 
 export const MARGEM = 16;

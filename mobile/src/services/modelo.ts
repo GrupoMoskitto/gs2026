@@ -4,7 +4,6 @@ import resumo from '@/data/resumo_modelo.json';
 import { FAIXAS_HORARIAS, type FaixaHoraria, type PrevisaoRisco } from '@/types/dominio';
 import { ehPrevisao, filtrarLista } from './tipos';
 
-/** Números por faixa, na ordem madrugada, manhã, tarde, noite. */
 type PorFaixa = number[];
 
 export interface ResumoLugar {

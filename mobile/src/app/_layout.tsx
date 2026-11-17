@@ -50,8 +50,6 @@ function Navegacao() {
     },
   };
 
-  // Quem decide para onde ir é a rota raiz (index) e as guardas de identificacao e (tabs):
-  // cada uma redireciona explicitamente conforme haja ou não identificação salva.
   return (
     <ThemeProvider value={tema}>
       <StatusBar style={escuro ? 'light' : 'dark'} />

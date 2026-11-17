@@ -1,4 +1,3 @@
-// Guarda no aparelho (AsyncStorage). Se o armazenamento falhar, o app segue sem ele.
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PREFIXO = 'mapa-relatos:';
@@ -24,9 +23,7 @@ export async function gravarJson(chave: string, valor: unknown): Promise<void> {
 export async function removerChave(chave: string): Promise<void> {
   try {
     await AsyncStorage.removeItem(PREFIXO + chave);
-  } catch {
-    // nada a fazer
-  }
+  } catch {}
 }
 
 interface Salvo<T> {

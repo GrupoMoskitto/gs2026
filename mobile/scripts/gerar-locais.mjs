@@ -1,12 +1,4 @@
-// Gera src/data/locais.json: municípios da Região Metropolitana de São Paulo e distritos da capital,
-// com um ponto central para o mapa se mover até o local escolhido na busca.
-//
-// Roda uma vez, no computador de quem desenvolve (não no app): node scripts/gerar-locais.mjs
-//   - Nomes e códigos: API de Localidades do IBGE (dados públicos).
-//   - Municípios: centro calculado a partir da malha do IBGE.
-//   - Distritos: o IBGE não publica a geometria, então o ponto vem do Nominatim (OpenStreetMap),
-//     no máximo 1 pedido por segundo, como pede a política de uso. Só vai o nome do distrito.
-// Nenhum dado pessoal é enviado. O app lê o arquivo gerado e não faz nenhuma consulta na busca.
+// Gera src/data/locais.json com os lugares do IBGE; o centro dos distritos vem do Nominatim (1 pedido por segundo).
 import { writeFile, mkdir } from 'node:fs/promises';
 
 const IBGE = 'https://servicodados.ibge.gov.br/api';

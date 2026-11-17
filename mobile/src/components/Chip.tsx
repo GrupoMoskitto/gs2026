@@ -15,7 +15,6 @@ interface Props {
   papel?: 'radio' | 'checkbox';
 }
 
-/** Opção selecionável. O selecionado inverte para tinta neutra: o azul fica para dados e ação principal. */
 export function Chip({ rotulo, selecionado, aoPressionar, icone, papel = 'radio' }: Props) {
   const { cores } = useTema();
   const vidro = useVidro();

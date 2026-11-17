@@ -75,10 +75,7 @@ export async function obterRelato(id: string, opcoes: OpcoesChamada = {}): Promi
   return { dados: exemplo, fonte: 'exemplo', atualizadoEm: new Date().toISOString() };
 }
 
-/**
- * Envia um relato novo. Sem conexão (ou com a API fora do ar), o relato vai para a fila
- * do aparelho e é enviado depois. Só uma recusa do servidor (400) volta como erro.
- */
+/** Sem conexão, o relato vai para a fila do aparelho; só uma recusa do servidor (400) volta como erro. */
 export async function criarRelato(novo: NovoRelato, opcoes: OpcoesChamada = {}): Promise<ResultadoEnvio> {
   const chave = gerarChave();
   try {

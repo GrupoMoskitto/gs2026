@@ -1,5 +1,3 @@
-// Carrega um dado assíncrono: carregando, erro, pronto e recarregando. Guarda só a última resposta e a chave a que ela
-// pertence; se a chave mudou, ainda não há resposta e a tela mostra "carregando".
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { ehErroApi } from '@/services/erro';

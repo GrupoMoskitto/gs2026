@@ -21,7 +21,6 @@ export interface FiltroRelatos {
 }
 
 export interface RelatoPendente {
-  /** Chave de idempotência (Idempotency-Key): evita duplicar o relato ao repetir o envio */
   chave: string;
   novo: NovoRelato;
   criadoEm: string;

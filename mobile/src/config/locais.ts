@@ -1,5 +1,4 @@
-// Lugares do app, todos locais. LOCAIS é o que a busca encontra; LUGARES é o que pode ser o local de um relato (campo `bairro`).
-// Municípios e distritos vêm de data/locais.json, gerado por scripts/gerar-locais.mjs.
+// LOCAIS é o que a busca encontra; LUGARES, o que pode ser o local de um relato. Gerado por scripts/gerar-locais.mjs.
 import dados from '@/data/locais.json';
 import { CENTRO_BAIRRO, ESTACOES_METRO, type BairroPaulista } from './regiao';
 

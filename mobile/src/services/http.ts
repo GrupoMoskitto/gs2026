@@ -1,5 +1,4 @@
-// Cliente HTTP para rede ruim: tempo limite, cancelamento e nova tentativa com espera crescente.
-// Só repete o que é seguro (GET e PATCH); POST só com chave de idempotência.
+// Só repete o que é seguro: GET, PATCH e POST com chave de idempotência.
 import { CONFIG_API } from '@/config/api';
 import { ErroApi } from './erro';
 import { calcularEspera, statusRepetivel } from './retry';

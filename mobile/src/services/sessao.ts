@@ -1,4 +1,3 @@
-// Identificação (apelido + RM), lembrada ao reabrir o app. Não é login: não há senha nem dado pessoal.
 import type { Sessao } from '@/types/dominio';
 import { gravarJson, lerJson, removerChave } from './armazenamento';
 

@@ -11,7 +11,6 @@ import { Texto } from './Texto';
 const VAO = 2;
 const PONTA = 4;
 
-/** Quantos lugares há em cada nível, numa barra só, do alto ao baixo. */
 export function BarraNiveis({ contagem }: { contagem: Record<NivelRisco, number> }) {
   const { cores } = useTema();
   const ordem = [...NIVEIS_RISCO].reverse();
@@ -45,7 +44,6 @@ export function BarraNiveis({ contagem }: { contagem: Record<NivelRisco, number>
   );
 }
 
-/** Divide um total em duas partes (ex.: celular e veículo), com o nome e a parte escritos ao lado. */
 export function BarraDivisao({ partes }: { partes: { rotulo: string; valor: number }[] }) {
   const { cores } = useTema();
   const total = partes.reduce((s, p) => s + p.valor, 0);
@@ -132,7 +130,6 @@ export function GraficoHoras({ horas }: { horas: number[] }) {
   );
 }
 
-/** Barras deitadas, uma por item, com a parte escrita no fim. */
 export function BarrasHorizontais({ itens }: { itens: { rotulo: string; parte: number }[] }) {
   const { cores } = useTema();
   const maior = Math.max(...itens.map((i) => i.parte), 0.0001);

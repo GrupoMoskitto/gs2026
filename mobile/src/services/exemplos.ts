@@ -1,5 +1,4 @@
-// Dados de exemplo (mock), usados quando a API não responde e não há cópia salva.
-// São SIMULADOS: nada aqui é relato real. Gerados com semente fixa, então o resultado é sempre o mesmo.
+// Relatos simulados, com semente fixa, para quando a API não responde e não há cópia salva.
 import { LUGARES, type Lugar } from '@/config/locais';
 import { ESTACOES_METRO } from '@/config/regiao';
 import {
@@ -32,7 +31,6 @@ const DESCRICOES: Record<TipoRelato, string[]> = {
 
 const PESO_FAIXA: Record<FaixaHoraria, number> = { madrugada: 2, manha: 1, tarde: 2, noite: 5 };
 
-// Dados SIMULADOS: onde há mais relatos é uma escolha de exemplo, não uma estatística.
 const CENTRO_EXPANDIDO = new Set([
   'Bela Vista', 'Cerqueira César', 'Consolação', 'Sé', 'República', 'Liberdade', 'Bom Retiro', 'Brás', 'Santa Cecília',
   'Pinheiros', 'Jardim Paulista', 'Itaim Bibi', 'Vila Mariana', 'Barra Funda', 'Mooca', 'Santa Efigênia', 'Cambuci',

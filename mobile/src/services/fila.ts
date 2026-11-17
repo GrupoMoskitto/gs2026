@@ -1,5 +1,3 @@
-// Fila de relatos criados sem conexão. Ficam guardados no aparelho e são enviados quando a rede volta.
-// Cada item tem uma chave de idempotência (Idempotency-Key): se o envio repetir, o servidor não duplica.
 import type { NovoRelato, Relato } from '@/types/dominio';
 import type { RelatoPendente } from '@/types/servicos';
 import { chamarApi } from './http';
@@ -53,8 +51,7 @@ export interface ResumoEnvio {
   erro: ErroApi | null;
 }
 
-/** Envia a fila do mais antigo ao mais novo. Para no primeiro erro de rede; relato recusado (400) sai da fila.
- * Quem chama durante um envio recebe o resultado desse mesmo envio. */
+/** Para no primeiro erro de rede; relato recusado (400) sai da fila. */
 export function enviarFila(sinal?: AbortSignal): Promise<ResumoEnvio> {
   envioAtual ??= enviar(sinal).finally(() => {
     envioAtual = null;

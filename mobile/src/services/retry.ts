@@ -1,9 +1,6 @@
 import { CONFIG_API } from '@/config/api';
 
-/**
- * Espera antes da próxima tentativa, em ms. `aleatorio` (0 a 1) vem de fora para o teste ser previsível.
- * O jitter sorteia entre metade e o total da espera, para vários celulares não tentarem todos ao mesmo tempo.
- */
+/** O jitter sorteia entre metade e o total da espera, para os celulares não tentarem todos juntos. */
 export function calcularEspera(
   tentativa: number,
   aleatorio: number = Math.random(),

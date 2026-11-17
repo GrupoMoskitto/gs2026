@@ -1,6 +1,3 @@
-// Região do projeto: Região Metropolitana de São Paulo (capital por distritos, demais cidades por município).
-// PROVISÓRIO: a caixa de coordenadas ainda é decisão em aberto (AGENTS.md, seção 7, item 5). Mude só aqui.
-
 export const CAIXA_REGIAO = {
   latMin: -24.1,
   latMax: -23.15,
