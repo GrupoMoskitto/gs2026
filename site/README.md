@@ -1,8 +1,8 @@
 # Site do Moskitto Radar
 
 Página única que demonstra a solução inteira: o risco de roubo por lugar e horário, o app do cidadão, o caminho do
-relato até o mapa e as oito partes da GS. As partes `mobile/` e `ia/` aparecem prontas; as outras seis estão como
-esboço, com o que cada uma vai entregar e o lugar das evidências.
+relato até o mapa e as oito partes da GS. As partes `mobile/`, `ia/`, `soa/` e `csharp/` aparecem prontas; as outras
+quatro estão como esboço, com o que cada uma vai entregar.
 
 ## Como rodar
 
