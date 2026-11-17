@@ -1,33 +1,35 @@
-# physical: Physical Computing: IOT & IOB
+# physical: Physical Computing: IoT & IOB
 
-**Papel no projeto:** dispositivo físico com **ESP32** simulado no **Wokwi**, integrado à solução. Não pode ser um projeto paralelo: precisa agregar valor ao mapa de relatos.
+**Papel no projeto:** **ESP32** simulado no **Wokwi**, integrado à solução.
 
 ## Entregas (19/11, 23h55)
 
-- [ ] Link do projeto no Wokwi
+- [x] Link do projeto no Wokwi
 - [ ] Vídeo de até 4 minutos: apresenta a solução, explica como o circuito foi incorporado e demonstra o funcionamento
-- [ ] Arquivo `.txt` com o nome dos integrantes
+- [x] Arquivo `.txt` com o nome dos integrantes
 
 ## Avaliação
 
-O PDF não traz a rubrica detalhada. Confirmar com o professor.
+Solução demonstrando como a IoT pode ser integrada ao projeto.
 
-## Ideias de partida
+## Solução
 
-- **Botão de relato rápido:** envia um relato à API (com posição simulada)
-- **Aviso de zona de risco:** LED e buzzer quando o nível de risco da região é alto
-- Dados simulados, sem dados pessoais reais
+- Simulação de uma transmissão de câmera ao vivo usando uma câmera simples e um ESP32, com botão físico de pausa/retomada da transmissão.
+- Programa multi-threaded para aproveitar todos os dois núcleos de processamento do ESP32 (2x Xtensa LX6 32-bits) para aproveitar toda a performance da CPU.
+- Solução cost-effective, de alta performance e expansível para construir um live feed de uma ou mais câmeras na aplicação principal.
 
-## Estrutura sugerida
+## Estrutura
 
 ```
 physical/
 ├── README.md
-└── (projeto Wokwi: diagram.json, sketch e link)
+├── MoskittoRadar_esp32stream.cpp (código fonte)
+└── diagram.json (projeto Wokwi)
+
 ```
 
 ## Status
 
-Não iniciado.
+Completado.
 
 Detalhes da disciplina: [`docs/disciplinas.md`](../docs/disciplinas.md#7-physical-computing-iot--iob)
