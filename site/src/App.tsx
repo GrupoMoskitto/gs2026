@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { lazy, Suspense, type ReactNode } from 'react';
 
 import { Letreiro } from './componentes/Letreiro';
 import { Marca } from './componentes/Marca';
@@ -8,7 +8,6 @@ import { Capa, Topo } from './secoes/Capa';
 import { Consulta } from './secoes/Consulta';
 import { Equipe } from './secoes/Equipe';
 import { Fluxo } from './secoes/Fluxo';
-import { Modelo } from './secoes/Modelo';
 import { Partes } from './secoes/Partes';
 import { Fecho, Rodape } from './secoes/Rodape';
 
@@ -19,6 +18,9 @@ function Titulo({ children }: { children: ReactNode }) {
     </Surgir>
   );
 }
+
+// Os gráficos (Recharts) vêm num arquivo separado.
+const Modelo = lazy(() => import('./secoes/Modelo').then((m) => ({ default: m.Modelo })));
 
 const vao = 'mt-28 md:mt-44';
 const perto = 'mt-12 md:mt-16';
@@ -61,7 +63,9 @@ export function App() {
           </Titulo>
         </div>
         <div className={perto}>
-          <Modelo />
+          <Suspense fallback={<div className="min-h-[80vh]" />}>
+            <Modelo />
+          </Suspense>
         </div>
 
         <div className={vao}>

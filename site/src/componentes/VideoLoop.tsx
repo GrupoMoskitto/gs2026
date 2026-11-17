@@ -29,7 +29,7 @@ export function VideoLoop({ nome, alt }: Props) {
 
   return (
     <div ref={caixa} className="relative h-full w-full">
-      <img src={`/app/loops/${nome}.webp`} alt={alt} decoding="async" className="absolute inset-0 h-full w-full object-cover object-top" />
+      <img src={`/app/loops/${nome}.webp`} alt={alt} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover object-top" />
       {usarVideo ? (
         <video
           ref={video}

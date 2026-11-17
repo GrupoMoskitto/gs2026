@@ -17,7 +17,7 @@ import {
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 
-import { MapaRisco } from './MapaRisco';
+import { MapaPreguicoso } from './MapaPreguicoso';
 import {
   FAIXAS,
   NA_FAIXA,
@@ -271,7 +271,7 @@ export function MiniApp() {
           >
             {aba === 'mapa' ? (
               <div className="relative h-full bg-[#e6eef4]">
-                <MapaRisco faixa={faixa} escolhido={lugar} aoEscolher={setLugar} compacto />
+                <MapaPreguicoso faixa={faixa} escolhido={lugar} aoEscolher={setLugar} compacto />
                 <p className="absolute bottom-1 left-2 z-[1] rounded bg-superficie/80 px-1 text-[8px] text-suave">© OpenStreetMap</p>
 
                 <div className="absolute inset-x-2.5 top-2 rounded-[18px] bg-superficie p-2.5 shadow-[0_6px_16px_-10px_rgb(7_29_54/0.5)]">

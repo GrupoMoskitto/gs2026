@@ -1,8 +1,8 @@
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-import '@fontsource/roboto/900.css';
-import 'leaflet/dist/leaflet.css';
+// Só o subconjunto latino: cobre o português e evita dezenas de @font-face no CSS.
+import '@fontsource/roboto/latin-400.css';
+import '@fontsource/roboto/latin-500.css';
+import '@fontsource/roboto/latin-700.css';
+import '@fontsource/roboto/latin-900.css';
 import './estilo.css';
 
 import { MotionConfig } from 'motion/react';

@@ -3,7 +3,7 @@ import { ToggleGroup } from 'radix-ui';
 import { useState } from 'react';
 
 import { BuscaLugar } from '../componentes/BuscaLugar';
-import { MapaRisco } from '../componentes/MapaRisco';
+import { MapaPreguicoso } from '../componentes/MapaPreguicoso';
 import { Surgir } from '../componentes/Surgir';
 import {
   COR_NIVEL,
@@ -85,7 +85,7 @@ export function Consulta() {
       <Surgir>
         <div className="grid gap-3 rounded-bloco bg-superficie p-3 lg:grid-cols-12">
           <div className="h-[52svh] min-h-[340px] overflow-hidden rounded-[22px] lg:col-span-7 lg:h-auto lg:min-h-[620px]" data-ui>
-            <MapaRisco faixa={faixa} escolhido={lugar} aoEscolher={setLugar} />
+            <MapaPreguicoso faixa={faixa} escolhido={lugar} aoEscolher={setLugar} />
           </div>
 
           <div className="flex flex-col gap-3 p-2 lg:col-span-5 lg:p-4">

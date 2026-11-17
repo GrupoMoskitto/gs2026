@@ -26,7 +26,7 @@
 Apresentação do servidor (1 min 20 s): a máquina virtual, a rede, a API no IIS, o firewall, o Nmap visto de fora e o
 alerta de CPU disparando no teste de estresse. As telas são os prints de [`images/`](images/).
 
-<!-- Cole aqui o link do vídeo: arraste o .mp4 para este README no editor do GitHub. -->
+https://github.com/user-attachments/assets/6fc66fe4-d36b-408c-bf5a-05f52d06ae37
 
 ## Servidor
 
