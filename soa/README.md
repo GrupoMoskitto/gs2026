@@ -20,7 +20,7 @@ no IIS do Windows Server, o mesmo servidor que recebe a transmissão da câmera 
 Apresentação da API (1 min 8 s): consulta com filtros, criação com idempotência, validação e moderação. As respostas
 na tela são reais, capturadas da API rodando localmente com os dados simulados.
 
-<!-- Cole aqui o link do vídeo: arraste o .mp4 para este README no editor do GitHub. -->
+https://github.com/user-attachments/assets/6984675c-0fe9-4801-82d8-20e042610cfb
 
 ## Estrutura
 

@@ -24,7 +24,7 @@ Apresentação da câmera ao vivo (57 s): o circuito, a transmissão dos quadros
 (o ponto de ônibus fica em Capão Redondo, o lugar de maior risco previsto pelo modelo). O circuito é o do
 `diagram.json`, desenhado com as peças do Wokwi, e o monitor serial segue a mesma lógica do `.cpp`.
 
-<!-- Cole aqui o link do vídeo: arraste o .mp4 para este README no editor do GitHub. -->
+https://github.com/user-attachments/assets/ea224566-1476-45d4-8cdf-ff591c81cb67
 
 ## Estrutura
 
