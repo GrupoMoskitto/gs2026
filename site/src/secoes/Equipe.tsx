@@ -23,7 +23,7 @@ const PESSOAS: Pessoa[] = [
   {
     nome: 'Gabriel Kato',
     rm: 'RM560000',
-    partes: 'Servidor e botão de pânico',
+    partes: 'Servidor e câmera ao vivo',
     github: 'kato8088',
     linkedin: 'https://www.linkedin.com/in/gabrikato/',
   },

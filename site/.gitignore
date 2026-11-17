@@ -1,5 +1,6 @@
 node_modules
 dist
 .taste-skill
-# Vídeo de apresentação: vem do release "midia" (npm run video)
+# Vídeos: vêm do release "midia" (npm run video)
 public/app/apresentacao.mp4
+public/videos/*.mp4

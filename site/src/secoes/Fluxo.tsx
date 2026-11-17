@@ -2,12 +2,12 @@ import {
   ArrowDown,
   ArrowRight,
   BrainCircuit,
+  Cctv,
   Check,
   Database,
   MapPinned,
   MessageSquarePlus,
   ShieldCheck,
-  Siren,
   TreePine,
   X,
   type LucideIcon,
@@ -32,7 +32,6 @@ const RELATO = {
   ocorrido_em: '2026-11-10T21:35:00-03:00',
   origem: 'mobile',
 };
-const RELATO_IOT = { tipo: 'outro', latitude: -23.557, longitude: -46.661, bairro: 'consolacao', origem: 'iot' };
 
 // Um lugar cujo risco muda ao longo do dia, para o exemplo do modelo.
 const variedade = (codigo: string) => new Set(FAIXAS.map((f) => nivelDe(codigo, f))).size;
@@ -51,59 +50,128 @@ function VisualRelato() {
   );
 }
 
-function VisualBotao() {
-  const [apertos, setApertos] = useState(0);
+// Onde fica a câmera: o lugar com mais risco somado nas 4 faixas; no empate, o com mais roubos por dia.
+const riscoTotal = (codigo: string) => FAIXAS.reduce((s, f) => s + (previsaoDe(codigo, f)?.score ?? 0), 0);
+const roubosDia = (codigo: string) => FAIXAS.reduce((s, f) => s + taxaDe(codigo, f), 0);
+const PONTO_CAMERA = [...LUGARES].sort((a, b) => riscoTotal(b.codigo) - riscoTotal(a.codigo) || roubosDia(b.codigo) - roubosDia(a.codigo))[0];
+
+const PALETA = ' .:-=+*#%@';
+const LARGURA = 32;
+const ALTURA = 16;
+const POT_MAX = 4095;
+
+// Mesma conta do map() do Arduino, com divisão inteira.
+const mapear = (x: number, a: number, b: number, c: number, d: number) => Math.trunc(((x - a) * (d - c)) / (b - a)) + c;
+
+/** Gera o quadro igual ao cameraCaptureTask de physical/MoskittoRadar_esp32stream.cpp. */
+function quadro(pot: number, n: number) {
+  const cx = mapear(pot, 0, POT_MAX, 2, LARGURA - 3);
+  const cy = ALTURA / 2 + Math.trunc(Math.sin(n * 0.3) * 4);
+  const fundo = mapear(pot, 0, POT_MAX, 10, 80);
+  const linhas: string[] = [];
+  for (let y = 0; y < ALTURA; y++) {
+    let l = '|';
+    for (let x = 0; x < LARGURA; x++) {
+      const dist = Math.hypot(x - cx, y - cy);
+      const pixel = dist < 3.2 ? 255 : dist < 5 ? 160 : Math.min(120, fundo + x * 2);
+      l += PALETA[mapear(pixel, 0, 255, 0, 9)];
+    }
+    linhas.push(`${l}|`);
+  }
+  return linhas;
+}
+
+function VisualCamera() {
+  const [pot, setPot] = useState(1400);
+  const [transmitindo, setTransmitindo] = useState(true);
+  const [n, setN] = useState(1);
   const [aceso, setAceso] = useState(false);
 
-  const apertar = () => {
-    setApertos((n) => n + 1);
+  useEffect(() => {
+    if (!transmitindo) return;
+    const t = setInterval(() => setN((x) => x + 1), 200);
+    return () => clearInterval(t);
+  }, [transmitindo]);
+  useEffect(() => {
+    if (!transmitindo) return;
     setAceso(true);
-  };
-  useEffect(() => {
-    const t = setTimeout(apertar, 900);
+    const t = setTimeout(() => setAceso(false), 60);
     return () => clearTimeout(t);
-  }, []);
-  useEffect(() => {
-    if (!aceso) return;
-    const t = setTimeout(() => setAceso(false), 1600);
-    return () => clearTimeout(t);
-  }, [aceso, apertos]);
-
-  const linhas = ['Wi-Fi Wokwi-GUEST conectado', 'Aguardando o botão...'];
-  if (apertos > 0) linhas.push('Botão apertado! Relato montado:', ...json(RELATO_IOT), 'POST /api/relatos', 'LED aceso: relato enviado');
+  }, [n, transmitindo]);
 
   return (
-    <div className="grid w-full items-center gap-10 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] sm:gap-5">
-      <div className="relative mx-auto aspect-[220/150] w-full max-w-[300px]">
-        <svg viewBox="0 0 220 150" className="h-full w-full" aria-hidden="true">
-          <rect x="10" y="10" width="200" height="130" rx="12" fill="#14324f" />
-          {Array.from({ length: 15 }, (_, i) => (
-            <g key={i} fill="#d6b04a">
-              <rect x={22 + i * 12.5} y="14" width="5" height="8" rx="1" />
-              <rect x={22 + i * 12.5} y="128" width="5" height="8" rx="1" />
+    <div className="grid w-full min-w-0 items-center gap-5 sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+      <div className="grid gap-4">
+        <div className="relative mx-auto aspect-[220/150] w-full max-w-[280px]">
+          <svg viewBox="0 0 220 150" className="h-full w-full" aria-hidden="true">
+            <rect x="10" y="10" width="200" height="130" rx="12" fill="#14324f" />
+            {Array.from({ length: 15 }, (_, i) => (
+              <g key={i} fill="#d6b04a">
+                <rect x={22 + i * 12.5} y="14" width="5" height="8" rx="1" />
+                <rect x={22 + i * 12.5} y="128" width="5" height="8" rx="1" />
+              </g>
+            ))}
+            <rect x="30" y="44" width="64" height="62" rx="5" fill="#0a1a2a" />
+            <text x="62" y="79" textAnchor="middle" fontSize="11" fill="#b0dcfc" fontFamily="monospace">
+              ESP32
+            </text>
+            <circle cx="128" cy="48" r="14" fill="#3ddc84" opacity={aceso ? 0.35 : 0} />
+            <circle cx="128" cy="48" r="7" fill={aceso ? '#3ddc84' : '#1f4a35'} />
+            <text x="118" y="76" fontSize="9" fill="#b0dcfc" fontFamily="monospace">
+              LED
+            </text>
+            <g transform={`rotate(${(pot / POT_MAX) * 270 - 135} 178 52)`}>
+              <circle cx="178" cy="52" r="16" fill="#0a1a2a" stroke="#b0dcfc" strokeOpacity="0.4" />
+              <rect x="176.5" y="39" width="3" height="11" rx="1.5" fill="#b0dcfc" />
             </g>
-          ))}
-          <rect x="34" y="44" width="64" height="62" rx="5" fill="#0a1a2a" />
-          <text x="66" y="79" textAnchor="middle" fontSize="11" fill="#b0dcfc" fontFamily="monospace">
-            ESP32
-          </text>
-          <circle cx="140" cy="48" r="14" fill="#3ddc84" opacity={aceso ? 0.3 : 0} style={{ transition: 'opacity 200ms' }} />
-          <circle cx="140" cy="48" r="7" fill={aceso ? '#3ddc84' : '#1f4a35'} style={{ transition: 'fill 200ms' }} />
-          <text x="156" y="52" fontSize="9" fill="#b0dcfc" fontFamily="monospace">
-            LED
-          </text>
-          <rect x="140" y="80" width="40" height="40" rx="6" fill="#0a1a2a" />
-        </svg>
-        <motion.button
-          type="button"
-          onClick={apertar}
-          whileTap={{ scale: 0.82 }}
-          aria-label="Apertar o botão de pânico"
-          className="absolute top-[66.7%] left-[72.7%] h-[17%] w-[12%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-alto shadow-[0_4px_0_#7f1d14] active:shadow-none"
-        />
-        <p className="absolute -bottom-7 left-1/2 -translate-x-1/2 text-[13px] whitespace-nowrap text-suave">Aperte o botão vermelho</p>
+            <text x="166" y="84" fontSize="9" fill="#b0dcfc" fontFamily="monospace">
+              POT
+            </text>
+            <rect x="120" y="94" width="34" height="34" rx="6" fill="#0a1a2a" />
+            <text x="160" y="115" fontSize="9" fill="#b0dcfc" fontFamily="monospace">
+              BOTÃO
+            </text>
+          </svg>
+          <motion.button
+            type="button"
+            onClick={() => setTransmitindo((t) => !t)}
+            whileTap={{ scale: 0.8 }}
+            aria-pressed={!transmitindo}
+            aria-label={transmitindo ? 'Apertar o botão do ESP32 para pausar a transmissão' : 'Apertar o botão do ESP32 para retomar a transmissão'}
+            className={`absolute top-[74%] left-[62.3%] h-[13.5%] w-[9.2%] -translate-x-1/2 -translate-y-1/2 rounded-full transition-colors ${
+              transmitindo ? 'bg-[#5b6b7c] shadow-[0_3px_0_#2b3642]' : 'bg-azul shadow-[0_3px_0_#123a73]'
+            } active:shadow-none`}
+          >
+            <motion.span
+              className="absolute -inset-2 rounded-full border-2 border-azul"
+              animate={transmitindo ? { scale: [1, 1.35], opacity: [0.8, 0] } : { opacity: 0 }}
+              transition={{ duration: 1.4, repeat: Infinity, ease: 'easeOut' }}
+              aria-hidden="true"
+            />
+          </motion.button>
+          <p className="absolute -bottom-7 left-1/2 -translate-x-1/2 text-[13px] whitespace-nowrap text-suave">
+            {transmitindo ? 'Aperte o botão para pausar' : 'Aperte de novo para retomar'}
+          </p>
+        </div>
+        <label className="mt-4 grid gap-1.5 text-[13px] text-suave">
+          Potenciômetro: mexe na imagem
+          <input type="range" min={0} max={POT_MAX} value={pot} onChange={(ev) => setPot(Number(ev.target.value))} className="accent-azul" />
+        </label>
       </div>
-      <Codigo key={apertos} titulo="Monitor serial" linhas={linhas} />
+      <div className="overflow-hidden rounded-[18px] bg-[#071d36] font-mono text-white">
+        <p className="border-b border-white/10 px-4 py-2 font-sans text-[13px] font-medium text-[#B0DCFC]">Monitor serial</p>
+        <div className="sem-barra overflow-x-auto px-4 py-3 text-[11px] leading-[1.35] sm:text-[12px]">
+          <p className="whitespace-pre text-[#FBE3A3]">Ponto de ônibus · {PONTO_CAMERA.nome}</p>
+          <p className="whitespace-pre text-[#B0DCFC]">POST /api/v1/stream · image/raw-gray</p>
+          <p className="whitespace-pre text-white/70">
+            Quadro #{n} · 512 bytes · {transmitindo ? '5,0 FPS' : 'pausado'}
+          </p>
+          <pre className={`mt-2 transition-opacity ${transmitindo ? '' : 'opacity-50'}`} aria-label="Quadro da câmera em ASCII">
+            {quadro(pot, n).join('\n')}
+          </pre>
+          {transmitindo ? null : <p className="mt-2 text-[#FBE3A3]">&gt;&gt;&gt; STREAMING PAUSADO &lt;&lt;&lt;</p>}
+        </div>
+      </div>
     </div>
   );
 }
@@ -162,7 +230,7 @@ type Situacao = 'pendente' | 'aprovado' | 'rejeitado';
 const PENDENTES = [
   { id: 1, texto: 'Celular · Bela Vista', quando: 'Hoje, 21:35' },
   { id: 2, texto: 'Bicicleta · Mooca', quando: 'Hoje, 18:10' },
-  { id: 3, texto: 'Outro · Consolação (iot)', quando: 'Hoje, 07:52' },
+  { id: 3, texto: 'Veículo · Santo André', quando: 'Hoje, 07:52' },
 ];
 const SELO_SITUACAO: Record<Situacao, string> = {
   pendente: 'bg-medio-suave text-sobre-medio',
@@ -384,14 +452,15 @@ const ETAPAS: Etapa[] = [
     Visual: VisualRelato,
   },
   {
-    icone: Siren,
-    nome: 'Botão de pânico',
+    icone: Cctv,
+    nome: 'Câmera ao vivo',
     parte: 'ESP32 no Wokwi',
     pasta: 'physical/',
-    pronta: false,
-    texto: 'Num ponto de ônibus, um aperto monta o mesmo relato, com origem iot e o local fixo do ponto.',
-    fatos: ['Mesmo formato de relato do app', 'Conecta pelo Wi-Fi Wokwi-GUEST', 'O LED confirma o envio'],
-    Visual: VisualBotao,
+    pronta: true,
+    texto: `O modelo aponta onde o risco é maior: ${PONTO_CAMERA.nome}. Num ponto de ônibus de lá, um ESP32 emula uma câmera e transmite os quadros ao mesmo servidor da API.`,
+    fatos: ['Um núcleo captura, o outro transmite', 'Quadros de 32×16 pixels em tons de cinza', 'O botão pausa e o LED pisca a cada envio'],
+    nota: 'A transmissão aparece no Serial Monitor; a rota de vídeo ainda não existe na API.',
+    Visual: VisualCamera,
   },
   {
     icone: Database,
@@ -400,7 +469,7 @@ const ETAPAS: Etapa[] = [
     pasta: 'soa/',
     pronta: true,
     texto: 'A API valida o relato, guarda como pendente e responde 201. Se algo vier errado, responde 400 com o motivo.',
-    fatos: ['Consultas só pelo Entity Framework, nunca SQL montado', 'Banco versionado com migrations', 'Pronta para o IIS do Windows Server'],
+    fatos: ['Consultas só pelo Entity Framework, nunca SQL montado', 'Banco versionado com migrations', 'Roda no IIS do Windows Server 2025'],
     Visual: VisualApi,
   },
   {
@@ -411,7 +480,7 @@ const ETAPAS: Etapa[] = [
     pronta: true,
     texto: 'O moderador revisa os relatos pendentes e aprova ou rejeita. Só os aprovados aparecem no mapa.',
     fatos: ['Um tipo de roubo por classe, com polimorfismo', 'Cidadão e Moderador como usuários', 'Filtra por tipo, lugar e situação'],
-    nota: 'Hoje o app em C# roda à parte, com relatos em memória.',
+    nota: 'A versão Windows usa relatos em memória; a de Linux modera direto na API.',
     Visual: VisualModeracao,
   },
   {

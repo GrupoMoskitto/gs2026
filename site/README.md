@@ -1,8 +1,8 @@
 # Site do Moskitto Radar
 
 Página única que demonstra a solução inteira: o risco de roubo por lugar e horário, o app do cidadão, o caminho do
-relato até o mapa e as oito partes da GS. As partes `mobile/`, `ia/`, `soa/` e `csharp/` aparecem prontas; as outras
-quatro estão como esboço, com o que cada uma vai entregar.
+relato até o mapa e as oito partes da GS. As partes `mobile/`, `ia/`, `soa/`, `csharp/` e `physical/` aparecem prontas; as outras
+três estão como esboço, com o que cada uma vai entregar.
 
 ## Como rodar
 
@@ -11,17 +11,19 @@ npm install
 npm run dev       # abre em http://localhost:5173
 npm run build     # gera a pasta dist/, que pode ser servida por qualquer servidor de arquivos
 npm run dados     # copia de novo os dados do modelo de ../ia/data
-npm run video     # baixa o vídeo de apresentação (rode uma vez)
+npm run video     # baixa os vídeos (rode uma vez)
 ```
 
-O vídeo de apresentação (`public/app/apresentacao.mp4`) fica fora do git, como anexo do release
-[`midia`](https://github.com/GrupoMoskitto/gs2026/releases/tag/midia). Para trocar o vídeo, substitua o anexo no release.
+Os vídeos ficam fora do git, como anexos do release [`midia`](https://github.com/GrupoMoskitto/gs2026/releases/tag/midia):
+o do app (`public/app/apresentacao.mp4`) e os das partes (`public/videos/ia.mp4`, `soa.mp4`, `csharp.mp4`, `iot.mp4`,
+abertos pelo botão "Ver vídeo" de cada cartão em [`Partes.tsx`](src/secoes/Partes.tsx)). As capas (`.webp`) ficam no git.
+Para trocar um vídeo, substitua o anexo no release.
 
 ## Publicação
 
 O site vai para o GitHub Pages pela Action [`.github/workflows/site.yml`](../.github/workflows/site.yml). Ela roda a
 cada push na `main` que mexa em `site/` ou nos dados do modelo (`ia/data`), e também à mão, na aba Actions. A Action
-copia os dados do modelo, baixa o vídeo, checa os tipos, gera `dist/` e publica.
+copia os dados do modelo, baixa os vídeos, checa os tipos, gera `dist/` e publica.
 
 O site roda na raiz de um domínio próprio (`base: '/'` no `vite.config.ts`).
 
@@ -33,7 +35,7 @@ O site roda na raiz de um domínio próprio (`base: '/'` no `vite.config.ts`).
 | O risco de cada lugar | Mapa dos 129 lugares, busca e faixa do dia, com a previsão do modelo |
 | O app do cidadão | Fileira de cartões com nove loops gravados do app (`public/app/loops/`) |
 | O modelo de risco | Fileira de cartões: roubos por hora, pico e calmaria, o que levam, F1 e cobertura |
-| Do relato ao mapa | Seis etapas, cada uma com o seu exemplo: o JSON do relato, o botão de pânico, a API, a moderação, o modelo e o mapa |
+| Do relato ao mapa | Seis etapas, cada uma com o seu exemplo: o JSON do relato, a câmera ao vivo, a API, a moderação, o modelo e o mapa |
 | As oito partes | Um cartão por matéria, com o dono, a situação e o que entrega |
 | Quem faz | A equipe |
 

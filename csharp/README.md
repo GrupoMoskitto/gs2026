@@ -17,7 +17,7 @@ GS FIAP 2026.2. O moderador vê a fila de relatos pendentes, ordenada por priori
 Apresentação do app de moderação (1 min 9 s): entrada, fila por prioridade, aprovar, rejeitar com motivo, novo relato e
 as classes de POO. As telas são os prints de [`evidencias/`](evidencias/) e os relatos são simulados.
 
-<!-- Cole aqui o link do vídeo: arraste o .mp4 para este README no editor do GitHub. -->
+https://github.com/user-attachments/assets/10f54553-29ff-4c4d-84b4-0313ca360195
 
 ## Como rodar
 

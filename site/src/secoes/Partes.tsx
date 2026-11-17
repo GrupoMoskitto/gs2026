@@ -1,7 +1,8 @@
-import { ArrowUpRight, Blocks } from 'lucide-react';
+import { ArrowUpRight, Blocks, Play } from 'lucide-react';
 
 import { seguirPonteiro } from '../componentes/brilho';
 import { Carrossel, cartaoBase } from '../componentes/Carrossel';
+import { VideoDialogo } from '../componentes/VideoApp';
 import { REPO, RESUMO, parte } from '../dados';
 
 interface Parte {
@@ -12,6 +13,7 @@ interface Parte {
   pronta: boolean;
   resumo: string;
   itens: string[];
+  video?: { src: string; capa: string; duracao: string };
 }
 
 const f1 = RESUMO.modelo.f1.toLocaleString('pt-BR', {
@@ -22,6 +24,11 @@ const f1 = RESUMO.modelo.f1.toLocaleString('pt-BR', {
 const PARTES: Parte[] = [
   {
     pasta: 'mobile',
+    video: {
+      src: '/app/apresentacao.mp4',
+      capa: '/app/apresentacao.jpg',
+      duracao: '1 min 21 s',
+    },
     nome: 'App do cidadão',
     materia: 'Mobile Development & IoT',
     dono: 'Gabriel Couto',
@@ -36,6 +43,11 @@ const PARTES: Parte[] = [
   },
   {
     pasta: 'ia',
+    video: {
+      src: '/videos/ia.mp4',
+      capa: '/videos/ia.webp',
+      duracao: '1 min 10 s',
+    },
     nome: 'Modelo de risco',
     materia: 'IA & Machine Learning',
     dono: 'Gabriel Couto',
@@ -50,15 +62,25 @@ const PARTES: Parte[] = [
   },
   {
     pasta: 'soa',
+    video: {
+      src: '/videos/soa.mp4',
+      capa: '/videos/soa.webp',
+      duracao: '1 min 8 s',
+    },
     nome: 'API e banco',
     materia: 'Arquitetura Orientada a Serviços',
     dono: 'João Vitor de Matos',
     pronta: true,
     resumo: 'ASP.NET Core Web API com Entity Framework Core e SQLite.',
-    itens: ['Rotas de relatos e de previsões', 'Banco com migrations', 'Carga dos dados na primeira execução', 'Testes de cada rota no Insomnia'],
+    itens: ['Rotas de relatos e de previsões', 'Banco com migrations', 'Carga dos dados na primeira execução', 'Testes de cada rota no Insomnia e no Bruno'],
   },
   {
     pasta: 'csharp',
+    video: {
+      src: '/videos/csharp.mp4',
+      capa: '/videos/csharp.webp',
+      duracao: '1 min 9 s',
+    },
     nome: 'App do moderador',
     materia: 'C# Software Development',
     dono: 'João Vitor de Matos',
@@ -73,12 +95,17 @@ const PARTES: Parte[] = [
   },
   {
     pasta: 'physical',
-    nome: 'Botão de pânico',
+    video: {
+      src: '/videos/iot.mp4',
+      capa: '/videos/iot.webp',
+      duracao: '57 s',
+    },
+    nome: 'Câmera ao vivo',
     materia: 'Physical Computing',
     dono: 'Gabriel Kato',
-    pronta: false,
+    pronta: true,
     resumo: 'ESP32 simulado no Wokwi, em Arduino C++.',
-    itens: ['Botão num ponto de ônibus', 'Monta um relato de origem iot', 'Envia para a API pelo Wi-Fi', 'LED ou buzzer confirma o envio'],
+    itens: ['Câmera num ponto de ônibus', 'Captura e transmite em núcleos separados', 'Botão pausa e retoma a transmissão', 'LED pisca a cada quadro enviado'],
   },
   {
     pasta: 'os',
@@ -86,8 +113,8 @@ const PARTES: Parte[] = [
     materia: 'Operating Systems',
     dono: 'Gabriel Kato',
     pronta: false,
-    resumo: 'Windows Server com Active Directory, DNS e IIS.',
-    itens: ['IP fixo, DNS e domínio', 'IIS hospedando a API', 'Alertas de CPU, disco e memória', 'Recuperação automática, com teste de falha'],
+    resumo: 'Windows Server 2025 numa VM, com Active Directory, DNS, DHCP e IIS.',
+    itens: ['IIS rodando a API', 'Active Directory, DNS e DHCP', 'Monitor de Desempenho com alertas', 'Recuperação automática, com teste de falha'],
   },
   {
     pasta: 'cyber',
@@ -117,7 +144,7 @@ export function Partes() {
           const escuro = p.pronta && i === 0;
           const cor = escuro ? 'bg-marinho text-white' : p.pronta ? 'bg-azul text-white' : 'bg-superficie text-forte';
           return (
-            <article key={p.pasta} onPointerMove={seguirPonteiro} className={`${cartaoBase} p-7 ${cor}`}>
+            <article key={p.pasta} onPointerMove={seguirPonteiro} className={`${cartaoBase} h-auto! min-h-[460px] p-7 ${cor}`}>
               <p className={`w-fit rounded-full px-3.5 py-1.5 text-[15px] font-medium ${p.pronta ? 'bg-superficie text-forte' : 'bg-nevoa text-forte'}`}>
                 {p.pronta ? (
                   <span className="flex items-center gap-2">
@@ -147,14 +174,28 @@ export function Partes() {
                   </li>
                 ))}
               </ul>
-              <a href={`${REPO}/tree/main/${p.pasta}`} className="elo mt-auto inline-flex items-center gap-1 pt-4 text-[15px] font-medium">
-                {p.pasta}/ no GitHub{' '}
-                <ArrowUpRight
-                  size={16}
-                  aria-hidden="true"
-                  className="transition-transform duration-300 ease-saida group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                />
-              </a>
+              <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 pt-5">
+                {p.video && (
+                  <VideoDialogo
+                    src={p.video.src}
+                    capa={p.video.capa}
+                    titulo={`Vídeo: ${p.nome}`}
+                    descricao={`Apresentação da parte ${p.nome}, com ${p.video.duracao}.`}
+                  >
+                    <button type="button" className="botao bg-superficie py-2.5 text-[15px] text-forte hover:bg-celeste">
+                      <Play size={14} fill="currentColor" aria-hidden="true" /> Ver vídeo · {p.video.duracao}
+                    </button>
+                  </VideoDialogo>
+                )}
+                <a href={`${REPO}/tree/main/${p.pasta}`} className="elo inline-flex items-center gap-1 text-[15px] font-medium">
+                  {p.pasta}/ no GitHub{' '}
+                  <ArrowUpRight
+                    size={16}
+                    aria-hidden="true"
+                    className="transition-transform duration-300 ease-saida group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  />
+                </a>
+              </div>
             </article>
           );
         })}
