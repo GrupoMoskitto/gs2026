@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "author": "Grupo Moskitto (Gabriel Kato)",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": -52.9, "left": -5, "attrs": {} },
+    { "type": "wokwi-potentiometer", "id": "pot1", "top": -68.5, "left": 182.2, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": 6,
+      "left": 128.6,
+      "attrs": { "color": "limegreen" }
+    },
+    {
+      "type": "wokwi-pushbutton-6mm",
+      "id": "btn2",
+      "top": 113,
+      "left": -105.6,
+      "attrs": { "color": "grey", "xray": "1" }
+    }
+  ],
+  "connections": [
+    [ "esp:D15", "btn2:2.r", "blue", [ "h18.9", "v76.6", "h-172.8", "v-28.8" ] ],
+    [ "esp:GND.2", "btn2:1.r", "black", [ "v-0.1", "h-28.8", "v19.2" ] ],
+    [ "esp:GND.1", "led1:C", "black", [ "h0" ] ],
+    [ "esp:D2", "led1:A", "green", [ "h57.3", "v-0.7" ] ],
+    [ "pot1:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "esp:D34", "pot1:SIG", "orange", [ "h-19.2", "v172.6", "h211.2" ] ],
+    [ "pot1:GND", "esp:GND.1", "black", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}
