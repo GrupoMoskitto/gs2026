@@ -5,6 +5,7 @@ import { FlatList, Pressable, RefreshControl, StyleSheet, TextInput, View } from
 import { BotaoNovoRelato } from '@/components/BotaoNovoRelato';
 import { CartaoRelato, iconeDoTipo } from '@/components/CartaoRelato';
 import { AvisoFonte, Carregando, Erro, Vazio } from '@/components/Estados';
+import { FolhaFiltros } from '@/components/FolhaFiltros';
 import { Icone } from '@/components/Icone';
 import { Superficie, useFundoCampo } from '@/components/Superficie';
 import { Texto } from '@/components/Texto';
@@ -17,6 +18,7 @@ import { listarRelatos } from '@/services/relatos';
 import { alvoToque, ESPACO_ABAS, raio, useTema } from '@/theme';
 import type { RelatoPendente } from '@/types/servicos';
 import { normalizar } from '@/utils/busca';
+import { aplicarFiltros, contarFiltros, SEM_FILTROS, type FiltrosRelatos } from '@/utils/filtros';
 import { ROTULO_TIPO } from '@/utils/rotulos';
 
 function CartaoPendente({ pendente }: { pendente: RelatoPendente }) {
@@ -49,6 +51,8 @@ export default function TelaRelatos() {
   const { cores } = useTema();
   const fundoCampo = useFundoCampo();
   const [busca, setBusca] = useState('');
+  const [filtros, setFiltros] = useState<FiltrosRelatos>(SEM_FILTROS);
+  const [filtrosAbertos, setFiltrosAbertos] = useState(false);
   const campo = useRef<ComponentRef<typeof TextInput>>(null);
   const conectado = useConexao();
   const fila = useFila();
@@ -57,12 +61,18 @@ export default function TelaRelatos() {
   useRecarregarAoVoltar(atualizar);
 
   const termo = normalizar(busca);
+  const ativos = contarFiltros(filtros);
   const visiveis = useMemo(() => {
     if (estado.fase !== 'pronto') return [];
-    return estado.resultado.dados.filter(
+    return aplicarFiltros(estado.resultado.dados, filtros).filter(
       (r) => termo === '' || normalizar(`${r.descricao ?? ''} ${ROTULO_TIPO[r.tipo]} ${nomeDoLugar(r.bairro)}`).includes(termo),
     );
-  }, [estado, termo]);
+  }, [estado, termo, filtros]);
+
+  function limparTudo() {
+    setBusca('');
+    setFiltros(SEM_FILTROS);
+  }
 
   return (
     <View style={[estilos.tela, { backgroundColor: cores.fundo }]}>
@@ -87,6 +97,21 @@ export default function TelaRelatos() {
               <Icone nome="close-circle" tamanho={20} cor={cores.textoSuave} />
             </Pressable>
           ) : null}
+          <Pressable
+            onPress={() => setFiltrosAbertos(true)}
+            accessibilityRole="button"
+            accessibilityLabel={ativos > 0 ? `Filtros, ${ativos} marcados` : 'Filtros'}
+            style={estilos.filtro}
+          >
+            <Icone nome="options-outline" tamanho={22} cor={cores.texto} />
+            {ativos > 0 ? (
+              <View style={[estilos.contador, { backgroundColor: cores.texto }]}>
+                <Texto variante="legendaForte" cor={cores.fundo} style={estilos.contadorTexto}>
+                  {String(ativos)}
+                </Texto>
+              </View>
+            ) : null}
+          </Pressable>
         </View>
       </View>
 
@@ -122,13 +147,13 @@ export default function TelaRelatos() {
             </View>
           )}
           ListEmptyComponent={
-            termo !== '' ? (
+            termo !== '' || ativos > 0 ? (
               <Vazio
                 icone="search-outline"
                 titulo="Nenhum relato encontrado"
-                descricao="Tente outra palavra ou outro local."
-                rotuloAcao="Limpar busca"
-                aoAcionar={() => setBusca('')}
+                descricao={ativos > 0 ? 'Nenhum relato com essa busca e esses filtros.' : 'Tente outra palavra ou outro local.'}
+                rotuloAcao={ativos > 0 ? 'Limpar busca e filtros' : 'Limpar busca'}
+                aoAcionar={limparTudo}
               />
             ) : (
               <Vazio
@@ -150,6 +175,16 @@ export default function TelaRelatos() {
       ) : null}
 
       <BotaoNovoRelato />
+
+      <FolhaFiltros
+        visivel={filtrosAbertos}
+        aoFechar={() => setFiltrosAbertos(false)}
+        filtros={filtros}
+        aoMudar={setFiltros}
+        secoes={['tipo', 'status', 'periodo', 'faixa', 'origem']}
+        total={visiveis.length}
+        aviso="Sem nada marcado num grupo, a lista mostra todos daquele grupo."
+      />
     </View>
   );
 }
@@ -161,7 +196,10 @@ function Separador() {
 const estilos = StyleSheet.create({
   tela: { flex: 1 },
   topo: { paddingBottom: 8, gap: 8 },
-  busca: { flexDirection: 'row', alignItems: 'center', gap: 10, marginHorizontal: 16, paddingHorizontal: 14, minHeight: alvoToque, borderRadius: raio.pilula, borderWidth: StyleSheet.hairlineWidth },
+  busca: { flexDirection: 'row', alignItems: 'center', gap: 10, marginHorizontal: 16, paddingLeft: 14, paddingRight: 4, minHeight: alvoToque, borderRadius: raio.pilula, borderWidth: StyleSheet.hairlineWidth },
+  filtro: { width: alvoToque, height: alvoToque, alignItems: 'center', justifyContent: 'center' },
+  contador: { position: 'absolute', top: 4, right: 2, minWidth: 18, height: 18, borderRadius: 9, paddingHorizontal: 4, alignItems: 'center', justifyContent: 'center' },
+  contadorTexto: { fontSize: 11, lineHeight: 14 },
   campoBusca: { flex: 1, fontSize: 17, minHeight: alvoToque },
   cabecalhoLista: { gap: 8, paddingTop: 4, paddingBottom: 4 },
   lista: { paddingBottom: 88 + ESPACO_ABAS },

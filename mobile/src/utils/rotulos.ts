@@ -1,5 +1,4 @@
-// Textos mostrados à pessoa. Tudo em português, em frase (só a primeira letra maiúscula).
-import type { FaixaHoraria, NivelRisco, StatusRelato, TipoRelato } from '@/types/dominio';
+import type { FaixaHoraria, NivelRisco, Origem, StatusRelato, TipoRelato } from '@/types/dominio';
 
 export const ROTULO_TIPO: Record<TipoRelato, string> = {
   celular: 'Celular',
@@ -42,4 +41,10 @@ export const ROTULO_STATUS: Record<StatusRelato, string> = {
   pendente: 'Pendente',
   aprovado: 'Aprovado',
   rejeitado: 'Rejeitado',
+};
+
+export const ROTULO_ORIGEM: Record<Origem, string> = {
+  mobile: 'App',
+  desktop: 'Moderação',
+  iot: 'Botão de pânico',
 };

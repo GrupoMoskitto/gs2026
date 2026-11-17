@@ -24,6 +24,7 @@ import { listarRelatos } from '@/services/relatos';
 import { coresDoRisco, ESPACO_ABAS, useTema } from '@/theme';
 import { ESTILO_MAPA_CLARO, ESTILO_MAPA_ESCURO } from '@/theme/mapaEscuro';
 import type { Bairro, NivelRisco, TipoRelato } from '@/types/dominio';
+import { SEM_FILTROS } from '@/utils/filtros';
 import { ROTULO_FAIXA_FRASE, ROTULO_RISCO } from '@/utils/rotulos';
 import { maioresRiscos } from '@/utils/risco';
 import { faixaAtual } from '@/utils/tempo';
@@ -58,7 +59,6 @@ export default function TelaMapa() {
   }, [atualizarRelatos, atualizarPrevisoes]);
   useRecarregarAoVoltar(atualizarTudo);
 
-  // O mapa aparece de imediato; relatos e risco entram quando chegam. Nada de spinner em tela cheia.
   const carregandoDados = relatos.estado.fase === 'carregando' || previsoes.estado.fase === 'carregando';
   const mensagemErro =
     relatos.estado.fase === 'erro' ? relatos.estado.mensagem : previsoes.estado.fase === 'erro' ? previsoes.estado.mensagem : null;
@@ -217,9 +217,11 @@ export default function TelaMapa() {
       <FolhaFiltros
         visivel={filtrosAbertos}
         aoFechar={() => setFiltrosAbertos(false)}
-        tipos={tipos}
-        aoMudarTipos={setTipos}
+        filtros={{ ...SEM_FILTROS, tipos }}
+        aoMudar={(f) => setTipos(f.tipos)}
+        secoes={['tipo']}
         total={listaRelatos.length}
+        aviso="Sem nada marcado, o mapa mostra todos os tipos."
       />
     </View>
   );

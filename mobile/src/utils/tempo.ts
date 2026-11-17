@@ -33,6 +33,10 @@ export function faixaAtual(agora: Date = new Date()): FaixaHoraria {
   return faixaDaHora(partesSp(agora).hora);
 }
 
+export function faixaDoIso(iso: string): FaixaHoraria {
+  return faixaDaHora(partesSp(new Date(iso)).hora);
+}
+
 export function formatarHora(iso: string): string {
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return '';
