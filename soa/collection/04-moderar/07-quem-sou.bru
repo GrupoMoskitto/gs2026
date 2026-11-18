@@ -1,0 +1,28 @@
+meta {
+  name: GET moderador da chave → 200
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{base_url}}/api/moderadores/eu
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{chave_moderador}}
+}
+
+tests {
+  test("responde 200", function () {
+    expect(res.getStatus()).to.equal(200);
+  });
+  test("diz o apelido do moderador", function () {
+    expect(res.getBody().apelido).to.be.a("string");
+  });
+}
+
+docs {
+  O app de moderação usa esta rota para conferir a chave na tela de entrada.
+}

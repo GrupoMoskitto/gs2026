@@ -1,0 +1,34 @@
+meta {
+  name: PATCH chave errada → 401
+  type: http
+  seq: 6
+}
+
+patch {
+  url: {{base_url}}/api/relatos/{{relato_id}}/status
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: chute-qualquer
+}
+
+body:json {
+  {
+    "status": "aprovado"
+  }
+}
+
+tests {
+  test("responde 401", function () {
+    expect(res.getStatus()).to.equal(401);
+  });
+  test("explica o erro", function () {
+    expect(res.getBody().erro).to.be.a("string");
+  });
+}
+
+docs {
+  Uma chave que não é de nenhum moderador também é recusada.
+}

@@ -63,6 +63,9 @@ namespace MoskittoRadar.Api.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("ModeradoPor")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Motivo")
                         .HasMaxLength(200)
                         .HasColumnType("TEXT");
@@ -193,7 +196,7 @@ namespace MoskittoRadar.Api.Migrations
             modelBuilder.Entity("MoskittoRadar.Api.Models.PrevisaoRisco", b =>
                 {
                     b.HasOne("MoskittoRadar.Api.Models.Lugar", "Lugar")
-                        .WithMany("Previsoes")
+                        .WithMany()
                         .HasForeignKey("Bairro")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -204,19 +207,12 @@ namespace MoskittoRadar.Api.Migrations
             modelBuilder.Entity("MoskittoRadar.Api.Models.Relato", b =>
                 {
                     b.HasOne("MoskittoRadar.Api.Models.Lugar", "Lugar")
-                        .WithMany("Relatos")
+                        .WithMany()
                         .HasForeignKey("Bairro")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Lugar");
-                });
-
-            modelBuilder.Entity("MoskittoRadar.Api.Models.Lugar", b =>
-                {
-                    b.Navigation("Previsoes");
-
-                    b.Navigation("Relatos");
                 });
 
             modelBuilder.Entity("MoskittoRadar.Api.Models.Relato", b =>

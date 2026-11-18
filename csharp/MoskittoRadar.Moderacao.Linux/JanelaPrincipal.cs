@@ -197,7 +197,7 @@ public class JanelaPrincipal : Window
         try
         {
             if (aprovar)
-                await api.MudarStatus(linha.Api.Id, "aprovado", $"Moderado por {usuario.Apelido}");
+                await api.MudarStatus(linha.Api.Id, "aprovado", null);
             else if (await Dialogos.PedirTexto(this, "Motivo da rejeição", "Relato duplicado", "Rejeitar") is { } motivo)
                 await api.MudarStatus(linha.Api.Id, "rejeitado", motivo);
             else

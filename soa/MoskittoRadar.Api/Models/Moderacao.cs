@@ -19,5 +19,8 @@ public class Moderacao
     /// <summary>Opcional. Ex.: "relato duplicado".</summary>
     public string? Motivo { get; set; }
 
+    /// <summary>Apelido do moderador que decidiu. Vem da chave enviada, não do corpo da requisição.</summary>
+    public string? ModeradoPor { get; set; }
+
     public DateTimeOffset DecididoEm { get; set; } = DateTimeOffset.UtcNow;
 }

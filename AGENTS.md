@@ -97,7 +97,7 @@ referências do awesome-design, API pensada para rede ruim e a logo do projeto.
 | GET | `/api/relatos?bairro=&tipo=&status=` | lista com filtros |
 | GET | `/api/relatos/{id}` | detalhe |
 | POST | `/api/relatos` | cria relato → `201` (`400` com `{ "erro": "..." }` se inválido) |
-| PATCH | `/api/relatos/{id}/status` | `{ "status": "aprovado" }` |
+| PATCH | `/api/relatos/{id}/status` | `{ "status": "aprovado" }`; exige `Authorization: Bearer <chave de moderador>` (`401` sem ela) |
 | GET | `/api/previsoes?bairro=` | previsões de risco |
 
 **Dados simulados:** `ia/data/relatos_simulados.csv` tem as mesmas colunas do Relato e 10.000 linhas. É gerado por

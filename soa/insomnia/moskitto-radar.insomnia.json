@@ -19,7 +19,8 @@
       "parentId": "wrk_moskitto",
       "name": "Base Environment",
       "data": {
-        "base_url": "http://localhost:5207"
+        "base_url": "http://localhost:5207",
+        "chave_moderador": "moskitto-demo"
       },
       "metaSortKey": -999
     },
@@ -316,7 +317,11 @@
         "mimeType": "application/json",
         "text": "{\n  \"status\": \"aprovado\"\n}"
       },
-      "metaSortKey": -978
+      "metaSortKey": -978,
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.chave_moderador }}"
+      }
     },
     {
       "_id": "req_18",
@@ -335,7 +340,11 @@
         "mimeType": "application/json",
         "text": "{\n  \"status\": \"rejeitado\",\n  \"motivo\": \"relato duplicado\"\n}"
       },
-      "metaSortKey": -977
+      "metaSortKey": -977,
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.chave_moderador }}"
+      }
     },
     {
       "_id": "req_19",
@@ -354,7 +363,11 @@
         "mimeType": "application/json",
         "text": "{\n  \"status\": \"ok\"\n}"
       },
-      "metaSortKey": -976
+      "metaSortKey": -976,
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.chave_moderador }}"
+      }
     },
     {
       "_id": "req_20",
@@ -373,7 +386,69 @@
         "mimeType": "application/json",
         "text": "{\n  \"status\": \"aprovado\"\n}"
       },
-      "metaSortKey": -975
+      "metaSortKey": -975,
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.chave_moderador }}"
+      }
+    },
+    {
+      "_id": "req_17_401_0",
+      "_type": "request",
+      "parentId": "fld_4",
+      "name": "PATCH sem chave → 401",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/api/relatos/eec144d8-57a4-4f63-9bda-1766b599975e/status",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{ \"status\": \"aprovado\" }"
+      },
+      "metaSortKey": -974,
+      "authentication": {}
+    },
+    {
+      "_id": "req_17_401_1",
+      "_type": "request",
+      "parentId": "fld_4",
+      "name": "PATCH chave errada → 401",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/api/relatos/eec144d8-57a4-4f63-9bda-1766b599975e/status",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{ \"status\": \"aprovado\" }"
+      },
+      "metaSortKey": -973,
+      "authentication": {
+        "type": "bearer",
+        "token": "chute-qualquer"
+      }
+    },
+    {
+      "_id": "req_17_eu",
+      "_type": "request",
+      "parentId": "fld_4",
+      "name": "GET moderador da chave → 200",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/moderadores/eu",
+      "headers": [],
+      "body": {},
+      "metaSortKey": -972,
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.chave_moderador }}"
+      }
     },
     {
       "_id": "fld_5",

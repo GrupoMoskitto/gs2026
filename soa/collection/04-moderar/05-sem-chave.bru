@@ -1,0 +1,30 @@
+meta {
+  name: PATCH sem chave → 401
+  type: http
+  seq: 5
+}
+
+patch {
+  url: {{base_url}}/api/relatos/{{relato_id}}/status
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "status": "aprovado"
+  }
+}
+
+tests {
+  test("responde 401", function () {
+    expect(res.getStatus()).to.equal(401);
+  });
+  test("explica o erro", function () {
+    expect(res.getBody().erro).to.be.a("string");
+  });
+}
+
+docs {
+  Sem o cabeçalho Authorization, ninguém aprova nem rejeita relatos. A recusa vai para o log da API.
+}

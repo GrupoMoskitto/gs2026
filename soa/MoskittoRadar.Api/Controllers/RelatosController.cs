@@ -4,13 +4,14 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using MoskittoRadar.Api.Data;
 using MoskittoRadar.Api.Models;
+using MoskittoRadar.Api.Seguranca;
 
 namespace MoskittoRadar.Api.Controllers;
 
 [ApiController]
 [Route("api/relatos")]
 [Produces("application/json")]
-public class RelatosController(AppDbContext db) : ControllerBase
+public class RelatosController(AppDbContext db, ILogger<RelatosController> logger) : ControllerBase
 {
     private const int LimitePadrao = 200, LimiteMaximo = 1000, TamanhoMaximoChave = 100, TamanhoMaximoMotivo = 200;
     private const string ErroTipo = "tipo deve ser celular, bolsa_mochila, veiculo, bicicleta, comercio ou outro.";
@@ -120,8 +121,12 @@ public class RelatosController(AppDbContext db) : ControllerBase
         return CreatedAtAction(nameof(Obter), new { id = relato.Id }, RelatoResposta.De(relato));
     }
 
-    /// <summary>Moderação: muda o status e grava a decisão na tabela moderacoes. 200 com o relato atualizado.</summary>
+    /// <summary>
+    /// Moderação: muda o status e grava a decisão, com o apelido do moderador, na tabela moderacoes.
+    /// Exige a chave de um moderador (401 sem ela). 200 com o relato atualizado.
+    /// </summary>
     [HttpPatch("{id}/status")]
+    [ExigeModerador]
     public async Task<ActionResult<RelatoResposta>> MudarStatus(string id, MudancaStatus? mudanca, CancellationToken cancelamento)
     {
         if (!CodigoEnumConverter<StatusRelato>.TentarLer(mudanca?.Status, out var status))
@@ -134,8 +139,10 @@ public class RelatosController(AppDbContext db) : ControllerBase
         if (!Guid.TryParse(id, out var guid) || await db.Relatos.FindAsync([guid], cancelamento) is not { } relato)
             return NotFound(NaoEncontrado);
 
-        relato.Moderar(status, string.IsNullOrEmpty(motivo) ? null : motivo);
+        var moderador = (string)HttpContext.Items[ExigeModeradorAttribute.ItemApelido]!;
+        relato.Moderar(status, string.IsNullOrEmpty(motivo) ? null : motivo, moderador);
         await db.SaveChangesAsync(cancelamento);
+        logger.LogInformation("Relato {Id} ficou {Status}, por {Moderador}", relato.Id, status, moderador);
         return RelatoResposta.De(relato);
     }
 

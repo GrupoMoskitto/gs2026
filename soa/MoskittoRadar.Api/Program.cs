@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MoskittoRadar.Api.Data;
 using MoskittoRadar.Api.Models;
+using MoskittoRadar.Api.Seguranca;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,12 +34,13 @@ builder.Services.AddControllers()
         };
     });
 builder.Services.AddOpenApi();
+builder.Services.AddSingleton<Moderadores>();
 
 // CORS: o app nativo não precisa, mas o Expo Web e o site do projeto (navegador) precisam.
 builder.Services.AddCors(opcoes => opcoes.AddDefaultPolicy(politica => politica
     .AllowAnyOrigin()
     .WithMethods("GET", "POST", "PATCH")
-    .WithHeaders("Content-Type", "Accept", "Idempotency-Key")
+    .WithHeaders("Content-Type", "Accept", "Idempotency-Key", "Authorization")
     .WithExposedHeaders("X-Total-Count", "Location", "Idempotent-Replayed")));
 
 var app = builder.Build();

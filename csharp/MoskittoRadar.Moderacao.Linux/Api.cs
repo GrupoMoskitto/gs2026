@@ -1,4 +1,6 @@
 using System.Globalization;
+using System.Net;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
 
@@ -21,6 +23,24 @@ public class ClienteApi
     };
 
     public string Endereco => http.BaseAddress!.ToString();
+
+    /// <summary>
+    /// Confere a chave do moderador na API e devolve o apelido dono dela. Daí em diante, toda requisição
+    /// leva a chave no cabeçalho Authorization, que a API exige para aprovar e rejeitar.
+    /// </summary>
+    public async Task<string> Entrar(string chave)
+    {
+        http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", chave.Trim());
+        using var resposta = await http.GetAsync("/api/moderadores/eu");
+        if (resposta.StatusCode == HttpStatusCode.Unauthorized)
+        {
+            http.DefaultRequestHeaders.Authorization = null;
+            throw new InvalidOperationException("Chave de moderador inválida.");
+        }
+        await Conferir(resposta);
+        var dono = await resposta.Content.ReadFromJsonAsync<Dictionary<string, string>>(Json);
+        return dono!["apelido"];
+    }
 
     public async Task<List<RelatoApi>> Listar(string? status, string? tipo)
     {

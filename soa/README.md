@@ -27,13 +27,14 @@ https://github.com/user-attachments/assets/6984675c-0fe9-4801-82d8-20e042610cfb
 ```
 soa/
 ├── MoskittoRadar.Api/
-│   ├── Controllers/   rotas (relatos, previsões, health)
+│   ├── Controllers/   rotas (relatos, previsões, moderadores, health)
 │   ├── Models/        domínio: Relato, Lugar, Moderacao, PrevisaoRisco, enums
 │   ├── Data/          AppDbContext, conversores e carga inicial
+│   ├── Seguranca/     chave dos moderadores (filtro [ExigeModerador])
 │   ├── Migrations/    migrations do EF Core
 │   └── Dados/         CSV e JSON do Coto (carga inicial)
 ├── publicar.ps1       gera o pacote para o IIS
-├── insomnia/          coleção do Insomnia (25 requisições)
+├── insomnia/          coleção do Insomnia (28 requisições)
 └── evidencias/        prints dos testes
 ```
 
@@ -73,13 +74,14 @@ O celular e o computador precisam estar na mesma rede Wi-Fi. A API também liber
 
 ## Banco de dados
 
-SQLite com Entity Framework Core 10. As tabelas são criadas pela migration `Inicial`:
+SQLite com Entity Framework Core 10. As tabelas são criadas pela migration `Inicial`; a `ModeradoPor` acrescenta em
+`moderacoes` o apelido de quem decidiu:
 
 | Tabela | O que guarda |
 |---|---|
 | `lugares` | os 129 lugares (`ia/data/lugares.csv`); `relatos.Bairro` e `previsoes.Bairro` apontam para cá |
 | `relatos` | os relatos, com índice único na chave de idempotência (evita relato duplicado) |
-| `moderacoes` | histórico de cada mudança de status |
+| `moderacoes` | histórico de cada mudança de status, com o moderador que decidiu |
 | `previsoes` | a previsão do ML, uma por lugar e faixa horária |
 
 - Os enums são gravados com o mesmo código do JSON (`bolsa_mochila`, `pendente`...).
@@ -97,7 +99,8 @@ O JSON segue o formato comum do projeto (`AGENTS.md`, seção 4): chaves em snak
 | GET | `/api/relatos?bairro=&tipo=&status=&limite=` | array dos mais recentes, até 200 (máx. 1000 com `limite`); total no cabeçalho `X-Total-Count`; `400` se um filtro for inválido |
 | GET | `/api/relatos/{id}` | o relato, ou `404` |
 | POST | `/api/relatos` | `201` com o relato criado (sempre `pendente`) e cabeçalho `Location`; `400` se inválido; `200` com o relato já existente se a `Idempotency-Key` repetir |
-| PATCH | `/api/relatos/{id}/status` | corpo `{ "status": "aprovado", "motivo": "opcional" }`; `200` com o relato atualizado, `400` se o status for inválido, `404` se o relato não existir. Cada mudança fica registrada na tabela `moderacoes` |
+| PATCH | `/api/relatos/{id}/status` | **exige a chave de um moderador** (ver abaixo); corpo `{ "status": "aprovado", "motivo": "opcional" }`; `200` com o relato atualizado, `401` sem chave válida, `400` se o status for inválido, `404` se o relato não existir. Cada mudança fica registrada na tabela `moderacoes`, com o apelido do moderador |
+| GET | `/api/moderadores/eu` | exige a chave; `200 { "apelido": "..." }` com o dono dela, ou `401`. O app de moderação usa na tela de entrada |
 | GET | `/api/previsoes?bairro=` | array das previsões (516 sem filtro, 4 com `bairro`); `400` se o lugar não existir |
 
 ### Validação do POST
@@ -150,6 +153,7 @@ cp ../ia/data/lugares.csv ../ia/data/relatos_simulados.csv ../ia/data/previsoes.
 2. No Insomnia: **Import** → `insomnia/moskitto-radar.insomnia.json`.
 3. As requisições estão em pastas na ordem (health, consultar, criar, moderar, previsões, erros).
    O nome de cada uma diz o status esperado (ex.: `POST fora da região (Rio) → 400`).
+   A moderação usa a variável `chave_moderador` do ambiente (`moskitto-demo`, a chave de Development).
 
 Os POST usam a data atual (`now`), então não vencem. Os prints ficam em [`evidencias/`](evidencias/README.md).
 
@@ -172,7 +176,30 @@ cd soa/collection
 npx @usebruno/cli run --env local
 ```
 
-Resultado esperado: 26 requisições e 44 testes passando.
+Resultado esperado: 29 requisições e 50 testes passando.
+
+## Chave dos moderadores
+
+Só moderador aprova ou rejeita relato. Cada um tem uma chave e manda no cabeçalho `Authorization: Bearer <chave>`.
+A API não guarda a chave, só o hash SHA-256 dela, na configuração `Moderadores` (`apelido` → hash). O filtro
+`[ExigeModerador]` (`Seguranca/Moderadores.cs`) confere a chave em tempo constante, responde `401` se ela não valer e
+registra a recusa no log; se valer, o apelido vai para a tabela `moderacoes`.
+
+- **Desenvolvimento:** o `appsettings.Development.json` traz o moderador `demo`, com a chave `moskitto-demo`. Ele só
+  existe em Development; em Production (IIS) essa chave não vale.
+- **Servidor:** cada moderador entra como variável de ambiente `Moderadores__<apelido>` com o hash da chave. No
+  PowerShell do servidor (troque `kato` pelo apelido):
+
+```powershell
+$bytes = New-Object byte[] 24
+[Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($bytes)
+$chave = [Convert]::ToBase64String($bytes)
+$hash = -join ([Security.Cryptography.SHA256]::Create().ComputeHash([Text.Encoding]::UTF8.GetBytes($chave)) | ForEach-Object { $_.ToString('x2') })
+& "$env:windir\system32\inetsrv\appcmd.exe" set config "MoskittoRadarAPI" -section:system.webServer/aspNetCore /+"environmentVariables.[name='Moderadores__kato',value='$hash']" /commit:apphost
+"Chave do moderador (entregue só para ele): $chave"
+```
+
+  Depois, recicle o pool. A chave aparece uma vez só; guarde num gerenciador de senhas, nunca no repositório.
 
 ## Pacote para o IIS (entrega para o Kato)
 
@@ -187,6 +214,7 @@ Gera `soa/publish/MoskittoRadar.Api.zip` (fora do git). O que o servidor precisa
 - Permissão de escrita só na pasta `App_Data\` do site: o banco é criado lá na primeira execução,
   com as migrations e a carga inicial. Os dados de origem vão no pacote, em `Dados\`.
 - Teste de vida: `http://<servidor>/api/health` → `{"status":"ok","banco":"ok",...}`.
+- Pelo menos um moderador configurado (seção acima). Sem nenhum, a moderação responde `401` para todos.
 
 Testado localmente em modo Production a partir do pacote: banco criado, 10.000 relatos carregados, OpenAPI desligado.
 
@@ -196,10 +224,10 @@ Testado localmente em modo Production a partir do pacote: banco criado, 10.000 r
 - [x] Carga do CSV simulado e das previsões
 - [x] Rotas de consulta (health, relatos, previsões)
 - [x] Rota de criação (POST) com validação e idempotência
-- [x] Rota de moderação (PATCH)
+- [x] Rota de moderação (PATCH), só com a chave de um moderador
 - [x] Acesso pelo celular (perfil `celular` + CORS)
-- [x] Coleção do Insomnia (25 requisições, todas conferidas)
-- [x] Collection do Bruno (`collection/`, 26 requisições com testes)
+- [x] Coleção do Insomnia (28 requisições)
+- [x] Collection do Bruno (`collection/`, 29 requisições com testes, todas passando)
 - [x] Prints das evidências (`evidencias/`)
 - [x] Pacote para o IIS (`publicar.ps1`)
 

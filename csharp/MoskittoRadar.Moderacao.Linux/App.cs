@@ -15,10 +15,11 @@ public class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            var entrada = new JanelaEntrada();
+            var api = new ClienteApi();
+            var entrada = new JanelaEntrada(api);
             entrada.Entrou += usuario =>
             {
-                var principal = new JanelaPrincipal(new ClienteApi(), usuario);
+                var principal = new JanelaPrincipal(api, usuario);
                 desktop.MainWindow = principal;
                 principal.Show();
                 entrada.Close();

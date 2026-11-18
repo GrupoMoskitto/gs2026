@@ -7,7 +7,11 @@ meta {
 patch {
   url: {{base_url}}/api/relatos/00000000-0000-0000-0000-000000000000/status
   body: json
-  auth: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{chave_moderador}}
 }
 
 body:json {

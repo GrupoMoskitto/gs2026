@@ -53,6 +53,9 @@ Diferente da versão Windows, esta lê e modera os relatos da **API** (`soa/`): 
 aprovar e rejeitar chamam `PATCH /api/relatos/{id}/status` e o relato aprovado aparece no mapa do app. Suba a API
 antes (`dotnet run` em `soa/MoskittoRadar.Api`). Outro endereço: variável `MODERACAO_API`.
 
+Para entrar como moderador, a tela pede a **chave de moderador**, conferida na API (`GET /api/moderadores/eu`); o
+apelido vem dela. Com a API local em Development, a chave de teste é `moskitto-demo`. O cidadão entra só com o apelido.
+
 O ZIP de entrega (`empacotar.ps1`) continua levando só a versão Windows.
 
 ## Como o código usa POO

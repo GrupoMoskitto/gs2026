@@ -44,7 +44,7 @@ public class Relato
     public List<Moderacao> Moderacoes { get; set; } = [];
 
     /// <summary>Muda o status e registra a decisão no histórico de moderação.</summary>
-    public Moderacao Moderar(StatusRelato novoStatus, string? motivo = null)
+    public Moderacao Moderar(StatusRelato novoStatus, string? motivo = null, string? moderadoPor = null)
     {
         var moderacao = new Moderacao
         {
@@ -52,6 +52,7 @@ public class Relato
             StatusAnterior = Status,
             Decisao = novoStatus,
             Motivo = motivo,
+            ModeradoPor = moderadoPor,
         };
         Status = novoStatus;
         Moderacoes.Add(moderacao);

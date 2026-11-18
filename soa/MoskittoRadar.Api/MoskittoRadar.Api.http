@@ -1,4 +1,6 @@
 @api = http://localhost:5207
+# Chave de demonstração do moderador "demo" (só em Development; ver appsettings.Development.json)
+@chave = moskitto-demo
 
 ### Teste de vida
 GET {{api}}/api/health
@@ -52,5 +54,6 @@ Content-Type: application/json
 ### Moderação -> 200 com o relato atualizado (troque o id)
 PATCH {{api}}/api/relatos/eec144d8-57a4-4f63-9bda-1766b599975e/status
 Content-Type: application/json
+Authorization: Bearer {{chave}}
 
 { "status": "aprovado", "motivo": "conferido" }
