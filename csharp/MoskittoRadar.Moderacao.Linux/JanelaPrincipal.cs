@@ -54,7 +54,7 @@ public class JanelaPrincipal : Window
         txtBairro.TextChanged += async (_, _) => await AtualizarLista();
         lista.SelectionChanged += (_, _) => MostrarDetalhe();
         lista.ItemTemplate = new FuncDataTemplate<LinhaRelato?>((linha, _) => linha is null ? new Grid() : Linha(
-            linha.Api.OcorridoEm.ToString("dd/MM HH:mm"), NomeTipo(linha.Api.Tipo), Lugares.Nome(linha.Api.Bairro),
+            linha.Api.OcorridoEm.ToLocalTime().ToString("dd/MM HH:mm"), NomeTipo(linha.Api.Tipo), Lugares.Nome(linha.Api.Bairro),
             Maiuscula(linha.Api.Status), Maiuscula(linha.Api.Origem), linha.Prioridade));
 
         var btnNovo = new Button { Content = "Novo relato" };
@@ -121,7 +121,8 @@ public class JanelaPrincipal : Window
 
     private static Relato? DoJoao(RelatoApi r)
     {
-        var (lugar, quando, descricao) = (Lugares.Nome(r.Bairro), r.OcorridoEm.DateTime, r.Descricao ?? "");
+        // Hora local: a classe do João compara com DateTime.Now, e um relato em UTC parecia estar no futuro
+        var (lugar, quando, descricao) = (Lugares.Nome(r.Bairro), r.OcorridoEm.LocalDateTime, r.Descricao ?? "");
         try
         {
             return r.Tipo switch
@@ -183,7 +184,7 @@ public class JanelaPrincipal : Window
         }
         var r = linha.Api;
         txtDetalhe.Text = string.Join(Environment.NewLine,
-            linha.Joao?.Descrever() ?? $"{NomeTipo(r.Tipo)} em {Lugares.Nome(r.Bairro)}, {r.OcorridoEm:dd/MM/yyyy HH:mm}", "",
+            linha.Joao?.Descrever() ?? $"{NomeTipo(r.Tipo)} em {Lugares.Nome(r.Bairro)}, {r.OcorridoEm.ToLocalTime():dd/MM/yyyy HH:mm}", "",
             linha.Joao == null ? "Prioridade: só para celular, veículo e bicicleta" : $"Prioridade: {linha.Prioridade} de 10",
             $"Local: {r.Latitude:0.000}, {r.Longitude:0.000}",
             $"Descrição: {(string.IsNullOrWhiteSpace(r.Descricao) ? "(sem descrição)" : r.Descricao)}",
