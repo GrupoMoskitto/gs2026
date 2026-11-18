@@ -1,0 +1,44 @@
+Relato pendente usado no teste: 1552e60b-9be4-4511-8b2c-b3806c77d866
+
+== 1. Sem chave: recusado
+
+$ curl -s -i -X PATCH http://localhost:5207/api/relatos/1552e60b-9be4-4511-8b2c-b3806c77d866/status -H 'Content-Type: application/json' -d '{"status":"aprovado"}'
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json; charset=utf-8
+WWW-Authenticate: Bearer
+{"erro":"Só moderadores podem fazer isso. Envie a chave no cabeçalho Authorization: Bearer <chave>."}
+
+== 2. Chave errada: recusado
+
+$ curl -s -i -X PATCH http://localhost:5207/api/relatos/1552e60b-9be4-4511-8b2c-b3806c77d866/status -H 'Content-Type: application/json' -H 'Authorization: Bearer chute-qualquer' -d '{"status":"aprovado"}'
+HTTP/1.1 401 Unauthorized
+Content-Type: application/json; charset=utf-8
+WWW-Authenticate: Bearer
+{"erro":"Só moderadores podem fazer isso. Envie a chave no cabeçalho Authorization: Bearer <chave>."}
+
+== 3. O relato continua pendente
+
+$ curl -s http://localhost:5207/api/relatos/1552e60b-9be4-4511-8b2c-b3806c77d866
+{"id":"1552e60b-9be4-4511-8b2c-b3806c77d866","tipo":"celular","descricao":"Gozei","latitude":-23.569,"longitude":-46.471,"bairro":"dis_355030857","ocorrido_em":"2026-11-12T20:54:00-03:00","status":"pendente","origem":"mobile"}
+
+== 4. Conferir a chave: de quem ela é
+
+$ curl -s -i http://localhost:5207/api/moderadores/eu -H 'Authorization: Bearer moskitto-demo'
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+{"apelido":"demo"}
+
+== 5. Com a chave do moderador: aprovado
+
+$ curl -s -i -X PATCH http://localhost:5207/api/relatos/1552e60b-9be4-4511-8b2c-b3806c77d866/status -H 'Content-Type: application/json' -H 'Authorization: Bearer moskitto-demo' -d '{"status":"aprovado"}'
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+{"id":"1552e60b-9be4-4511-8b2c-b3806c77d866","tipo":"celular","descricao":"Gozei","latitude":-23.569,"longitude":-46.471,"bairro":"dis_355030857","ocorrido_em":"2026-11-12T20:54:00-03:00","status":"aprovado","origem":"mobile"}
+
+== 6. Registro da decisão na tabela moderacoes
+
+$ sqlite3 -header -column soa/MoskittoRadar.Api/App_Data/moskitto.db 'SELECT RelatoId, StatusAnterior, Decisao, ModeradoPor FROM moderacoes WHERE RelatoId = upper('1552e60b-9be4-4511-8b2c-b3806c77d866') OR RelatoId = '1552e60b-9be4-4511-8b2c-b3806c77d866';'
+RelatoId                              StatusAnterior  Decisao   ModeradoPor
+------------------------------------  --------------  --------  -----------
+1552E60B-9BE4-4511-8B2C-B3806C77D866  pendente        aprovado  demo       
+

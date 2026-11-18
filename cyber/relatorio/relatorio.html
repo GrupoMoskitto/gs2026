@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Relatório de Gestão de Riscos · Moskitto Radar</title>
+<meta name="author" content="Marcelo Affonso (RM559790), Gabriel Couto (RM559579), Gabriel Kato (RM560000), João Vitor de Matos (RM559246)">
+<style>
+@font-face { font-family: Roboto; font-weight: 400; src: url(fontes/roboto-latin-400-normal.woff2); }
+@font-face { font-family: Roboto; font-weight: 400; font-style: italic; src: url(fontes/roboto-latin-400-italic.woff2); }
+@font-face { font-family: Roboto; font-weight: 500; src: url(fontes/roboto-latin-500-normal.woff2); }
+@font-face { font-family: Roboto; font-weight: 700; src: url(fontes/roboto-latin-700-normal.woff2); }
+@font-face { font-family: Roboto; font-weight: 900; src: url(fontes/roboto-latin-900-normal.woff2); }
+
+/* Cores da marca (mobile/assets/brand) e do site */
+:root {
+  --marinho: #0E3B6B; --azul: #1f6fc8; --claro: #B0DCFC; --nevoa: #eef5fc; --fundo: #f6f9fc;
+  --tinta: #1b2733; --suave: #5b6b7b; --linha: #c9d4df; --fina: #e2e8ee;
+  --alto: #a8322a; --alto-s: #f8e1de; --medio: #8a6100; --medio-s: #fbeecb; --baixo: #23705a; --baixo-s: #dcefe7;
+}
+@page {
+  size: A4; margin: 24mm 20mm 22mm 25mm;
+  @top-left { content: "MOSKITTO RADAR"; font: 700 7.5pt Roboto; letter-spacing: 0.12em; color: #0E3B6B; vertical-align: bottom; padding-bottom: 4mm; }
+  @top-right { content: "Relatório de Gestão de Riscos · Cybersecurity"; font: 400 7.5pt Roboto; color: #5b6b7b; vertical-align: bottom; padding-bottom: 4mm; }
+  @bottom-right { content: counter(page); font: 500 8.5pt Roboto; color: #0E3B6B; }
+  @bottom-left { content: "Global Solution FIAP 2026.2"; font: 400 7.5pt Roboto; color: #5b6b7b; }
+}
+@page capa { margin: 0; @top-left { content: none; } @top-right { content: none; } @bottom-right { content: none; } @bottom-left { content: none; } }
+
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; font: 400 10pt/1.5 Roboto, sans-serif; color: var(--tinta); counter-reset: tab fig; }
+p { margin: 0 0 7pt; text-align: justify; hyphens: auto; }
+strong { font-weight: 700; }
+em { font-style: italic; }
+code { font: 400 8.6pt/1.3 "DejaVu Sans Mono", monospace; color: var(--marinho); }
+
+/* capa */
+.capa { page: capa; height: 297mm; position: relative; break-after: page; overflow: hidden; }
+.capa .faixa { position: absolute; left: 0; top: 0; bottom: 0; width: 15mm; background: var(--marinho); }
+.capa .faixa::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 92mm; background: var(--azul); }
+.capa .inseto { position: absolute; right: -22mm; bottom: -14mm; width: 150mm; opacity: 0.07; }
+.capa .conteudo { position: absolute; left: 35mm; right: 24mm; top: 26mm; bottom: 24mm; display: flex; flex-direction: column; }
+.capa .inst { font-size: 9pt; letter-spacing: 0.14em; text-transform: uppercase; color: var(--suave); }
+.capa .marca { display: flex; align-items: center; gap: 4mm; margin-top: 46mm; font-size: 13pt; font-weight: 700; color: var(--marinho); }
+.capa .marca img { height: 12mm; }
+.capa h1 { font-size: 36pt; line-height: 1.04; letter-spacing: -0.03em; font-weight: 700; color: var(--marinho); margin: 7mm 0 0; }
+.capa .sub { font-size: 12pt; color: var(--suave); margin-top: 6mm; max-width: 120mm; }
+.capa .linha { width: 24mm; height: 1.4mm; background: var(--azul); margin: 12mm 0 10mm; }
+.capa .rotulo { font-size: 8pt; letter-spacing: 0.14em; text-transform: uppercase; color: var(--azul); font-weight: 700; margin-bottom: 3mm; }
+.capa table.equipe { border: 0; margin: 0; width: auto; font-size: 10.5pt; }
+.capa table.equipe td { border: 0; padding: 1.2mm 10mm 1.2mm 0; background: none !important; }
+.capa table.equipe td:last-child { color: var(--suave); }
+.capa .pe { margin-top: auto; display: flex; justify-content: space-between; font-size: 9.5pt; color: var(--suave); border-top: 0.6pt solid var(--linha); padding-top: 4mm; }
+
+/* páginas iniciais */
+.inicial { break-after: page; }
+.chaves { font-size: 9.5pt; margin-top: 6pt; }
+.sumario { list-style: none; padding: 0; margin: 8pt 0 0; }
+.sumario li { display: flex; align-items: baseline; gap: 4pt; margin: 0 0 5pt; font-size: 10.5pt; }
+.sumario li.sub { padding-left: 16pt; font-size: 9.8pt; color: #33414f; margin-bottom: 3.5pt; }
+.sumario li b { font-weight: 700; color: var(--marinho); min-width: 18pt; }
+.sumario li.sub b { font-weight: 500; min-width: 24pt; }
+.sumario li .pontos { flex: 1; border-bottom: 0.8pt dotted var(--linha); transform: translateY(-3pt); }
+.sumario li .pg { min-width: 14pt; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* títulos */
+h2 { font-size: 16pt; font-weight: 700; letter-spacing: -0.015em; color: var(--marinho); margin: 0 0 10pt; padding-bottom: 5pt; border-bottom: 0.8pt solid var(--marinho); break-after: avoid; }
+h2 .n { color: var(--azul); margin-right: 8pt; }
+h3 { font-size: 11.5pt; font-weight: 700; color: var(--marinho); margin: 14pt 0 6pt; break-after: avoid; }
+h3 .n { color: var(--azul); margin-right: 6pt; }
+section { break-before: page; }
+section.segue { break-before: auto; margin-top: 16pt; }
+
+/* tabelas: título em cima, fonte embaixo */
+table { width: 100%; border-collapse: collapse; margin: 3pt 0 2pt; font-size: 8.7pt; line-height: 1.38; border-top: 1.2pt solid var(--marinho); border-bottom: 1.2pt solid var(--marinho); }
+caption { caption-side: top; text-align: left; font-size: 8.8pt; color: var(--tinta); padding-bottom: 4pt; counter-increment: tab; }
+caption::before { content: "Tabela " counter(tab) " – "; font-weight: 700; color: var(--marinho); }
+thead { display: table-header-group; }
+th { text-align: left; font-weight: 700; color: var(--marinho); padding: 4pt 6pt; font-size: 8.3pt; white-space: nowrap; border-bottom: 0.8pt solid var(--marinho); background: var(--nevoa); }
+td { padding: 3.8pt 6pt; vertical-align: top; border-top: 0.5pt solid var(--fina); }
+tr { break-inside: avoid; }
+td.id { font-weight: 700; color: var(--marinho); white-space: nowrap; }
+td.c { text-align: center; }
+td.nw { white-space: nowrap; }
+.fonte { font-size: 7.8pt; color: var(--suave); margin: 2pt 0 13pt; text-align: left; }
+
+/* níveis e situação */
+.s { display: inline-block; border-radius: 2pt; padding: 0 4pt; font-size: 7.4pt; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; white-space: nowrap; }
+.alto { background: var(--alto-s); color: var(--alto); } .medio { background: var(--medio-s); color: var(--medio); } .baixo { background: var(--baixo-s); color: var(--baixo); }
+.ok { background: var(--baixo-s); color: var(--baixo); } .parcial { background: var(--medio-s); color: var(--medio); } .previsto { background: #e6ebf0; color: #44525f; }
+.nota-s { display: block; color: var(--suave); font-size: 7.8pt; margin-top: 2pt; }
+
+/* notas */
+.nota { border-left: 2.4pt solid var(--azul); background: var(--nevoa); padding: 7pt 10pt; margin: 6pt 0 12pt; break-inside: avoid; font-size: 9.6pt; }
+.nota.atencao { border-color: var(--alto); background: #fbf0ee; }
+.nota p { margin: 0; }
+.nota .t { font-weight: 700; color: var(--marinho); }
+.nota.atencao .t { color: var(--alto); }
+
+/* matriz de risco */
+.matriz { display: grid; grid-template-columns: 20pt repeat(3, 1fr); grid-template-rows: repeat(3, 38pt) 16pt; gap: 2pt; margin: 4pt 0 2pt; break-inside: avoid; font-size: 8.3pt; }
+.matriz .cel { padding: 4pt 6pt; display: flex; flex-wrap: wrap; gap: 3pt; align-content: flex-start; }
+.matriz .cel b { background: #fff; border: 0.5pt solid rgb(0 0 0 / 0.12); padding: 0 4pt; font-size: 7.8pt; height: 12pt; line-height: 12pt; color: var(--tinta); }
+.matriz .eixo { color: var(--suave); font-size: 7.6pt; display: flex; align-items: center; justify-content: center; }
+.matriz .eixo.v { writing-mode: vertical-rl; transform: rotate(180deg); }
+.n1 { background: var(--baixo-s); } .n2 { background: var(--medio-s); } .n3 { background: #f2c9c3; }
+
+/* figuras: título em cima, fonte embaixo */
+figure { margin: 6pt 0 12pt; break-inside: avoid; }
+figure img { max-width: 100%; max-height: 92mm; margin: 0 auto; display: block; border: 0.5pt solid var(--linha); }
+figcaption { font-size: 8.8pt; margin-bottom: 4pt; counter-increment: fig; }
+figcaption::before { content: "Figura " counter(fig) " – "; font-weight: 700; color: var(--marinho); }
+figure .fonte { margin: 3pt 0 0; }
+.duas { display: grid; grid-template-columns: 1fr 1fr; gap: 0 10pt; }
+.duas figure { margin: 4pt 0 10pt; }
+.duas figure img { max-height: 48mm; }
+.duas figcaption { font-size: 8pt; }
+
+/* fichas e código */
+.ficha { width: 100%; border-collapse: collapse; margin: 4pt 0 10pt; font-size: 9pt; border: 0; background: var(--fundo); }
+.ficha th { background: none; border: 0; color: var(--suave); font-weight: 500; width: 24mm; vertical-align: top; padding: 4pt 8pt; white-space: normal; }
+.ficha td { border: 0; padding: 4pt 8pt; }
+pre { font: 400 7.6pt/1.45 "DejaVu Sans Mono", monospace; background: var(--fundo); color: #1b2733; border: 0.5pt solid var(--linha); border-left: 2.4pt solid var(--marinho); padding: 7pt 10pt; margin: 4pt 0 2pt; white-space: pre; break-inside: avoid; overflow: hidden; }
+pre .c { color: #6a7d90; font-style: italic; }
+pre.saida { white-space: pre-wrap; word-break: break-all; font-size: 7.2pt; }
+ul { margin: 0 0 10pt; padding-left: 14pt; } li { margin-bottom: 3pt; text-align: justify; }
+</style>
+</head>
+<body>
+
+<!-- CAPA -->
+<div class="capa">
+  <div class="faixa"></div>
+  <img class="inseto" src="../../mobile/assets/brand/logo-mark.svg" alt="">
+  <div class="conteudo">
+    <div class="inst">FIAP · Global Solution 2026.2 · Cybersecurity</div>
+    <div class="marca"><img src="../../mobile/assets/brand/logo-mark.svg" alt="">Moskitto Radar</div>
+    <h1>Relatório de<br>Gestão de Riscos</h1>
+    <div class="sub">Ativos, ameaças, vulnerabilidades, riscos, controles e evidências técnicas de uma CitizenTech de segurança urbana.</div>
+    <div class="linha"></div>
+    <div class="rotulo">Equipe</div>
+    <table class="equipe">
+      <tr><td><strong>Marcelo Affonso</strong></td><td>RM559790 · responsável pelo relatório</td></tr>
+      <tr><td>Gabriel Couto</td><td>RM559579</td></tr>
+      <tr><td>Gabriel Kato</td><td>RM560000</td></tr>
+      <tr><td>João Vitor de Matos</td><td>RM559246</td></tr>
+    </table>
+    <div class="pe"><span>São Paulo</span><span>Novembro de 2026</span></div>
+  </div>
+</div>
+
+<!-- RESUMO E SUMÁRIO -->
+<div class="inicial">
+  <h2>Resumo</h2>
+  <p>Este relatório aplica a gestão de riscos ao Moskitto Radar, uma CitizenTech em que moradores da Grande São Paulo relatam roubos e consultam o risco por lugar e horário. Foram mapeados 10 ativos, 6 agentes de ameaça, 11 ameaças, 13 vulnerabilidades e 11 riscos, avaliados por probabilidade e impacto pela tríade Confidencialidade, Integridade e Disponibilidade. Cinco riscos são altos. Para cada risco há um controle proposto, e quatro evidências técnicas testam os controles mais críticos: consultas parametrizadas contra SQL Injection, proteção contra LFI e chave de moderador na rota de moderação, todas aprovadas, e a varredura NMAP do servidor, parcialmente aprovada porque as portas do Active Directory seguem abertas.</p>
+  <p class="chaves"><strong>Palavras-chave:</strong> gestão de riscos; tríade CIA; <em>Security by Design</em>; SQL Injection; LFI; NMAP.</p>
+
+  <h2 style="margin-top: 26pt">Sumário</h2>
+  <ul class="sumario">
+    <li><b>1</b>Escopo e visão geral<span class="pontos"></span><span class="pg" data-alvo="s1"></span></li>
+    <li><b>2</b>Ativos críticos<span class="pontos"></span><span class="pg" data-alvo="s2"></span></li>
+    <li><b>3</b>Agentes de ameaça e ameaças<span class="pontos"></span><span class="pg" data-alvo="s3"></span></li>
+    <li><b>4</b>Vulnerabilidades por componente<span class="pontos"></span><span class="pg" data-alvo="s4"></span></li>
+    <li><b>5</b>Análise de riscos<span class="pontos"></span><span class="pg" data-alvo="s5"></span></li>
+    <li><b>6</b>Controles propostos<span class="pontos"></span><span class="pg" data-alvo="s6"></span></li>
+    <li><b>7</b>Evidências técnicas<span class="pontos"></span><span class="pg" data-alvo="s7"></span></li>
+    <li class="sub"><b>7.1</b>E1. Consulta parametrizada contra SQL Injection<span class="pontos"></span><span class="pg" data-alvo="s71"></span></li>
+    <li class="sub"><b>7.2</b>E2. Sanitização de caminho contra LFI<span class="pontos"></span><span class="pg" data-alvo="s72"></span></li>
+    <li class="sub"><b>7.3</b>E3. Varredura NMAP do servidor<span class="pontos"></span><span class="pg" data-alvo="s73"></span></li>
+    <li class="sub"><b>7.4</b>E4. Chave de moderador na rota de moderação<span class="pontos"></span><span class="pg" data-alvo="s74"></span></li>
+    <li><b>8</b>Riscos residuais<span class="pontos"></span><span class="pg" data-alvo="s8"></span></li>
+  </ul>
+</div>
+
+<!-- 1 -->
+<section>
+<h2 id="s1"><span class="n">1</span>Escopo e visão geral</h2>
+<p>O Moskitto Radar é uma CitizenTech para relatar roubos e consultar o risco por lugar e horário na Região Metropolitana de São Paulo, em 129 lugares: três bairros da Avenida Paulista, 88 distritos da capital e 38 municípios vizinhos.</p>
+<p>A solução reúne um app mobile em React Native, uma API REST em ASP.NET Core com SQLite, um modelo de Machine Learning, um app de moderação em C#, uma câmera ao vivo simulada num ESP32 e um Windows Server com IIS. No projeto, a câmera fica no ponto de ônibus do lugar de maior risco previsto pelo modelo. Os 10.000 relatos do protótipo são simulados, sem dado pessoal real, e o modelo usa dados públicos e agregados da Secretaria da Segurança Pública (SSP-SP).</p>
+<p>A análise passa por ativos, ameaças, vulnerabilidades, riscos, controles e evidências, sempre pela tríade <strong>Confidencialidade, Integridade e Disponibilidade (CIA)</strong>. Cada risco recebe probabilidade e impacto de 1 a 3, e os controles seguem o princípio de <em>Security by Design</em>: a proteção é pensada junto com a solução, não depois dela.</p>
+
+</section>
+
+<!-- 2 -->
+<section>
+<h2 id="s2"><span class="n">2</span>Ativos críticos</h2>
+<p>São dez ativos a proteger. Os relatos, a localização e o banco concentram o que é mais importante para o cidadão.</p>
+<table>
+<caption>Ativos críticos e sua importância para a tríade CIA</caption>
+<colgroup><col style="width:7%"><col style="width:37%"><col style="width:17%"><col style="width:19%"><col style="width:6.6%"><col style="width:6.6%"><col style="width:6.8%"></colgroup>
+<thead><tr><th>ID</th><th>Ativo</th><th>Onde fica</th><th>Responsável</th><th>C</th><th>I</th><th>D</th></tr></thead>
+<tbody>
+<tr><td class="id">A1</td><td>Relatos de roubo</td><td>Banco SQLite</td><td>João Vitor de Matos</td><td class="c">Média</td><td class="c">Alta</td><td class="c">Média</td></tr>
+<tr><td class="id">A2</td><td>Localização dos relatos e do celular</td><td>App e banco</td><td>Gabriel Couto</td><td class="c">Alta</td><td class="c">Média</td><td class="c">Baixa</td></tr>
+<tr><td class="id">A3</td><td>Identificação do usuário (apelido e RM)</td><td>App e API</td><td>Gabriel Couto</td><td class="c">Média</td><td class="c">Média</td><td class="c">Baixa</td></tr>
+<tr><td class="id">A4</td><td>Banco de dados e migrações</td><td>Servidor</td><td>João Vitor de Matos</td><td class="c">Alta</td><td class="c">Alta</td><td class="c">Alta</td></tr>
+<tr><td class="id">A5</td><td>API REST</td><td>IIS</td><td>João Vitor de Matos</td><td class="c">Média</td><td class="c">Alta</td><td class="c">Alta</td></tr>
+<tr><td class="id">A6</td><td>Servidor Windows (IIS, AD e DNS)</td><td>Máquina virtual</td><td>Gabriel Kato</td><td class="c">Alta</td><td class="c">Alta</td><td class="c">Alta</td></tr>
+<tr><td class="id">A7</td><td>Modelo de ML e previsões de risco</td><td>Notebook e API</td><td>Gabriel Couto</td><td class="c">Baixa</td><td class="c">Alta</td><td class="c">Média</td></tr>
+<tr><td class="id">A8</td><td>Fila e decisões de moderação</td><td>App C#</td><td>João Vitor de Matos</td><td class="c">Média</td><td class="c">Alta</td><td class="c">Média</td></tr>
+<tr><td class="id">A9</td><td>Câmera do ponto de ônibus e sua credencial</td><td>ESP32</td><td>Gabriel Kato</td><td class="c">Média</td><td class="c">Alta</td><td class="c">Média</td></tr>
+<tr><td class="id">A10</td><td>Segredos e configuração (strings de conexão, chaves)</td><td>Repositório e servidor</td><td>Toda a equipe</td><td class="c">Alta</td><td class="c">Alta</td><td class="c">Média</td></tr>
+</tbody>
+</table>
+<p class="fonte">Fonte: elaborado pela equipe (2026). C, I e D: importância do ativo para Confidencialidade, Integridade e Disponibilidade.</p>
+<div class="nota"><p><span class="t">Ativo mais sensível: a localização (A2).</span> Cruzada com horário e descrição, pode apontar onde alguém mora ou passa, mesmo sem nome; por isso o local é sempre aproximado. A câmera (A9) transmite quadros de 32 × 16 pixels em tons de cinza, resolução que não permite reconhecer pessoas.</p></div>
+</section>
+
+<!-- 3 -->
+<section>
+<h2 id="s3"><span class="n">3</span>Agentes de ameaça e ameaças</h2>
+<p>Quem ameaça a solução não é só o invasor técnico: também há quem publique relato falso e quem cruze o mapa com outras fontes para identificar alguém.</p>
+<table>
+<caption>Agentes de ameaça, motivação e forma de ação</caption>
+<thead><tr><th>Agente</th><th>Motivação</th><th>Ação</th></tr></thead>
+<tbody>
+<tr><td><strong>Usuário malicioso</strong></td><td>Desinformar ou prejudicar uma região ou comércio</td><td>Envia relatos falsos ou em massa</td></tr>
+<tr><td><strong>Atacante externo oportunista</strong></td><td>Invadir e roubar dados</td><td>Varre portas e testa SQL Injection e LFI com ferramentas prontas</td></tr>
+<tr><td><strong>Perseguidor com OSINT</strong></td><td>Localizar ou intimidar alguém</td><td>Cruza relatos, horários e redes sociais</td></tr>
+<tr><td><strong>Criminoso interessado no mapa</strong></td><td>Esconder ou desviar a atenção de uma área</td><td>Manipula o risco para uma área parecer segura</td></tr>
+<tr><td><strong>Pessoa com acesso interno</strong></td><td>Abuso ou descuido</td><td>Usa conta de moderador ou administrador de forma indevida</td></tr>
+<tr><td><strong>Falha operacional</strong></td><td>Sem intenção</td><td>Erra uma configuração ou perde dados sem backup</td></tr>
+</tbody>
+</table>
+<p class="fonte">Fonte: elaborado pela equipe (2026).</p>
+<table>
+<caption>Ameaças, ativos afetados e dimensão da tríade CIA</caption>
+<thead><tr><th>ID</th><th>Ameaça</th><th>Ativos</th><th>Dimensão afetada</th></tr></thead>
+<tbody>
+<tr><td class="id">T1</td><td>SQL Injection nos campos e filtros da API</td><td>A1, A4, A5</td><td>Confidencialidade, Integridade</td></tr>
+<tr><td class="id">T2</td><td>LFI (path traversal): ler arquivos do servidor pela API</td><td>A6, A10</td><td>Confidencialidade</td></tr>
+<tr><td class="id">T3</td><td>Relatos falsos e spam em massa</td><td>A1, A7, A8</td><td>Integridade</td></tr>
+<tr><td class="id">T4</td><td>Envenenamento do modelo de ML com dados falsos</td><td>A7</td><td>Integridade</td></tr>
+<tr><td class="id">T5</td><td>Reidentificação de vítimas por localização e OSINT</td><td>A1, A2</td><td>Confidencialidade</td></tr>
+<tr><td class="id">T6</td><td>Quadros falsos enviados como se fossem da câmera, ou clone do dispositivo</td><td>A9, A5</td><td>Integridade, Disponibilidade</td></tr>
+<tr><td class="id">T7</td><td>Interceptação de tráfego sem criptografia (HTTP)</td><td>A1, A3</td><td>Confidencialidade, Integridade</td></tr>
+<tr><td class="id">T8</td><td>Negação de serviço na API e no IIS</td><td>A5, A6</td><td>Disponibilidade</td></tr>
+<tr><td class="id">T9</td><td>Acesso indevido ao servidor por portas expostas ou senhas fracas</td><td>A6, A4</td><td>Confidencialidade, Integridade, Disponibilidade</td></tr>
+<tr><td class="id">T10</td><td>Uso indevido da moderação</td><td>A8</td><td>Integridade</td></tr>
+<tr><td class="id">T11</td><td>Vazamento de segredos pelo repositório ou pelo app</td><td>A10</td><td>Confidencialidade</td></tr>
+</tbody>
+</table>
+<p class="fonte">Fonte: elaborado pela equipe (2026).</p>
+</section>
+
+<!-- 4 -->
+<section>
+<h2 id="s4"><span class="n">4</span>Vulnerabilidades por componente</h2>
+<p>As vulnerabilidades mais graves estão na API e no servidor, porque são a porta de entrada de tudo. A tabela liga cada fraqueza às ameaças que ela abre.</p>
+<table>
+<caption>Vulnerabilidades por componente e ameaças relacionadas</caption>
+<thead><tr><th>ID</th><th>Componente</th><th>Vulnerabilidade</th><th>Ameaças</th></tr></thead>
+<tbody>
+<tr><td class="id">V1</td><td>API</td><td>Entrada sem validação e consulta SQL montada por concatenação de texto</td><td>T1</td></tr>
+<tr><td class="id">V2</td><td>API</td><td>A API lê arquivos de dados do disco; se o nome ou o caminho viesse da requisição, abriria LFI</td><td>T2</td></tr>
+<tr><td class="id">V3</td><td>API</td><td>Sem limite de requisições e sem autenticação no envio de relatos</td><td>T3, T6, T8</td></tr>
+<tr><td class="id">V4</td><td>API, app e ESP32</td><td>Tráfego em HTTP, sem TLS</td><td>T7</td></tr>
+<tr><td class="id">V5</td><td>Banco</td><td>Arquivo SQLite no servidor com permissões NTFS amplas e sem backup</td><td>T9</td></tr>
+<tr><td class="id">V6</td><td>Servidor</td><td>Portas e serviços desnecessários abertos (RDP, SMB), contas padrão e senhas fracas</td><td>T9, T8</td></tr>
+<tr><td class="id">V7</td><td>IIS</td><td>Listagem de diretório, erros detalhados e cabeçalhos que revelam a versão</td><td>T2, T9</td></tr>
+<tr><td class="id">V8</td><td>App mobile</td><td>Dados no aparelho sem criptografia e coordenada precisa guardada</td><td>T5</td></tr>
+<tr><td class="id">V9</td><td>ESP32</td><td>Credencial embutida no firmware e sem autenticação do dispositivo que envia os quadros</td><td>T6, T11</td></tr>
+<tr><td class="id">V10</td><td>App C#</td><td>Moderador sem login e sem registro das ações</td><td>T10</td></tr>
+<tr><td class="id">V11</td><td>Modelo de ML</td><td>Treino com relatos não moderados e sem detecção de valores fora do padrão</td><td>T4</td></tr>
+<tr><td class="id">V12</td><td>Dados</td><td>Texto livre pode conter telefone, placa ou nome; coordenada exata expõe o local</td><td>T5</td></tr>
+<tr><td class="id">V13</td><td>Repositório</td><td>Chaves e strings de conexão enviadas ao GitHub</td><td>T11</td></tr>
+</tbody>
+</table>
+<p class="fonte">Fonte: elaborado pela equipe (2026).</p>
+</section>
+
+<!-- 5 -->
+<section>
+<h2 id="s5"><span class="n">5</span>Análise de riscos</h2>
+<p>Cinco dos onze riscos são altos. A nota é a probabilidade vezes o impacto, cada um de 1 a 3: até 2 é baixo, de 3 a 4 é médio e 6 ou mais é alto. A Figura 1 posiciona cada risco na matriz.</p>
+<figure>
+<figcaption>Matriz de risco: probabilidade × impacto</figcaption>
+<div class="matriz">
+  <div class="eixo v">Prob. 3</div><div class="cel n2"></div><div class="cel n3"><b>R3</b></div><div class="cel n3"></div>
+  <div class="eixo v">Prob. 2</div><div class="cel n1"></div><div class="cel n2"><b>R4</b><b>R6</b><b>R7</b><b>R8</b><b>R11</b></div><div class="cel n3"><b>R1</b><b>R2</b><b>R5</b><b>R9</b></div>
+  <div class="eixo v">Prob. 1</div><div class="cel n1"></div><div class="cel n1"><b>R10</b></div><div class="cel n2"></div>
+  <div></div><div class="eixo">Impacto 1</div><div class="eixo">Impacto 2</div><div class="eixo">Impacto 3</div>
+</div>
+<p class="fonte">Fonte: elaborado pela equipe (2026). Verde: baixo; amarelo: médio; vermelho: alto.</p>
+</figure>
+<table>
+<caption>Cenários de risco, probabilidade, impacto e nível</caption>
+<thead><tr><th>ID</th><th>Cenário</th><th>Prob.</th><th>Impacto</th><th>Nota</th><th>Nível</th></tr></thead>
+<tbody>
+<tr><td class="id">R1</td><td>Alguém digita <code>' OR '1'='1</code> no filtro de bairro e a API devolve ou altera todos os relatos, ou apaga a tabela</td><td class="c">2</td><td class="c">3</td><td class="c">6</td><td><span class="s alto">Alto</span></td></tr>
+<tr><td class="id">R2</td><td>Uma requisição com <code>..\..\</code> no caminho de um arquivo de dados lê arquivos de configuração do servidor</td><td class="c">2</td><td class="c">3</td><td class="c">6</td><td><span class="s alto">Alto</span></td></tr>
+<tr><td class="id">R3</td><td>Um usuário envia dezenas de relatos falsos e faz uma rua inocente parecer perigosa, ou o contrário</td><td class="c">3</td><td class="c">2</td><td class="c">6</td><td><span class="s alto">Alto</span></td></tr>
+<tr><td class="id">R5</td><td>Um perseguidor cruza local, horário e descrição de um relato e descobre onde a vítima mora ou passa</td><td class="c">2</td><td class="c">3</td><td class="c">6</td><td><span class="s alto">Alto</span></td></tr>
+<tr><td class="id">R9</td><td>Um atacante encontra RDP ou SMB aberto, adivinha uma senha fraca e controla o servidor</td><td class="c">2</td><td class="c">3</td><td class="c">6</td><td><span class="s alto">Alto</span></td></tr>
+<tr><td class="id">R4</td><td>Relatos falsos entram no treino e o modelo passa a prever o risco errado</td><td class="c">2</td><td class="c">2</td><td class="c">4</td><td><span class="s medio">Médio</span></td></tr>
+<tr><td class="id">R6</td><td>Alguém copia a credencial do ESP32 e envia à API quadros falsos como se fossem da câmera</td><td class="c">2</td><td class="c">2</td><td class="c">4</td><td><span class="s medio">Médio</span></td></tr>
+<tr><td class="id">R7</td><td>Em rede aberta, alguém lê os relatos e o RM que trafegam em HTTP</td><td class="c">2</td><td class="c">2</td><td class="c">4</td><td><span class="s medio">Médio</span></td></tr>
+<tr><td class="id">R8</td><td>Uma enxurrada de requisições derruba o IIS e o mapa fica fora do ar</td><td class="c">2</td><td class="c">2</td><td class="c">4</td><td><span class="s medio">Médio</span></td></tr>
+<tr><td class="id">R11</td><td>Uma chave ou string de conexão vai para o GitHub e fica pública</td><td class="c">2</td><td class="c">2</td><td class="c">4</td><td><span class="s medio">Médio</span></td></tr>
+<tr><td class="id">R10</td><td>Um moderador aprova ou rejeita relatos sem deixar registro</td><td class="c">1</td><td class="c">2</td><td class="c">2</td><td><span class="s baixo">Baixo</span></td></tr>
+</tbody>
+</table>
+<p class="fonte">Fonte: elaborado pela equipe (2026).</p>
+<div class="nota atencao"><p><span class="t">Atenção especial: R3.</span> É o único risco de probabilidade alta, porque qualquer pessoa pode enviar um relato. Ele não some com um controle técnico simples, e por isso a moderação é central no plano da seção 6.</p></div>
+</section>
+
+<!-- 6 -->
+<section>
+<h2 id="s6"><span class="n">6</span>Controles propostos</h2>
+<p>Cada risco alto tem pelo menos um controle preventivo, e os riscos R1, R2, R9 e R10 também têm evidência técnica na seção 7. Na coluna de situação, <span class="s previsto">Previsto</span> indica que o controle está no plano da equipe e ainda precisa ser comprovado.</p>
+<table>
+<caption>Controles por risco, tipo, evidência e situação</caption>
+<thead><tr><th>Risco</th><th>Controle</th><th>Tipo</th><th>Evid.</th><th>Situação</th></tr></thead>
+<tbody>
+<tr><td class="id">R1</td><td>Consultas parametrizadas; validação de tipo, tamanho e valores permitidos; usuário do banco com o mínimo de permissão; erros genéricos</td><td>Preventivo</td><td>E1</td><td><span class="s ok">Implementado</span></td></tr>
+<tr><td class="id">R2</td><td>Nome de arquivo fixo; caminho montado só a partir da pasta de dados; nenhum caminho vindo da requisição; dados fora da pasta pública</td><td>Preventivo</td><td>E2</td><td><span class="s ok">Implementado</span></td></tr>
+<tr><td class="id">R3</td><td>Moderação antes da publicação; limite por apelido e hora; chave contra duplicados; bloqueio de telefone e placa</td><td>Preventivo e detectivo</td><td>E4</td><td><span class="s parcial">Parcial</span><span class="nota-s">falta o limite de envios</span></td></tr>
+<tr><td class="id">R4</td><td>Treinar só com relatos aprovados; descartar valores fora do padrão; revisar o conjunto antes de um novo treino</td><td>Preventivo</td><td></td><td><span class="s previsto">Previsto</span></td></tr>
+<tr><td class="id">R5</td><td>Mostrar local aproximado, nunca o endereço; agrupar poucos relatos; bloquear dados pessoais; coordenada arredondada a 3 casas</td><td>Preventivo</td><td></td><td><span class="s ok">Implementado</span><span class="nota-s">3 casas, cerca de 110 m</span></td></tr>
+<tr><td class="id">R6</td><td>Chave por dispositivo; limite de envios; origem da câmera identificada; quadros só aceitos de dispositivos cadastrados</td><td>Preventivo e detectivo</td><td></td><td><span class="s previsto">Previsto</span><span class="nota-s">transmissão simulada</span></td></tr>
+<tr><td class="id">R7</td><td>HTTPS no IIS; redirecionamento de HTTP para HTTPS; HSTS</td><td>Preventivo</td><td></td><td><span class="s previsto">Previsto</span></td></tr>
+<tr><td class="id">R8</td><td>Limite de taxa e de tamanho; alertas de CPU, disco e memória; recuperação automática do serviço</td><td>Preventivo e corretivo</td><td></td><td><span class="s previsto">Previsto</span></td></tr>
+<tr><td class="id">R9</td><td>Firewall só com as portas necessárias; RDP com NLA e restrito por IP; SMBv1 desligado; senhas fortes; varredura NMAP</td><td>Preventivo e detectivo</td><td>E3</td><td><span class="s parcial">Parcial</span><span class="nota-s">portas do AD abertas</span></td></tr>
+<tr><td class="id">R10</td><td>Chave por moderador, guardada só como hash; registro de quem decidiu; recusas no log</td><td>Preventivo e detectivo</td><td>E4</td><td><span class="s ok">Implementado</span></td></tr>
+<tr><td class="id">R11</td><td>Segredos fora do repositório; nenhuma chave no app; revisão do histórico do Git</td><td>Preventivo</td><td></td><td><span class="s previsto">Previsto</span></td></tr>
+</tbody>
+</table>
+<p class="fonte">Fonte: elaborado pela equipe (2026).</p>
+<div class="nota"><p><span class="t">Moderação protegida (R3 e R10).</span> Todo relato novo entra como pendente, e só a rota <code>PATCH /api/relatos/{id}/status</code> aprova ou rejeita. Ela exige a chave de um moderador e grava quem decidiu (evidência E4). Enquanto a API usar HTTP, a chave trafega sem criptografia; por isso o HTTPS (R7) continua necessário.</p></div>
+</section>
+
+<!-- 7 -->
+<section>
+<h2 id="s7"><span class="n">7</span>Evidências técnicas</h2>
+<p>As quatro evidências testam os controles dos riscos R1, R2, R9 e R10. Cada uma mostra o comando e a resposta real, sem edição.</p>
+<table>
+<caption>Evidências técnicas, responsáveis e situação</caption>
+<thead><tr><th>Evidência</th><th>Risco e tema</th><th>Responsável</th><th>Atividade</th><th>Data</th><th>Situação</th></tr></thead>
+<tbody>
+<tr><td class="id">E1</td><td>R1 · SQL Injection</td><td>João Vitor de Matos</td><td>Código e testes</td><td>16/11/2026</td><td><span class="s ok">Aprovada</span></td></tr>
+<tr><td class="id">E2</td><td>R2 · LFI</td><td>João Vitor de Matos</td><td>Código e testes</td><td>16/11/2026</td><td><span class="s ok">Aprovada</span></td></tr>
+<tr><td class="id">E3</td><td>R9 · Portas do servidor</td><td>Gabriel Kato</td><td>Servidor e varredura</td><td>17/11/2026</td><td><span class="s parcial">Parcial</span></td></tr>
+<tr><td class="id">E4</td><td>R10 · Moderação</td><td>Gabriel Couto</td><td>Código e testes</td><td>17/11/2026</td><td><span class="s ok">Aprovada</span></td></tr>
+</tbody>
+</table>
+<p class="fonte">Fonte: elaborado pela equipe (2026).</p>
+
+<h3 id="s71"><span class="n">7.1</span>E1. Consulta parametrizada contra SQL Injection</h3>
+<table class="ficha">
+<tr><th>O que prova</th><td>A API trata o texto recebido como dado, nunca como parte do comando SQL.</td></tr>
+<tr><th>Resultado</th><td><span class="s ok">Aprovada</span> Nenhuma entrada maliciosa alterou, apagou ou revelou dados.</td></tr>
+<tr><th>Como</th><td>João Vitor de Matos testou a API em 16/11/2026 (<code>http://localhost:5207</code>, com 10.000 relatos simulados) usando scripts PowerShell que mostram o comando e a resposta.</td></tr>
+</table>
+<table>
+<caption>Testes de SQL Injection e resultados</caption>
+<thead><tr><th>Teste</th><th>Entrada maliciosa</th><th>Resposta</th><th>Conclusão</th></tr></thead>
+<tbody>
+<tr><td>Filtro de bairro</td><td><code>' OR 1=1 --</code>, <code>' OR '1'='1</code> e <code>UNION SELECT</code></td><td><code>400</code> com <code>{ "erro": ... }</code></td><td>Recusado; nenhum relato devolvido</td></tr>
+<tr><td>Criar relato (descrição)</td><td>Injeção no texto da descrição</td><td><code>201</code>, gravado como texto comum</td><td>Tratado como dado; não executa</td></tr>
+<tr><td>Criar relato (bairro)</td><td>Injeção no bairro</td><td><code>400</code></td><td>Recusado pela lista de lugares válidos</td></tr>
+<tr><td>Id na rota</td><td>Injeção no id</td><td><code>404</code>; o total continua em 10.001</td><td>Nenhuma linha alterada ou apagada</td></tr>
+<tr><td>Log do EF Core</td><td>Consultas da própria API</td><td>SQL com parâmetros (<code>@codigo</code>, <code>@p</code>, <code>@p0</code>)</td><td>Consulta parametrizada</td></tr>
+</tbody>
+</table>
+<p class="fonte">Fonte: testes de João Vitor de Matos (16/11/2026).</p>
+<p><strong>No código.</strong> Em <code>RelatosController.Listar</code>, os filtros entram como parâmetros do LINQ do Entity Framework Core, que gera SQL parametrizado. Antes disso, o bairro é conferido contra a lista de lugares, e o tipo e o status só aceitam valores conhecidos. Na criação, a descrição tem limite de 280 caracteres. Os erros voltam genéricos, sem detalhe interno.</p>
+<pre><span class="c">// Os filtros entram como parâmetros do LINQ: o EF Core gera SQL parametrizado.</span>
+var consulta = db.Relatos.AsNoTracking();
+
+if (!string.IsNullOrWhiteSpace(bairro))
+{
+    if (!await db.LugarExiste(bairro, cancelamento))
+        return BadRequest(new RespostaErro(ErroBairro(bairro)));
+    consulta = consulta.Where(r =&gt; r.Bairro == bairro);
+}
+if (!string.IsNullOrWhiteSpace(tipo))
+{
+    if (!CodigoEnumConverter&lt;TipoRelato&gt;.TentarLer(tipo, out var valor))
+        return BadRequest(new RespostaErro(ErroTipo));
+    consulta = consulta.Where(r =&gt; r.Tipo == valor);
+}</pre>
+<p class="fonte">Fonte: <code>soa/MoskittoRadar.Api/Controllers/RelatosController.cs</code>, método <code>Listar</code> (trecho; quebras de linha ajustadas para caber na página).</p>
+<figure><figcaption>Testes de SQL Injection nos filtros da listagem: as três tentativas voltam <code>400</code></figcaption><img src="../evidencias/e1-filtros.png" alt=""><p class="fonte">Fonte: João Vitor de Matos (16/11/2026).</p></figure>
+<figure><figcaption>Injeção ao criar um relato: na descrição vira texto comum (<code>201</code>); no bairro, é recusada (<code>400</code>)</figcaption><img src="../evidencias/e1-criar-relato.png" alt=""><p class="fonte">Fonte: João Vitor de Matos (16/11/2026).</p></figure>
+<figure><figcaption>Injeção no id da rota (<code>404</code>) e conferência do total: 10.000 da carga inicial mais 1 criado no teste</figcaption><img src="../evidencias/e1-id-e-total.png" alt=""><p class="fonte">Fonte: João Vitor de Matos (16/11/2026).</p></figure>
+<figure><figcaption>Log do EF Core: as consultas usam parâmetros (<code>@codigo</code>, <code>@p</code>, <code>@p0</code>)</figcaption><img src="../evidencias/e1-log-ef-core.png" alt=""><p class="fonte">Fonte: João Vitor de Matos (16/11/2026).</p></figure>
+
+<h3 id="s72"><span class="n">7.2</span>E2. Sanitização de caminho contra LFI</h3>
+<table class="ficha">
+<tr><th>O que prova</th><td>Nenhuma parte da requisição consegue levar a API a ler um arquivo fora da pasta de dados.</td></tr>
+<tr><th>Resultado</th><td><span class="s ok">Aprovada</span> Todas as tentativas voltaram <code>404</code> ou <code>400</code>, sem conteúdo de arquivo.</td></tr>
+<tr><th>Como</th><td>João Vitor de Matos tentou ler <code>../../windows/win.ini</code> de várias formas: no caminho da URL (com <code>--path-as-is</code>), com o id codificado e nos filtros. O script <code>04-lfi.ps1</code> guarda os comandos.</td></tr>
+</table>
+<p><strong>No código.</strong> A API não tem rota que receba nome ou caminho de arquivo. Ela só lê arquivos na carga inicial do banco, quando as tabelas estão vazias, e com três nomes fixos dentro da pasta de dados. Depois disso, relatos e previsões saem do banco.</p>
+<pre>using var transacao = db.Database.BeginTransaction();
+Carregar(db, db.Lugares, () =&gt; LerLugares(Path.Combine(pastaDados, "lugares.csv")),
+    "lugares", logger);
+Carregar(db, db.Relatos, () =&gt; LerRelatos(Path.Combine(pastaDados, "relatos_simulados.csv")),
+    "relatos simulados", logger);
+Carregar(db, db.Previsoes, () =&gt; LerPrevisoes(Path.Combine(pastaDados, "previsoes.json")),
+    "previsões de risco", logger);
+transacao.Commit();</pre>
+<p class="fonte">Fonte: <code>soa/MoskittoRadar.Api/Data/CargaInicial.cs</code>, método <code>Executar</code> (trecho; quebras de linha ajustadas para caber na página).</p>
+<figure><figcaption>Tentativas de path traversal no caminho, no id codificado e nos filtros de previsões e de relatos</figcaption><img src="../evidencias/e2-lfi.png" alt=""><p class="fonte">Fonte: João Vitor de Matos (16/11/2026).</p></figure>
+
+<h3 id="s73"><span class="n">7.3</span>E3. Varredura NMAP do servidor</h3>
+<table class="ficha">
+<tr><th>O que prova</th><td>Só as portas necessárias estão acessíveis no servidor Windows.</td></tr>
+<tr><th>Resultado</th><td><span class="s parcial">Parcial</span> 65.511 das 65.535 portas estão filtradas, mas as portas do AD seguem abertas.</td></tr>
+<tr><th>Como</th><td>De uma VM Debian da rede do laboratório, Gabriel Kato rodou <code>nmap -sV -p- moskitto.br -oN nmap-vm.txt</code> contra a VM da equipe (<code>10.0.1.1</code>), que é nossa e está autorizada.</td></tr>
+</table>
+<p>O firewall do Windows, com os três perfis ativos, descarta o tráfego das portas filtradas. RDP (3389) e HTTPS (443) não estão abertos. O NMAP identifica o Microsoft IIS 10.0 na porta 80, e o IIS tem o site <code>MoskittoRadarAPI</code>; no print do servidor, <code>/api/health</code> responde <code>ok</code> em <code>localhost:5000</code>. Há regras de entrada próprias para a API, nas portas 5207 e 5000.</p>
+<figure><figcaption>Varredura NMAP de todas as portas da VM <code>moskitto.br</code> (<code>10.0.1.1</code>)</figcaption><img src="../../os/images/nmap.png" alt=""><p class="fonte">Fonte: Gabriel Kato (17/11/2026).</p></figure>
+<p>Como a VM também é controladora de domínio (AD e DNS), as portas abertas abaixo existem por necessidade e não por erro, mas deveriam ser alcançáveis só pela rede interna. Essa é a parte que falta fechar.</p>
+<table>
+<caption>Portas do servidor: necessidade e resultado do NMAP</caption>
+<thead><tr><th>Porta</th><th>Serviço</th><th>Necessidade</th><th>Resultado do NMAP</th></tr></thead>
+<tbody>
+<tr><td class="id">80</td><td>HTTP do IIS</td><td>Sim; serve a API em HTTP</td><td><span class="s ok">Aberta</span> Microsoft IIS 10.0</td></tr>
+<tr><td class="id">443</td><td>HTTPS do IIS</td><td>Sim</td><td><span class="s parcial">Não aberta</span> HTTPS ainda não configurado</td></tr>
+<tr><td class="id">3389</td><td>RDP</td><td>Só de IPs da equipe</td><td><span class="s ok">Não aberta</span></td></tr>
+<tr><td class="id">445</td><td>SMB</td><td>Só na rede interna, se o AD exigir</td><td><span class="s parcial">Aberta</span> SMB do AD</td></tr>
+<tr><td class="id">53, 88, 389</td><td>DNS e AD</td><td>Só na rede interna</td><td><span class="s parcial">Abertas</span> DNS, Kerberos e LDAP</td></tr>
+<tr><td class="id">464, 593, 636,<br>3268, 3269, 9389</td><td>Serviços do AD: senha Kerberos, RPC, LDAPS, catálogo global e AD Web Services</td><td>Só na rede interna</td><td><span class="s parcial">Abertas</span></td></tr>
+<tr><td class="id">135, 139,<br>49664 a 59541</td><td>RPC e NetBIOS do Windows; portas dinâmicas do AD</td><td>Só na rede interna</td><td><span class="s parcial">Abertas</span> 10 portas altas de RPC</td></tr>
+<tr><td class="id">5985</td><td>WinRM (HTTPAPI)</td><td>Só se a equipe administrar remotamente</td><td><span class="s parcial">Aberta</span></td></tr>
+<tr><td class="id">Demais</td><td>Sem serviço publicado</td><td>Não</td><td><span class="s ok">Filtradas</span> 65.511 portas</td></tr>
+</tbody>
+</table>
+<p class="fonte">Fonte: elaborado pela equipe a partir da varredura de Gabriel Kato (17/11/2026).</p>
+<div class="duas">
+  <figure><figcaption>Os três perfis do Firewall do Windows ativos</figcaption><img src="../../os/images/firewall-perfis.png" alt=""><p class="fonte">Fonte: Gabriel Kato (17/11/2026).</p></figure>
+  <figure><figcaption>Regras de entrada da API nas portas 5207 e 5000</figcaption><img src="../../os/images/firewall-regras.png" alt=""><p class="fonte">Fonte: Gabriel Kato (17/11/2026).</p></figure>
+  <figure><figcaption>Portas e estados de conexão no servidor</figcaption><img src="../../os/images/netstat.png" alt=""><p class="fonte">Fonte: Gabriel Kato (17/11/2026).</p></figure>
+  <figure><figcaption>Site <code>MoskittoRadarAPI</code> no IIS e <code>/api/health</code> em <code>localhost:5000</code></figcaption><img src="../../os/images/iis-health.png" alt=""><p class="fonte">Fonte: Gabriel Kato (17/11/2026).</p></figure>
+  <figure><figcaption>Configuração de rede do servidor</figcaption><img src="../../os/images/ipconfig.png" alt=""><p class="fonte">Fonte: Gabriel Kato (17/11/2026).</p></figure>
+  <figure><figcaption>Identificação do servidor</figcaption><img src="../../os/images/hostname.png" alt=""><p class="fonte">Fonte: Gabriel Kato (17/11/2026).</p></figure>
+</div>
+
+<h3 id="s74"><span class="n">7.4</span>E4. Chave de moderador na rota de moderação</h3>
+<table class="ficha">
+<tr><th>O que prova</th><td>Só quem tem a chave de um moderador aprova ou rejeita relatos, e cada decisão registra quem decidiu.</td></tr>
+<tr><th>Resultado</th><td><span class="s ok">Aprovada</span> Sem chave e com chave errada, a API responde <code>401</code> e o relato continua pendente; com a chave, aprova e grava o moderador.</td></tr>
+<tr><th>Como</th><td>Gabriel Couto testou a API local em 17/11/2026 (<code>http://localhost:5207</code>, ambiente Development, moderador de demonstração <code>demo</code>) com o script <code>cyber/evidencias/e4-moderacao.sh</code>. A collection do Bruno da API também cobre os dois casos de <code>401</code>.</td></tr>
+</table>
+<p><strong>No código.</strong> O filtro <code>[ExigeModerador]</code> protege a rota de moderação. A API não guarda a chave, só o hash SHA-256 de cada uma, vindo da configuração do servidor; a comparação é feita em tempo constante. Quando a chave vale, o apelido do moderador segue para a tabela <code>moderacoes</code>.</p>
+<pre>var cabecalho = http.Request.Headers.Authorization.ToString();
+var chave = cabecalho.StartsWith(&quot;Bearer &quot;, StringComparison.OrdinalIgnoreCase)
+    ? cabecalho[7..].Trim() : null;
+var apelido = http.RequestServices.GetRequiredService&lt;Moderadores&gt;()
+    .Identificar(chave);
+
+if (apelido is null)
+{
+    <span class="c">// Vai para o log do servidor: várias recusas seguidas indicam</span>
+    <span class="c">// alguém tentando adivinhar chaves.</span>
+    http.RequestServices.GetRequiredService&lt;ILogger&lt;ExigeModeradorAttribute&gt;&gt;()
+        .LogWarning(&quot;Moderação recusada: chave {Situacao} em {Metodo} {Caminho}, IP {Ip}&quot;,
+            string.IsNullOrEmpty(chave) ? &quot;ausente&quot; : &quot;inválida&quot;,
+            http.Request.Method, http.Request.Path, http.Connection.RemoteIpAddress);
+    http.Response.Headers.WWWAuthenticate = &quot;Bearer&quot;;
+    contexto.Result = new UnauthorizedObjectResult(new RespostaErro(
+        &quot;Só moderadores podem fazer isso. Envie a chave no cabeçalho Authorization: Bearer &lt;chave&gt;.&quot;));
+    return;
+}
+
+http.Items[ItemApelido] = apelido;</pre>
+<p class="fonte">Fonte: <code>soa/MoskittoRadar.Api/Seguranca/Moderadores.cs</code>, método <code>OnAuthorization</code> (trecho; quebras de linha ajustadas para caber na página).</p>
+<p>Saída do teste (passos 1, 2, 5 e 6), sem as linhas de cabeçalho HTTP <code>Content-Type</code>, <code>Date</code> e <code>Server</code>:</p>
+<pre class="saida">== 1. Sem chave: recusado
+$ curl -s -i -X PATCH http://localhost:5207/api/relatos/1552e60b-9be4-4511-8b2c-b3806c77d866/status -H &#x27;Content-Type: application/json&#x27; -d &#x27;{&quot;status&quot;:&quot;aprovado&quot;}&#x27;
+HTTP/1.1 401 Unauthorized
+WWW-Authenticate: Bearer
+{&quot;erro&quot;:&quot;Só moderadores podem fazer isso. Envie a chave no cabeçalho Authorization: Bearer &lt;chave&gt;.&quot;}
+
+== 2. Chave errada: recusado
+$ curl -s -i -X PATCH http://localhost:5207/api/relatos/1552e60b-9be4-4511-8b2c-b3806c77d866/status -H &#x27;Content-Type: application/json&#x27; -H &#x27;Authorization: Bearer chute-qualquer&#x27; -d &#x27;{&quot;status&quot;:&quot;aprovado&quot;}&#x27;
+HTTP/1.1 401 Unauthorized
+WWW-Authenticate: Bearer
+{&quot;erro&quot;:&quot;Só moderadores podem fazer isso. Envie a chave no cabeçalho Authorization: Bearer &lt;chave&gt;.&quot;}
+
+== 5. Com a chave do moderador: aprovado
+$ curl -s -i -X PATCH http://localhost:5207/api/relatos/1552e60b-9be4-4511-8b2c-b3806c77d866/status -H &#x27;Content-Type: application/json&#x27; -H &#x27;Authorization: Bearer moskitto-demo&#x27; -d &#x27;{&quot;status&quot;:&quot;aprovado&quot;}&#x27;
+HTTP/1.1 200 OK
+{&quot;id&quot;:&quot;1552e60b-9be4-4511-8b2c-b3806c77d866&quot;,&quot;tipo&quot;:&quot;celular&quot;,&quot;descricao&quot;:&quot;Gozei&quot;,&quot;latitude&quot;:-23.569,&quot;longitude&quot;:-46.471,&quot;bairro&quot;:&quot;dis_355030857&quot;,&quot;ocorrido_em&quot;:&quot;2026-11-12T20:54:00-03:00&quot;,&quot;status&quot;:&quot;aprovado&quot;,&quot;origem&quot;:&quot;mobile&quot;}
+
+== 6. Registro da decisão na tabela moderacoes
+$ sqlite3 -header -column soa/MoskittoRadar.Api/App_Data/moskitto.db &#x27;SELECT RelatoId, StatusAnterior, Decisao, ModeradoPor FROM moderacoes WHERE RelatoId = upper(&#x27;1552e60b-9be4-4511-8b2c-b3806c77d866&#x27;) OR RelatoId = &#x27;1552e60b-9be4-4511-8b2c-b3806c77d866&#x27;;&#x27;
+RelatoId                              StatusAnterior  Decisao   ModeradoPor
+------------------------------------  --------------  --------  -----------
+1552E60B-9BE4-4511-8B2C-B3806C77D866  pendente        aprovado  demo       </pre>
+<p class="fonte">Fonte: <code>cyber/evidencias/e4-moderacao.txt</code>, gerado por Gabriel Couto (17/11/2026).</p>
+</section>
+
+<!-- 8 -->
+<section class="segue" style="break-inside: avoid">
+<h2 id="s8"><span class="n">8</span>Riscos residuais</h2>
+<p>O que ainda fica em aberto, pelos controles marcados como parciais ou previstos na seção 6:</p>
+<ul>
+<li><strong>Portas do AD (R9).</strong> Restringir DNS, Kerberos, LDAP, SMB, RPC e WinRM à rede interna.</li>
+<li><strong>Chave de moderador no servidor (R10).</strong> No IIS, cada moderador precisa ser cadastrado com o hash da sua chave; até lá, a moderação recusa todos. A chave trafega em HTTP até o HTTPS ser configurado.</li>
+<li><strong>Sem limite de envios (R3 e R8).</strong> Nada impede uma enxurrada de relatos ou de requisições.</li>
+<li><strong>Tráfego em HTTP (R7).</strong> O HTTPS ainda não está configurado no IIS.</li>
+<li><strong>Câmera, modelo e segredos (R4, R6 e R11).</strong> Os controles estão no plano, mas ainda sem comprovação.</li>
+</ul>
+</section>
+
+</body>
+</html>
