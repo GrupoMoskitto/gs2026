@@ -591,9 +591,7 @@ export function Fluxo() {
                   <span className="rounded-full bg-nevoa px-3 py-1 font-medium">
                     {e.parte} · {e.pasta}
                   </span>
-                  <span className={`rounded-full px-3 py-1 font-medium ${e.pronta ? 'bg-baixo-suave text-sobre-baixo' : 'bg-fundo text-suave'}`}>
-                    {e.pronta ? 'Pronta' : 'Em construção'}
-                  </span>
+                  {!e.pronta && <span className="rounded-full bg-fundo px-3 py-1 font-medium text-suave">Em construção</span>}
                 </p>
                 <p className="mt-5 text-[18px] leading-relaxed text-tinta">{e.texto}</p>
                 <ul className="mt-5 grid gap-2 text-[16px]">

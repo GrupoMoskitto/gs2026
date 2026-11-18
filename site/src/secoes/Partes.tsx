@@ -121,7 +121,7 @@ const PARTES: Parte[] = [
     nome: 'Segurança',
     materia: 'Cybersecurity',
     dono: 'Marcelo Affonso',
-    pronta: false,
+    pronta: true,
     resumo: 'Relatório de gestão de riscos da solução.',
     itens: ['Ativos: banco, API e servidor', 'Ameaças e vulnerabilidades', 'Riscos e os controles de cada um', 'Scan das portas do servidor'],
   },
@@ -145,20 +145,8 @@ export function Partes() {
           const cor = escuro ? 'bg-marinho text-white' : p.pronta ? 'bg-azul text-white' : 'bg-superficie text-forte';
           return (
             <article key={p.pasta} onPointerMove={seguirPonteiro} className={`${cartaoBase} h-auto! min-h-[460px] p-7 ${cor}`}>
-              <p className={`w-fit rounded-full px-3.5 py-1.5 text-[15px] font-medium ${p.pronta ? 'bg-superficie text-forte' : 'bg-nevoa text-forte'}`}>
-                {p.pronta ? (
-                  <span className="flex items-center gap-2">
-                    <span className="relative flex h-2 w-2" aria-hidden="true">
-                      <span className="absolute inset-0 animate-ping rounded-full bg-baixo motion-reduce:hidden" />
-                      <span className="relative h-2 w-2 rounded-full bg-baixo" />
-                    </span>
-                    Pronta
-                  </span>
-                ) : (
-                  'Em construção'
-                )}
-              </p>
-              <h3 className="mt-5 text-[30px] leading-[1.05] font-medium tracking-[-0.02em]">{p.nome}</h3>
+              {!p.pronta && <p className="mb-5 w-fit rounded-full bg-nevoa px-3.5 py-1.5 text-[15px] font-medium text-forte">Em construção</p>}
+              <h3 className="text-[30px] leading-[1.05] font-medium tracking-[-0.02em]">{p.nome}</h3>
               <p className={`mt-2 text-[15px] ${escuro ? 'text-claro' : p.pronta ? 'text-white' : 'text-suave'}`}>
                 {p.materia} · {p.dono}
               </p>
