@@ -40,7 +40,8 @@
         {
           "locationWhenInUsePermission": "O app usa a sua localização só para preencher o local aproximado do relato."
         }
-      ]
+      ],
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,

@@ -6,7 +6,7 @@
 
 - [x] **Relatório de Gestão de Riscos (PDF):** ativos, ameaças, vulnerabilidades, riscos e controles
 - [x] **Evidências técnicas** (prints/scripts): *Prepared Statements* contra SQLi, sanitização contra LFI, varredura NMAP, etc.
-- [ ] Envio único por equipe no Teams
+- [x] Envio único por equipe no Teams
 
 ## Avaliação (10,0)
 
@@ -34,6 +34,6 @@ cyber/
 
 ## Status
 
-Pronto para a entrega de 19/11.
+Entregue em 19/11.
 
 Detalhes da disciplina: [`docs/disciplinas.md`](../docs/disciplinas.md#2-cybersecurity)

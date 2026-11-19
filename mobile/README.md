@@ -11,7 +11,7 @@
 | **Como funciona** | A pessoa relata um roubo no app (local, horário e tipo, sem dados pessoais). A API guarda os relatos, um modelo de aprendizado de máquina prevê o risco por lugar e faixa horária, e o app mostra isso no mapa e na lista. |
 | **O que cada parte faz** | **Mobile:** este app. **API (SOA):** guarda e serve os relatos. **ML:** prevê o risco. **C#:** app de moderação. **ESP32:** câmera ao vivo num ponto de ônibus. **OS:** Windows Server com IIS. **Segurança e testes:** relatório de riscos, diagrama e pitch. |
 | **Link do repositório** | <https://github.com/GrupoMoskitto/gs2026> |
-| **Indicador de impacto** | *A definir pelo time (documento de Testing).* |
+| **Indicador de impacto** | Relatos aprovados por semana, tempo entre o relato e a sua chegada ao mapa e quantas pessoas consultam o risco antes de sair. Estimativa: se 1% de quem passa pela Av. Paulista (1,2 milhão de pessoas por dia) usar o app, são cerca de 12 mil pessoas por dia. Fontes no [documento de Testing](../testing/documento/Documento-descritivo-Moskitto-Radar.pdf). |
 | **ODS conectados** | 11 (principal), 9 e 10 |
 
 | Nome | RM |
@@ -93,7 +93,7 @@ npx expo start           # leia o QR Code com o Expo Go
 ```bash
 npm run typecheck   # tsc --noEmit (tem que sair limpo)
 npm run lint        # expo lint
-npm test            # 40 testes: camada pura (validação, tempo, geografia, retry, aviso de envio, aba Risco) e dados do modelo
+npm test            # 44 testes: camada pura (validação, tempo, geografia, retry, aviso de envio, aba Risco) e dados do modelo
 npx expo-doctor     # 20 de 20 verificações
 ```
 
@@ -156,12 +156,12 @@ Em `src/services/` (regras em [`REGRAS.md`](REGRAS.md), seção 5):
 - [x] `npx tsc --noEmit` limpo, sem `any`
 - [x] `npm run lint` sem erros
 - [x] `npx expo-doctor`: 20 de 20 verificações
-- [x] `npm test`: 40 testes passando
+- [x] `npm test`: 44 testes passando
 
 ## Entregas (19/11, 23h55)
 
 - [x] App em React Native + Expo, **TypeScript estrito**
-- [ ] ZIP da pasta do app **sem `node_modules`**, com os RMs no nome
+- [x] ZIP da pasta do app **sem `node_modules`**, com os RMs no nome (`mobile-RM559579-RM560000-RM559246-RM559790.zip`)
 - [x] `README.md` com a Ficha da CitizenTech
 - [x] [`DECISOES.md`](DECISOES.md) *(falta o autor completar as referências de design)*
 - [x] Array `authors` no `package.json` (nome e RM de todos)
@@ -189,7 +189,6 @@ Em `src/services/` (regras em [`REGRAS.md`](REGRAS.md), seção 5):
 ## Status
 
 App completo, verificado por `tsc`, lint, testes e `expo-doctor`, e testado no Expo Go em iPhone (iOS 26) e no
-emulador Android. Vídeo demo gravado e prints das telas em [`prints/`](prints/). Falta para a entrega: o ZIP sem `node_modules`
-(veja as pendências no [`DECISOES.md`](DECISOES.md)).
+emulador Android. Vídeo demo gravado e prints das telas em [`prints/`](prints/). Entregue em 19/11.
 
 Detalhes da disciplina: [`docs/disciplinas.md`](../docs/disciplinas.md#5-mobile-development--iot)

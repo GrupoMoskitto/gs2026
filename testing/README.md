@@ -45,4 +45,4 @@ SSP-SP).
 
 ## Status
 
-Pronto para a entrega de 19/11.
+Entregue em 19/11.

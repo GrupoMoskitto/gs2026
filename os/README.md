@@ -98,7 +98,7 @@ Visualizador de Eventos do servidor, com os logs do sistema, do Directory Servic
 - [x] Teste de falha (recuperação automática do serviço e do pool)
 - [x] Roteiro de configuração
 - [x] Vídeo de demonstração de até 7 minutos
-- [ ] Um único integrante envia o link
+- [x] Um único integrante envia o link
 
 ## Avaliação (10 pts)
 
@@ -123,6 +123,6 @@ os/
 
 ## Status
 
-Pronto para a entrega de 19/11.
+Entregue em 19/11.
 
 Detalhes da disciplina: [`docs/disciplinas.md`](../docs/disciplinas.md#6-operating-systems)

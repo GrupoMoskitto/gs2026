@@ -70,8 +70,8 @@ A seção 5 do `REGRAS.md` propõe mudanças no servidor. O app já funciona sem
 - **Caixa de coordenadas provisória** (`src/config/regiao.ts`). A decisão 5 do `AGENTS.md` está em aberto;
   API, C# e app precisam usar os mesmos limites.
 - **Mapa é proposta** (decisão 2 do `AGENTS.md`). Se o time não aprovar, a aba sai sem afetar o resto.
-- **Moderação** (decisão 1): o app mostra o status de cada relato. Quem aprova ainda depende de como o C# vai
-  falar com a API.
+- **Moderação** (decisão 1): o app mostra o status de cada relato. Quem aprova é o app de moderação em C# (versão
+  Linux), que chama a API com a chave de um moderador.
 - **Pinos do mapa coloridos pelo risco do lugar** no horário de agora, com a granularidade que o ML adotou
   (distrito na capital, município fora dela).
-- Sem testes de interface automatizados: só a camada pura e a previsão guardada (40 testes).
+- Sem testes de interface automatizados: só a camada pura e a previsão guardada (44 testes).
