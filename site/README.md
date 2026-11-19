@@ -1,8 +1,7 @@
 # Site do Moskitto Radar
 
 Página única que demonstra a solução inteira: o risco de roubo por lugar e horário, o app do cidadão, o caminho do
-relato até o mapa e as oito partes da GS. As partes `mobile/`, `ia/`, `soa/`, `csharp/` e `physical/` aparecem prontas; as outras
-três estão como esboço, com o que cada uma vai entregar.
+relato até o mapa, o vídeo da solução (YouTube) e as oito partes da GS, todas prontas.
 
 ## Como rodar
 
@@ -15,7 +14,7 @@ npm run video     # baixa os vídeos (rode uma vez)
 ```
 
 Os vídeos ficam fora do git, como anexos do release [`midia`](https://github.com/GrupoMoskitto/gs2026/releases/tag/midia):
-o do app (`public/app/apresentacao.mp4`) e os das partes (`public/videos/ia.mp4`, `soa.mp4`, `csharp.mp4`, `iot.mp4`,
+o do app (`public/app/apresentacao.mp4`) e os das partes (`public/videos/ia.mp4`, `soa.mp4`, `csharp.mp4`, `iot.mp4`, `os.mp4`,
 abertos pelo botão "Ver vídeo" de cada cartão em [`Partes.tsx`](src/secoes/Partes.tsx)). As capas (`.webp`) ficam no git.
 Para trocar um vídeo, substitua o anexo no release.
 

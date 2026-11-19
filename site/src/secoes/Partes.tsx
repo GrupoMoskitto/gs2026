@@ -14,6 +14,7 @@ interface Parte {
   resumo: string;
   itens: string[];
   video?: { src: string; capa: string; duracao: string };
+  link?: { rotulo: string; href: string };
 }
 
 const f1 = RESUMO.modelo.f1.toLocaleString('pt-BR', {
@@ -112,7 +113,12 @@ const PARTES: Parte[] = [
     nome: 'Servidor',
     materia: 'Operating Systems',
     dono: 'Gabriel Kato',
-    pronta: false,
+    pronta: true,
+    video: {
+      src: '/videos/os.mp4',
+      capa: '/videos/os.webp',
+      duracao: '1 min 20 s',
+    },
     resumo: 'Windows Server 2025 numa VM, com Active Directory, DNS, DHCP e IIS.',
     itens: ['IIS rodando a API', 'Active Directory, DNS e DHCP', 'Monitor de Desempenho com alertas', 'Recuperação automática, com teste de falha'],
   },
@@ -130,9 +136,10 @@ const PARTES: Parte[] = [
     nome: 'Arquitetura e pitch',
     materia: 'Testing, Compliance & QA',
     dono: 'Marcelo Affonso',
-    pronta: false,
+    pronta: true,
     resumo: 'Diagrama no ArchiMate, documento e pitch.',
     itens: ['Camada de motivação e os ODS', 'Camada de negócios', 'Camadas de aplicação e tecnologia', 'Pitch de até 4 minutos'],
+    link: { rotulo: 'Ver o pitch', href: '#video' },
   },
 ];
 
@@ -174,6 +181,11 @@ export function Partes() {
                       <Play size={14} fill="currentColor" aria-hidden="true" /> Ver vídeo · {p.video.duracao}
                     </button>
                   </VideoDialogo>
+                )}
+                {p.link && (
+                  <a href={p.link.href} className="botao bg-superficie py-2.5 text-[15px] text-forte hover:bg-celeste">
+                    <Play size={14} fill="currentColor" aria-hidden="true" /> {p.link.rotulo}
+                  </a>
                 )}
                 <a href={`${REPO}/tree/main/${p.pasta}`} className="elo inline-flex items-center gap-1 text-[15px] font-medium">
                   {p.pasta}/ no GitHub{' '}

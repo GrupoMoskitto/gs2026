@@ -12,6 +12,7 @@ import { VideoApp } from '../componentes/VideoApp';
 import { LUGARES, RESUMO, contarNiveis, faixaDeAgora } from '../dados';
 
 const ELOS = [
+  { rotulo: 'O vídeo', destino: '#video' },
   { rotulo: 'O risco', destino: '#consulta' },
   { rotulo: 'O app', destino: '#app' },
   { rotulo: 'O modelo', destino: '#modelo' },

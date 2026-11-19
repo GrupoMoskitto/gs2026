@@ -10,6 +10,7 @@ import { Equipe } from './secoes/Equipe';
 import { Fluxo } from './secoes/Fluxo';
 import { Partes } from './secoes/Partes';
 import { Fecho, Rodape } from './secoes/Rodape';
+import { VideoSolucao } from './secoes/VideoSolucao';
 
 function Titulo({ children }: { children: ReactNode }) {
   return (
@@ -34,6 +35,15 @@ export function App() {
 
         <div className="mt-16 md:mt-20">
           <Letreiro />
+        </div>
+
+        <div className={vao}>
+          <Titulo>
+            A solução <Marca /> em vídeo
+          </Titulo>
+        </div>
+        <div className={perto}>
+          <VideoSolucao />
         </div>
 
         <div className={vao}>

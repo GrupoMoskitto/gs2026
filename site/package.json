@@ -8,7 +8,7 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "dados": "node scripts/dados.mjs",
-    "video": "curl -fL --create-dirs -o public/app/apresentacao.mp4 https://github.com/GrupoMoskitto/gs2026/releases/download/midia/apresentacao.mp4 && curl -fL --create-dirs -o public/videos/ia.mp4 https://github.com/GrupoMoskitto/gs2026/releases/download/midia/ia.mp4 && curl -fL --create-dirs -o public/videos/soa.mp4 https://github.com/GrupoMoskitto/gs2026/releases/download/midia/soa.mp4 && curl -fL --create-dirs -o public/videos/csharp.mp4 https://github.com/GrupoMoskitto/gs2026/releases/download/midia/csharp.mp4 && curl -fL --create-dirs -o public/videos/iot.mp4 https://github.com/GrupoMoskitto/gs2026/releases/download/midia/iot.mp4"
+    "video": "curl -fL --create-dirs -o public/app/apresentacao.mp4 https://github.com/GrupoMoskitto/gs2026/releases/download/midia/apresentacao.mp4 && curl -fL --create-dirs -o public/videos/ia.mp4 https://github.com/GrupoMoskitto/gs2026/releases/download/midia/ia.mp4 && curl -fL --create-dirs -o public/videos/soa.mp4 https://github.com/GrupoMoskitto/gs2026/releases/download/midia/soa.mp4 && curl -fL --create-dirs -o public/videos/csharp.mp4 https://github.com/GrupoMoskitto/gs2026/releases/download/midia/csharp.mp4 && curl -fL --create-dirs -o public/videos/iot.mp4 https://github.com/GrupoMoskitto/gs2026/releases/download/midia/iot.mp4 && curl -fL --create-dirs -o public/videos/os.mp4 https://github.com/GrupoMoskitto/gs2026/releases/download/midia/os.mp4"
   },
   "dependencies": {
     "@fontsource/roboto": "^5.3.0",

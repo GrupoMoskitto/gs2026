@@ -11,6 +11,7 @@ const COLUNAS = [
   {
     titulo: 'Na página',
     elos: [
+      ['O vídeo', '#video'],
       ['O risco', '#consulta'],
       ['O app', '#app'],
       ['O modelo', '#modelo'],
@@ -45,6 +46,9 @@ export function Fecho() {
                 <Play size={16} fill="currentColor" aria-hidden="true" /> Ver o app em 1 minuto
               </button>
             </VideoApp>
+            <a href="#video" className="botao bg-superficie text-forte hover:bg-celeste">
+              <Play size={16} fill="currentColor" aria-hidden="true" /> Ver a solução em vídeo
+            </a>
             <a href={REPO} className="botao bg-azul text-white hover:bg-azul-escuro">
               Abrir o repositório
             </a>
