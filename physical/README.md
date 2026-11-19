@@ -5,7 +5,7 @@
 ## Entregas (19/11, 23h55)
 
 - [x] Link do projeto no Wokwi
-- [ ] Vídeo de até 4 minutos: apresenta a solução, explica como o circuito foi incorporado e demonstra o funcionamento
+- [x] Vídeo de até 4 minutos: apresenta a solução, explica como o circuito foi incorporado e demonstra o funcionamento
 - [x] Arquivo `.txt` com o nome dos integrantes
 
 ## Avaliação

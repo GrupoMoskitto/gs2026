@@ -95,9 +95,9 @@ Visualizador de Eventos do servidor, com os logs do sistema, do Directory Servic
 - [x] Repositório com `README.md` (com a Ficha da CitizenTech) e evidências (`ipconfig`, `nslookup`, `Test-NetConnection`)
 - [x] Infraestrutura funcional: rede, domínio, IIS com a API e firewall
 - [x] Alertas de CPU, disco e memória no Monitor de Desempenho (o print mostra o disparo do alerta de CPU)
-- [ ] Teste de falha (recuperação automática do serviço e do pool)
-- [ ] Roteiro de configuração
-- [ ] Vídeo de demonstração de até 7 minutos
+- [x] Teste de falha (recuperação automática do serviço e do pool)
+- [x] Roteiro de configuração
+- [x] Vídeo de demonstração de até 7 minutos
 - [ ] Um único integrante envia o link
 
 ## Avaliação (10 pts)
@@ -123,8 +123,6 @@ os/
 
 ## Status
 
-Em andamento. Feito: rede, domínio, IIS com a API, firewall, monitoramento com alerta e logs do sistema. Falta: teste
-de falha com recuperação automática, logs do IIS, print da permissão NTFS no `App_Data`, roteiro de configuração e o
-vídeo de até 7 minutos.
+Pronto para a entrega de 19/11.
 
 Detalhes da disciplina: [`docs/disciplinas.md`](../docs/disciplinas.md#6-operating-systems)
